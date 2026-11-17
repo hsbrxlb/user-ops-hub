@@ -120,10 +120,11 @@ assert.ok(!/href="sema-/.test(home));
 // Resource entries disclose their actual type and size and preserve source files.
 assert.ok(!homeMain.includes('hub-hero-media') && !/Bruno|mascot-kit\//.test(homeMain), 'homepage has no mascot showcase');
 const guides = read('content-guides.html');
-for (const id of ['1NJArYiaoi8NqiUCKW9d93Y-EieA6TkFL', '1xVehYVMVfieKDRxjTGtK0zl0lDdjPfd_', '1hQ1_4GUxj7oGoGnAHdSN2Iyl38itZtXe']) {
+for (const id of ['1NJArYiaoi8NqiUCKW9d93Y-EieA6TkFL', '1xVehYVMVfieKDRxjTGtK0zl0lDdjPfd_', '1hQ1_4GUxj7oGoGnAHdSN2Iyl38itZtXe', '1ouN9F_a-USEeE85369Z9GjcGFhZt41-y', '1CreDhIbUz5AUU-Z_fLeJc7ILuzkNv9kj']) {
   assert.ok(guides.includes('https://drive.google.com/drive/folders/' + id), 'brand folder is linked: ' + id);
 }
 assert.ok(!/href="[^\"]+brand-pack\.zip/.test(guides), 'brand folders replace ZIP entries');
+assert.ok(!/1FKH_RYGcdbNnaBjQ6NzoTXvOJRALywErPd80OZffalg|1xHtbq-JyEWHkiLCIXipD039I_csuJ3pacxrDOrRK9sY/.test(guides), 'guide entries stay within reviewed material folders');
 const skills = read('skills.html');
 assert.ok(!skills.includes('mono-color'), 'retired skill is absent from the page');
 assert.ok(fs.existsSync(path.join(root, 'assets/onboarding/mono-color.zip')), 'retired skill source is retained');
