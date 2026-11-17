@@ -1,0 +1,121 @@
+(function () {
+  const safe = (value) => String(value ?? '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
+
+  function assetFigure(asset, eager = false, priority = false) {
+    const stem = asset.src.replace(/\.webp$/, '');
+    const sizes = '(max-width: 760px) calc(100vw - 36px), (max-width: 980px) calc(100vw - 84px), (max-width: 1180px) calc(100vw - 320px), min(741px, calc((100vw - 524px) / 2))';
+    return '<figure class="evo-asset">'
+      + '<a class="evo-asset-image" href="' + safe(asset.src) + '" aria-label="查看原图：' + safe(asset.caption) + '"><picture><source type="image/avif" srcset="' + safe(stem + '-768.avif') + ' 768w, ' + safe(stem + '.avif') + ' ' + (asset.width || 1254) + 'w" sizes="' + sizes + '"><img src="' + safe(asset.src) + '" alt="' + safe(asset.alt)
+      + '" width="' + (asset.width || 1254) + '" height="' + (asset.height || 1254) + '" loading="' + (eager ? 'eager' : 'lazy') + '" decoding="async"' + (priority ? ' fetchpriority="high"' : '') + '></picture></a>'
+      + '<figcaption>' + safe(asset.caption) + '</figcaption></figure>';
+  }
+
+  function characterImages(character) {
+    return '<div class="evo-assets">'
+      + character.assets.map((asset, index) => assetFigure(asset, index < 2, index === 0)).join('')
+      + '</div>';
+  }
+
+  function characterMarkup(character) {
+    return '<section class="evo-character" id="' + safe(character.id) + '" data-searchable>'
+      + '<header class="evo-character-head">'
+      + '<div><h2>' + safe(character.name_cn) + '<span lang="en">（' + safe(character.name_en) + '）</span></h2>'
+      + '<p>' + safe(character.blurb) + '</p></div></header>'
+      + characterImages(character) + '</section>';
+  }
+
+  function tocMarkup(characters) {
+    return '<nav class="evo-toc" aria-label="本页跳转"><strong>本页</strong><div class="evo-toc-list">'
+      + characters.map((character) => '<a href="#' + safe(character.id) + '">' + safe(character.name_cn) + '</a>').join('')
+      + '<a class="evo-section-link" href="#iteration">角色迭代</a><a class="evo-section-link" href="#applications">应用与素材</a><a class="evo-section-link" href="#design-workflow">设计技能</a><a class="evo-section-link" href="#character-voice">角色表达</a><a class="evo-section-link" href="#digital-assets">数字素材</a></div></nav>';
+  }
+
+  function sceneApplicationsMarkup(assets) {
+    return '<section class="evo-scene-applications" aria-labelledby="evo-scenes-title"><h3 id="evo-scenes-title">社媒与周边</h3>'
+      + '<div class="evo-assets">' + assets.map((asset) => assetFigure(asset)).join('') + '</div></section>';
+  }
+
+  function applicationMarkup(kit) {
+    const avatar = kit.assets.find((asset) => asset.id === 'avatar-128-png');
+    const poses = ['pose-welcome-768-webp', 'pose-explain-768-webp'].map((id) => kit.assets.find((asset) => asset.id === id));
+    return '<section class="evo-applications" id="applications" aria-labelledby="evo-applications-title"><h2 id="evo-applications-title">应用示意</h2>'
+      + "<p>同一位车库搭档，出现在问卷、社群、购物答疑和阅读内容中。</p>"
+      + '<div class="kit-poses">' + poses.map((asset, index) => '<figure><a href="' + safe(asset.src) + '"><img src="' + safe(asset.src)
+        + '" alt="' + safe(asset.alt) + '" width="' + asset.width + '" height="' + asset.height + '" loading="lazy"></a><figcaption>'
+        + (index === 0 ? '挥手欢迎' : "协助查看细节") + '</figcaption></figure>').join('') + '</div>'
+      + '<div class="evo-application-list">' + kit.examples.map((example) =>
+        '<section class="evo-application"><h3>' + safe(example.channel) + '</h3><div class="evo-application-preview">'
+        + '<img src="' + safe(avatar.src) + '" width="64" height="64" alt="公牛角色头像" loading="lazy">'
+        + '<div lang="en"><strong>' + safe(example.speaker) + '</strong><p>' + safe(example.copy) + '</p></div></div>'
+        + '<p class="kit-purpose">' + safe(example.purpose) + '</p></section>').join('')
+      + '</div></section>';
+  }
+
+  function voiceMarkup() {
+    return '<section class="kit-section" id="character-voice"><h2>角色表达</h2>'
+      + "<p>Bruno 是一头成年公牛，像一位有本事、愿意搭把手的车库伙伴：直接、实用，也带一点轻松的幽默。</p>"
+      + "<p>每次给出一个有用细节，或提出一个容易回答的具体问题。氛围轻松时语气轻快，用户遇到故障或安全问题时则保持认真。</p>"
+      + "<p>名字统一显示为 Bruno，AI 身份在首次互动的介绍正文中说明；品牌帖保留真实发件团队。角色不冒充车主，不编造购买、安装或驾驶经历。车型适配、商品性能和安全相关回答均以准确资料为准。</p></section>";
+  }
+
+  function downloadsMarkup(kit) {
+    const links = [['avatar-256-png', "256px 头像 PNG"], ['pose-welcome-512-png', "欢迎图 透明 PNG"], ['pose-explain-512-png', "答疑图 透明 PNG"],
+      ['pose-welcome-512-webp', '欢迎图 WebP'], ['pose-explain-512-webp', '答疑图 WebP'], ['social-companion-jpeg', '搭档图 JPEG']];
+    return '<section class="kit-section" id="digital-assets"><h2>数字素材</h2>'
+      + "<p>头像为透明 PNG，保留完整牛角，可直接放在不同底色上。平台可能自行添加底色或裁切，上传后需要检查。完整姿势至少 128px 高，四周留 16px。</p>"
+      + '<div class="kit-downloads">' + links.map(([id, label]) => {
+        const asset = kit.assets.find((entry) => entry.id === id);
+        return '<a class="asset-preview-link" href="' + safe(asset.src) + '" download><img src="' + safe(asset.src) + '" alt="' + label + '" loading="lazy"><span>' + label + '</span></a>';
+      }).join('') + '<a href="' + safe(kit.download) + '" download>下载头像与网页素材包</a><a href="' + safe(kit.usage) + '">使用要点</a></div>'
+      + "<p>制造需要另做准确的字标、刀线、色样或模型。数字图像不代表已生产实物，也不证明商标注册或排他版权。</p>"
+      + "<p><a href=\"merch-plan.html#bull-merch\">查看帽章与贴纸应用</a></p></section>";
+  }
+
+  window.initMascot = async function initMascot(retry = false) {
+    const content = document.querySelector('#content');
+    content.setAttribute('tabindex', '-1');
+    content.setAttribute('aria-busy', 'true');
+    content.innerHTML = '<p class="loading-state" role="status">正在加载吉祥物…</p>';
+    try {
+      const [data, kit, workflow] = await Promise.all([
+        window.fetchHubJSON('data/mascot.json', { retry }),
+        window.fetchHubJSON('data/mascot-kit.json', { retry }),
+        window.fetchHubJSON('data/mascot-workflow.json', { retry })
+      ]);
+      document.title = data.title + '｜海外用户运营 Hub';
+      document.querySelector('meta[name="description"]').content = data.meta_description;
+      document.querySelector('#content').innerHTML = '<header class="page-heading evo-heading"><h1>吉祥物 Bruno</h1></header>'
+        + '<div class="evo-layout">' + tocMarkup(data.characters)
+        + '<div class="evo-character-list"><section id="iteration" class="mascot-section"><h2>角色迭代</h2>'
+        + data.characters.map((character) => characterMarkup(character)).join('')
+        + sceneApplicationsMarkup(data.applications)
+        + '</section><section id="applications" class="mascot-section"><h2>应用与素材</h2>'
+        + applicationMarkup(kit).replace('id="applications"','id="application-examples"').replaceAll('<h2','<h3').replaceAll('</h2>','</h3>')
+        + voiceMarkup().replaceAll('<h2','<h3').replaceAll('</h2>','</h3>')
+        + downloadsMarkup(kit).replaceAll('<h2','<h3').replaceAll('</h2>','</h3>') + '</section>' + workflow.html
+        + '</div></div>';
+      scrollToMascotAnchor();
+    } catch (error) {
+      content.innerHTML = '<div class="load-error" role="alert"><h1>吉祥物暂时无法加载</h1><p>加载超时或连接失败，请重试。</p><button type="button" id="retry-mascot">重试吉祥物</button><a href="index.html">返回首页</a></div>';
+      document.querySelector('#retry-mascot').addEventListener('click', () => window.initMascot(true));
+      console.error(error);
+    } finally {
+      content.setAttribute('aria-busy', 'false');
+    }
+  };
+
+  function scrollToMascotAnchor() {
+    const target = document.getElementById(location.hash.slice(1));
+    if (target && document.querySelector('#content').contains(target)) requestAnimationFrame(() => target.scrollIntoView({ behavior: 'instant', block: 'start' }));
+  }
+
+  if (document.body.dataset.page === 'mascot') {
+    if (document.querySelector('#content').querySelector('.evo-character-list')) scrollToMascotAnchor();
+    else window.initMascot();
+  }
+})();

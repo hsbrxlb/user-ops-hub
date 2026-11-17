@@ -1,0 +1,118 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const vm = require('node:vm');
+const root = path.resolve(__dirname, '..');
+const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
+const nav = JSON.parse(read('data/content.json')).nav;
+
+const home = read('index.html');
+assert.ok(home.includes('data-page="home"'));
+assert.ok(!/http-equiv=["']refresh|location\.(?:replace|assign)|location\s*=/.test(home), 'home must not redirect to a topic');
+assert.ok(home.includes('<h1>海外用户运营<br/><span>Hub</span></h1>'));
+assert.ok(home.includes('id="breadcrumb-page">首页</strong>'));
+assert.ok(read('app.js').includes("const staticContentPage = ['home',"), 'homepage remains readable if data loading fails');
+assert.ok(read('app.js').includes("page === 'home' ? '首页'"));
+const homeMain = home.match(/<main[^>]*>([\s\S]*?)<\/main>/)[1];
+for (const item of nav.filter(item => item.id !== 'home')) {
+  assert.ok(homeMain.includes('href="' + item.file + '"'), 'homepage links to ' + item.id);
+}
+assert.equal((homeMain.match(/class="section home-directory"/g) || []).length, 6);
+assert.ok(read('context.html').includes("location.replace('index.html')"));
+assert.ok(home.includes('base.css') && home.includes('theme.css'), 'keep existing visual system');
+assert.ok(home.includes('class="menu-button"') && home.includes('class="skip-link"'));
+
+
+for (const [id,label] of Object.entries({'discord-community':'Discord 频道设计',research:'AI 问卷',voice:'用户声音','brand-voice-system':'OEDRO 品牌口吻','merch-plan':'OEDRO 周边','first-outreach':'首批触达用户','discord-invite-plan':'Discord 邀请活动',products:'产品知识库',mascot:'吉祥物 Bruno','ugc-activity':'投稿活动'})) assert.equal(nav.find(item=>item.id===id)?.label,label);
+assert.deepEqual(nav.map(item=>item.id), ['home','content-guides','content-review','studio','skills','social-brand','social-tools','brand-voice-system','mascot','merch-plan','products','freshflow','discord-community','discord-invite-plan','newsletter','email-templates','loyalty','repurchase','ugc-activity','customer-analytics','first-outreach','voice','competitor-experience','research','seo-geo','fakesite','flipbooks']);
+assert.deepEqual([...new Set(nav.map(item=>item.group).filter(Boolean))], ['社媒内容','品牌与产品','社区与邮件','会员与复购','用户与市场研究','样例']);
+for (const id of ['first-outreach', 'discord-invite-plan', 'ugc-activity']) {
+  assert.ok(read(`${id}.html`).includes(`data-page="${id}"`));
+  assert.ok(read('app.js').includes(`'${id}'`), 'static pages retain their content during navigation loading');
+}
+assert.ok(nav.some(item => item.id === 'products' && item.file === 'products.html'));
+assert.ok(!nav.some(item => ['research-library', 'sites-systems', 'playbook'].includes(item.id)));
+
+const discord = JSON.parse(read('data/topics/discord-community.json'));
+const discordContent = {};
+const discordRenderer = read('app.js').match(/function renderDiscord\(topic, data\) \{[\s\S]*?\n\}/)[0];
+const discordContext = {
+  document: { querySelector: selector => selector === '#content' ? discordContent : {} },
+  escapeHtml: value => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;'),
+  pageHeading: title => `<h1>${title}</h1>`
+};
+vm.createContext(discordContext);
+vm.runInContext(discordRenderer, discordContext);
+discordContext.renderDiscord(discord, { site: { title: 'Hub' } });
+assert.ok(!discordContent.innerHTML.includes('discord-configuration'), 'omit empty settings and unsupported bot claims');
+assert.ok(!/已安装|未开启/.test(discordContent.innerHTML));
+for (const server of discord.servers) {
+  assert.ok(discordContent.innerHTML.includes(`id="${server.id}"`));
+  for (const group of server.groups) for (const channel of group.channels) assert.ok(discordContent.innerHTML.includes(channel));
+}
+const configuredDiscord = structuredClone(discord);
+configuredDiscord.servers[0].bots = [{ name: 'Example bot', purpose: 'Handle <help> requests' }];
+configuredDiscord.servers[0].settings = [['Example setting', 'Enabled']];
+discordContext.renderDiscord(configuredDiscord, { site: { title: 'Hub' } });
+assert.equal((discordContent.innerHTML.match(/class="discord-configuration"/g) || []).length, 1);
+assert.ok(discordContent.innerHTML.indexOf('discord-configuration') > discordContent.innerHTML.indexOf('garage-talk'));
+assert.ok(discordContent.innerHTML.includes('Handle &lt;help&gt; requests'));
+assert.ok(discordContent.innerHTML.includes('<dt>Example setting</dt><dd>Enabled</dd>'));
+
+const persona = JSON.parse(read('data/topics/brand-voice-system.json'));
+const topicVisibility = read('app.js').match(/function visibleTopicSections\(topic\) \{[\s\S]*?\n\}/)[0];
+const topicContext = {};
+vm.createContext(topicContext);
+vm.runInContext(topicVisibility, topicContext);
+const visiblePersona = topicContext.visibleTopicSections(persona);
+for (const id of ['brand-name', 'everyday-example', 'discord-example', 'fitment-example', 'support-example', 'research-example', 'ugc-example']) {
+  assert.ok(visiblePersona.some(section => section.id === id && section.paragraphs.length >= 2), `${id} reaches the page renderer`);
+}
+assert.ok(!visiblePersona.some(section => section.id === 'validation'), 'internal review state stays out of the reading page');
+
+for (const [page, hash, expected] of [
+  ['research-library', '', 'research.html'],
+  ['research-library', '#brand-voice-system', 'topic.html?slug=brand-voice-system'],
+  ['research-library', '#discord-audit', 'topic.html?slug=discord-community'],
+  ['research-library', '#user-voice-summary', 'user-voice.html'],
+  ['research-library', '#ai-smart-survey', 'research.html'],
+  ['sites-systems', '', 'topic.html?slug=seo-geo'],
+  ['sites-systems', '#hub-structure', 'index.html'],
+  ['studio', '#seo-geo-lab', 'topic.html?slug=seo-geo'],
+  ['playbook', '', 'mascot-workflow.html']
+]) {
+  let destination;
+  vm.runInNewContext(read('content-studio.js'), {
+    document: { body: { dataset: { page } } },
+    location: { hash, replace: value => { destination = value; } }, window: {}
+  });
+  assert.equal(destination, expected, `${page}${hash}`);
+}
+
+const pipeline = require('../content-pipeline-test.js');
+const config = JSON.parse(read('data/content-pipeline-tests.json'));
+const markup = pipeline.renderPageMarkup(config, { inline: true });
+assert.ok(!markup.includes('← 社媒内容生产'));
+assert.equal((markup.match(/class="pipeline-record"/g) || []).length, 1);
+assert.equal((markup.match(/class="pipeline-platform"/g) || []).length, 3);
+assert.ok(markup.includes(`id="${config.active_run_id}"`));
+assert.equal((markup.match(/class="platform-translation" open/g) || []).length, 3);
+assert.ok(!read('content-studio.html').includes('<iframe'));
+
+async function checkDownload() {
+  const html=JSON.parse(read('data/mascot-workflow.json')).html;
+  const packet=html.match(/<pre id="workflow-packet" lang="en">([\s\S]*?)<\/pre>/)[1];
+  assert.ok(html.includes('href="assets/mascot-kit/mascot-design-workflow.md"'));
+  assert.equal(read('assets/mascot-kit/mascot-design-workflow.md'),packet);
+  assert.ok(!/\/Users\/|Oliver|OEDRO|Cozeware|api[_-]?key|cookie/i.test(packet));
+  assert.ok(packet.includes('Task brief') && packet.includes('32px') && packet.includes('64px'));
+  assert.ok(read('mascot-workflow.html').includes("location.replace('mascot.html#design-workflow')"));
+}
+
+checkDownload().then(() => console.log('Hub navigation, inline works and workflow download checks passed'));
+
+for (const file of ['sema-plan.html', 'sema-promotion.html', 'data/sema-promotion.json']) {
+  assert.ok(!fs.existsSync(path.join(root, file)), 'withdrawn public content remains absent: ' + file);
+}
+assert.ok(!nav.some(item => /^sema-/.test(item.id)));
+assert.ok(!/href="sema-/.test(home));

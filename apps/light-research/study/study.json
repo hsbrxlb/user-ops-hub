@@ -1,0 +1,668 @@
+{
+  "schemaVersion": "2.0",
+  "study": {
+    "id": "worklight-regression",
+    "version": "pilot-1.2-question-clarity",
+    "title": "OEDRO AI Research for Drivers",
+    "status": "review_ready",
+    "readiness": "technical_prototype",
+    "sampleKind": "participant",
+    "goal": "Learn from five real vehicle owners whether a switchable wide-versus-distance light bar solves a real task, what each mode must show, and what would prevent installation or use.",
+    "decisionQuestions": [
+      "Which real night-driving or work situations are poorly served by the lights owners already use?",
+      "When, if ever, would owners use one proposed light bar with switchable near-wide and forward-distance beams?",
+      "What comparable evidence, tradeoffs, fitment and cost questions determine whether the concept deserves development?"
+    ],
+    "audience": {
+      "description": "Adult vehicle owners who use their vehicle after dark, especially recent light buyers or active owners with relevant real use. Five complete, comprehensible interviews are the research target.",
+      "eligibility": [
+        "Adult vehicle owner",
+        "Has driven, worked, camped or otherwise used a vehicle after dark, or can explicitly say they have not",
+        "Voluntarily agrees to this research interview"
+      ]
+    },
+    "languagePolicy": {
+      "entryLanguage": "en",
+      "fallbackLanguage": "en",
+      "autoReplyLanguage": true,
+      "preserveOriginal": true
+    },
+    "estimatedMinutes": 10
+  },
+  "brand": {
+    "name": "OEDRO",
+    "shortLabel": "OEDRO",
+    "tagline": "AI Research for Drivers",
+    "accent": "#FF6518",
+    "surface": "immersive",
+    "backgroundImage": "/study-assets/cast-light.png"
+  },
+  "claims": [
+    {
+      "id": "dual_beam_concept",
+      "text": "Hypothetical lens-based added light bar with a user-switchable wide nearby beam and a farther-reaching forward beam. No brightness, fitment, release date or performance is established.",
+      "status": "approved_for_participants",
+      "source": "User-directed qualitative concept test; internal work-light MRD and prior owner feedback. Concept description only, not a tested product claim."
+    }
+  ],
+  "consent": {
+    "version": "pilot-consent-1",
+    "enabledByDefault": true,
+    "internalOnly": false,
+    "locales": {
+      "en": {
+        "languageLabel": "Language",
+        "title": "Before we begin",
+        "intro": "OEDRO is asking about your real experience with vehicle lights and a possible new light-bar idea. This is a text interview of about 10 minutes. The idea is not a finished or tested product.",
+        "items": [
+          "Your answers are saved for this research and processed by an AI service. Access to the interview expires after 30 days; a daily cleanup deletes expired records. You can stop or delete your answers sooner.",
+          "Please do not enter your name, email, phone number, address, or other contact details. There is no automatic reward on this page."
+        ],
+        "checkbox": "I understand and agree to take part.",
+        "accept": "Start interview",
+        "decline": "Not now",
+        "declinedTitle": "Interview not started",
+        "declinedText": "No answers were collected."
+      },
+      "zh-CN": {
+        "languageLabel": "语言",
+        "title": "开始之前",
+        "intro": "OEDRO 想了解你实际用车灯的经历，以及一款仍在设想中的长条灯。文字访谈大约需要 10 分钟；这不是已上市或已验证的产品。",
+        "items": [
+          "回答会用于本次研究，并由 AI 服务处理。访谈记录在 30 天后无法再访问，每日清理会删除到期记录；你也可以提前停止或删除回答。",
+          "请不要填写姓名、邮箱、电话、住址等联系信息。本页面不会自动发放奖励。"
+        ],
+        "checkbox": "我已了解并同意参与。",
+        "accept": "开始访谈",
+        "decline": "暂不参与",
+        "declinedTitle": "访谈未开始",
+        "declinedText": "尚未收集回答。"
+      },
+      "es": {
+        "languageLabel": "Idioma",
+        "title": "Antes de empezar",
+        "intro": "OEDRO quiere conocer tu experiencia real con las luces del vehículo y una posible idea para una barra de luces. La entrevista escrita dura unos 10 minutos. No es un producto terminado ni probado.",
+        "items": [
+          "Tus respuestas se guardan para esta investigación y las procesa un servicio de IA. El acceso vence a los 30 días y una limpieza diaria borra los registros vencidos. Puedes parar o borrar tus respuestas antes.",
+          "No escribas tu nombre, correo, teléfono, dirección ni otros datos de contacto. Esta página no entrega recompensas automáticamente."
+        ],
+        "checkbox": "Entiendo la información y acepto participar.",
+        "accept": "Empezar la entrevista",
+        "decline": "Ahora no",
+        "declinedTitle": "La entrevista no ha comenzado",
+        "declinedText": "No se recogieron respuestas."
+      }
+    }
+  },
+  "dataPolicy": {
+    "retentionDays": 30,
+    "collectPii": false,
+    "allowWithdrawal": true,
+    "providerDisclosure": "Answers are processed by a configured third-party AI provider for interview understanding, controlled follow-up, and evidence extraction."
+  },
+  "moderation": {
+    "policyVersion": "controlled-autonomy-3.9-semantic-followups",
+    "maxTotalProbes": 6,
+    "checkpointEveryAnchors": 3,
+    "maxCheckpointQuestions": 2,
+    "maxFinalAuditQuestions": 3,
+    "maxRepairTurns": 5,
+    "repairConsumesProbeBudget": false,
+    "oneQuestionPerReply": true
+  },
+  "model": {
+    "provider": "deepseek",
+    "model": "deepseek-v4-flash",
+    "promptVersion": "interviewer-3.12-current-turn-wording",
+    "timeoutMs": 25000,
+    "maxRetries": 1
+  },
+  "fields": [
+    {
+      "id": "vehicle_year",
+      "description": "Vehicle model year when stated",
+      "type": "number",
+      "decisionRelevance": "context"
+    },
+    {
+      "id": "vehicle_make",
+      "description": "Vehicle manufacturer as stated or cautiously normalized",
+      "type": "text",
+      "decisionRelevance": "important"
+    },
+    {
+      "id": "vehicle_model",
+      "description": "Vehicle model as stated or kept as a candidate",
+      "type": "text",
+      "decisionRelevance": "critical"
+    },
+    {
+      "id": "use_context",
+      "description": "The purpose of ordinary after-dark vehicle use, as stated. Keep trip purpose separate from road type, available light, and weather; do not infer one from another.",
+      "type": "text",
+      "decisionRelevance": "important"
+    },
+    {
+      "id": "recent_location",
+      "description": "Non-identifying context of the most recent after-dark use. Preserve stated road type, available light, or weather as separate facts; do not infer any from another. For a driver who only says on the road, clarify road type only if needed. For stationary use, ask about the activity or work surface instead. Never collect an address or demand all context dimensions.",
+      "type": "text",
+      "decisionRelevance": "important",
+      "clarificationStyle": "objective_categories"
+    },
+    {
+      "id": "visibility_problem",
+      "description": "What the participant could or could not see during that recent use, including an explicit report that they could see clearly. Do not assume a problem or turn uncertainty into a problem.",
+      "type": "text",
+      "decisionRelevance": "critical"
+    },
+    {
+      "id": "user_action",
+      "description": "What the owner actually did when visibility was poor on the recalled trip, including doing nothing. Do not invent a response when they saw clearly or cannot recall a trip.",
+      "type": "text",
+      "decisionRelevance": "critical"
+    },
+    {
+      "id": "current_lights",
+      "description": "Vehicle lights actually used during the recalled trip or task, including factory lights only, added lights, no lights, or an honest inability to remember. Do not infer equipment from vehicle model or desired lighting.",
+      "type": "text",
+      "decisionRelevance": "important"
+    },
+    {
+      "id": "priority",
+      "description": "What matters to the participant when choosing vehicle lights, in their own words; no ranked list or minimum number is required.",
+      "type": "string_list",
+      "decisionRelevance": "critical"
+    },
+    {
+      "id": "constraint",
+      "description": "A stated practical obstacle to adding or using an extra vehicle light, including an explicit report of no obstacle. Do not suggest an installation, cost, or legal problem.",
+      "type": "text",
+      "decisionRelevance": "important"
+    },
+    {
+      "id": "concept_reaction",
+      "description": "Spontaneous reaction to a hypothetical single added light bar with switchable wide nearby and farther-forward beam settings; preserve rejection and uncertainty.",
+      "type": "text",
+      "decisionRelevance": "important"
+    },
+    {
+      "id": "price_fit",
+      "description": "Exploratory self-stated total cost, including installation, that the owner might consider for this unpriced concept, or explicit no interest/uncertainty. Do not treat as willingness-to-pay evidence for a specified product or infer a price.",
+      "type": "text",
+      "decisionRelevance": "important"
+    },
+    {
+      "id": "price_reason",
+      "description": "The participant's stated reason for considering a listed size and price, considering none, or being unsure. Do not assume cost or lack of need is the reason.",
+      "type": "text",
+      "decisionRelevance": "critical"
+    },
+    {
+      "id": "final_change",
+      "description": "The participant's desired first change to the hypothetical extra vehicle light, or an explicit statement that no change is needed or there is not enough information to judge.",
+      "type": "text",
+      "decisionRelevance": "critical"
+    },
+    {
+      "id": "beam_use",
+      "description": "The specific real situation, if any, in which the owner would use either proposed beam setting. Keep wide and forward uses distinct.",
+      "type": "text",
+      "decisionRelevance": "critical"
+    },
+    {
+      "id": "switch_use",
+      "description": "When the owner would switch between the nearby-wide and farther-forward settings, or that they would use only one or neither. Capture the owner's actual task, not a hypothetical benefit supplied by the interviewer.",
+      "type": "text",
+      "decisionRelevance": "critical"
+    },
+    {
+      "id": "proof_needed",
+      "description": "Evidence or comparable night-test conditions the owner would need to judge both proposed settings, including concern that one or both settings might compromise performance.",
+      "type": "text",
+      "decisionRelevance": "critical"
+    }
+  ],
+  "anchors": [
+    {
+      "id": "use_context",
+      "label": "Use context",
+      "objective": "Establish one real recent trip or task before describing any new product. Accept no recent after-dark use.",
+      "question": "The last time you used your vehicle after dark, what were you doing?",
+      "questionLocales": {
+        "en": "The last time you used your vehicle after dark, what were you doing?",
+        "zh-CN": "最近一次天黑后用车时，你在做什么？",
+        "es": "La última vez que usaste tu vehículo de noche, ¿qué estabas haciendo?"
+      },
+      "clarification": "The last time you used your vehicle after dark, what were you doing?",
+      "clarificationLocales": {
+        "en": "The last time you used your vehicle after dark, what were you doing?",
+        "zh-CN": "最近一次天黑后用车时，你在做什么？",
+        "es": "La última vez que usaste tu vehículo de noche, ¿qué estabas haciendo?"
+      },
+      "sufficiencyCriteria": [
+        "A concrete answer, an explicit no need or no experience, or honest uncertainty is understood in the owner’s own words. Do not invent a problem or force agreement."
+      ],
+      "highValueProbeTargets": [
+        "Clarify the one activity or trip purpose only when the answer is not understandable."
+      ],
+      "requiredFields": [
+        "use_context"
+      ],
+      "evidenceFields": [
+        "use_context"
+      ],
+      "optional": false,
+      "skipWhenCovered": true,
+      "maxImmediateProbes": 1,
+      "measurementStage": "conversation",
+      "claimRefs": [],
+      "media": [],
+      "input": {
+        "type": "text",
+        "placeholder": {
+          "en": "Answer in your own words…",
+          "zh-CN": "按自己的实际情况回答…",
+          "es": "Responde con tus propias palabras…"
+        }
+      },
+      "followUpQuestions": {}
+    },
+    {
+      "id": "recent_experience",
+      "label": "Recent experience",
+      "objective": "Record one concrete visibility outcome during the same event, including no difficulty. If the owner reports a real difficulty, learn what they did in response when that action is not already stated. Do not invent a problem or response.",
+      "question": "During that trip or task, what, if anything, was hard to see?",
+      "questionLocales": {
+        "en": "During that trip or task, what, if anything, was hard to see?",
+        "zh-CN": "那次用车时，有什么东西看不清？如果都看得清，也可以说。",
+        "es": "Durante ese viaje o tarea, ¿qué te costó ver, si hubo algo?"
+      },
+      "clarification": "During that trip or task, what, if anything, was hard to see?",
+      "clarificationLocales": {
+        "en": "During that trip or task, what, if anything, was hard to see?",
+        "zh-CN": "那次用车时，有什么东西看不清？如果都看得清，也可以说。",
+        "es": "Durante ese viaje o tarea, ¿qué te costó ver, si hubo algo?"
+      },
+      "sufficiencyCriteria": [
+        "A concrete answer, an explicit no need or no experience, or honest uncertainty is understood in the owner’s own words. Do not invent a problem or force agreement."
+      ],
+      "highValueProbeTargets": [
+        "If a real visibility problem is understood but the response is missing, ask what the owner did at that moment. Otherwise clarify one unclear object or area without assuming a problem."
+      ],
+      "requiredFields": [
+        "visibility_problem"
+      ],
+      "evidenceFields": [
+        "visibility_problem",
+        "user_action"
+      ],
+      "optional": false,
+      "skipWhenCovered": true,
+      "maxImmediateProbes": 1,
+      "measurementStage": "conversation",
+      "claimRefs": [],
+      "media": [],
+      "input": {
+        "type": "text",
+        "placeholder": {
+          "en": "Answer in your own words…",
+          "zh-CN": "按自己的实际情况回答…",
+          "es": "Responde con tus propias palabras…"
+        }
+      },
+      "followUpQuestions": {
+        "user_action": {
+          "en": "What did you do when you could not see that clearly?",
+          "zh-CN": "当时看不清时，你做了什么？",
+          "es": "¿Qué hiciste cuando no podías ver bien eso?"
+        }
+      }
+    },
+    {
+      "id": "current_lights",
+      "label": "Lights in use",
+      "objective": "Establish which vehicle lights the owner actually used during the recalled night trip or task, before discussing the new product. Factory lights only, no lights and uncertainty are valid.",
+      "question": "During that trip or task, which lights on your vehicle were you using?",
+      "questionLocales": {
+        "en": "During that trip or task, which lights on your vehicle were you using?",
+        "zh-CN": "那次用车时，你用了车上的哪些灯？",
+        "es": "Durante ese viaje o tarea, ¿qué luces de tu vehículo estabas usando?"
+      },
+      "clarification": "During that trip or task, which lights on your vehicle were you using?",
+      "clarificationLocales": {
+        "en": "During that trip or task, which lights on your vehicle were you using?",
+        "zh-CN": "那次用车时，你用了车上的哪些灯？",
+        "es": "Durante ese viaje o tarea, ¿qué luces de tu vehículo estabas usando?"
+      },
+      "sufficiencyCriteria": [
+        "Record the lights actually used, or an explicit no lights, no recalled trip, or uncertainty. Do not infer equipment from a vehicle model."
+      ],
+      "highValueProbeTargets": [
+        "Clarify whether a mentioned light was actually used during that trip only if the answer is ambiguous."
+      ],
+      "requiredFields": [
+        "current_lights"
+      ],
+      "evidenceFields": [
+        "current_lights"
+      ],
+      "optional": false,
+      "skipWhenCovered": true,
+      "maxImmediateProbes": 1,
+      "measurementStage": "baseline",
+      "claimRefs": [],
+      "media": [],
+      "input": {
+        "type": "text",
+        "placeholder": {
+          "en": "Answer in your own words…",
+          "zh-CN": "按自己的实际情况回答…",
+          "es": "Responde con tus propias palabras…"
+        }
+      },
+      "followUpQuestions": {}
+    },
+    {
+      "id": "priorities",
+      "label": "Priorities",
+      "objective": "Identify one owner-selected criterion before the concept; factory lights count and no extra-light experience is valid.",
+      "question": "From the vehicle lights you have used, what one thing matters most to you in real use?",
+      "questionLocales": {
+        "en": "From the vehicle lights you have used, what one thing matters most to you in real use?",
+        "zh-CN": "在你用过的车灯里，实际使用时你最在意哪一点？",
+        "es": "De las luces de vehículo que has usado, ¿qué es lo que más te importa en la práctica?"
+      },
+      "clarification": "From the vehicle lights you have used, what one thing matters most to you in real use?",
+      "clarificationLocales": {
+        "en": "From the vehicle lights you have used, what one thing matters most to you in real use?",
+        "zh-CN": "在你用过的车灯里，实际使用时你最在意哪一点？",
+        "es": "De las luces de vehículo que has usado, ¿qué es lo que más te importa en la práctica?"
+      },
+      "sufficiencyCriteria": [
+        "A concrete answer, an explicit no need or no experience, or honest uncertainty is understood in the owner’s own words. Do not invent a problem or force agreement."
+      ],
+      "highValueProbeTargets": [
+        "Clarify a vague criterion with the owner’s own example, only if needed."
+      ],
+      "requiredFields": [
+        "priority"
+      ],
+      "evidenceFields": [
+        "priority"
+      ],
+      "optional": false,
+      "skipWhenCovered": true,
+      "maxImmediateProbes": 1,
+      "measurementStage": "conversation",
+      "claimRefs": [],
+      "media": [],
+      "input": {
+        "type": "text",
+        "placeholder": {
+          "en": "Answer in your own words…",
+          "zh-CN": "按自己的实际情况回答…",
+          "es": "Responde con tus propias palabras…"
+        }
+      },
+      "followUpQuestions": {}
+    },
+    {
+      "id": "concept",
+      "label": "Concept",
+      "objective": "Present an untested switchable wide-versus-distance concept without promising performance. Learn whether either mode fits a specific actual task, and, only if useful to the owner, when they would switch modes or use only one.",
+      "question": "Imagine one added light bar with two settings you can switch between: a wide beam for nearby ground and side areas, and a narrower beam that reaches farther ahead. In what real situation, if any, would you use it?",
+      "questionLocales": {
+        "en": "Imagine one added light bar with two settings you can switch between: a wide beam for nearby ground and side areas, and a narrower beam that reaches farther ahead. In what real situation, if any, would you use it?",
+        "zh-CN": "设想在车上加装一根长条灯，可以切换两种照明方式：一种照亮近处地面和两侧，另一种照向更远的前方。你会在什么实际情况下使用它？如果不会，也可以直说。",
+        "es": "Imagina una barra de luces adicional con dos modos entre los que puedes cambiar: uno amplio para el suelo cercano y los lados, y otro más estrecho que ilumina más lejos hacia delante. ¿En qué situación real la usarías, si es que la usarías?"
+      },
+      "clarification": "Imagine one added light bar with two settings you can switch between: a wide beam for nearby ground and side areas, and a narrower beam that reaches farther ahead. In what real situation, if any, would you use it?",
+      "clarificationLocales": {
+        "en": "Imagine one added light bar with two settings you can switch between: a wide beam for nearby ground and side areas, and a narrower beam that reaches farther ahead. In what real situation, if any, would you use it?",
+        "zh-CN": "设想在车上加装一根长条灯，可以切换两种照明方式：一种照亮近处地面和两侧，另一种照向更远的前方。你会在什么实际情况下使用它？如果不会，也可以直说。",
+        "es": "Imagina una barra de luces adicional con dos modos entre los que puedes cambiar: uno amplio para el suelo cercano y los lados, y otro más estrecho que ilumina más lejos hacia delante. ¿En qué situación real la usarías, si es que la usarías?"
+      },
+      "sufficiencyCriteria": [
+        "A concrete answer, an explicit no need or no experience, or honest uncertainty is understood in the owner’s own words. Do not invent a problem or force agreement."
+      ],
+      "highValueProbeTargets": [
+        "After an interested but vague response, ask when the owner would switch from the nearby-wide setting to the farther-forward setting, if at all. Accept one-mode use or no need."
+      ],
+      "requiredFields": [
+        "beam_use"
+      ],
+      "evidenceFields": [
+        "beam_use",
+        "concept_reaction",
+        "switch_use"
+      ],
+      "optional": false,
+      "skipWhenCovered": true,
+      "maxImmediateProbes": 1,
+      "measurementStage": "conversation",
+      "claimRefs": [
+        "dual_beam_concept"
+      ],
+      "media": [],
+      "input": {
+        "type": "text",
+        "placeholder": {
+          "en": "Answer in your own words…",
+          "zh-CN": "按自己的实际情况回答…",
+          "es": "Responde con tus propias palabras…"
+        }
+      },
+      "followUpQuestions": {
+        "switch_use": {
+          "en": "When would you switch from the wide setting to the farther-reaching one, if at all?",
+          "zh-CN": "什么情况下你会把灯从照亮近处和两侧，切换成照向远处前方？如果只用一种，也可以说。",
+          "es": "¿Cuándo cambiarías del modo amplio al que ilumina más lejos, si es que lo harías?"
+        }
+      }
+    },
+    {
+      "id": "optics_proof",
+      "label": "Night-test evidence",
+      "objective": "Capture what the owner would need to see in a real night test to judge whether the near-wide and farther-forward settings are useful. Lenses are a proposed way to form these beams, not a promise of greater brightness or better performance. Ask about a comparison only if the owner brings one up.",
+      "question": "If you could watch this light being tested at night, what would you want to see before deciding whether its two settings would help you?",
+      "questionLocales": {
+        "en": "If you could watch this light being tested at night, what would you want to see before deciding whether its two settings would help you?",
+        "zh-CN": "如果能看到这款灯在夜间实际使用，你想看清哪些东西，才能判断这两种照明方式对你有没有用？",
+        "es": "Si pudieras ver cómo se prueba esta luz de noche, ¿qué querrías ver para decidir si sus dos modos te servirían?"
+      },
+      "clarification": "If you could watch this light being tested at night, what would you want to see before deciding whether its two settings would help you?",
+      "clarificationLocales": {
+        "en": "If you could watch this light being tested at night, what would you want to see before deciding whether its two settings would help you?",
+        "zh-CN": "如果能看到这款灯在夜间实际使用，你想看清哪些东西，才能判断这两种照明方式对你有没有用？",
+        "es": "Si pudieras ver cómo se prueba esta luz de noche, ¿qué querrías ver para decidir si sus dos modos te servirían?"
+      },
+      "sufficiencyCriteria": [
+        "A concrete answer, an explicit no need or no experience, or honest uncertainty is understood in the owner’s own words. Do not invent a problem or force agreement."
+      ],
+      "highValueProbeTargets": [
+        "Clarify one test condition or comparison the owner would trust."
+      ],
+      "requiredFields": [
+        "proof_needed"
+      ],
+      "evidenceFields": [
+        "proof_needed"
+      ],
+      "optional": false,
+      "skipWhenCovered": true,
+      "maxImmediateProbes": 1,
+      "measurementStage": "conversation",
+      "claimRefs": [
+        "dual_beam_concept"
+      ],
+      "media": [],
+      "input": {
+        "type": "text",
+        "placeholder": {
+          "en": "Answer in your own words…",
+          "zh-CN": "按自己的实际情况回答…",
+          "es": "Responde con tus propias palabras…"
+        }
+      },
+      "followUpQuestions": {}
+    },
+    {
+      "id": "constraints",
+      "label": "Constraints",
+      "objective": "Find concrete fitment, wiring, control, heat, wind, legal-use or other barriers only when the owner volunteers them; no obstacle is valid.",
+      "question": "For your vehicle, what could make installing or using that two-setting light difficult, if anything?",
+      "questionLocales": {
+        "en": "For your vehicle, what could make installing or using that two-setting light difficult, if anything?",
+        "zh-CN": "对你的车来说，安装或使用这款可切换两种光型的灯，有什么可能的困难？如果没有，也可以说没有。",
+        "es": "En tu vehículo, ¿qué podría dificultar instalar o usar esa luz de dos modos, si hubiera algo?"
+      },
+      "clarification": "For your vehicle, what could make installing or using that two-setting light difficult, if anything?",
+      "clarificationLocales": {
+        "en": "For your vehicle, what could make installing or using that two-setting light difficult, if anything?",
+        "zh-CN": "对你的车来说，安装或使用这款可切换两种光型的灯，有什么可能的困难？如果没有，也可以说没有。",
+        "es": "En tu vehículo, ¿qué podría dificultar instalar o usar esa luz de dos modos, si hubiera algo?"
+      },
+      "sufficiencyCriteria": [
+        "A concrete answer, an explicit no need or no experience, or honest uncertainty is understood in the owner’s own words. Do not invent a problem or force agreement."
+      ],
+      "highValueProbeTargets": [
+        "Clarify one owner-mentioned obstacle that could affect use."
+      ],
+      "requiredFields": [
+        "constraint"
+      ],
+      "evidenceFields": [
+        "constraint"
+      ],
+      "optional": true,
+      "skipWhenCovered": true,
+      "maxImmediateProbes": 1,
+      "measurementStage": "conversation",
+      "claimRefs": [],
+      "media": [],
+      "input": {
+        "type": "text",
+        "placeholder": {
+          "en": "Answer in your own words…",
+          "zh-CN": "按自己的实际情况回答…",
+          "es": "Responde con tus propias palabras…"
+        }
+      },
+      "followUpQuestions": {}
+    },
+    {
+      "id": "price",
+      "label": "Price",
+      "objective": "Exploratory cost threshold only. No invented size, price tier or purchase intent; explicit no interest and uncertainty are valid.",
+      "question": "No size or price has been set for this idea. Including installation, roughly what total cost would you consider, if any? You can skip this question.",
+      "questionLocales": {
+        "en": "No size or price has been set for this idea. Including installation, roughly what total cost would you consider, if any? You can skip this question.",
+        "zh-CN": "这个设想还没有确定尺寸和价格。算上安装，你大约会考虑什么总价？不考虑、暂时不知道或不想回答，都可以直接说。",
+        "es": "Esta idea aún no tiene tamaño ni precio definidos. Incluida la instalación, ¿qué coste total aproximado considerarías, si considerarías alguno? Puedes omitir esta pregunta."
+      },
+      "clarification": "No size or price has been set for this idea. Including installation, roughly what total cost would you consider, if any? You can skip this question.",
+      "clarificationLocales": {
+        "en": "No size or price has been set for this idea. Including installation, roughly what total cost would you consider, if any? You can skip this question.",
+        "zh-CN": "这个设想还没有确定尺寸和价格。算上安装，你大约会考虑什么总价？不考虑、暂时不知道或不想回答，都可以直接说。",
+        "es": "Esta idea aún no tiene tamaño ni precio definidos. Incluida la instalación, ¿qué coste total aproximado considerarías, si considerarías alguno? Puedes omitir esta pregunta."
+      },
+      "sufficiencyCriteria": [
+        "A concrete answer, an explicit no need or no experience, or honest uncertainty is understood in the owner’s own words. Do not invent a problem or force agreement."
+      ],
+      "highValueProbeTargets": [
+        "If a number is given, clarify whether it includes installation only when necessary."
+      ],
+      "requiredFields": [
+        "price_fit"
+      ],
+      "evidenceFields": [
+        "price_fit"
+      ],
+      "optional": true,
+      "allowRefusal": true,
+      "skipWhenCovered": true,
+      "maxImmediateProbes": 1,
+      "measurementStage": "post_intervention",
+      "claimRefs": [],
+      "media": [],
+      "input": {
+        "type": "text",
+        "placeholder": {
+          "en": "Answer in your own words…",
+          "zh-CN": "按自己的实际情况回答…",
+          "es": "Responde con tus propias palabras…"
+        }
+      },
+      "followUpQuestions": {}
+    },
+    {
+      "id": "final_change",
+      "label": "Final change",
+      "objective": "Record one owner-generated change after evaluating use, proof, fit and exploratory cost; no change is valid.",
+      "question": "What one change, if any, would make this two-setting light idea more useful for your own vehicle?",
+      "questionLocales": {
+        "en": "What one change, if any, would make this two-setting light idea more useful for your own vehicle?",
+        "zh-CN": "如果要让这款可切换两种光型的灯更适合你的车，你最希望改哪一点？没有想改的也可以说。",
+        "es": "¿Qué cambiarías, si cambiarías algo, para que esta idea de luz de dos modos te sirva más en tu vehículo?"
+      },
+      "clarification": "What one change, if any, would make this two-setting light idea more useful for your own vehicle?",
+      "clarificationLocales": {
+        "en": "What one change, if any, would make this two-setting light idea more useful for your own vehicle?",
+        "zh-CN": "如果要让这款可切换两种光型的灯更适合你的车，你最希望改哪一点？没有想改的也可以说。",
+        "es": "¿Qué cambiarías, si cambiarías algo, para que esta idea de luz de dos modos te sirva más en tu vehículo?"
+      },
+      "sufficiencyCriteria": [
+        "A concrete answer, an explicit no need or no experience, or honest uncertainty is understood in the owner’s own words. Do not invent a problem or force agreement."
+      ],
+      "highValueProbeTargets": [
+        "Clarify one proposed change only when its object is unclear."
+      ],
+      "requiredFields": [
+        "final_change"
+      ],
+      "evidenceFields": [
+        "final_change"
+      ],
+      "optional": false,
+      "skipWhenCovered": true,
+      "maxImmediateProbes": 1,
+      "measurementStage": "post_intervention",
+      "claimRefs": [],
+      "media": [],
+      "input": {
+        "type": "text",
+        "placeholder": {
+          "en": "Answer in your own words…",
+          "zh-CN": "按自己的实际情况回答…",
+          "es": "Responde con tus propias palabras…"
+        }
+      },
+      "followUpQuestions": {}
+    }
+  ],
+  "completion": {
+    "requiredAnchors": [
+      "use_context",
+      "recent_experience",
+      "current_lights",
+      "priorities",
+      "concept",
+      "optics_proof",
+      "final_change"
+    ],
+    "messages": {
+      "en": "Thank you for sharing your experience. Your interview is saved. Keep your reference code; this page does not issue a reward automatically.",
+      "zh-CN": "谢谢你分享真实经历。访谈已保存，请保留参与编号；本页面不会自动发放奖励。",
+      "es": "Gracias por compartir tu experiencia. La entrevista está guardada. Conserva tu código de referencia; esta página no entrega recompensas automáticamente."
+    }
+  },
+  "analysis": {
+    "outputs": [
+      "individual_summary",
+      "theme_matrix",
+      "decision_report",
+      "evidence_packet"
+    ],
+    "primaryDecisionQuestion": "Do five actual vehicle owners have use cases and credible evidence requirements for a switchable lens-shaped wide and distance light-bar concept?"
+  }
+}

@@ -1,0 +1,8 @@
+.DS_Store
+assets/generated-source/
+build-artifacts/
+build-tools/
+.playwright-cli/
+output/
+public-dist/
+__pycache__/

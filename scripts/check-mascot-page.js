@@ -1,0 +1,198 @@
+const fs = require('fs');
+const path = require('path');
+const crypto = require('crypto');
+const vm = require('vm');
+
+const root = path.resolve(process.env.PUBLIC_SITE_ROOT || path.join(__dirname, '..'));
+const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
+const fail = (message) => { throw new Error(`Mascot page check failed: ${message}`); };
+
+function webpSize(file) {
+  const buffer = fs.readFileSync(file);
+  if (buffer.toString('ascii', 0, 4) !== 'RIFF' || buffer.toString('ascii', 8, 12) !== 'WEBP') return null;
+  const kind = buffer.toString('ascii', 12, 16);
+  if (kind === 'VP8 ') return { width: buffer.readUInt16LE(26) & 0x3fff, height: buffer.readUInt16LE(28) & 0x3fff };
+  if (kind === 'VP8L') {
+    const bits = buffer.readUInt32LE(21);
+    return { width: (bits & 0x3fff) + 1, height: ((bits >> 14) & 0x3fff) + 1 };
+  }
+  if (kind === 'VP8X') return { width: 1 + buffer.readUIntLE(24, 3), height: 1 + buffer.readUIntLE(27, 3) };
+  return null;
+}
+
+const mascot = JSON.parse(read('data/mascot.json'));
+const content = JSON.parse(read('data/content.json'));
+const html = read('mascot.html');
+const script = read('mascot.js');
+const css = read('mascot.css');
+
+if (!content.nav.some((item) => item.id === 'mascot' && item.file === 'mascot.html')) fail('Hub navigation does not include mascot.html');
+if (!html.includes('data-page="mascot"') || !html.includes('mascot.css') || !html.includes('mascot.js')) fail('mascot.html is missing the page id or dedicated assets');
+if (!script.includes('data.characters') || !script.includes('evo-toc') || !script.includes('evo-character-list')) fail('character gallery or jump navigation is incomplete');
+if (!css.includes('grid-template-columns: 150px minmax(0, 1fr)') || !css.includes('scroll-margin-top') || !css.includes('overflow-x: auto')) fail('reserved desktop navigation or mobile anchor layout is incomplete');
+
+const forbiddenUi = [
+  'evo-filter', '<details', '<summary', '<time', 'evo-round-toggle', 'evo-status',
+  'dialog', 'evo-lightbox', 'recommendedMarkup', 'data-evo-overview'
+];
+const buttons = script.match(/<button\b[^>]*>/g) || [];
+if (buttons.length !== 1 || buttons[0] !== '<button type="button" id="retry-mascot">') fail('only the loading-error retry button is allowed');
+for (const token of forbiddenUi) {
+  if (script.includes(token)) fail(`unnecessary mascot interaction remains: ${token}`);
+}
+
+if ('rounds' in mascot || !Array.isArray(mascot.characters) || mascot.characters.length !== 1) fail('the gallery must contain only the Bruno character family');
+
+const codes = [];
+const sources = [];
+const families = [];
+for (const character of mascot.characters) {
+  if (!character.id || !character.index || !character.family || !character.type || !character.name_cn || !character.name_en || !character.blurb) fail('a character section is missing identity or copy');
+  if (!Array.isArray(character.assets) || character.assets.length !== 5) fail(`${character.family} has the wrong image count`);
+  families.push(character.family);
+  if (character.versions || character.sizePreview) fail('the current gallery must not reintroduce version comparisons');
+  for (const asset of character.assets) {
+    if (!asset.code || !asset.caption || !asset.alt || !asset.src || !asset.source_round) fail(`${character.family} contains an incomplete asset record`);
+    const assetPath = path.join(root, asset.src);
+    if (!fs.existsSync(assetPath) || fs.statSync(assetPath).size < 1000) fail(`${asset.code} asset is missing or empty`);
+    const size = webpSize(assetPath);
+    if (!size || size.width !== size.height || size.width < 1024) fail(`${asset.code} must remain a square WebP at least 1024px wide`);
+    codes.push(asset.code);
+    sources.push(asset.src);
+  }
+}
+
+if (families.join(',') !== 'bison') fail('only the Bruno family belongs in the current gallery');
+if (codes.length !== 5 || new Set(codes).size !== 5 || new Set(sources).size !== 5) fail('five unique Bruno gallery images are required');
+if (mascot.characters[0].role !== 'brand' || mascot.characters[0].index !== '01') fail('Bruno must retain the brand identity');
+
+const bull = mascot.characters[0];
+if (bull.name_cn !== '布诺' || bull.name_en !== 'Bruno'
+  || bull.assets.some((asset) => asset.source_round !== 'bull-v2')) fail('the updated bull identity is missing');
+const expectedCodes = Array.from({ length: 5 }, (_, index) => `BULL-V2-0${index + 1}`);
+if (codes.join(',') !== expectedCodes.join(',')
+  || bull.assets.some((asset) => asset.src !== `assets/mascot-evolution/bull-v2/${asset.code}.webp`)) fail('the five accepted Bruno images must remain in order');
+if (bull.avatar_src !== 'assets/mascot-evolution/bull-v2/BULL-V2-AVATAR.webp'
+  || !fs.existsSync(path.join(root, bull.avatar_src))) fail('the Bruno gallery avatar is missing');
+if (!Array.isArray(mascot.applications) || mascot.applications.length !== 2) fail('social and merchandise applications are required');
+if (mascot.applications.map((asset) => asset.code).join(',') !== 'BULL-V2-SOCIAL,BULL-V2-MERCH') fail('both accepted Bruno scenes must remain');
+for (const asset of mascot.applications) {
+  if (asset.source_round !== 'bull-v2' || asset.src !== `assets/mascot-evolution/bull-v2/${asset.code}.webp`) fail('a scene uses an obsolete mascot version');
+  if (!asset.code || !asset.caption || !asset.alt || !asset.src) fail('an application is incomplete');
+  const size = webpSize(path.join(root, asset.src));
+  if (!size || size.width < 1024 || size.height < 1024
+    || size.width !== asset.width || size.height !== asset.height) fail(`${asset.code} dimensions are incorrect`);
+  if (sources.includes(asset.src) || codes.includes(asset.code)) fail('an application duplicates a character image');
+  sources.push(asset.src);
+  codes.push(asset.code);
+}
+if (new Set(sources).size !== sources.length || new Set(codes).size !== codes.length) fail('application images are duplicated');
+
+// Validate committed same-artwork derivatives without requiring a codec at CI time.
+const previewManifest = JSON.parse(read('assets/mascot-evolution/preview-manifest.json'));
+if (previewManifest.format !== 'same-artwork-avif-previews-v1' || previewManifest.images.length !== 8) fail('the same-artwork preview manifest must cover seven gallery images and the background');
+const expectedSources = new Set([...sources, 'assets/background.png']);
+function avifSize(buffer) {
+  if (buffer.toString('ascii', 4, 8) !== 'ftyp') return null;
+  const ftypEnd = buffer.readUInt32BE(0);
+  if (ftypEnd < 16 || ftypEnd > buffer.length || !buffer.toString('ascii', 8, ftypEnd).includes('avif')) return null;
+  function boxes(start, end) {
+    for (let offset = start; offset + 8 <= end;) {
+      const length = buffer.readUInt32BE(offset);
+      if (length < 8 || offset + length > end) return null;
+      const kind = buffer.toString('ascii', offset + 4, offset + 8);
+      if (kind === 'ispe' && length >= 20) return { width: buffer.readUInt32BE(offset + 12), height: buffer.readUInt32BE(offset + 16) };
+      if (['meta', 'iprp', 'ipco'].includes(kind)) {
+        const result = boxes(offset + 8 + (kind === 'meta' ? 4 : 0), offset + length);
+        if (result) return result;
+      }
+      offset += length;
+    }
+    return null;
+  }
+  return boxes(0, buffer.length);
+}
+for (const entry of previewManifest.images) {
+  if (!expectedSources.delete(entry.source)) fail('unexpected or duplicate preview source');
+  const original = fs.readFileSync(path.join(root, entry.source));
+  if (entry.source_bytes !== original.length || crypto.createHash('sha256').update(original).digest('hex') !== entry.source_sha256) fail(`preview source changed: ${entry.source}`);
+  const background = entry.source === 'assets/background.png';
+  const originalSize = background ? { width: original.readUInt32BE(16), height: original.readUInt32BE(20) } : webpSize(path.join(root, entry.source));
+  const stem = entry.source.replace(/\.(png|webp)$/, '');
+  const expectedVariants = new Set(background ? [stem + '.avif'] : [stem + '.avif', stem + '-768.avif']);
+  for (const variant of entry.variants) {
+    if (!expectedVariants.delete(variant.path)) fail('unexpected or duplicate AVIF variant');
+    const bytes = fs.readFileSync(path.join(root, variant.path));
+    const size = avifSize(bytes);
+    const width = variant.path.endsWith('-768.avif') ? 768 : originalSize.width;
+    const height = Math.round(originalSize.height * width / originalSize.width);
+    if (!size || size.width !== width || size.height !== height || variant.width !== width || variant.height !== height) fail(`AVIF dimensions are incorrect: ${variant.path}`);
+    if (variant.bytes !== bytes.length || crypto.createHash('sha256').update(bytes).digest('hex') !== variant.sha256) fail(`AVIF variant changed: ${variant.path}`);
+    if (bytes.length >= original.length) fail(`AVIF preview must reduce bytes: ${variant.path}`);
+  }
+  if (expectedVariants.size) fail('an AVIF preview size is missing');
+}
+if (expectedSources.size) fail('a preview source is missing');
+
+const kit = JSON.parse(read('data/mascot-kit.json'));
+if (kit.display_name !== 'Bruno') fail('the display name must be Bruno');
+if (kit.examples.length !== 6 || kit.examples.some((example) => example.speaker !== 'Bruno')) fail('all six application speakers must be Bruno');
+if (!kit.examples[0].copy.includes('AI research guide') || !/AI\s*身份在首次互动/.test(script)) fail('AI identity must remain in the introduction');
+for (const asset of kit.assets) {
+  if (!/^assets\/mascot-kit\/[a-z0-9.-]+$/.test(asset.src)) fail('public kit asset path is unsafe');
+  const bytes = fs.readFileSync(path.join(root, asset.src));
+  if (bytes.length !== asset.bytes || crypto.createHash('sha256').update(bytes).digest('hex') !== asset.sha256) fail(`public kit asset changed: ${asset.id}`);
+  if (/^pose-(welcome|explain)-512-png$/.test(asset.id)
+    && (bytes.toString('hex', 0, 8) !== '89504e470d0a1a0a' || bytes[25] !== 6)) fail(`${asset.id} must remain a transparent RGBA PNG`);
+  if (/^avatar-\d+-png$/.test(asset.id)) {
+    const size = Number(asset.id.split('-')[1]);
+    if (bytes.toString('hex', 0, 8) !== '89504e470d0a1a0a' || bytes[25] !== 6
+      || bytes.readUInt32BE(16) !== size || bytes.readUInt32BE(20) !== size) fail(`${asset.id} must be an RGBA PNG of its declared size`);
+  }
+}
+for (const id of ['avatar-32-png', 'avatar-64-png', 'avatar-128-png', 'avatar-256-png', 'pose-welcome-512-png', 'pose-explain-512-png', 'pose-welcome-768-webp', 'pose-explain-768-webp']) {
+  if (!kit.assets.some((asset) => asset.id === id)) fail(`missing kit asset: ${id}`);
+}
+if (!fs.existsSync(path.join(root, kit.download)) || !fs.existsSync(path.join(root, kit.usage))) fail('kit downloads are missing');
+if (!content.nav.some(item => item.id === 'mascot' && item.file === 'mascot.html')) fail('Bruno navigation missing');
+for (const id of ['iteration','applications','design-workflow']) if (!html.includes('id="'+id+'"')) fail('Merged section missing: '+id);
+const publicText = [JSON.stringify(mascot), JSON.stringify(kit), read(kit.usage), html, script, css].join('\n');
+if (/Sunny|阿朗|Ollie|小欧|Tread|踏踏|MR-BOARD|bull-v1|ollie-halo|ollie-kit|chat-refresh|meeting-refresh/i.test(publicText)) fail('an obsolete independent mascot remains in the current page');
+if (/已淘汰|当前候选|候选|已选定|首选|备选|Rejected|Shortlisted|Selected/.test(publicText)) fail('selection labels must not appear');
+if (/"date"\s*:|"goal"\s*:|独立画面|身份｜|结构｜|工作｜|动态｜/.test(JSON.stringify(mascot))) fail('dates or design-process copy must not appear in the character gallery');
+if (/\/Users\/|127\.0\.0\.1|localhost|API[_ -]?KEY|COOKIE|PASSWORD/i.test(publicText)) fail('local-only or sensitive text appears in the public mascot page');
+
+async function checkRenderedPage() {
+  const main = { innerHTML: '', setAttribute() {} };
+  const description = { content: '' };
+  const page = { window: { fetchHubJSON: async (file) => JSON.parse(read(file)) }, document: {
+    body: { dataset: {} },
+    querySelector: (selector) => selector === '#content' ? main : description,
+    getElementById: () => null
+  }, location: { hash: '' }, fetch: async (file) => ({ ok: true, json: async () => JSON.parse(read(file)) }) };
+  vm.runInNewContext(script, page);
+  await page.window.initMascot();
+  const rendered = main.innerHTML;
+  if ((rendered.match(/<picture><source type="image\/avif"/g) || []).length !== 7) fail('all seven gallery images need responsive AVIF sources');
+  for (const source of sources) {
+    const stem = source.replace(/\.webp$/, '');
+    if (!rendered.includes(stem + '-768.avif 768w, ' + stem + '.avif ') || !rendered.includes('<img src="' + source + '"')) fail('responsive AVIF and original WebP fallback are required');
+  }
+  if (!html.includes('<!-- mascot-content:start -->' + rendered + '<!-- mascot-content:end -->')) fail('static gallery must match the full current renderer');
+  const staticNavigation = html.match(/<!-- mascot-nav:start -->([^]*?)<!-- mascot-nav:end -->/);
+  if (!staticNavigation || (staticNavigation[1].match(/<a /g) || []).length !== content.nav.length) fail('static navigation must contain every shared navigation entry');
+  if ((rendered.match(/class="evo-character"/g) || []).length !== 1
+    || (rendered.match(/class="evo-asset"/g) || []).length !== 7) fail('rendered gallery must show one family and all seven accepted images');
+  if ((rendered.match(/<strong>Bruno<\/strong>/g) || []).length !== 6) fail('rendered applications must keep all six Bruno speakers');
+  for (const id of [bull.id, 'applications', 'character-voice', 'digital-assets']) {
+    if (!rendered.includes(`href="#${id}"`) || !rendered.includes(`id="${id}"`)) fail(`rendered page anchor is missing: ${id}`);
+  }
+  for (const src of [...sources, kit.download, kit.usage]) {
+    if (!rendered.includes(`href="${src}"`)) fail(`rendered image or download is missing: ${src}`);
+  }
+  if (!rendered.includes('AI research guide') || !rendered.includes('救援板小伙伴')) fail('rendered AI introduction or Bruno companion is missing');
+  if (/Sunny|阿朗|Ollie|小欧|Tread|踏踏|MR-BOARD|bull-v1/i.test(rendered + description.content)) fail('an obsolete mascot is rendered');
+  console.log('Mascot gallery check passed: Bruno only, 5 unique character images, 2 accepted scenes, 6 applications, transparent assets and downloads; rendered anchors and AI disclosure intact.');
+}
+
+checkRenderedPage().catch((error) => { console.error(error.message); process.exitCode = 1; });

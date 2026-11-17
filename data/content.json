@@ -1,0 +1,326 @@
+{
+  "site": {
+    "title": "海外用户运营 Hub",
+    "subtitle": "记录工作进展、计划和成果。"
+  },
+  "nav": [
+    {
+      "id": "home",
+      "label": "首页",
+      "file": "index.html"
+    },
+    {
+      "id": "content-guides",
+      "label": "内容指南",
+      "file": "content-guides.html",
+      "group": "社媒内容"
+    },
+    {
+      "id": "content-review",
+      "label": "过审标准",
+      "file": "content-review.html",
+      "group": "社媒内容"
+    },
+    {
+      "id": "studio",
+      "label": "内容生产流程",
+      "file": "content-studio.html",
+      "group": "社媒内容"
+    },
+    {
+      "id": "skills",
+      "label": "设计技能包",
+      "file": "skills.html",
+      "group": "社媒内容"
+    },
+    {
+      "id": "social-brand",
+      "label": "社媒品牌升级",
+      "file": "social-brand.html",
+      "group": "社媒内容"
+    },
+    {
+      "id": "social-tools",
+      "label": "社媒工具 54 例",
+      "file": "social-tools.html",
+      "group": "社媒内容"
+    },
+    {
+      "id": "brand-voice-system",
+      "label": "OEDRO 品牌口吻",
+      "file": "topic.html?slug=brand-voice-system",
+      "group": "品牌与产品"
+    },
+    {
+      "id": "mascot",
+      "label": "吉祥物 Bruno",
+      "file": "mascot.html",
+      "group": "品牌与产品"
+    },
+    {
+      "id": "merch-plan",
+      "label": "OEDRO 周边",
+      "file": "merch-plan.html",
+      "group": "品牌与产品"
+    },
+    {
+      "id": "products",
+      "label": "产品知识库",
+      "file": "products.html",
+      "group": "品牌与产品"
+    },
+    {
+      "id": "freshflow",
+      "label": "FreshFlow 新风机",
+      "file": "freshflow.html",
+      "group": "品牌与产品"
+    },
+    {
+      "id": "discord-community",
+      "label": "Discord 频道设计",
+      "file": "topic.html?slug=discord-community",
+      "group": "社区与邮件"
+    },
+    {
+      "id": "discord-invite-plan",
+      "label": "Discord 邀请活动",
+      "file": "discord-invite-plan.html",
+      "group": "社区与邮件"
+    },
+    {
+      "id": "newsletter",
+      "label": "The Glovebox 邮件期刊",
+      "file": "newsletter.html",
+      "group": "社区与邮件"
+    },
+    {
+      "id": "email-templates",
+      "label": "用户邮件模板",
+      "file": "email-templates.html",
+      "group": "社区与邮件"
+    },
+    {
+      "id": "loyalty",
+      "label": "积分商城",
+      "file": "loyalty.html",
+      "group": "会员与复购"
+    },
+    {
+      "id": "repurchase",
+      "label": "复购办法",
+      "file": "repurchase.html",
+      "group": "会员与复购"
+    },
+    {
+      "id": "ugc-activity",
+      "label": "投稿活动",
+      "file": "ugc-activity.html",
+      "group": "会员与复购"
+    },
+    {
+      "id": "customer-analytics",
+      "label": "用户数据分析",
+      "file": "customer-analytics.html",
+      "group": "用户与市场研究"
+    },
+    {
+      "id": "first-outreach",
+      "label": "首批触达用户",
+      "file": "first-outreach.html",
+      "group": "用户与市场研究"
+    },
+    {
+      "id": "voice",
+      "label": "用户声音",
+      "file": "user-voice.html",
+      "group": "用户与市场研究"
+    },
+    {
+      "id": "competitor-experience",
+      "label": "竞品体验报告",
+      "file": "competitor-experience.html",
+      "group": "用户与市场研究"
+    },
+    {
+      "id": "research",
+      "label": "AI 问卷",
+      "file": "research.html",
+      "group": "用户与市场研究"
+    },
+    {
+      "id": "seo-geo",
+      "label": "SEO 与 AI 搜索",
+      "file": "topic.html?slug=seo-geo",
+      "group": "用户与市场研究"
+    },
+    {
+      "id": "fakesite",
+      "label": "独立站样站",
+      "file": "fakesite/",
+      "external": true,
+      "group": "样例"
+    },
+    {
+      "id": "flipbooks",
+      "label": "Flip Book 样例",
+      "file": "flipbooks.html",
+      "group": "样例"
+    }
+  ],
+  "flipbooks": {
+    "title": "Flip Book 样例（翻页书）",
+    "entries": [
+      {
+        "title": "品牌故事 · Brand Story",
+        "image": "experiences/flipbooks/assets/v2/出发封面_Departure_Cover.webp",
+        "image_alt": "品牌故事翻页书",
+        "image_width": 1086,
+        "image_height": 1448,
+        "href": "experiences/flipbooks/?book=edition-01&return=../../flipbooks.html"
+      },
+      {
+        "title": "车主问卷 · Car Owner Survey",
+        "image": "experiences/flipbooks/assets/v2/雨天归来_Floor_Mats_Rain_Return.webp",
+        "image_alt": "车主问卷翻页书",
+        "image_width": 1086,
+        "image_height": 1448,
+        "href": "experiences/flipbooks/?book=owner-field-notes&return=../../flipbooks.html"
+      }
+    ]
+  },
+  "capabilities": [
+    {
+      "name": "用户资料与联系许可",
+      "purpose": "统一管理用户资料、车型和各类联系许可，便于后续邀请用户参加调研或活动。",
+      "minimum": "至少可查看用户基本资料、车型和授权状态。"
+    },
+    {
+      "name": "用户反馈与产品改进",
+      "purpose": "记录用户反馈和处理情况，并将重要问题交给产品或运营同事继续跟进。",
+      "minimum": "至少可记录反馈来源、问题点和跟进结果。"
+    },
+    {
+      "name": "社交媒体内容与互动",
+      "purpose": "各平台分别确定受众、主要目的、内容主题、发布节奏、素材来源、互动分工和衡量方式。具体发布频率待账号交接并核对历史表现后确定。",
+      "minimum": "至少完成主要平台的内容规划和分工说明。"
+    },
+    {
+      "name": "用户调研与条件式产品测试",
+      "purpose": "组织用户参与调研；产品测试和试用只在产品、方案、权益与履约获批后启动。",
+      "minimum": "至少可核对联系许可、参与条件，并记录参与结果。"
+    },
+    {
+      "name": "内容创作者、用户内容与社群",
+      "purpose": "整理用户内容（UGC）、内容创作者合作和社群讨论，并记录内容来源与使用许可。",
+      "minimum": "至少可记录内容来源、使用授权和社群反馈。"
+    },
+    {
+      "name": "复购、推荐与口碑",
+      "purpose": "基于用户关系和参与记录，为复购、推荐和口碑传播提供支持。",
+      "minimum": "至少可识别适合参与复购或推荐的用户群体。"
+    }
+  ],
+  "research": {
+    "title": "AI问卷",
+    "meta_description": "打开 OEDRO AI 文字访谈，查看调研准备、结果整理与参与说明。",
+    "description": "工作灯 AI 调研问卷演示，根据回答继续追问。",
+    "prepare": [
+      "写明需要回答的问题、目标人群和希望比较的方案。",
+      "准备必要的产品资料和访谈提纲，确认参与范围及后续联系范围。"
+    ],
+    "results": "保留用户原话和来源，归纳共性问题与分歧；对资料不足的判断继续核实。",
+    "participation": "参与前说明研究目的、回答用途和联系范围，取得明确同意，并记录分项许可。参与者可跳过问题或结束参与，退出后不再继续邀请；营销联系和内容复用需另行取得许可。"
+  },
+  "user_voice": {
+    "meta_description": "OEDRO公开问题与反馈的阶段性工作汇总。",
+    "title": "用户声音",
+    "description": "记录本机问题处理工作的公开汇总、重复主题、结论和后续动作。",
+    "snapshot_title": "最近汇总",
+    "snapshot": [
+      {
+        "label": "已接入来源",
+        "value": "2",
+        "note": "Tavily、YouTube"
+      },
+      {
+        "label": "累计记录",
+        "value": "117",
+        "note": "完整明细保留在本机"
+      },
+      {
+        "label": "当前待处理",
+        "value": "0",
+        "note": "暂无安全候选"
+      },
+      {
+        "label": "已确认的公开洞察",
+        "value": "0",
+        "note": "空结果不补写"
+      }
+    ],
+    "findings_title": "当前结论",
+    "findings": [
+      "当前没有证据充分且仍在回复窗口内的真实候选。",
+      "媒体文章、推广内容和无明确问题的视频列为覆盖记录，不进入回复队列。",
+      "适配、安装、保修等具体问题的回答仍以官方产品事实为准；证据不足时不再给出确定性回答。"
+    ],
+    "workflow_title": "处理流程",
+    "workflow": [
+      {
+        "name": "发现",
+        "description": "收集公开问题并去重，由人工判断是否值得回复。"
+      },
+      {
+        "name": "核实",
+        "description": "涉及适配、安装、保修等产品事实时，核对官方资料；证据不足时不再给出确定性回答。"
+      },
+      {
+        "name": "人工处理",
+        "description": "系统仅准备回复草稿，审核、复制和平台发布始终由人工完成。"
+      }
+    ],
+    "public_title": "洞察与行动",
+    "public_description": "经核对的重复问题、内容选题、FAQ、产品反馈和研究任务记录在此；逐条原始记录保留在本机。",
+    "empty_message": "暂无新增洞察或行动",
+    "empty_detail": "本次扫描未形成需要公开记录的新结论。",
+    "related_title": "相关记录",
+    "related": [
+      {
+        "label": "AI智能用户调研",
+        "description": "打开文字访谈，查看调研准备和结果整理。",
+        "file": "research.html"
+      },
+      {
+        "label": "社媒内容生产",
+        "description": "查看已形成的内容、研究、方案和网站成果。",
+        "file": "content-studio.html"
+      }
+    ]
+  },
+  "social_media": {
+    "title": "接手社交媒体后应先做什么",
+    "summary": "交接内容包括账号、历史内容、数据和各平台安排。",
+    "steps": [
+      {
+        "name": "完成账号交接",
+        "description": "确认账号权限、管理员、登录和找回方式，以及现有素材的存放位置。"
+      },
+      {
+        "name": "了解过往发布内容",
+        "description": "整理历史内容、表现数据和待处理留言，找出值得继续制作的内容。"
+      },
+      {
+        "name": "确定各平台的用途",
+        "description": "分别写明各平台的受众、账号用途、内容主题、形式和发布节奏。"
+      },
+      {
+        "name": "安排内容与互动",
+        "description": "明确素材来源、审稿、排期、发布、评论和私信的处理人。"
+      },
+      {
+        "name": "定期查看效果",
+        "description": "查看内容表现、有效互动、网站访问和用户线索，并据此调整后续安排。"
+      }
+    ]
+  }
+}

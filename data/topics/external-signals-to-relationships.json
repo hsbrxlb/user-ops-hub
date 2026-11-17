@@ -1,0 +1,112 @@
+{
+  "schema_version": "1.0",
+  "slug": "external-signals-to-relationships",
+  "title": "公开信号与用户关系",
+  "description": "说明外部渠道留下的用户信号如何被记录、判断、采用，并在用户主动许可的前提下发展为长期关系。",
+  "area": "用户反馈",
+  "status": "筹备",
+  "public_safe": true,
+  "sections": [
+    {
+      "id": "external-signals",
+      "title": "外部渠道会留下什么",
+      "paragraphs": [
+        "Slickdeals/Deal、Creator、YouTube、Reddit、产品评论、客服和社媒互动会留下几类信息：适配问题、安装困难、使用顾虑、用户实际用词，以及用户自行发布的内容。"
+      ]
+    },
+    {
+      "id": "comment-handling",
+      "title": "一条评论先如何处理",
+      "paragraphs": [
+        "看到一条外部评论，第一步是保留原话、上下文、来源链接、时间和内容哈希：原话不改写，上下文说明用户为什么这样表达，来源链接用于回溯，时间用于判断新旧，内容哈希用于确认内容未被改动。",
+        "整理时按车型、产品、场景、问题、动机和用户语言归类。",
+        "AI 可以建议标签，标签经人工核对后才能进入后续流程。"
+      ]
+    },
+    {
+      "id": "repeat-issue-threshold",
+      "title": "什么情况算重复问题",
+      "paragraphs": [
+        "普通单条评论属于初步线索。3个独立声音且至少来自2个不同来源时，进入重复问题处理。这个内部阈值不作为对外承诺或统计结论。",
+        "安全、适配、产品损坏类问题可以单条紧急升级，不受3个独立声音的限制。",
+        "只有经过人工确认的重复问题，才能作为可采用的认知进入下一步。"
+      ]
+    },
+    {
+      "id": "turning-into-work",
+      "title": "怎样变成实际工作",
+      "paragraphs": [
+        "确认后的问题可以进入 FAQ、调研问题、Discord 话题、产品反馈、客服反馈、内容选题或官网文章候选。",
+        "每个动作记录接收人、处理状态和采用证据；采用证据写明这条认知最终用在了哪里。"
+      ]
+    },
+    {
+      "id": "long-term-relationship",
+      "title": "怎样建立长期关系",
+      "paragraphs": [
+        "公开评论用于理解用户，不直接把用户纳入长期关系。用户主动报名并明确许可后，才能继续邀请参与研究、社区、产品测试、UGC 或营销联系。",
+        "流程是：外部触点→报名入口→分项许可→首次有效参与→7日回访→第二次参与。外部触点是任何渠道的公开互动，报名入口由用户自行进入，分项许可让用户选择愿意参与的内容，7日回访在参与后一周内进行。",
+        "用户可以选择加入 Discord，也可以只参加调研、产品测试或特定内容项目。每一种参与方式都按用户明确同意的范围执行。"
+      ]
+    },
+    {
+      "id": "weekly-monthly-routine",
+      "title": "每周和每月怎么做",
+      "paragraphs": [
+        "每周查看新增线索、高频问题、紧急问题、待核对事项和已发出的动作。",
+        "每月查看稳定主题、用户实际用词、车型/产品分布、采用情况和仍需研究的问题。",
+        "原始证据一直保留，不因整理或采用而删除。"
+      ]
+    },
+    {
+      "id": "rights-and-platform-boundaries",
+      "title": "权利和平台边界",
+      "paragraphs": [
+        "公开评论不自动进入营销名单；公开发言不代表同意接收营销信息。",
+        "研究、营销邮件、社群邀请、UGC 复用和短信许可分开管理。用户同意其中一项，不代表同意其他项。",
+        "免费产品、佣金或奖励涉及公开内容时，需要清楚披露。具体披露要求参照 FTC Endorsement Guides。",
+        "不绕过登录、API 或平台限制。读取公开内容时使用官方接口，例如 YouTube Data API 的 commentThreads.list；Reddit Data API 需遵守数据访问、使用与删除要求。",
+        "不自动回复、私信、发帖或联系用户。所有主动联系必须基于用户明确许可。"
+      ]
+    }
+  ],
+  "related_pages": [
+    {
+      "href": "content-studio.html",
+      "label": "内容生产",
+      "description": "把已经批准的问题和事实整理成活动、研究或社区内容。"
+    },
+    {
+      "href": "topic.html?slug=discord-community",
+      "label": "Discord社区",
+      "description": "查看用户进入社区后的频道、主持和回访安排。"
+    },
+    {
+      "href": "topic.html?slug=brand-voice-system",
+      "label": "品牌人格与用户联系",
+      "description": "查看不同渠道的说话原则、事实边界和许可要求。"
+    }
+  ],
+  "sources": [
+    {
+      "label": "FTC Endorsement Guides FAQ",
+      "url": "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "supports": "合作、免费产品、奖励与披露"
+    },
+    {
+      "label": "YouTube Data API commentThreads.list",
+      "url": "https://developers.google.com/youtube/v3/docs/commentThreads/list",
+      "supports": "官方评论读取接口"
+    },
+    {
+      "label": "Reddit Data API Terms",
+      "url": "https://redditinc.com/policies/data-api-terms",
+      "supports": "数据访问、使用与删除要求"
+    },
+    {
+      "label": "Microsoft Feedback Hub",
+      "url": "https://learn.microsoft.com/en-us/windows-insider/feedback",
+      "supports": "反馈需要状态和结果回流"
+    }
+  ]
+}

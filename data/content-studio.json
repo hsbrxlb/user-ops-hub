@@ -1,0 +1,150 @@
+{
+  "title": "社媒内容生产",
+  "intro": "AI根据需求自动生产并审核用于社媒和社群的图文内容。",
+  "categories": [
+    {
+      "id": "all",
+      "label": "全部"
+    },
+    {
+      "id": "content",
+      "label": "内容"
+    },
+    {
+      "id": "research",
+      "label": "研究与方案"
+    },
+    {
+      "id": "system",
+      "label": "网站与系统"
+    }
+  ],
+  "results": [
+    {
+      "id": "multiplatform-content-test",
+      "date": "2026-09-09",
+      "project": "OEDRO社媒内容",
+      "type": "内容",
+      "category": "content",
+      "title": "徒步归来的皮卡 · 三平台图文",
+      "description": "Instagram、X 和 YouTube 的社区图文，采用照片感场景并附中英对照。",
+      "purpose": "借助泥靴与车内泥沙的生活片段，引起车主共鸣。",
+      "status": "待确认",
+      "related_work": "欧美多个社交媒体平台的内容准备。",
+      "links": [
+        {
+          "label": "查看测试记录",
+          "href": "content-pipeline-test.html"
+        }
+      ]
+    },
+    {
+      "id": "seo-geo-lab",
+      "date": "2026-08-27",
+      "project": "OEDRO独立站增长",
+      "type": "网站与系统",
+      "category": "system",
+      "title": "SEO 与 AI 搜索的本机实验系统",
+      "description": "建立公开站点审计、三个品类共九页的静态 Demo、六十条买家问题及分层测量规则。",
+      "purpose": "在无法获取官网代码权限时，先形成可供复核、也可交给技术部的实现与验收材料。",
+      "status": "进行中",
+      "related_work": "OEDRO SEO与AI搜索可见度",
+      "links": [
+        {
+          "label": "查看专题",
+          "href": "topic.html?slug=seo-geo"
+        }
+      ]
+    },
+    {
+      "id": "brand-voice-system",
+      "date": "2026-08-25",
+      "project": "OEDRO 品牌声音",
+      "type": "内容",
+      "category": "research",
+      "title": "品牌人格与跨渠道声音专题",
+      "description": "整理 Email、Discord、调研、客服和内容合作中的表达原则，以及不同渠道需要守住的事实与联系边界。",
+      "purpose": "作为后续内容、用户联系和本地 Codex 工作的共同参考。",
+      "status": "进行中",
+      "related_work": "品牌人格与用户联系",
+      "links": [
+        {
+          "label": "查看专题",
+          "href": "topic.html?slug=brand-voice-system"
+        }
+      ]
+    },
+    {
+      "id": "discord-audit",
+      "date": "2026-09-14",
+      "project": "OEDRO与COZEWARE Discord",
+      "type": "研究与方案",
+      "category": "research",
+      "title": "Discord 频道与机器人配置",
+      "description": "展示 OEDRO 与 COZEWARE 的主要频道结构、成员规模、机器人及已核实设置。",
+      "purpose": "查看两套服务器的实际结构与配置范围。",
+      "status": "已完成",
+      "related_work": "Discord 社群配置",
+      "links": [
+        {
+          "label": "查看专题",
+          "href": "topic.html?slug=discord-community"
+        }
+      ]
+    },
+    {
+      "id": "user-voice-summary",
+      "date": "2026-08-26",
+      "project": "OEDRO 问题与反馈",
+      "type": "研究与方案",
+      "category": "research",
+      "title": "问题与反馈公开汇总",
+      "description": "梳理公开问题的发现、核实与后续处理；当前没有可公开的具体洞察。",
+      "purpose": "记录问题如何进入研究、内容、产品反馈或支持工作。",
+      "status": "进行中",
+      "related_work": "公开问题与反馈的回复准备",
+      "links": [
+        {
+          "label": "查看页面",
+          "href": "user-voice.html"
+        }
+      ]
+    },
+    {
+      "id": "ai-smart-survey",
+      "date": "2026-08-31",
+      "project": "AI 智能对话问卷",
+      "type": "研究与方案",
+      "category": "research",
+      "title": "AI 智能对话问卷",
+      "description": "把问卷目的和背景资料转为由 AI 主持的对话问卷，并保留可追溯的原始回答和整理结果。",
+      "purpose": "记录可复用的问卷制作方向，不局限于单一产品或研究主题。",
+      "status": "进行中",
+      "related_work": "通用 AI 智能对话问卷工具",
+      "links": [
+        {
+          "label": "查看介绍",
+          "href": "research.html"
+        }
+      ]
+    },
+    {
+      "id": "hub-structure",
+      "date": "2026-08-26",
+      "project": "OEDRO 海外用户运营工作台",
+      "type": "网站与系统",
+      "category": "system",
+      "title": "Hub 信息架构与内容成果的静态页面",
+      "description": "建立总览、用户调研/问卷、问题与反馈、内容成果和运营专题等在线工作档案的入口。",
+      "purpose": "在线记录本地 Codex 完成的工作，便于回顾。",
+      "status": "已完成",
+      "related_work": "海外用户运营工作台",
+      "links": [
+        {
+          "label": "查看工作台",
+          "href": "index.html"
+        }
+      ]
+    }
+  ]
+}

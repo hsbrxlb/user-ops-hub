@@ -1,0 +1,30 @@
+.automation-main { --automation-line: #555443; }
+.automation-heading { padding-bottom: 32px; }
+.automation-heading p { max-width: 800px; color: var(--text-secondary); font-size: 16px; line-height: 1.8; margin-top: 16px; }
+.automation-flow { padding-bottom: 24px; }
+.automation-stage-image { display: block; width: 100%; height: auto; }
+.automation-stages { display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; max-width: 880px; margin: 0 auto; padding: 0; list-style: none; }
+.automation-stages li { min-width: 0; }
+.automation-stage-number { color: var(--text-secondary); font-size: 12px; font-weight: 400; margin-right: 12px; }
+.automation-step { display: block; color: var(--accent); font-size: 12px; letter-spacing: .07em; }
+.automation-flow h2 { font-size: 14px; font-weight: 500; margin: 0 0 12px; }
+.automation-flow p { color: var(--text-secondary); font-size: 14px; line-height: 1.7; margin: 16px 0 0; }
+.automation-sample { margin-top: 16px; border-top: 1px solid var(--automation-line); padding-top: 24px; }
+.automation-section-head { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 24px; }
+.automation-section-head h2 { font-size: 21px; margin: 8px 0 0; }
+.automation-section-head a { display: inline-flex; align-items: center; gap: 12px; color: var(--accent); font-size: 14px; min-height: 44px; text-underline-offset: 4px; }
+.automation-sample-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.automation-example { margin: 0; min-width: 0; }
+.automation-example img { display: block; width: 100%; height: 190px; object-fit: contain; background: #10150f; }
+.automation-example h3 { font-size: 14px; margin: 16px 0 8px; }
+.automation-example p { margin: 0; font-size: 13px; line-height: 1.7; color: var(--text-secondary); }
+@media (max-width: 760px) {
+  .automation-heading p { font-size: 14px; }
+  .automation-stages { gap: 32px; }
+  .automation-sample-grid { grid-template-columns: 1fr; gap: 32px; }
+  .automation-example { display: grid; grid-template-columns: 116px minmax(0, 1fr); gap: 16px; }
+  .automation-example img { height: 145px; }
+  .automation-example h3 { margin-top: 0; }
+  .automation-section-head { gap: 12px; align-items: flex-end; }
+  .automation-section-head a { font-size: 12px; white-space: nowrap; }
+}

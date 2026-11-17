@@ -1,0 +1,845 @@
+{
+  "title": "社媒内容制作（测试版）",
+  "active_run_id": "2026-09-09-oedro-muddy-return-photo",
+  "records": [
+    {
+      "run_id": "2026-09-09-oedro-muddy-return-photo",
+      "date": "2026-09-09",
+      "version": "照片版",
+      "product": "徒步回来的皮卡",
+      "review_status": "等待Oliver判断",
+      "prompt": "给 OEDRO 做一组面向美国皮卡车主的趣味社媒图文，发布位置是 Instagram、X 和 YouTube 社区。用徒步回来、泥跟进车里的生活细节写得有意思。图片要像真实照片，场景可信。不要漫画，不做 TikTok，不制作视频。",
+      "brief": {
+        "purpose": "品牌趣味内容",
+        "audience": "美国皮卡车主",
+        "desired_effect": "让皮卡车主看到徒步回家后的脚下残局，会心一笑，愿意把帖子转给一起出门的人。",
+        "creative_direction": "Proposed brand humor using a generic staged photographic scene; not a real owner testimonial.",
+        "asset_decision": "Codex built-in image_gen; exact model not exposed. No claimed real photograph or customer account.",
+        "success_criteria": [
+          "场景可信，泥靴与车内泥沙对应文案。",
+          "三平台文案有不同节奏，中英意思一致。",
+          "没有具体产品或效果承诺。"
+        ],
+        "post_publish_signals": "尚未进行社媒发布，没有受众效果数据。"
+      },
+      "source": {
+        "label": "OEDRO产品页",
+        "url": "https://www.oedro.com/products/all-weather-tpe-floor-mats-liners-for-2017-2024-ford-f-250-f-350-super-duty-crew-cab-full-set-liners-p-5361.html",
+        "verification_status": "2026年9月9日核对产品身份；未引用功效承诺。"
+      },
+      "facts": [
+        {
+          "label": "品牌背景",
+          "value": "OEDRO；本组使用通用皮卡生活场景，没有具体产品或功效说法。"
+        },
+        {
+          "label": "素材性质",
+          "value": "Codex built-in image_gen; exact model not exposed. No claimed real photograph or customer account."
+        }
+      ],
+      "variants": [
+        {
+          "id": "instagram",
+          "platform": "Instagram",
+          "platform_job": "围绕泥靴回车的生活情境。",
+          "format": "静态图文",
+          "fields": [
+            {
+              "key": "caption",
+              "blocks": [
+                {
+                  "en": "The hike is over. Getting these boots into the truck is a separate expedition.",
+                  "zh": "徒步结束了。把这双靴子弄进皮卡，还得另开一趟探险。"
+                }
+              ]
+            }
+          ],
+          "visual": {
+            "kind": "generated_photo",
+            "aspect_ratio": "4:5",
+            "note": "Codex built-in image_gen; exact model not exposed. No claimed real photograph or customer account.",
+            "image": {
+              "src": "assets/content-pipeline/muddy-return-instagram.jpg",
+              "alt": "Muddy hiking boots at an open pickup door after a walk.",
+              "width": 1122,
+              "height": 1402
+            }
+          },
+          "review": {
+            "decision": "文案可审",
+            "rationale": "待负责人判断照片感与幽默表达。",
+            "checks": [
+              "按最终稿保留双语段落。",
+              "未新增产品效果说法。",
+              "使用父任务交付的实际图片。"
+            ],
+            "success_signal": "观察具体共鸣、转发或回复。"
+          }
+        },
+        {
+          "id": "x",
+          "platform": "X",
+          "platform_job": "围绕泥靴回车的生活情境。",
+          "format": "静态图文",
+          "fields": [
+            {
+              "key": "caption",
+              "blocks": [
+                {
+                  "en": "love the outdoors. apparently the feeling is mutual. there's a small amount of forest living on the truck floor now.",
+                  "zh": "喜欢大自然。看来这份喜欢是相互的，已经有一小片森林住进皮卡地板了。"
+                }
+              ]
+            }
+          ],
+          "visual": {
+            "kind": "generated_photo",
+            "aspect_ratio": "1:1",
+            "note": "Codex built-in image_gen; exact model not exposed. No claimed real photograph or customer account.",
+            "image": {
+              "src": "assets/content-pipeline/muddy-return-square.jpg",
+              "alt": "Mud flakes and pine needles on a pickup's carpeted floor beside the open driver door.",
+              "width": 1254,
+              "height": 1254
+            }
+          },
+          "review": {
+            "decision": "文案可审",
+            "rationale": "待负责人判断照片感与幽默表达。",
+            "checks": [
+              "按最终稿保留双语段落。",
+              "未新增产品效果说法。",
+              "使用父任务交付的实际图片。"
+            ],
+            "success_signal": "观察具体共鸣、转发或回复。"
+          }
+        },
+        {
+          "id": "youtube",
+          "platform": "YouTube",
+          "platform_job": "围绕泥靴回车的生活情境。",
+          "format": "YouTube 社区图文",
+          "fields": [
+            {
+              "key": "caption",
+              "blocks": [
+                {
+                  "en": "Somewhere between the trailhead and the driveway, the truck picked up a second floor.",
+                  "zh": "从山路口开回家这一路，皮卡不知什么时候又多铺了一层地板。"
+                },
+                {
+                  "en": "Mostly mud, with a few pine needles. Terrible resale value.",
+                  "zh": "主要是泥，夹着几根松针。这装修，卖车时可加不了价。"
+                }
+              ]
+            }
+          ],
+          "visual": {
+            "kind": "generated_photo",
+            "aspect_ratio": "1:1",
+            "note": "Codex built-in image_gen; exact model not exposed. No claimed real photograph or customer account.",
+            "image": {
+              "src": "assets/content-pipeline/muddy-return-square.jpg",
+              "alt": "Mud flakes and pine needles on a pickup's carpeted floor beside the open driver door.",
+              "width": 1254,
+              "height": 1254
+            }
+          },
+          "review": {
+            "decision": "文案可审",
+            "rationale": "待负责人判断照片感与幽默表达。",
+            "checks": [
+              "按最终稿保留双语段落。",
+              "未新增产品效果说法。",
+              "使用父任务交付的实际图片。"
+            ],
+            "success_signal": "观察具体共鸣、转发或回复。"
+          }
+        }
+      ],
+      "ai_review": {
+        "decision": "待人工判断",
+        "revision_count": 1,
+        "summary": "插画方向已退回；本组改为通用皮卡泥靴和车内泥沙的照片感场景，等待最终图文判断。",
+        "corrections": [
+          "用照片感场景替换被退回的小树漫画。",
+          "主平台调整为 Instagram、X、YouTube 社区图文。",
+          "移除页面审核说明与来源展示，保留数据检查。"
+        ]
+      },
+      "human_questions": [
+        "场景是否可信？",
+        "文案是否好笑？",
+        "照片与文案是否匹配？"
+      ]
+    },
+    {
+      "run_id": "2026-09-09-oedro-trail-passenger",
+      "date": "2026-09-09",
+      "version": "小树插画旧稿 · 已退回",
+      "product": "泥靴把山路带回皮卡",
+      "review_status": "需要修改",
+      "prompt": "为 OEDRO 重做五个平台的创意样稿。面向徒步后带着泥靴回到皮卡的美国车主，把泥巴画成不请自来的乘客：靴子携带一小块山路和小树。让人认出熟悉的车边清理情境并觉得好笑，不堆产品参数。制作 Instagram、Facebook、Pinterest 三张静态插画，提供五个平台的英文文案与中文对照。TikTok 和 YouTube Shorts 提供可搭配公司既有泥靴或清理视频的候选配文；不制作视频。",
+      "brief": {
+        "purpose": "车主共鸣与趣味内容",
+        "audience": "徒步后带着泥靴回到皮卡的美国车主",
+        "desired_effect": "让车主认出熟悉的车内脏污情境，愿意看完、分享或收藏这个笑话；测试这种语气是否适合 OEDRO。",
+        "creative_direction": "这是旧清洁互动稿被退回后的新创意方向。小树和微型山路是明确的插画虚构；品牌语气仍是提案，尚无受众效果证据。",
+        "asset_decision": "三张原创主题插画不呈现脚垫几何结构或产品效果。Instagram、Facebook 原图为 1122×1402，低于原定 1440×1800；保留原尺寸，手机阅读清楚，未放大以伪装成高清。Pinterest 为 1024×1536。TikTok、YouTube Shorts 尚未核对公司既有视频，使用前须确认画面和复用权限。",
+        "success_criteria": [
+          "文案和画面一起能让人认出泥靴回车后的清理情境。",
+          "笑点来自可见细节，品牌语气有辨识度，未变成产品说明书。",
+          "中英文意思一致，插画未冒充产品使用或清洁效果证明。",
+          "视频配文须与实际既有画面匹配后才能使用。"
+        ],
+        "post_publish_signals": "尚未发布，没有效果数据。若后续使用，观察具体共鸣、转发和收藏。"
+      },
+      "source": {
+        "label": "OEDRO产品页",
+        "url": "https://www.oedro.com/products/all-weather-tpe-floor-mats-liners-for-2017-2024-ford-f-250-f-350-super-duty-crew-cab-full-set-liners-p-5361.html",
+        "verification_status": "2026年9月9日核对产品身份；未引用功效承诺。"
+      },
+      "facts": [
+        {
+          "label": "品牌与产品背景",
+          "value": "OEDRO 2Gen TPE 脚垫；本组关注泥靴与车边清理情境。"
+        },
+        {
+          "label": "画面性质",
+          "value": "微型山路与小树是插画虚构，不是车主证言或产品效果演示。"
+        }
+      ],
+      "variants": [
+        {
+          "id": "instagram",
+          "platform": "Instagram",
+          "platform_job": "借助靴底小树搭车的设定，把徒步后的泥带到皮卡地板这一笑点说完整。",
+          "format": "静态图文",
+          "fields": [
+            {
+              "key": "caption",
+              "blocks": [
+                {
+                  "en": "Went hiking to get a little space.",
+                  "zh": "去徒步，本想清静一会儿。"
+                },
+                {
+                  "en": "Now there's a pine tree on the boot asking for a ride home. That's a lot of landscaping for one truck floor.",
+                  "zh": "现在靴子上有棵松树，嚷着要搭车回家。一辆皮卡的地板，哪用得着这么多绿化。"
+                }
+              ]
+            }
+          ],
+          "visual": {
+            "kind": "illustration",
+            "aspect_ratio": "4:5",
+            "note": "原创主题插画，非产品实拍。",
+            "image": {
+              "src": "assets/content-pipeline/trail-passenger-instagram.jpg",
+              "alt": "皮卡车门外的泥靴，靴底带着一小块山路和松树。",
+              "width": 1122,
+              "height": 1402
+            }
+          },
+          "review": {
+            "decision": "需要修改",
+            "rationale": "旧插画方向已退回，此前意见已失效。原意见为：小树搭车与地板绿化要连在一起，笑点涉及车内脏污；是否像 OEDRO 的语气仍待判断。",
+            "checks": [
+              "已核对最终英文与中文逐段对应。",
+              "没有新增适配、清洁效果或产品性能承诺。",
+              "图中虚构山路与文案的车边情境相呼应。"
+            ],
+            "success_signal": "观察车主是否认出情境并愿意分享笑点。"
+          }
+        },
+        {
+          "id": "facebook",
+          "platform": "Facebook",
+          "platform_job": "把掉落的泥块写成微型景点，落在车道清理的情境里。",
+          "format": "静态图文",
+          "fields": [
+            {
+              "key": "caption",
+              "blocks": [
+                {
+                  "en": "Back in the driveway, one tap of a boot drops a surprisingly complete souvenir.",
+                  "zh": "回到自家车道，靴子一磕，一份出奇完整的纪念品就掉了下来。"
+                },
+                {
+                  "en": "A tiny tree. A chunk of trail. Enough scenery to start charging admission. The truck floor has narrowly avoided becoming the visitor center.",
+                  "zh": "一棵小树，一截山路。这点风景都够开始收门票了。车里的地板差一点就成了游客中心。"
+                }
+              ]
+            }
+          ],
+          "visual": {
+            "kind": "illustration",
+            "aspect_ratio": "4:5",
+            "note": "原创主题插画，非产品实拍。",
+            "image": {
+              "src": "assets/content-pipeline/trail-passenger-facebook.jpg",
+              "alt": "停放的皮卡旁，一磕靴子掉下一块带小树的山路。",
+              "width": 1122,
+              "height": 1402
+            }
+          },
+          "review": {
+            "decision": "需要修改",
+            "rationale": "旧插画方向已退回，此前意见已失效。原意见为：游客中心的包袱承接掉下的山路碎片，车内地板成为笑点落点。",
+            "checks": [
+              "已核对最终英文与中文逐段对应。",
+              "没有新增适配、清洁效果或产品性能承诺。",
+              "图中虚构山路与文案的车边情境相呼应。"
+            ],
+            "success_signal": "观察车主是否认出情境并愿意分享笑点。"
+          }
+        },
+        {
+          "id": "pinterest",
+          "platform": "Pinterest",
+          "platform_job": "以车外泥靴和小树构成一幅可收藏的徒步插画。",
+          "format": "静态图文",
+          "fields": [
+            {
+              "key": "title",
+              "blocks": [
+                {
+                  "en": "Muddy hiking boots & an ambitious souvenir",
+                  "zh": "沾泥的登山靴，带回一份有想法的纪念品"
+                }
+              ]
+            },
+            {
+              "key": "description",
+              "blocks": [
+                {
+                  "en": "Boots outside the cab. The mud brought a tiny tree home, and this souvenir expects to be watered.",
+                  "zh": "靴子先放车外。泥巴把一棵小树带回了家，这份纪念品还等着浇水。"
+                }
+              ]
+            }
+          ],
+          "visual": {
+            "kind": "illustration",
+            "aspect_ratio": "2:3",
+            "note": "原创主题插画，非产品实拍。",
+            "image": {
+              "src": "assets/content-pipeline/trail-passenger-pinterest.jpg",
+              "alt": "皮卡车外的泥靴与清理场景，泥中有一棵小树。",
+              "width": 1024,
+              "height": 1536
+            }
+          },
+          "review": {
+            "decision": "需要修改",
+            "rationale": "旧插画方向已退回，此前意见已失效。原意见为：靴子在车外交代清理情境，小树要浇水这一设定承接插画中的荒诞感。",
+            "checks": [
+              "已核对最终英文与中文逐段对应。",
+              "没有新增适配、清洁效果或产品性能承诺。",
+              "图中虚构山路与文案的车边情境相呼应。"
+            ],
+            "success_signal": "观察收藏及车主对画面的具体回应。"
+          }
+        },
+        {
+          "id": "tiktok",
+          "platform": "TikTok",
+          "platform_job": "为普通泥靴或车边清理视频提供一句夸张旁白。",
+          "format": "候选视频配文",
+          "fields": [
+            {
+              "key": "caption",
+              "blocks": [
+                {
+                  "en": "brought half the trail home. the other half is still open.",
+                  "zh": "半条山路都带回来了。另一半还正常开放。"
+                }
+              ]
+            }
+          ],
+          "visual": {
+            "kind": "external_video",
+            "aspect_ratio": "9:16",
+            "note": "候选配文；尚未核对公司既有泥靴或清理视频，须匹配画面及复用权限。"
+          },
+          "review": {
+            "decision": "需要修改",
+            "rationale": "旧插画方向已退回，此前意见已失效。原意见为：半条山路的夸张可配普通泥靴画面；尚未检查实际公司视频。",
+            "checks": [
+              "已核对最终英文与中文逐段对应。",
+              "没有新增适配、清洁效果或产品性能承诺。",
+              "实际既有视频未检查，配文仍需匹配素材。"
+            ],
+            "success_signal": "观察车主是否认出情境并愿意分享笑点。"
+          }
+        },
+        {
+          "id": "youtube_shorts",
+          "platform": "YouTube Shorts",
+          "platform_job": "用可辨认的泥靴回车场景配上简短幽默描述。",
+          "format": "候选视频配文",
+          "fields": [
+            {
+              "key": "title",
+              "blocks": [
+                {
+                  "en": "Muddy hiking boots back at the truck | OEDRO",
+                  "zh": "沾泥的登山靴，又回到了车边 | OEDRO"
+                }
+              ]
+            },
+            {
+              "key": "description",
+              "blocks": [
+                {
+                  "en": "The boots made it back to the truck. So did a generous sample of the trail.",
+                  "zh": "靴子回到了车边，还顺便带回了一大份山路样本。"
+                }
+              ]
+            }
+          ],
+          "visual": {
+            "kind": "external_video",
+            "aspect_ratio": "9:16",
+            "note": "候选配文；尚未核对公司既有泥靴或清理视频，须匹配画面及复用权限。"
+          },
+          "review": {
+            "decision": "需要修改",
+            "rationale": "旧插画方向已退回，此前意见已失效。原意见为：山路样本指靴上的泥，标题交代回到车边；尚未检查实际公司视频。",
+            "checks": [
+              "已核对最终英文与中文逐段对应。",
+              "没有新增适配、清洁效果或产品性能承诺。",
+              "实际既有视频未检查，配文仍需匹配素材。"
+            ],
+            "success_signal": "观察车主是否认出情境并愿意分享笑点。"
+          }
+        }
+      ],
+      "ai_review": {
+        "decision": "需要修改",
+        "revision_count": 3,
+        "summary": "负责人已退回小树插画，要求真实照片感场景；旧稿保留，原可审意见已失效。",
+        "corrections": [
+          "撤回旧清洁互动样稿的可审意见，保留原稿作对照。",
+          "删除重复产品标签和空泛口号，把笑点落在靴底小树、山路碎片和皮卡地板上。",
+          "视频配文不再依赖虚构的小树镜头；公司既有素材尚未检查，视频未完成。",
+          "逐段核对中文，修正游客中心、车内绿化等笑点的对应关系。"
+        ]
+      },
+      "human_questions": [
+        "配图和文案放在一起，能否一眼认出泥靴回车的情境？",
+        "小树和山路的笑点值得看完或分享吗？",
+        "这种语气是否符合期望中的 OEDRO 品牌表达？",
+        "公司现有泥靴或清理视频中，哪些画面能准确承接两条候选配文？"
+      ]
+    },
+    {
+      "run_id": "2026-09-08-oedro-cleaning-engagement",
+      "date": "2026-09-08",
+      "version": "旧互动样稿 · 负责人已退回",
+      "product": "OEDRO 脚垫清洁",
+      "review_status": "需要修改",
+      "prompt": "围绕 OEDRO 脚垫清洁，做五个平台能引出真实车主交流的内容。让人聊聊车里最难清理的脏东西，语气轻松自然；产品配置按需提及，别重复说明书。不编造车主故事，不做视频。",
+      "brief": {
+        "purpose": "用户关系与清洁话题互动",
+        "audience": "美国卡车车主",
+        "desired_effect": "让车主分享污物、清洁经验和习惯，也收集还没得到解答的问题；Pinterest 提供可收藏的清洁参考。",
+        "creative_direction": "围绕车内地板清洁，让车主说出反复遇到的污物、踩过的坑、拖延清洁的习惯和仍想问的问题；Pinterest 提供可收藏的清洁参考。",
+        "asset_decision": "本次用原创主题插画配文，替代原计划中尚未提供的产品实拍。插画不展示具体脚垫外观、安装关系或清洁效果。",
+        "success_criteria": [
+          "五个平台引导的回答或动作有区别。",
+          "中文没有增加英文原稿未表达的意思。",
+          "插画只用来引出话题。"
+        ],
+        "post_publish_signals": "尚未发布。后续观察具体回答、经验分享和收藏。"
+      },
+      "source": {
+        "label": "OEDRO产品页",
+        "url": "https://www.oedro.com/products/all-weather-tpe-floor-mats-liners-for-2017-2024-ford-f-250-f-350-super-duty-crew-cab-full-set-liners-p-5361.html",
+        "verification_status": "2026年9月8日已核对"
+      },
+      "facts": [
+        {
+          "label": "产品",
+          "value": "OEDRO 2Gen TPE floor liners。"
+        },
+        {
+          "label": "结构",
+          "value": "深槽与凸起边缘。"
+        },
+        {
+          "label": "清洁",
+          "value": "取出、用水管冲洗、装回。"
+        }
+      ],
+      "variants": [
+        {
+          "id": "instagram",
+          "platform": "Instagram",
+          "platform_job": "辨认反复出现的污物，收集低门槛的选择回答。",
+          "format": "静态图文",
+          "fields": [
+            {
+              "key": "caption",
+              "blocks": [
+                {
+                  "en": "Which is the repeat visitor on your truck's floor: sand, dried mud or crumbs?",
+                  "zh": "沙子、干泥、碎屑，车内地板上哪一种总是反复出现？"
+                },
+                {
+                  "en": "OEDRO 2Gen TPE floor liners have deep channels and raised edges.",
+                  "zh": "OEDRO 2Gen TPE 脚垫有深槽和凸起边缘。"
+                }
+              ]
+            }
+          ],
+          "visual": {
+            "kind": "illustration",
+            "aspect_ratio": "4:5",
+            "note": "原创清洁主题插画，非产品实拍。",
+            "image": {
+              "src": "assets/content-pipeline/cleaning-engagement-instagram.jpg",
+              "alt": "沙子、干泥和碎屑组成的日常清洁主题插画。",
+              "width": 1122,
+              "height": 1402
+            }
+          },
+          "review": {
+            "decision": "需要修改",
+            "rationale": "该平台旧稿已随整组退回；此前审核意见已失效。原意见为：简短选择题与静态纹理近景配合，读者无需写长故事。",
+            "checks": [
+              "原检查记录（已失效）：保留已审核的英文原稿。",
+              "原检查记录（已失效）：中文逐段对应。",
+              "原检查记录（已失效）：未新增适配或效果承诺。"
+            ],
+            "success_signal": "观察评论中各类污物的具体回答。"
+          }
+        },
+        {
+          "id": "facebook",
+          "platform": "Facebook",
+          "platform_job": "邀请车主分享清理时踩过的坑，供别的车主参考。",
+          "format": "静态图文",
+          "fields": [
+            {
+              "key": "caption",
+              "blocks": [
+                {
+                  "en": "OEDRO 2Gen TPE floor liners can be taken out, hosed off and put back in.",
+                  "zh": "OEDRO 2Gen TPE 脚垫可以取出，用水管冲洗后装回。"
+                },
+                {
+                  "en": "What's one floor-cleaning mistake you'd spare another truck owner?",
+                  "zh": "清理车内地板时踩过哪些坑，值得提醒别的车主避开？"
+                }
+              ]
+            }
+          ],
+          "visual": {
+            "kind": "illustration",
+            "aspect_ratio": "4:5",
+            "note": "原创清洁主题插画，非产品实拍。",
+            "image": {
+              "src": "assets/content-pipeline/cleaning-engagement-facebook.jpg",
+              "alt": "水管与泥脚印组成的车道清洁主题插画。",
+              "width": 1122,
+              "height": 1402
+            }
+          },
+          "review": {
+            "decision": "需要修改",
+            "rationale": "该平台旧稿已随整组退回；此前审核意见已失效。原意见为：允许用一段经历交代经验，区别于 Instagram 的污物选择。",
+            "checks": [
+              "原检查记录（已失效）：保留已审核的英文原稿。",
+              "原检查记录（已失效）：中文逐段对应。",
+              "原检查记录（已失效）：未新增适配或效果承诺。"
+            ],
+            "success_signal": "观察评论是否提出具体失误和经验。"
+          }
+        },
+        {
+          "id": "pinterest",
+          "platform": "Pinterest",
+          "platform_job": "把已核实的清洁方法做成可收藏参考。",
+          "format": "Image Pin",
+          "fields": [
+            {
+              "key": "title",
+              "blocks": [
+                {
+                  "en": "OEDRO 2Gen TPE Floor Liner Cleaning Guide",
+                  "zh": "OEDRO 2Gen TPE 脚垫清洁指南"
+                }
+              ]
+            },
+            {
+              "key": "description",
+              "blocks": [
+                {
+                  "en": "The cleaning steps for OEDRO 2Gen TPE floor liners: removal, a hose rinse and reinstallation.",
+                  "zh": "OEDRO 2Gen TPE 脚垫的清洁步骤是取出、用水管冲洗、装回。"
+                },
+                {
+                  "en": "Save this guide to your truck maintenance board.",
+                  "zh": "把这份指南收藏到车辆养护画板。"
+                }
+              ]
+            }
+          ],
+          "visual": {
+            "kind": "illustration",
+            "aspect_ratio": "2:3",
+            "note": "原创清洁主题插画，非产品实拍。",
+            "image": {
+              "src": "assets/content-pipeline/cleaning-engagement-pinterest.jpg",
+              "alt": "标有取出、冲洗和装回步骤的清洁主题插画。",
+              "width": 1024,
+              "height": 1536
+            }
+          },
+          "review": {
+            "decision": "需要修改",
+            "rationale": "该平台旧稿已随整组退回；此前审核意见已失效。原意见为：以检索和收藏为主要互动，不把评论问题搬到每个平台。",
+            "checks": [
+              "原检查记录（已失效）：保留已审核的英文原稿。",
+              "原检查记录（已失效）：中文逐段对应。",
+              "原检查记录（已失效）：未新增适配或效果承诺。"
+            ],
+            "success_signal": "观察这条清洁参考的收藏情况。"
+          }
+        },
+        {
+          "id": "tiktok",
+          "platform": "TikTok",
+          "platform_job": "问清洁拖延多久，收集个人习惯。",
+          "format": "视频配文",
+          "fields": [
+            {
+              "key": "caption",
+              "blocks": [
+                {
+                  "en": "OEDRO 2Gen TPE floor liners have deep channels and raised edges.",
+                  "zh": "OEDRO 2Gen TPE 脚垫有深槽和凸起边缘。"
+                },
+                {
+                  "en": "How long does a dirty truck floor stay on your to-do list?",
+                  "zh": "车内地板脏了之后，清理这件事通常会在待办清单上挂多久？"
+                }
+              ]
+            }
+          ],
+          "visual": {
+            "kind": "external_video",
+            "aspect_ratio": "9:16",
+            "note": "搭配公司已有且与文案内容相符的视频。"
+          },
+          "review": {
+            "decision": "需要修改",
+            "rationale": "该平台旧稿已随整组退回；此前审核意见已失效。原意见为：问题短，围绕时间习惯，而非再次询问污物种类或清洁经验。",
+            "checks": [
+              "原检查记录（已失效）：保留已审核的英文原稿。",
+              "原检查记录（已失效）：中文逐段对应。",
+              "原检查记录（已失效）：未新增适配或效果承诺。"
+            ],
+            "success_signal": "观察评论是否给出具体时间习惯。"
+          }
+        },
+        {
+          "id": "youtube_shorts",
+          "platform": "YouTube Shorts",
+          "platform_job": "收集车主仍未得到解答的脚垫清洁问题。",
+          "format": "视频配文",
+          "fields": [
+            {
+              "key": "title",
+              "blocks": [
+                {
+                  "en": "Cleaning OEDRO 2Gen TPE Floor Liners",
+                  "zh": "清洁 OEDRO 2Gen TPE 脚垫"
+                }
+              ]
+            },
+            {
+              "key": "description",
+              "blocks": [
+                {
+                  "en": "OEDRO 2Gen TPE floor liners can be removed, hosed off and reinstalled.",
+                  "zh": "OEDRO 2Gen TPE 脚垫可以取出，用水管冲洗后装回。"
+                },
+                {
+                  "en": "What question about cleaning floor liners have you had trouble finding an answer to?",
+                  "zh": "关于脚垫清洁，有哪些一直难以找到答案的问题？"
+                }
+              ]
+            }
+          ],
+          "visual": {
+            "kind": "external_video",
+            "aspect_ratio": "9:16",
+            "note": "搭配公司已有且与文案内容相符的视频。"
+          },
+          "review": {
+            "decision": "需要修改",
+            "rationale": "该平台旧稿已随整组退回；此前审核意见已失效。原意见：标题便于检索，描述提供已知步骤，评论用于发现剩余信息需求。",
+            "checks": [
+              "原检查记录（已失效）：保留已审核的英文原稿。",
+              "原检查记录（已失效）：中文逐段对应。",
+              "原检查记录（已失效）：未新增适配或效果承诺。"
+            ],
+            "success_signal": "观察是否出现具体、尚未解答的清洁问题。"
+          }
+        }
+      ],
+      "ai_review": {
+        "decision": "需要修改",
+        "revision_count": 1,
+        "summary": "负责人已退回这组清洁互动样稿：内容缺少值得一看的创意，文案与插画仍需重做。此前的可审意见已失效，以下原图文保留供对照。",
+        "corrections": [
+          "已撤回此前的可审结论，保留用户退回的原稿。",
+          "将重复的互动问题改为污物选择、经验分享、清洁习惯和未解答问题；Pinterest 使用收藏动作。",
+          "删除中文里英文原稿未表达的条件，核对产品结构与清洁说法。",
+          "配图从待提供的实拍改为主题插画，不呈现未经核对的产品外观。"
+        ]
+      },
+      "human_questions": [
+        "这些问题有车主愿意回答吗？",
+        "插画与文案放在一起，是否像 OEDRO 会发布的内容？",
+        "哪一条值得继续完善或实际试发？"
+      ]
+    },
+    {
+      "run_id": "2026-09-04-oedro-floor-mats-static",
+      "date": "2026-09-04",
+      "version": "第2版",
+      "product": "OEDRO 2Gen TPE脚垫",
+      "review_status": "文案可审，图片待完善",
+      "prompt": "给 OEDRO 2Gen TPE 脚垫做一组面向美国车主的静态社媒内容，覆盖 Instagram、Facebook 和 Pinterest。内容重点是两件事：购买前核对 2017至2026年 Ford F-250/F-350 Super Duty Crew Cab、前排桶形座椅和座椅下储物空间；脏了以后可以取出冲洗并装回。三个平台要有不同写法和不同作用。语气具体、克制，像懂车型差异的人；不要写价格、折扣、保修或绝对适配，也不要生成视频。使用官方产品图，最后交给人审核。",
+      "brief": {
+        "purpose": "产品教育与购买前适配确认",
+        "audience": "正在为 F-250 或 F-350 挑选脚垫的美国车主",
+        "desired_effect": "让车主看懂适配条件，愿意进入产品页核对车辆配置",
+        "creative_direction": "泥水清洁用于吸引注意，车型配置用于推动下一步",
+        "asset_decision": "使用官方产品图。AI产品图未进入此次测试，避免产品轮廓和适配关系失真。",
+        "success_criteria": [
+          "读者能在短时间内说清适配条件和清洁方式",
+          "三个平台承担不同任务，文案没有互相复制",
+          "所有产品说法都能在当前产品页找到依据",
+          "人审能明确决定可用、需改或放弃"
+        ],
+        "post_publish_signals": "后续关注产品页点击、保存和有效车型咨询；尚无真实发布数据。"
+      },
+      "source": {
+        "label": "OEDRO产品页",
+        "url": "https://www.oedro.com/products/all-weather-tpe-floor-mats-liners-for-2017-2024-ford-f-250-f-350-super-duty-crew-cab-full-set-liners-p-5361.html",
+        "verification_status": "2026年9月4日已核对"
+      },
+      "image": {
+        "src": "assets/content-pipeline/oedro-floor-mat-official.jpg",
+        "alt": "OEDRO 官方产品页展示的黑色 TPE 前排和后排脚垫",
+        "width": 1000,
+        "height": 1000
+      },
+      "facts": [
+        {
+          "label": "车型适配",
+          "value": "2017至2026年 Ford F-250 / F-350 Super Duty Crew Cab，前排桶形座椅，且带座椅下储物空间。"
+        },
+        {
+          "label": "防护结构",
+          "value": "深沟槽和高边缘用于承接常见泥水污渍。"
+        },
+        {
+          "label": "清洁方式",
+          "value": "取出脚垫，用水冲洗，清洁后装回。"
+        }
+      ],
+      "variants": [
+        {
+          "id": "instagram",
+          "platform": "Instagram",
+          "platform_job": "以车主熟悉的泥水场景吸引注意，结尾提醒核对车型。",
+          "format": "4:5 静态图目标 + Caption",
+          "hook_en": "Mud rinses off. Fitment still depends on the cab, seats, and storage setup.",
+          "body_en": "For this OEDRO 2Gen set, check the truck before you buy: 2017-2026 F-250 or F-350 Super Duty Crew Cab, first-row bucket seats, and under-seat storage. The deep channels and raised edges are designed to hold common wet and muddy messes on the liner. Pull it out, hose it off, and put it back when clean.",
+          "cta_en": "Match your truck to the fitment details on the product page.",
+          "visual": {
+            "aspect_ratio": "4:5",
+            "note": "官方产品图已准备；Instagram 专用图片尚未制作。"
+          },
+          "review": {
+            "decision": "文案可审",
+            "rationale": "开头有生活感，车型条件完整，CTA 落在产品页核对。",
+            "checks": [
+              "目的清楚",
+              "Instagram 语气成立",
+              "事实未越界"
+            ],
+            "success_signal": "保存与产品页点击"
+          }
+        },
+        {
+          "id": "facebook",
+          "platform": "Facebook",
+          "platform_job": "清楚解释套装内容和车辆条件，减少购买前的适配疑问。",
+          "format": "4:5 静态图目标 + Feed Post",
+          "hook_en": "Before choosing a floor-liner set, check the truck configuration.",
+          "body_en": "This OEDRO 2Gen black TPE set includes two front mats and one rear liner. The product page lists 2017-2026 Ford F-250 and F-350 Super Duty Crew Cab configurations with first-row bucket seats and under-seat storage. Deep channels and raised edges are designed to hold common wet and muddy messes on the liner. Remove the liner, rinse it with a hose, and reinstall it when clean.",
+          "cta_en": "Check the year, model, cab, front seats, and storage setup on the product page.",
+          "visual": {
+            "aspect_ratio": "4:5",
+            "note": "官方产品图已准备；Facebook 专用图片尚未制作。"
+          },
+          "review": {
+            "decision": "文案可审",
+            "rationale": "信息比 Instagram 完整，仍便于快速浏览，适合回答购买前问题。",
+            "checks": [
+              "套装内容清楚",
+              "Facebook 信息密度合适",
+              "CTA 具体"
+            ],
+            "success_signal": "有效适配咨询与产品页点击"
+          }
+        },
+        {
+          "id": "pinterest",
+          "platform": "Pinterest",
+          "platform_job": "做成可搜索、可保存的适配与清洁参考。",
+          "format": "2:3 Image Pin 目标",
+          "hook_en": "2017-2026 F-250/F-350 Floor Mats: Fitment and Cleaning",
+          "body_en": "Save this fitment and cleaning reference for an OEDRO 2Gen TPE floor-liner set. Compare the listed model year, Crew Cab, first-row bucket seats, and under-seat storage with your truck. Deep channels and raised edges are designed to hold common wet and muddy messes on the liner. Remove it, rinse it with a hose, and reinstall it when clean.",
+          "cta_en": "Save the checklist and verify the full fitment details on the product page.",
+          "visual": {
+            "aspect_ratio": "2:3",
+            "note": "官方产品图已准备；Pinterest 专用图片尚未制作。"
+          },
+          "review": {
+            "decision": "文案可审",
+            "rationale": "标题可搜索，正文适合收藏，外链动作与 Pinterest 使用习惯一致。",
+            "checks": [
+              "搜索信息明确",
+              "保存价值成立",
+              "没有复制其他平台开头"
+            ],
+            "success_signal": "保存与站外点击"
+          }
+        }
+      ],
+      "ai_review": {
+        "decision": "图片待完善",
+        "revision_count": 1,
+        "summary": "文案事实与平台差异已通过检查。图片环节尚未完成：官方产品图已有，Instagram、Facebook 和 Pinterest 的平台专用图片尚未制作。",
+        "corrections": [
+          "删除了可能暗示经济损失的表述。",
+          "删除了可能暗示污水完全不会洒到地毯的表述。",
+          "三个平台分别承担吸引注意、解释配置和提供可保存参考的任务。"
+        ]
+      },
+      "human_questions": [
+        "看完开头，能否马上说出这条内容想让谁做什么？",
+        "三个平台的用途和语气是否真的不同？",
+        "文案有人愿意看吗，还是仍像产品说明书？",
+        "官方产品图是否足够像社媒内容，是否需要单独制作平台图片？"
+      ]
+    }
+  ]
+}
