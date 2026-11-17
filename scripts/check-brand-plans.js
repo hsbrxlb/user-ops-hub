@@ -7,8 +7,8 @@ const vm = require('node:vm');
 const repoRoot = path.resolve(__dirname, '..');
 const root = process.env.PUBLIC_SITE_ROOT ? path.resolve(repoRoot, process.env.PUBLIC_SITE_ROOT) : repoRoot;
 const plans = [
-  { id: 'social-brand', title: 'OEDRO 社媒品牌升级', other: 'merch-plan' },
-  { id: 'merch-plan', title: 'OEDRO 周边', other: 'social-brand' }
+  { id: 'social-brand', title: 'OEDRO 社媒品牌升级', visibleTitle: '社媒品牌升级', other: 'merch-plan' },
+  { id: 'merch-plan', title: 'OEDRO 周边', visibleTitle: '周边', other: 'social-brand' }
 ];
 const navigation = JSON.parse(fs.readFileSync(path.join(root, 'data/content.json'), 'utf8')).nav;
 const application = fs.readFileSync(path.join(root, 'app.js'), 'utf8');
@@ -17,7 +17,7 @@ const startup = application.slice(application.indexOf("const mainContent = docum
 async function checkPlan(plan) {
   const html = fs.readFileSync(path.join(root, `${plan.id}.html`), 'utf8');
   assert.equal(html.match(/<title>([^<]+)<\/title>/)?.[1], plan.title, `${plan.id}: document title`);
-  assert.equal(html.match(/<h1>([^<]+)<\/h1>/)?.[1], plan.title, `${plan.id}: visible title`);
+  assert.equal(html.match(/<h1>([^<]+)<\/h1>/)?.[1], plan.visibleTitle, `${plan.id}: visible title`);
   assert.equal((html.match(/<h1>/g) || []).length, 1, `${plan.id}: one main title`);
   assert.ok(html.includes(`data-page="${plan.id}"`), `${plan.id}: route identity`);
   assert.ok(navigation.some(item => item.id === plan.other && item.file === `${plan.other}.html`), `${plan.id}: companion page remains available in shared navigation`);

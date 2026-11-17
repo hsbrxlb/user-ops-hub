@@ -23,7 +23,7 @@ assert.ok(home.includes('base.css') && home.includes('theme.css'), 'keep existin
 assert.ok(home.includes('class="menu-button"') && home.includes('class="skip-link"'));
 
 
-for (const [id,label] of Object.entries({'discord-community':'Discord 频道设计',research:'AI 问卷',voice:'用户声音','brand-voice-system':'OEDRO 品牌口吻','merch-plan':'OEDRO 周边','first-outreach':'首批触达用户','discord-invite-plan':'Discord 邀请活动',products:'产品知识库',mascot:'吉祥物 Bruno','ugc-activity':'投稿活动'})) assert.equal(nav.find(item=>item.id===id)?.label,label);
+for (const [id,label] of Object.entries({'discord-community':'Discord 频道设计',research:'AI 问卷',voice:'用户声音','brand-voice-system':'品牌口吻','merch-plan':'周边','first-outreach':'首批触达用户','discord-invite-plan':'Discord 邀请活动',products:'产品知识库',mascot:'吉祥物','ugc-activity':'投稿活动'})) assert.equal(nav.find(item=>item.id===id)?.label,label);
 assert.deepEqual(nav.map(item=>item.id), ['home','content-guides','content-review','studio','skills','social-brand','social-tools','brand-voice-system','mascot','merch-plan','products','freshflow','discord-community','discord-invite-plan','newsletter','email-templates','loyalty','repurchase','ugc-activity','customer-analytics','first-outreach','voice','competitor-experience','research','seo-geo','fakesite','flipbooks']);
 assert.deepEqual([...new Set(nav.map(item=>item.group).filter(Boolean))], ['社媒内容','品牌与产品','社区与邮件','会员与复购','用户与市场研究','样例']);
 for (const id of ['first-outreach', 'discord-invite-plan', 'ugc-activity']) {
@@ -116,3 +116,25 @@ for (const file of ['sema-plan.html', 'sema-promotion.html', 'data/sema-promotio
 }
 assert.ok(!nav.some(item => /^sema-/.test(item.id)));
 assert.ok(!/href="sema-/.test(home));
+
+// Resource entries disclose their actual type and size and preserve source files.
+assert.ok(!homeMain.includes('hub-hero-media') && !/Bruno|mascot-kit\//.test(homeMain), 'homepage has no mascot showcase');
+const guides = read('content-guides.html');
+for (const id of ['1NJArYiaoi8NqiUCKW9d93Y-EieA6TkFL', '1xVehYVMVfieKDRxjTGtK0zl0lDdjPfd_', '1hQ1_4GUxj7oGoGnAHdSN2Iyl38itZtXe']) {
+  assert.ok(guides.includes('https://drive.google.com/drive/folders/' + id), 'brand folder is linked: ' + id);
+}
+assert.ok(!/href="[^\"]+brand-pack\.zip/.test(guides), 'brand folders replace ZIP entries');
+const skills = read('skills.html');
+assert.ok(!skills.includes('mono-color'), 'retired skill is absent from the page');
+assert.ok(fs.existsSync(path.join(root, 'assets/onboarding/mono-color.zip')), 'retired skill source is retained');
+const skillDownloads = [...skills.matchAll(/<a\b[^>]*>/g)].map(([tag]) => ({
+  file: /href="(assets\/onboarding\/[^" ]+\.zip)"/.exec(tag)?.[1],
+  bytes: /data-download-bytes="(\d+)"/.exec(tag)?.[1],
+})).filter(entry => entry.file);
+assert.equal(skillDownloads.length, 6);
+for (const { file, bytes } of skillDownloads) assert.equal(Number(bytes), fs.statSync(path.join(root, file)).size, file + ': displayed size matches file');
+for (const id of ['social-brand', 'merch-plan', 'discord-invite-plan', 'first-outreach', 'ugc-activity', 'customer-analytics']) {
+  const source = read(id + '.html');
+  assert.ok(source.indexOf('id="oedro-brand-title"') < source.indexOf('id="cozeware-brand-title"'), id + ': OEDRO precedes Cozeware');
+  assert.ok(source.includes('Cozeware：暂无，制作后放在这里'), id + ': explicit empty brand section');
+}

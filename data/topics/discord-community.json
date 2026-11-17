@@ -37,7 +37,7 @@
     },
     {
       "id": "cozeware",
-      "name": "COZEWARE",
+      "name": "Cozeware",
       "members": "",
       "scope": "本次登录账号可见的频道，不代表未验证新人的可见范围。verify 提示完成验证后可取得 COZER 身份；多数后续频道设有权限锁，但这不等于员工专用。general-chat 已实际打开，可以看到历史聊天和发言框；本次未发送消息，也未重新测试新人验证流程。",
       "bots": [],

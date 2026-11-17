@@ -8,9 +8,9 @@ window.initNewsletter = async function () {
       <${tag} lang="zh-CN">${number}${escapeHtml(text.zh)}</${tag}>
     </div>`;
   document.querySelector('#content').innerHTML = `
-    <header class="page-heading"><h1>The Glovebox Newsletter</h1></header>
+    <header class="page-heading"><h1>邮件期刊</h1></header>
     <section class="newsletter-issue" aria-labelledby="newsletter-issue-title">
-      <h2 id="newsletter-issue-title">首期：冷天早晨，胎压灯为什么会亮？</h2>
+      <h2 id="newsletter-issue-title">OEDRO The Glovebox：冷天早晨，胎压灯为什么会亮？</h2>
       <div class="newsletter-controls" role="group" aria-label="邮件预览尺寸">
         <button type="button" data-preview="desktop" aria-pressed="true">桌面</button>
         <button type="button" data-preview="mobile" aria-pressed="false">手机</button>

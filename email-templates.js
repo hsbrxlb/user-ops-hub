@@ -1,7 +1,7 @@
 window.initEmailTemplates = async function () {
   const templates = [
     {
-      id: 'discord-invite', title: 'Discord 社群邀请',
+      id: 'discord-invite', title: 'OEDRO Discord 社群邀请',
       file: 'assets/email/discord-invite.html',
       subject: 'Come take a look at OEDRO on Discord',
       subjectTranslation: '来看看 OEDRO 的 Discord',

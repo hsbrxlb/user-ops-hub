@@ -589,3 +589,64 @@ if (typeof MutationObserver !== 'undefined') {
   showLinkedImages();
   new MutationObserver(showLinkedImages).observe(document.querySelector('#content'), { childList: true, subtree: true });
 }
+
+
+// Retain event handlers when grouping existing content under its verified brand.
+function completeBrandSections() {
+  const content = document.querySelector('#content');
+  if (!content?.querySelector('.page-heading') || content.getAttribute('aria-busy') === 'true' || content.querySelector('.brand-section')) return;
+  const topic = content.dataset.topic;
+  if (!['voice', 'email-templates', 'newsletter', 'flipbooks'].includes(page)
+    && !(page === 'topics' && ['brand-voice-system', 'seo-geo'].includes(topic))) return;
+  const supplement = content.querySelector('#context-supplement');
+  const oedro = document.createElement('section');
+  oedro.className = 'brand-section';
+  oedro.setAttribute('aria-labelledby', 'oedro-brand-title');
+  oedro.innerHTML = '<h2 class="brand-section-title" id="oedro-brand-title">OEDRO</h2>';
+  for (const child of [...content.children]) {
+    if (!child.classList.contains('page-heading') && child !== supplement) oedro.append(child);
+  }
+  const cozeware = document.createElement('section');
+  cozeware.className = 'brand-section brand-empty';
+  cozeware.setAttribute('aria-labelledby', 'cozeware-brand-title');
+  cozeware.innerHTML = '<h2 class="brand-section-title" id="cozeware-brand-title">Cozeware</h2><p>Cozeware：暂无，制作后放在这里</p>';
+  if (page === 'newsletter' && supplement) {
+    const journals = [...supplement.querySelectorAll('.journals > article')];
+    if (journals.length === 2) {
+      oedro.append(journals[0]);
+      cozeware.classList.remove('brand-empty');
+      cozeware.querySelector('p').remove();
+      cozeware.append(journals[1]);
+      const empty = document.createElement('p');
+      empty.textContent = 'Room Notes 邮件样稿：暂无，制作后放在这里';
+      cozeware.append(empty);
+      supplement.querySelector('.journals').remove();
+    }
+  }
+  content.append(oedro, cozeware);
+  if (supplement) content.append(supplement);
+}
+
+function markContentLinks() {
+  document.querySelectorAll('#content a[href]').forEach((link) => {
+    if (link.dataset.linkChecked) return;
+    link.dataset.linkChecked = 'true';
+    const destination = new URL(link.href, location.href);
+    if (destination.origin !== location.origin && /^https?:$/.test(destination.protocol)) {
+      link.classList.add('external-link');
+      // Existing visible arrows remain part of their original link labels.
+      if (!link.textContent.includes('↗')) {
+        const marker = document.createElement('span');
+        marker.className = 'external-link-icon';
+        marker.setAttribute('aria-hidden', 'true');
+        marker.textContent = ' ↗';
+        link.append(marker);
+      }
+    }
+  });
+}
+if (typeof MutationObserver !== 'undefined') {
+  const refreshContentAffordances = () => { completeBrandSections(); markContentLinks(); };
+  refreshContentAffordances();
+  new MutationObserver(refreshContentAffordances).observe(document.querySelector('#content'), { childList: true, subtree: true, attributes: true, attributeFilter: ['aria-busy'] });
+}

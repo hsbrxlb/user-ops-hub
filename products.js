@@ -1,6 +1,6 @@
 (() => {
   const PAGE_SIZE = 24;
-  const state = { manifest: null, category: null, products: [], brand: '全部', quality: '全部', page: 1, requestId: 0, family: 'oedro', familyRequestId: 0 };
+  const state = { manifest: null, category: null, products: [], brand: '全部', quality: '全部', page: 1, requestId: 0, family: 'oedro', familyRequestId: 0, exportReady: false };
 
   const h = (value) => String(value ?? '')
     .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
@@ -41,8 +41,8 @@
         <p class="catalog-coverage" role="note"><strong>目录核对</strong><span>${h(m.coverageText || `${m.uncoveredSitemapUrls || 0} 条链接未形成商品记录。`)} 图片文字的核对范围见商品详情。</span></p>
       </header>
       <nav class="catalog-downloads" aria-label="品牌资料总稿">
-        <a href="data/product-library/brand-summaries/${encodeURIComponent('OEDRO_产品与官方资料汇总.md')}" download="OEDRO_产品与官方资料汇总.md">下载 OEDRO 官网总稿（MD）</a>
-        <a href="data/product-library/brand-summaries/${encodeURIComponent('Cozeware_产品与官方资料汇总.md')}" download="Cozeware_产品与官方资料汇总.md">下载 Cozeware 总稿（MD）</a>
+        <a href="data/product-library/brand-summaries/${encodeURIComponent('OEDRO_产品与官方资料汇总.md')}" download="OEDRO_产品与官方资料汇总.md" data-download-bytes="3869332" title="3,869,332 字节"><span class="download-icon" aria-hidden="true">⤓</span> 下载 OEDRO 官网总稿（MD，3.87 MB）</a>
+        <a href="data/product-library/brand-summaries/${encodeURIComponent('Cozeware_产品与官方资料汇总.md')}" download="Cozeware_产品与官方资料汇总.md" data-download-bytes="497512" title="497,512 字节"><span class="download-icon" aria-hidden="true">⤓</span> 下载 Cozeware 总稿（MD，497.5 KB）</a>
       </nav>
       <form id="product-search" class="product-search"><label for="sku-query">查商品名称或 SKU</label><input id="sku-query" type="search" autocomplete="off"><button type="submit">查找</button></form>
       <section class="catalog-section category-section" aria-labelledby="category-heading">
@@ -127,7 +127,29 @@
       <p class="snapshot-note">资料快照：${h(dateText(item.capturedAt))}。价格、库存、评价和适配以官网当前页面为准。</p>`;
   }
 
+  function invalidateProducts() {
+    state.exportReady = false;
+    state.products = [];
+    const download = document.querySelector('#download-products');
+    if (download) {
+      download.disabled = true;
+      download.onclick = null;
+      download.removeAttribute('title');
+      download.textContent = '下载当前筛选的完整资料';
+    }
+    for (const id of ['catalog-toolbar', 'catalog-pagination', 'resource-results']) {
+      const element = document.querySelector('#' + id);
+      if (element) element.replaceChildren();
+    }
+    const grid = document.querySelector('#product-grid');
+    if (grid) {
+      grid.setAttribute('aria-busy', 'true');
+      grid.innerHTML = '<p class="catalog-loading" role="status">正在载入商品资料…</p>';
+    }
+  }
+
   function renderProducts() {
+    if (!state.exportReady) return;
     const products = visibleProducts();
     const pages = Math.max(1, Math.ceil(products.length / PAGE_SIZE));
     state.page = Math.min(state.page, pages);
@@ -139,7 +161,12 @@
     document.querySelector('#catalog-status').textContent = `${state.category.name} · ${products.length} 件 · 第 ${state.page}/${pages} 页`;
     document.querySelector('#catalog-pagination').innerHTML = `<button type="button" data-page="${state.page - 1}" ${state.page === 1 ? 'disabled' : ''}>上一页</button><span>第 ${state.page} / ${pages} 页</span><button type="button" data-page="${state.page + 1}" ${state.page === pages ? 'disabled' : ''}>下一页</button>`;
 
-    document.querySelector('#download-products').onclick = downloadProducts;
+    const downloadButton = document.querySelector('#download-products');
+    const downloadBytes = new Blob([downloadContent()], {type:'text/markdown;charset=utf-8'}).size;
+    downloadButton.innerHTML = '<span class="download-icon" aria-hidden="true">⤓</span> 下载当前筛选的完整资料（MD，' + (downloadBytes / 1000).toFixed(1) + ' KB）';
+    downloadButton.title = downloadBytes.toLocaleString('en-US') + ' 字节';
+    downloadButton.disabled = products.length === 0;
+    downloadButton.onclick = downloadProducts;
     document.querySelectorAll('[data-brand]').forEach((button) => button.addEventListener('click', () => { state.brand = button.dataset.brand; state.page = 1; renderProducts(); }));
     document.querySelectorAll('[data-quality]').forEach((button) => button.addEventListener('click', () => { state.quality = button.dataset.quality; state.page = 1; renderProducts(); }));
     document.querySelectorAll('#catalog-pagination [data-page]').forEach((button) => button.addEventListener('click', () => { state.page = Number(button.dataset.page); renderProducts(); document.querySelector('#products-heading').scrollIntoView({ behavior: 'smooth' }); }));
@@ -155,6 +182,7 @@
 
   async function loadCategory(categoryId) {
     const requestId = ++state.requestId;
+    invalidateProducts();
     const category = state.manifest.categories.find((item) => item.id === categoryId) || state.manifest.categories[0];
     state.category = category;
     document.querySelector('#resource-results').innerHTML = '';
@@ -170,6 +198,7 @@
       const data = await response.json();
       if (requestId !== state.requestId) return;
       state.products = data.products;
+      state.exportReady = true;
       const url = new URL(location.href); url.searchParams.set('category', category.id); history.replaceState(null, '', url);
       renderProducts();
     } catch (error) {
@@ -206,6 +235,7 @@
     const query = document.querySelector('#sku-query').value.trim();
     if (!query) return loadCategory(state.category.id);
     const requestId = ++state.requestId;
+    invalidateProducts();
     const families = state.family === 'cozeware' ? ['cozeware'] : ['oedro', 'oedro-pro', 'yitamotor'];
     document.querySelector('#catalog-status').textContent = '正在查找…';
     try {
@@ -225,19 +255,26 @@
       }));
       if (requestId !== state.requestId) return;
       document.querySelector('#resource-results').innerHTML = resources.length ? `<section><h3>相关官网资料</h3><ul>${resources.map(resource => `<li><a href="${h(resource.url)}" target="_blank" rel="noreferrer">${h(resource.title)}</a> · ${h(dateText(resource.capturedAt))} · <a href="data/product-library/${h(resource.json)}" target="_blank" rel="noreferrer">查看来源快照</a></li>`).join('')}</ul></section>` : '';
+      state.exportReady = true;
       state.products = products; state.brand = '全部'; state.quality = '全部'; state.page = 1;
       state.category = {id:'search', name:`“${query}”`, brands:Object.fromEntries([...new Set(products.map(p=>p.brand))].map(brand=>[brand,products.filter(p=>p.brand===brand).length]))};
       renderProducts();
     } catch (error) {
       if (requestId !== state.requestId) return;
+      document.querySelector('#product-grid').setAttribute('aria-busy', 'false');
+      document.querySelector('#product-grid').replaceChildren();
       document.querySelector('#catalog-status').textContent = "查询失败，请再次查找。";
       console.error(error);
     }
   }
 
+  function downloadContent() {
+    return visibleProducts().map(product => `# ${product.brand} — ${product.name}\n\n来源：${product.url}\n快照：${product.capturedAt}\n\n` + '```json\n' + JSON.stringify(product,null,2) + '\n```').join('\n\n');
+  }
+
   function downloadProducts() {
-    const products = visibleProducts();
-    const content = products.map(product => `# ${product.brand} — ${product.name}\n\n来源：${product.url}\n快照：${product.capturedAt}\n\n` + '```json\n' + JSON.stringify(product,null,2) + '\n```').join('\n\n');
+    if (!state.exportReady || !visibleProducts().length) return;
+    const content = downloadContent();
     const link = document.createElement('a');
     link.href = URL.createObjectURL(new Blob([content], {type:'text/markdown;charset=utf-8'}));
     link.download = `${state.family}-products.md`; link.click(); URL.revokeObjectURL(link.href);
@@ -246,6 +283,7 @@
   async function loadFamily(family) {
     const familyRequestId = ++state.familyRequestId;
     ++state.requestId;
+    invalidateProducts();
     state.family = family;
     const response = await fetch(family === 'cozeware' ? 'data/cozeware-products/manifest.json' : 'data/products/manifest.json', {cache:'no-store'});
     if (!response.ok) throw new Error('产品资料库清单加载失败');

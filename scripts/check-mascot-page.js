@@ -153,7 +153,8 @@ for (const asset of kit.assets) {
 for (const id of ['avatar-32-png', 'avatar-64-png', 'avatar-128-png', 'avatar-256-png', 'pose-welcome-512-png', 'pose-explain-512-png', 'pose-welcome-768-webp', 'pose-explain-768-webp']) {
   if (!kit.assets.some((asset) => asset.id === id)) fail(`missing kit asset: ${id}`);
 }
-if (!fs.existsSync(path.join(root, kit.download)) || !fs.existsSync(path.join(root, kit.usage))) fail('kit downloads are missing');
+if (kit.download !== 'https://drive.google.com/drive/folders/1xVehYVMVfieKDRxjTGtK0zl0lDdjPfd_') fail('mascot material folder is incorrect');
+if (!fs.existsSync(path.join(root, kit.source_archive)) || !fs.existsSync(path.join(root, kit.usage))) fail('retained source archive or usage file is missing');
 if (!content.nav.some(item => item.id === 'mascot' && item.file === 'mascot.html')) fail('Bruno navigation missing');
 for (const id of ['iteration','applications','design-workflow']) if (!html.includes('id="'+id+'"')) fail('Merged section missing: '+id);
 const publicText = [JSON.stringify(mascot), JSON.stringify(kit), read(kit.usage), html, script, css].join('\n');
@@ -173,6 +174,8 @@ async function checkRenderedPage() {
   vm.runInNewContext(script, page);
   await page.window.initMascot();
   const rendered = main.innerHTML;
+  if (!rendered.includes('OEDRO（Bruno）') || !rendered.includes('Cozeware：暂无，制作后放在这里')) fail('brand sections are missing');
+  if (rendered.includes(`href="${kit.source_archive}"`)) fail('the archive must not be a public download entry');
   if ((rendered.match(/<picture><source type="image\/avif"/g) || []).length !== 7) fail('all seven gallery images need responsive AVIF sources');
   for (const source of sources) {
     const stem = source.replace(/\.webp$/, '');

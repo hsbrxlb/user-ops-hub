@@ -9,8 +9,8 @@ Hub 按部门任务线汇集项目进展、上下文与下载资产，通过 Git
 ## 当前发布入口
 
 - `context.html` 保留旧链接并跳转首页。品牌、产品、权限申请、画风和工作流程按主题并入相应页面；首页提供首次阅读入口。
-- `content-guides.html` 连接两个 Content Guide、两份排期表与 5.4 品牌包。品牌包使用同仓库 Release `hub-assets` 的公开安全副本，原包中的绩效段与内部绩效表入口已移除。
-- `content-review.html` 提供现行内容过审标准，`skills.html` 提供七个技能 ZIP。
+- `content-guides.html` 连接两个 Content Guide、两份排期表与品牌资料 Drive 文件夹。总文件夹按 OEDRO、Cozeware 分组，页面品牌资料入口使用文件夹链接。
+- `content-review.html` 提供现行内容过审标准，`skills.html` 提供六个技能 ZIP，显示文件类型与实际大小；mono-color 原件保留在仓库，页面省略该项。
 - `freshflow.html`、`loyalty.html`、`repurchase.html`、`social-tools.html` 分别承载新风机背景、积分方案与24张设计稿、六种复购办法、54例社媒工具案例。
 - `customer-analytics.html` 只加载聚合统计，`#outreach` 直接选择首批触达样本。`first-outreach-users.html` 是转到聚合统计的兼容入口。
 - 逐客户原数据保留在公开工作区以外。重新聚合时给 `scripts/build-customer-analytics.py --input` 传入私有原件；本地用 `HUB_PRIVATE_OUTREACH_SOURCE` 执行源数据对账，CI 核公开聚合一致性与明细排除。
@@ -48,7 +48,7 @@ Hub 按部门任务线汇集项目进展、上下文与下载资产，通过 Git
 - `flipbooks.html`：Flip Book Demo（翻页书），进入 Brand Story 与 Car Owner Survey
 - `mascot.html`：展示公牛布诺与随行的救援板小伙伴，包含五张角色图与两张社媒、周边场景图；六类应用示意、角色表达与数字素材下载分别有锚点。`data/mascot-kit.json`只收公开安全内容，素材路径和哈希由`check-mascot-page.js`核对；内部确认与厂家材料不进入公开包。
 - `mascot-workflow.html` 跳转 `mascot.html#design-workflow`；Bruno 页合并角色迭代、应用与素材、设计技能，完整工作包可直接下载。
-- 侧栏分别进入“SEO与AI搜索”“Discord频道设计”“OEDRO 品牌口吻”，沿用对应的 `topic.html?slug=...` 网址。侧栏按六条任务线排列；邀请活动归社区与邮件，首批触达归用户与市场研究。`topics.html` 仅保留旧链接所需的资料索引。
+- 侧栏分别进入“SEO与AI搜索”“Discord频道设计”“品牌口吻”，沿用对应的 `topic.html?slug=...` 网址。侧栏按六条任务线排列；邀请活动归社区与邮件，首批触达归用户与市场研究。`topics.html` 仅保留旧链接所需的资料索引。
 - Discord 配置位于频道结构下方；没有实际用途证据的机器人与空配置区不显示。品牌表达页包含品牌名大小写建议和六个双语场景示例，示例不代表已发送消息。
 - 原“公开信号与用户关系”网址兼容跳转至讨论卡片；页面已移除通用处理流程说明，旧 `#feedback-method` 链接仍可打开。
 - `research-library.html`、`sites-systems.html`、`playbook.html` 已退出导航，只保留旧网址的定向跳转。

@@ -70,8 +70,8 @@
       + "<p>头像为透明 PNG，保留完整牛角，可直接放在不同底色上。平台可能自行添加底色或裁切，上传后需要检查。完整姿势至少 128px 高，四周留 16px。</p>"
       + '<div class="kit-downloads">' + links.map(([id, label]) => {
         const asset = kit.assets.find((entry) => entry.id === id);
-        return '<a class="asset-preview-link" href="' + safe(asset.src) + '" download><img src="' + safe(asset.src) + '" alt="' + label + '" loading="lazy"><span>' + label + '</span></a>';
-      }).join('') + '<a href="' + safe(kit.download) + '" download>下载头像与网页素材包</a><a href="' + safe(kit.usage) + '">使用要点</a></div>'
+        return '<a class="asset-preview-link file-download" href="' + safe(asset.src) + '" data-download-bytes="' + asset.bytes + '" title="' + asset.bytes.toLocaleString('en-US') + ' 字节" download><img src="' + safe(asset.src) + '" alt="' + label + '" loading="lazy"><span>' + '<span class="download-icon" aria-hidden="true">⤓</span> ' + label + '（' + (asset.bytes / 1000).toFixed(1) + ' KB）</span></a>';
+      }).join('') + '<a href="' + safe(kit.download) + "\" target=\"_blank\" rel=\"noopener noreferrer\">打开 OEDRO 吉祥物素材文件夹 <span aria-hidden=\"true\">↗</span></a><p>Bruno 头像、透明姿势图、网页素材和使用要点。</p><a href=\"" + safe(kit.usage) + '">使用要点</a></div>'
       + "<p>制造需要另做准确的字标、刀线、色样或模型。数字图像不代表已生产实物，也不证明商标注册或排他版权。</p>"
       + "<p><a href=\"merch-plan.html#bull-merch\">查看帽章与贴纸应用</a></p></section>";
   }
@@ -89,7 +89,7 @@
       ]);
       document.title = data.title + '｜海外用户运营 Hub';
       document.querySelector('meta[name="description"]').content = data.meta_description;
-      document.querySelector('#content').innerHTML = '<header class="page-heading evo-heading"><h1>吉祥物 Bruno</h1></header>'
+      document.querySelector('#content').innerHTML = '<header class="page-heading evo-heading"><h1>吉祥物</h1></header><section class="brand-section" aria-labelledby="oedro-brand-title"><h2 class="brand-section-title" id="oedro-brand-title">OEDRO（Bruno）</h2>'
         + '<div class="evo-layout">' + tocMarkup(data.characters)
         + '<div class="evo-character-list"><section id="iteration" class="mascot-section"><h2>角色迭代</h2>'
         + data.characters.map((character) => characterMarkup(character)).join('')
@@ -98,7 +98,7 @@
         + applicationMarkup(kit).replace('id="applications"','id="application-examples"').replaceAll('<h2','<h3').replaceAll('</h2>','</h3>')
         + voiceMarkup().replaceAll('<h2','<h3').replaceAll('</h2>','</h3>')
         + downloadsMarkup(kit).replaceAll('<h2','<h3').replaceAll('</h2>','</h3>') + '</section>' + workflow.html
-        + '</div></div>';
+        + '</div></div></section><section class="brand-section brand-empty" aria-labelledby="cozeware-brand-title"><h2 class="brand-section-title" id="cozeware-brand-title">Cozeware</h2><p>Cozeware：暂无，制作后放在这里</p></section>';
       scrollToMascotAnchor();
     } catch (error) {
       content.innerHTML = '<div class="load-error" role="alert"><h1>吉祥物暂时无法加载</h1><p>加载超时或连接失败，请重试。</p><button type="button" id="retry-mascot">重试吉祥物</button><a href="index.html">返回首页</a></div>';

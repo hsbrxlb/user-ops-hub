@@ -47,19 +47,19 @@
     },
     {
       "id": "brand-voice-system",
-      "label": "OEDRO 品牌口吻",
+      "label": "品牌口吻",
       "file": "topic.html?slug=brand-voice-system",
       "group": "品牌与产品"
     },
     {
       "id": "mascot",
-      "label": "吉祥物 Bruno",
+      "label": "吉祥物",
       "file": "mascot.html",
       "group": "品牌与产品"
     },
     {
       "id": "merch-plan",
-      "label": "OEDRO 周边",
+      "label": "周边",
       "file": "merch-plan.html",
       "group": "品牌与产品"
     },
@@ -71,7 +71,7 @@
     },
     {
       "id": "freshflow",
-      "label": "FreshFlow 新风机",
+      "label": "Cozeware FreshFlow 新风机",
       "file": "freshflow.html",
       "group": "品牌与产品"
     },
@@ -89,7 +89,7 @@
     },
     {
       "id": "newsletter",
-      "label": "The Glovebox 邮件期刊",
+      "label": "邮件期刊",
       "file": "newsletter.html",
       "group": "社区与邮件"
     },

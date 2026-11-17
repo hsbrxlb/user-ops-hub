@@ -158,7 +158,7 @@
       "src": "assets/mascot-kit/social-companion-jpeg.jpg"
     }
   ],
-  "download": "assets/mascot-kit/oedro-bull-digital-kit.zip",
+  "download": "https://drive.google.com/drive/folders/1xVehYVMVfieKDRxjTGtK0zl0lDdjPfd_",
   "usage": "assets/mascot-kit/usage.txt",
   "examples": [
     {
@@ -211,5 +211,6 @@
     "pose-welcome-768-webp",
     "pose-explain-512-webp",
     "pose-explain-768-webp"
-  ]
+  ],
+  "source_archive": "assets/mascot-kit/oedro-bull-digital-kit.zip"
 }
