@@ -24,8 +24,8 @@ assert.ok(home.includes('class="menu-button"') && home.includes('class="skip-lin
 
 
 for (const [id,label] of Object.entries({'discord-community':'Discord 频道设计',research:'AI 问卷',voice:'用户声音','brand-voice-system':'品牌口吻','merch-plan':'周边','first-outreach':'首批触达用户','discord-invite-plan':'Discord 邀请活动',products:'产品知识库',mascot:'吉祥物','ugc-activity':'投稿活动'})) assert.equal(nav.find(item=>item.id===id)?.label,label);
-assert.deepEqual(nav.map(item=>item.id), ['home','content-guides','content-review','studio','skills','social-brand','social-tools','brand-voice-system','mascot','merch-plan','products','freshflow','discord-community','discord-invite-plan','newsletter','email-templates','loyalty','repurchase','ugc-activity','campaigns-oedro','campaigns-cozeware','customer-analytics','first-outreach','voice','competitor-experience','research','seo-geo','user-segments-oedro','user-segments-cozeware','fakesite','flipbooks']);
-assert.deepEqual([...new Set(nav.map(item=>item.group).filter(Boolean))], ['社媒内容','品牌与产品','社区与邮件','会员与复购','Campaigns','用户与市场研究','样例']);
+assert.deepEqual(nav.map(item=>item.id), ['home','content-guides','content-review','studio','skills','social-brand','social-tools','brand-voice-system','mascot','merch-plan','products','freshflow','discord-community','discord-invite-plan','newsletter','email-templates','loyalty','repurchase','ugc-activity','campaigns-overview','customer-analytics','first-outreach','voice','competitor-experience','research','seo-geo','user-segments-oedro','user-segments-cozeware','fakesite','flipbooks']);
+assert.deepEqual([...new Set(nav.map(item=>item.group).filter(Boolean))], ['社媒内容','品牌与产品','社区与邮件','会员与复购','用户与市场研究','样例']);
 for (const id of ['first-outreach', 'discord-invite-plan', 'ugc-activity']) {
   assert.ok(read(`${id}.html`).includes(`data-page="${id}"`));
   assert.ok(read('app.js').includes(`'${id}'`), 'static pages retain their content during navigation loading');

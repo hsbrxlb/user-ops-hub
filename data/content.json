@@ -118,16 +118,10 @@
       "group": "会员与复购"
     },
     {
-      "id": "campaigns-oedro",
-      "label": "OEDRO",
-      "file": "campaigns-oedro.html",
-      "group": "Campaigns"
-    },
-    {
-      "id": "campaigns-cozeware",
-      "label": "Cozeware",
-      "file": "campaigns-cozeware.html",
-      "group": "Campaigns"
+      "id": "campaigns-overview",
+      "label": "活动系列",
+      "file": "campaigns.html",
+      "group": "会员与复购"
     },
     {
       "id": "customer-analytics",
