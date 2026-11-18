@@ -64,7 +64,8 @@ jobs:
         run: |
           mkdir public-dist
           cp .nojekyll robots.txt *.html *.js *.css public-dist/
-          cp -R assets data preview experiences fakesite public-dist/
+          cp -R data preview experiences fakesite skills public-dist/
+          rsync -a --exclude='/onboarding/*.webp' --exclude='/onboarding/*.zip' assets/ public-dist/assets/
       - name: Validate complete public artifact
         run: |
           PUBLIC_SITE_ROOT=public-dist python3 scripts/test-customer-analytics.py

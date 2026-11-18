@@ -6,7 +6,7 @@ const path = require('node:path');
 const repoRoot = path.resolve(__dirname, '..');
 const root = process.env.PUBLIC_SITE_ROOT ? path.resolve(repoRoot, process.env.PUBLIC_SITE_ROOT) : repoRoot;
 const errors = [];
-const publicRoots = ['assets', 'data', 'preview', 'experiences', 'fakesite'];
+const publicRoots = ['assets', 'data', 'preview', 'experiences', 'fakesite', 'skills'];
 const rootExtensions = new Set(['.html', '.js', '.css']);
 const textExtensions = new Set(['.html', '.js', '.mjs', '.css', '.json', '.txt', '.md']);
 const forbidden = [
@@ -102,6 +102,28 @@ for (const file of publicFiles.filter((item) => path.extname(item) === '.html'))
     const resolved = path.resolve(path.dirname(file), clean);
     if (!fs.existsSync(resolved)) errors.push(path.relative(root, file) + ' 有断链：' + target);
   }
+}
+
+const skillsDirectory = path.join(root, 'skills');
+const skillsIndex = path.join(skillsDirectory, 'index.json');
+if (!fs.existsSync(skillsIndex)) {
+  errors.push('技能画廊缺少 skills/index.json');
+} else {
+  const { skills } = JSON.parse(fs.readFileSync(skillsIndex, 'utf8'));
+  const markdownFiles = fs.readdirSync(skillsDirectory).filter((name) => name.endsWith('.md'));
+  const expected = [];
+  for (const skill of skills) {
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(skill.name)) {
+      errors.push('技能索引存在无效文件名');
+      continue;
+    }
+    const name = skill.name + '.md';
+    expected.push(name);
+    if (!markdownFiles.includes(name) || fs.statSync(path.join(skillsDirectory, name)).size !== skill.bytes) {
+      errors.push('技能文件缺失或大小不一致：' + name);
+    }
+  }
+  if (expected.sort().join('\n') !== markdownFiles.sort().join('\n')) errors.push('技能索引与公开 Markdown 文件不一致');
 }
 
 if (fs.existsSync(path.join(root, 'data/product-library/latest-manifest.json'))) {

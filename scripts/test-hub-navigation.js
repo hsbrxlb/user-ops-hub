@@ -23,12 +23,18 @@ assert.ok(home.includes('base.css') && home.includes('theme.css'), 'keep existin
 assert.ok(home.includes('class="menu-button"') && home.includes('class="skip-link"'));
 
 
-for (const [id,label] of Object.entries({'discord-community':'Discord 频道设计',research:'AI 问卷',voice:'用户声音','brand-voice-system':'品牌口吻','merch-plan':'周边','first-outreach':'首批触达用户','discord-invite-plan':'Discord 邀请活动',products:'产品知识库',mascot:'吉祥物','ugc-activity':'投稿活动'})) assert.equal(nav.find(item=>item.id===id)?.label,label);
-assert.deepEqual(nav.map(item=>item.id), ['home','content-guides','content-review','studio','skills','social-brand','social-tools','brand-voice-system','mascot','merch-plan','products','freshflow','discord-community','discord-invite-plan','newsletter','email-templates','loyalty','repurchase','ugc-activity','campaigns-overview','customer-analytics','first-outreach','voice','competitor-experience','research','seo-geo','user-segments-oedro','user-segments-cozeware','fakesite','flipbooks']);
+for (const [id,label] of Object.entries({'comics-gallery':'漫画画廊',skills:'技能画廊','discord-community':'Discord 频道设计',research:'AI 问卷',voice:'用户声音','brand-voice-system':'品牌口吻','merch-plan':'周边','first-outreach':'首批触达用户','discord-invite-plan':'Discord 邀请活动',products:'产品知识库',mascot:'吉祥物','ugc-activity':'投稿活动'})) assert.equal(nav.find(item=>item.id===id)?.label,label);
+assert.deepEqual(nav.map(item=>item.id), ['home','content-guides','content-review','studio','comics-gallery','skills','social-brand','social-tools','brand-voice-system','mascot','merch-plan','products','freshflow','discord-community','discord-invite-plan','newsletter','email-templates','loyalty','repurchase','ugc-activity','campaigns-overview','customer-analytics','first-outreach','voice','competitor-experience','research','seo-geo','user-segments-oedro','user-segments-cozeware','fakesite','flipbooks']);
 assert.deepEqual([...new Set(nav.map(item=>item.group).filter(Boolean))], ['社媒内容','品牌与产品','社区与邮件','会员与复购','用户与市场研究','样例']);
-for (const id of ['first-outreach', 'discord-invite-plan', 'ugc-activity']) {
-  assert.ok(read(`${id}.html`).includes(`data-page="${id}"`));
-  assert.ok(read('app.js').includes(`'${id}'`), 'static pages retain their content during navigation loading');
+const staticPages = read('app.js').match(/const staticContentPage = \[([^\]]+)\]/)[1];
+for (const id of ['first-outreach', 'discord-invite-plan', 'ugc-activity', 'comics-gallery', 'skills']) {
+  const html = read(`${id}.html`);
+  assert.ok(html.includes(`data-page="${id}"`));
+  assert.ok(staticPages.includes(`'${id}'`), 'static pages retain their content during navigation loading');
+}
+for (const id of ['comics-gallery', 'skills']) {
+  assert.equal(nav.find(item => item.id === id)?.group, '社媒内容');
+  assert.match(read(`${id}.html`), new RegExp(`<a aria-current="page" class="active" data-page="${id}"`));
 }
 assert.ok(nav.some(item => item.id === 'products' && item.file === 'products.html'));
 assert.ok(!nav.some(item => ['research-library', 'sites-systems', 'playbook'].includes(item.id)));
@@ -128,12 +134,11 @@ assert.ok(!/1FKH_RYGcdbNnaBjQ6NzoTXvOJRALywErPd80OZffalg|1xHtbq-JyEWHkiLCIXipD03
 const skills = read('skills.html');
 assert.ok(!skills.includes('mono-color'), 'retired skill is absent from the page');
 assert.ok(fs.existsSync(path.join(root, 'assets/onboarding/mono-color.zip')), 'retired skill source is retained');
-const skillDownloads = [...skills.matchAll(/<a\b[^>]*>/g)].map(([tag]) => ({
-  file: /href="(assets\/onboarding\/[^" ]+\.zip)"/.exec(tag)?.[1],
-  bytes: /data-download-bytes="(\d+)"/.exec(tag)?.[1],
-})).filter(entry => entry.file);
-assert.equal(skillDownloads.length, 6);
-for (const { file, bytes } of skillDownloads) assert.equal(Number(bytes), fs.statSync(path.join(root, file)).size, file + ': displayed size matches file');
+assert.doesNotMatch(skills, /href="[^"]+\.zip/);
+const skillIndex = JSON.parse(read('skills/index.json'));
+const skillCards = [...skills.matchAll(/data-skill="([a-z0-9-]+)"/g)].map(match => match[1]);
+assert.equal(skillCards.length, 22);
+assert.deepEqual(skillCards.sort(), skillIndex.skills.map(skill => skill.name).sort());
 for (const id of ['social-brand', 'merch-plan', 'discord-invite-plan', 'first-outreach', 'ugc-activity', 'customer-analytics']) {
   const source = read(id + '.html');
   assert.ok(source.indexOf('id="oedro-brand-title"') < source.indexOf('id="cozeware-brand-title"'), id + ': OEDRO precedes Cozeware');

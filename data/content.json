@@ -28,8 +28,14 @@
       "group": "社媒内容"
     },
     {
+      "id": "comics-gallery",
+      "label": "漫画画廊",
+      "file": "comics-gallery.html",
+      "group": "社媒内容"
+    },
+    {
       "id": "skills",
-      "label": "设计技能包",
+      "label": "技能画廊",
       "file": "skills.html",
       "group": "社媒内容"
     },
