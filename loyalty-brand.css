@@ -11,14 +11,15 @@
 
 .loyalty-crop {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr);
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
   align-items: center;
-  gap: var(--space-5) var(--space-6);
+  gap: var(--space-4);
   border-top: .5px solid var(--border-strong);
   padding: var(--space-6) 0;
 }
 
-.loyalty-crop img { display: block; max-width: 100%; height: auto; }
+.loyalty-crop > .hub-image-trigger { width: 100%; }
+.loyalty-crop img { display: block; width: 100%; height: auto; }
 
 #content .loyalty-crop h2 {
   margin: 0 0 var(--space-2);
