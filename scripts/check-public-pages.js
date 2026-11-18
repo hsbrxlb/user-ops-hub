@@ -41,6 +41,10 @@ const publicFiles = [
   ...publicRoots.flatMap((name) => walk(path.join(root, name)))
 ];
 
+for (const file of publicFiles) {
+  if (path.extname(file).toLowerCase() === '.zip') errors.push('公开目录仍含 ZIP：' + path.relative(root, file));
+}
+
 const codeFiles = publicFiles.filter((file) => ['.html', '.js'].includes(path.extname(file)));
 const detailTags = [];
 for (const file of codeFiles) {
@@ -96,6 +100,7 @@ for (const file of publicFiles.filter((item) => path.extname(item) === '.html'))
   }
   for (const match of source.matchAll(/(?:href|src)="([^"]+)"/g)) {
     const target = match[1];
+    if (/\.zip(?:$|[?#])/i.test(target)) errors.push(path.relative(root, file) + ' 仍含 ZIP 下载');
     if (/^(?:https:|data:|#|mailto:|javascript:)/.test(target)) continue;
     const clean = target.split('#')[0].split('?')[0];
     if (!clean) continue;

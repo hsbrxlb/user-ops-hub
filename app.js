@@ -38,12 +38,6 @@ function sectionHead(title, action = '') {
   return `<div class="section-head"><h2>${escapeHtml(title)}</h2>${action}</div>`;
 }
 
-function topicLink(item) {
-  return `<a class="topic-row" href="topic.html?slug=${encodeURIComponent(item.slug)}" data-searchable data-status="${escapeHtml(item.status)}">
-    <strong>${escapeHtml(item.title)}</strong>
-  </a>`;
-}
-
 function renderShell(data) {
   const parentPage = document.body.dataset.navParent;
   const activePage = page === 'topics' && location.pathname.endsWith('topic.html')
@@ -351,19 +345,6 @@ function renderUserVoice(data, voice, radar) {
     </section>` : ''}`;
 }
 
-function renderTopics(data, topics) {
-  document.title = `${topics.title}｜${data.site.title}`;
-  document.querySelector('meta[name="description"]').content = "OEDRO 海外用户运营专题及当前状态。";
-  document.querySelector('#content').innerHTML = `
-    ${pageHeading(topics.title)}
-    <section class="section topic-index-surface">
-      <div class="table-toolbar"><span class="count-note" id="topic-count"></span></div>
-      <div class="topic-list" id="topic-list">${topics.items.map(topicLink).join('')}</div>
-    </section>`;
-  document.querySelector('#topic-filter')?.addEventListener('change', runFilters);
-  runFilters();
-}
-
 const topicTitleMap = {
   当前判断: '品牌表达', "OEDRO 怎么说": '表达原则', 不同渠道怎么变: '各渠道的语气',
   明确不采用: '禁用表达', 当前验证状态: '验证状态'
@@ -411,7 +392,6 @@ function visibleTopicSections(topic) {
   if (!topic.sections?.length) return [];
   const ids = {
     'brand-voice-system': ['current', 'brand-name', 'everyday-example', 'discord-example', 'fitment-example', 'support-example', 'research-example', 'ugc-example', 'principles', 'channels', 'donts'],
-    'seo-geo': ['current', 'milestones', 'baseline', 'next']
   }[topic.slug];
   return ids ? topic.sections.filter((section) => ids.includes(section.id)) : topic.sections;
 }
@@ -426,6 +406,11 @@ function renderRelatedPages(pages = []) {
 
 async function renderTopic(data) {
   const slug = new URLSearchParams(window.location.search).get('slug') || 'discord-community';
+  if (!['discord-community', 'brand-voice-system'].includes(slug)) {
+    document.title = `专题已下线｜${data.site.title}`;
+    document.querySelector('#content').innerHTML = '<header class="page-heading"><h1>专题已下线</h1><p><a href="index.html">返回首页查看现有资料</a></p></header>';
+    return;
+  }
   const response = await fetch(`data/topics/${encodeURIComponent(slug)}.json`, { cache: 'no-store' });
   if (!response.ok) throw new Error('专题加载失败');
   const topic = await response.json();
@@ -441,25 +426,6 @@ async function renderTopic(data) {
         ${renderRelatedPages(topic.related_pages)}
       </article>
     </div>`;
-}
-
-function runFilters() {
-  const statusFilter = document.querySelector('#status-filter')?.value || '全部';
-  const topicFilter = document.querySelector('#topic-filter')?.value || '全部';
-  const items = [...document.querySelectorAll('[data-searchable]')];
-  items.forEach((item) => {
-    const projectStatusMatch = !item.matches('#project-rows tr') || statusFilter === '全部' || item.dataset.status === statusFilter;
-    const topicStatusMatch = !item.matches('#topic-list [data-status]') || topicFilter === '全部' || item.dataset.status === topicFilter;
-    item.hidden = !(projectStatusMatch && topicStatusMatch);
-  });
-  const rows = [...document.querySelectorAll('#project-rows tr')];
-  const count = document.querySelector('#project-count');
-  if (count) count.textContent = `共 ${rows.filter((row) => !row.hidden).length} 个项目`;
-  const empty = document.querySelector('#project-empty');
-  if (empty) empty.hidden = rows.some((row) => !row.hidden);
-  const topicRows = [...document.querySelectorAll('#topic-list [data-status]')];
-  const topicCount = document.querySelector('#topic-count');
-  if (topicCount) topicCount.textContent = `共 ${topicRows.filter((row) => !row.hidden).length} 个专题`;
 }
 
 if (sidebar) {
@@ -520,16 +486,14 @@ async function init() {
     location.replace('user-voice.html#feedback-method');
     return;
   }
-  const [dataResponse, topicsResponse, voiceResponse, radarResponse] = await Promise.all([
+  const [dataResponse, voiceResponse, radarResponse] = await Promise.all([
     fetch('data/content.json', { cache: 'no-store' }),
-    fetch('data/topics.json', { cache: 'no-store' }),
     page === 'voice' ? fetch('data/user-voice.json', { cache: 'no-store' }) : Promise.resolve(null),
     page === 'voice' ? fetch('data/demand-radar.json', { cache: 'no-store' }) : Promise.resolve(null)
   ]);
-  if (!dataResponse.ok || !topicsResponse.ok || (page === 'voice' && (!voiceResponse?.ok || !radarResponse?.ok))) throw new Error('页面数据加载失败');
-  const [data, topics, voice, radar] = await Promise.all([
+  if (!dataResponse.ok || (page === 'voice' && (!voiceResponse?.ok || !radarResponse?.ok))) throw new Error('页面数据加载失败');
+  const [data, voice, radar] = await Promise.all([
     dataResponse.json(),
-    topicsResponse.json(),
     voiceResponse ? voiceResponse.json() : Promise.resolve(null),
     radarResponse ? radarResponse.json() : Promise.resolve(null)
   ]);
@@ -540,10 +504,7 @@ async function init() {
     renderUserVoice(data, voice, radar);
     if (location.hash === '#feedback-method') document.querySelector('.voice-discussions')?.scrollIntoView({ behavior: 'instant', block: 'start' });
   }
-  if (page === 'topics' && location.pathname.endsWith('topics.html')) renderTopics(data, topics);
   if (page === 'topics' && location.pathname.endsWith('topic.html')) await renderTopic(data);
-  if (page === 'studio' && location.pathname.endsWith('content-pipeline-test.html')) await window.initContentPipelineTests?.();
-  if (page === 'studio' && !location.pathname.endsWith('content-pipeline-test.html')) await window.initContentStudio?.();
   if (page === 'email-templates') await window.initEmailTemplates?.();
   if (page === 'newsletter') await window.initNewsletter?.();
   if (page === 'products') await window.initProducts?.();
@@ -554,7 +515,7 @@ const contextSupplement = document.querySelector('#context-supplement')?.outerHT
 function restoreContextSupplement() {
   if (contextSupplement && !document.querySelector('#context-supplement')) mainContent.insertAdjacentHTML('beforeend', contextSupplement);
 }
-const staticContentPage = ['home', 'context', 'content-guides', 'content-review', 'comics-gallery', 'skills', 'loyalty', 'repurchase', 'social-tools', 'freshflow', 'competitor-experience', 'customer-analytics', 'mascot-workflow', 'social-brand', 'merch-plan', 'first-outreach', 'discord-invite-plan', 'ugc-activity', 'user-segments-oedro'].includes(page) || page?.startsWith('campaigns-');
+const staticContentPage = ['home', 'context', 'studio', 'content-guides', 'content-review', 'comics-gallery', 'skills', 'loyalty', 'repurchase', 'freshflow', 'competitor-experience', 'customer-analytics', 'mascot-workflow', 'social-brand', 'merch-plan', 'first-outreach', 'discord-invite-plan', 'ugc-activity', 'user-segments-oedro'].includes(page) || page?.startsWith('campaigns-');
 if (page === 'mascot') {
   if (!document.querySelector('#nav-list').querySelector('a')) initMascotNavigation();
 } else {
@@ -605,7 +566,7 @@ function completeBrandSections() {
   if (!content?.querySelector('.page-heading') || content.getAttribute('aria-busy') === 'true' || content.querySelector('.brand-section')) return;
   const topic = content.dataset.topic;
   if (!['voice', 'email-templates', 'newsletter', 'flipbooks'].includes(page)
-    && !(page === 'topics' && ['brand-voice-system', 'seo-geo'].includes(topic))) return;
+    && !(page === 'topics' && topic === 'brand-voice-system')) return;
   const supplement = content.querySelector('#context-supplement');
   const oedro = document.createElement('section');
   oedro.className = 'brand-section';

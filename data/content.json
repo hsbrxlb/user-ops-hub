@@ -46,12 +46,6 @@
       "group": "社媒内容"
     },
     {
-      "id": "social-tools",
-      "label": "社媒工具 54 例",
-      "file": "social-tools.html",
-      "group": "社媒内容"
-    },
-    {
       "id": "brand-voice-system",
       "label": "品牌口吻",
       "file": "topic.html?slug=brand-voice-system",
@@ -160,35 +154,10 @@
       "group": "用户与市场研究"
     },
     {
-      "id": "seo-geo",
-      "label": "SEO 与 AI 搜索",
-      "file": "topic.html?slug=seo-geo",
-      "group": "用户与市场研究"
-    },
-    {
       "id": "user-segments-oedro",
       "label": "User segments — OEDRO",
       "file": "user-segments-oedro.html",
       "group": "用户与市场研究"
-    },
-    {
-      "id": "user-segments-cozeware",
-      "label": "User segments — Cozeware",
-      "group": "用户与市场研究",
-      "reserved": true
-    },
-    {
-      "id": "fakesite",
-      "label": "独立站样站",
-      "file": "fakesite/",
-      "external": true,
-      "group": "样例"
-    },
-    {
-      "id": "flipbooks",
-      "label": "Flip Book 样例",
-      "file": "flipbooks.html",
-      "group": "样例"
     }
   ],
   "flipbooks": {

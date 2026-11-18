@@ -10,7 +10,6 @@ const errors = [];
 
 const hubPagePath = path.join(root, 'flipbooks.html');
 const contentPath = path.join(root, 'data', 'content.json');
-const resultsPath = path.join(root, 'data', 'content-studio.json');
 const appPath = path.join(root, 'app.js');
 
 const requiredImages = new Set([
@@ -46,7 +45,7 @@ const actualImages = fs.existsSync(imageRoot) ? new Set(fs.readdirSync(imageRoot
 for (const image of requiredImages) if (!actualImages.has(image)) errors.push(`缺少页面图 ${image}`);
 for (const image of actualImages) if (!requiredImages.has(image)) errors.push(`包含未使用页面图 ${image}`);
 
-for (const file of [hubPagePath, contentPath, resultsPath, appPath]) {
+for (const file of [hubPagePath, contentPath, appPath]) {
   if (!fs.existsSync(file)) errors.push(`缺少 Hub 入口文件 ${path.relative(root, file)}`);
 }
 
@@ -57,7 +56,7 @@ if (fs.existsSync(hubPagePath) && !fs.readFileSync(hubPagePath, 'utf8').includes
 if (fs.existsSync(contentPath)) {
   const content = JSON.parse(fs.readFileSync(contentPath, 'utf8'));
   const nav = (content.nav || []).find((item) => item.id === 'flipbooks');
-  if (!nav || nav.label !== 'Flip Book 样例' || nav.file !== 'flipbooks.html') errors.push('侧边栏缺少 Flip Book 样例');
+  if (nav) errors.push('独立翻页书不应出现在 Hub 导航');
   if (content.flipbooks?.title !== 'Flip Book 样例（翻页书）') errors.push('翻页书页面标题不正确');
   const entries = content.flipbooks?.entries;
   if (!Array.isArray(entries) || entries.length !== 2) {
@@ -71,11 +70,6 @@ if (fs.existsSync(contentPath)) {
     }
   }
   if (content.research?.interactive_book) errors.push('用户调研页仍含旧翻页书入口');
-}
-
-if (fs.existsSync(resultsPath)) {
-  const results = JSON.parse(fs.readFileSync(resultsPath, 'utf8')).results || [];
-  if (results.some((item) => ['owner-field-notes', 'edition-01-field-book'].includes(item.id))) errors.push('内容成果页仍含旧翻页书入口');
 }
 
 if (fs.existsSync(appPath)) {

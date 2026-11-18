@@ -154,7 +154,7 @@ for (const id of ['avatar-32-png', 'avatar-64-png', 'avatar-128-png', 'avatar-25
   if (!kit.assets.some((asset) => asset.id === id)) fail(`missing kit asset: ${id}`);
 }
 if (kit.download !== 'https://drive.google.com/drive/folders/1xVehYVMVfieKDRxjTGtK0zl0lDdjPfd_') fail('mascot material folder is incorrect');
-if (!fs.existsSync(path.join(root, kit.source_archive)) || !fs.existsSync(path.join(root, kit.usage))) fail('retained source archive or usage file is missing');
+if (!fs.existsSync(path.join(root, kit.usage))) fail('public asset usage file is missing');
 if (!content.nav.some(item => item.id === 'mascot' && item.file === 'mascot.html')) fail('Bruno navigation missing');
 for (const id of ['iteration','applications','design-workflow']) if (!html.includes('id="'+id+'"')) fail('Merged section missing: '+id);
 const publicText = [JSON.stringify(mascot), JSON.stringify(kit), read(kit.usage), html, script, css].join('\n');

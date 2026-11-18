@@ -1,349 +1,169 @@
 {
- "skills": [
-  {
-   "shelf": "create",
-   "name": "story-first-comics",
-   "title": "叙事优先的品牌漫画",
-   "does": "先写剧本、再画分镜、最后出图的品牌漫画流程。",
-   "when": "要做社媒或社区漫画，或旧漫画被说“看不懂”“太突兀”时。",
-   "tags": [
-    "漫画",
-    "剧本",
-    "分镜"
-   ],
-   "updated": "2026-11-18",
-   "featured": true,
-   "bytes": 5184
-  },
-  {
-   "shelf": "create",
-   "name": "brand-creative-direction",
-   "title": "品牌创意方向",
-   "does": "比较两三个真正不同的想法，选一个，写成可执行的文案或图片简报。",
-   "when": "产品很普通、稿子写出来很平，或被退回说“太泛”时。",
-   "tags": [
-    "创意",
-    "社媒",
-    "图片简报"
-   ],
-   "updated": "2026-10-14",
-   "featured": true,
-   "bytes": 5445
-  },
-  {
-   "shelf": "create",
-   "name": "mascot-design",
-   "title": "品牌吉祥物设计",
-   "does": "先定角色感，再出一张主图，通过后扩展成一组视角和动作。",
-   "when": "新设计或修改吉祥物，或收到“不讨喜”“太像机器”的反馈时。",
-   "tags": [
-    "吉祥物",
-    "角色",
-    "一致性"
-   ],
-   "updated": "2026-09-09",
-   "featured": false,
-   "bytes": 5764
-  },
-  {
-   "shelf": "create",
-   "name": "brand-copy-studio",
-   "title": "品牌英文文案工作室",
-   "does": "锁定事实和权限，写英文、做红队和母语审查，交人工批准。",
-   "when": "写或审面向海外用户的邮件、社区帖子、调研邀请、客服回复时。",
-   "tags": [
-    "英文文案",
-    "邮件",
-    "审查"
-   ],
-   "updated": "2026-11-11",
-   "featured": false,
-   "bytes": 5364
-  },
-  {
-   "shelf": "create",
-   "name": "multiplatform-content-pack",
-   "title": "多平台图文内容包",
-   "does": "一句话需求变成按平台区分角度和尺寸的静态图文审阅包。",
-   "when": "同一个主题要发 Instagram、X、YouTube 社区时。",
-   "tags": [
-    "社媒",
-    "图文",
-    "多平台"
-   ],
-   "updated": "2026-11-16",
-   "featured": false,
-   "bytes": 5240
-  },
-  {
-   "shelf": "create",
-   "name": "design-principle-composer",
-   "title": "设计原则配方",
-   "does": "从有出处的设计原则里选主锚点和辅助，组合成可检查的视觉配方。",
-   "when": "不想套模板，要给网站、PPT 或图片定一套原创方向时。",
-   "tags": [
-    "设计系统",
-    "视觉方向"
-   ],
-   "updated": "2026-11-12",
-   "featured": false,
-   "bytes": 3875
-  },
-  {
-   "shelf": "create",
-   "name": "high-fidelity-flipbook",
-   "title": "高保真网页翻页书",
-   "does": "可拖拽软页卷角的网页翻页书，以及真实鼠标拖拽的验收清单。",
-   "when": "要做网页画册、刊物，或修翻页书的叠页、选中文字等问题时。",
-   "tags": [
-    "网页",
-    "翻页书",
-    "前端"
-   ],
-   "updated": "2026-08-31",
-   "featured": false,
-   "bytes": 3708
-  },
-  {
-   "shelf": "review",
-   "name": "anti-ai-slop-review",
-   "title": "去 AI 味审查",
-   "does": "对文字、代码和视觉三类成品做严格审查，删掉对读者没用的部分。",
-   "when": "任何要给别人看、用或批准的成品交付之前。",
-   "tags": [
-    "审查",
-    "文案",
-    "代码"
-   ],
-   "updated": "2026-11-12",
-   "featured": true,
-   "bytes": 5768
-  },
-  {
-   "shelf": "review",
-   "name": "visual-review",
-   "title": "视觉审查",
-   "does": "按实际渲染结果审功能、审美、模板味和媒介适配，0–3 分逐项给证据。",
-   "when": "网页、PPT、图片或视频做完、准备交付时。",
-   "tags": [
-    "视觉",
-    "评分表"
-   ],
-   "updated": "2026-11-12",
-   "featured": false,
-   "bytes": 4051
-  },
-  {
-   "shelf": "review",
-   "name": "defamiliarization-review",
-   "title": "陌生化审查",
-   "does": "找出看不见的默认假设，换一个外部视角，回到能落地的下一步。",
-   "when": "方案或文案“太普通、太模板、说不清哪里怪”时。",
-   "tags": [
-    "创意",
-    "复盘"
-   ],
-   "updated": "2026-11-11",
-   "featured": false,
-   "bytes": 2553
-  },
-  {
-   "shelf": "review",
-   "name": "dabaihua-clarity",
-   "title": "大白话理解补桥",
-   "does": "逐项找理解断点，把难懂的中文说明修成第一遍就能读懂。",
-   "when": "给新同事或其他部门解释技术、业务问题时。",
-   "tags": [
-    "写作",
-    "中文"
-   ],
-   "updated": "2026-09-08",
-   "featured": false,
-   "bytes": 2519
-  },
-  {
-   "shelf": "users",
-   "name": "conversational-survey-builder",
-   "title": "AI 智能对话问卷",
-   "does": "把调研简报做成聊天式问卷网页，AI 当访谈员逐题追问。",
-   "when": "要做用户调研网页，或把访谈导出整理成证据时。",
-   "tags": [
-    "调研",
-    "问卷",
-    "访谈"
-   ],
-   "updated": "2026-09-20",
-   "featured": true,
-   "bytes": 4920
-  },
-  {
-   "shelf": "users",
-   "name": "community-replies",
-   "title": "社区入站回复",
-   "does": "读全上下文、锁定事实、按风险分档、独立质检后再回复。",
-   "when": "处理品牌社媒评论区和社区里需要回应的消息时。",
-   "tags": [
-    "社区",
-    "客服",
-    "风险分级"
-   ],
-   "updated": "2026-10-25",
-   "featured": false,
-   "bytes": 6686
-  },
-  {
-   "shelf": "users",
-   "name": "user-voice-pipeline",
-   "title": "用户声音转化流程",
-   "does": "把评论和客服记录一步步变成经人工核对的洞察，再送到具体事项。",
-   "when": "一批评论、评价、客服记录要整理成用户声音报告时。",
-   "tags": [
-    "用户研究",
-    "洞察"
-   ],
-   "updated": "2026-08-26",
-   "featured": false,
-   "bytes": 2933
-  },
-  {
-   "shelf": "users",
-   "name": "weekly-report-writer",
-   "title": "工作周报写作",
-   "does": "一次性收集当周证据，写成忙碌读者也能看懂的三段式周报。",
-   "when": "写、重写或补写周报时。",
-   "tags": [
-    "周报",
-    "写作"
-   ],
-   "updated": "2026-11-11",
-   "featured": false,
-   "bytes": 2640
-  },
-  {
-   "shelf": "research",
-   "name": "graded-deep-research",
-   "title": "分级深度调研",
-   "does": "quick／standard／deep 三档，结论绑原始来源，主动找反证。",
-   "when": "方案比较、竞品研究或会影响决定的调查时。",
-   "tags": [
-    "调研",
-    "证据"
-   ],
-   "updated": "2026-10-27",
-   "featured": false,
-   "bytes": 4224
-  },
-  {
-   "shelf": "research",
-   "name": "solution-discovery-reuse",
-   "title": "先找现成方案",
-   "does": "按本地、官方、开源、社区的顺序查，留一条选型记录。",
-   "when": "准备自己造工具、流程或集成之前。",
-   "tags": [
-    "选型",
-    "开源"
-   ],
-   "updated": "2026-09-08",
-   "featured": false,
-   "bytes": 3371
-  },
-  {
-   "shelf": "research",
-   "name": "transcript-doc-cleanup",
-   "title": "转写与杂乱文档清理",
-   "does": "得到干净的工作文本，同时保留原始证据和不确定处。",
-   "when": "清理访谈、会议转写或 OCR、杂乱文档时。",
-   "tags": [
-    "转写",
-    "文档"
-   ],
-   "updated": "2026-08-26",
-   "featured": false,
-   "bytes": 2042
-  },
-  {
-   "shelf": "research",
-   "name": "local-video-review",
-   "title": "本地视频审看",
-   "does": "静音抽帧做成带时间码的联系表，写出带时间点的意见。",
-   "when": "审看红人视频、广告素材或样片时。",
-   "tags": [
-    "视频",
-    "审看"
-   ],
-   "updated": "2026-11-17",
-   "featured": false,
-   "bytes": 1988
-  },
-  {
-   "shelf": "ai",
-   "name": "ai-agent-team",
-   "title": "AI 专员团队",
-   "does": "十个分工明确的 AI 角色，配统一的任务单、状态和自检清单。",
-   "when": "想把一件工作拆给多个 AI 角色协作时。",
-   "tags": [
-    "AI 协作",
-    "分工",
-    "质检"
-   ],
-   "updated": "2026-11-18",
-   "featured": true,
-   "bytes": 6663
-  },
-  {
-   "shelf": "ai",
-   "name": "ai-task-orchestration",
-   "title": "AI 任务编排",
-   "does": "判断哪些工作能并行，写完整任务包，用证据循环验证。",
-   "when": "复杂的编程、调研、运营或长期任务。",
-   "tags": [
-    "AI 协作",
-    "并行"
-   ],
-   "updated": "2026-11-18",
-   "featured": false,
-   "bytes": 4604
-  },
-  {
-   "shelf": "ai",
-   "name": "workflow-distiller",
-   "title": "流程蒸馏",
-   "does": "把做完的多步骤任务沉淀成任务说明和检查清单。",
-   "when": "一套做法以后还会反复用时。",
-   "tags": [
-    "工作流",
-    "沉淀"
-   ],
-   "updated": "2026-11-11",
-   "featured": false,
-   "bytes": 3057
-  }
- ],
- "shelves": [
-  {
-   "id": "create",
-   "title": "内容与创意",
-   "line": "从一个想法到一套能发的图文。"
-  },
-  {
-   "id": "review",
-   "title": "审查与质量",
-   "line": "交付前的最后一道关。"
-  },
-  {
-   "id": "users",
-   "title": "用户与社区",
-   "line": "听用户说什么，再好好回应。"
-  },
-  {
-   "id": "research",
-   "title": "调研与资料",
-   "line": "先查清楚，再下结论。"
-  },
-  {
-   "id": "ai",
-   "title": "AI 协作方法",
-   "line": "让几个 AI 像一个小团队一样干活。"
-  }
- ]
+  "skills": [
+    {
+      "shelf": "create",
+      "name": "story-first-comics",
+      "title": "叙事优先的品牌漫画",
+      "does": "先写剧本、再画分镜、最后出图的品牌漫画流程。",
+      "when": "要做社媒或社区漫画，或旧漫画被说“看不懂”“太突兀”时。",
+      "tags": [
+        "漫画",
+        "剧本",
+        "分镜"
+      ],
+      "updated": "2026-11-18",
+      "featured": true,
+      "bytes": 5184
+    },
+    {
+      "shelf": "create",
+      "name": "brand-creative-direction",
+      "title": "品牌创意方向",
+      "does": "比较两三个真正不同的想法，选一个，写成可执行的文案或图片简报。",
+      "when": "产品很普通、稿子写出来很平，或被退回说“太泛”时。",
+      "tags": [
+        "创意",
+        "社媒",
+        "图片简报"
+      ],
+      "updated": "2026-10-14",
+      "featured": true,
+      "bytes": 5445
+    },
+    {
+      "shelf": "create",
+      "name": "mascot-design",
+      "title": "品牌吉祥物设计",
+      "does": "先定角色感，再出一张主图，通过后扩展成一组视角和动作。",
+      "when": "新设计或修改吉祥物，或收到“不讨喜”“太像机器”的反馈时。",
+      "tags": [
+        "吉祥物",
+        "角色",
+        "一致性"
+      ],
+      "updated": "2026-09-09",
+      "featured": false,
+      "bytes": 5764
+    },
+    {
+      "shelf": "create",
+      "name": "brand-copy-studio",
+      "title": "品牌英文文案工作室",
+      "does": "锁定事实和权限，写英文、做红队和母语审查，交人工批准。",
+      "when": "写或审面向海外用户的邮件、社区帖子、调研邀请、客服回复时。",
+      "tags": [
+        "英文文案",
+        "邮件",
+        "审查"
+      ],
+      "updated": "2026-11-11",
+      "featured": false,
+      "bytes": 5364
+    },
+    {
+      "shelf": "create",
+      "name": "multiplatform-content-pack",
+      "title": "多平台图文内容包",
+      "does": "一句话需求变成按平台区分角度和尺寸的静态图文审阅包。",
+      "when": "同一个主题要发 Instagram、X、YouTube 社区时。",
+      "tags": [
+        "社媒",
+        "图文",
+        "多平台"
+      ],
+      "updated": "2026-11-16",
+      "featured": false,
+      "bytes": 5240
+    },
+    {
+      "shelf": "review",
+      "name": "anti-ai-slop-review",
+      "title": "去 AI 味审查",
+      "does": "对文字、代码和视觉三类成品做严格审查，删掉对读者没用的部分。",
+      "when": "任何要给别人看、用或批准的成品交付之前。",
+      "tags": [
+        "审查",
+        "文案",
+        "代码"
+      ],
+      "updated": "2026-11-12",
+      "featured": true,
+      "bytes": 5768
+    },
+    {
+      "shelf": "review",
+      "name": "visual-review",
+      "title": "视觉审查",
+      "does": "按实际渲染结果审功能、审美、模板味和媒介适配，0–3 分逐项给证据。",
+      "when": "网页、PPT、图片或视频做完、准备交付时。",
+      "tags": [
+        "视觉",
+        "评分表"
+      ],
+      "updated": "2026-11-12",
+      "featured": false,
+      "bytes": 4051
+    },
+    {
+      "shelf": "users",
+      "name": "conversational-survey-builder",
+      "title": "AI 智能对话问卷",
+      "does": "把调研简报做成聊天式问卷网页，AI 当访谈员逐题追问。",
+      "when": "要做用户调研网页，或把访谈导出整理成证据时。",
+      "tags": [
+        "调研",
+        "问卷",
+        "访谈"
+      ],
+      "updated": "2026-09-20",
+      "featured": true,
+      "bytes": 4920
+    },
+    {
+      "shelf": "users",
+      "name": "community-replies",
+      "title": "社区入站回复",
+      "does": "读全上下文、锁定事实、按风险分档、独立质检后再回复。",
+      "when": "处理品牌社媒评论区和社区里需要回应的消息时。",
+      "tags": [
+        "社区",
+        "客服",
+        "风险分级"
+      ],
+      "updated": "2026-10-25",
+      "featured": false,
+      "bytes": 6686
+    },
+    {
+      "shelf": "users",
+      "name": "user-voice-pipeline",
+      "title": "用户声音转化流程",
+      "does": "把评论和客服记录一步步变成经人工核对的洞察，再送到具体事项。",
+      "when": "一批评论、评价、客服记录要整理成用户声音报告时。",
+      "tags": [
+        "用户研究",
+        "洞察"
+      ],
+      "updated": "2026-08-26",
+      "featured": false,
+      "bytes": 2933
+    }
+  ],
+  "shelves": [
+    {
+      "id": "create",
+      "title": "内容与创意",
+      "line": "从一个想法到一套能发的图文。"
+    },
+    {
+      "id": "review",
+      "title": "审查与质量",
+      "line": "交付前的最后一道关。"
+    },
+    {
+      "id": "users",
+      "title": "用户与社区",
+      "line": "听用户说什么，再好好回应。"
+    }
+  ]
 }

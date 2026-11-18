@@ -13,7 +13,7 @@ const context = {
 };
 vm.createContext(context);
 vm.runInContext(app.slice(app.indexOf('function escapeHtml('), app.indexOf('function setSidebar(')), context);
-vm.runInContext(app.slice(app.indexOf('function voiceThreadContext('), app.indexOf('function renderTopics(')), context);
+vm.runInContext(app.slice(app.indexOf('function voiceThreadContext('), app.indexOf('const topicTitleMap')), context);
 const radar = JSON.parse(read('data/demand-radar.json'));
 const original = JSON.stringify(radar);
 const data = JSON.parse(read('data/content.json'));

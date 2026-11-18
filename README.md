@@ -10,8 +10,8 @@ Hub 按部门任务线汇集项目进展、上下文与下载资产，通过 Git
 
 - `context.html` 保留旧链接并跳转首页。品牌、产品、权限申请、画风和工作流程按主题并入相应页面；首页提供首次阅读入口。
 - `content-guides.html` 连接两个 Content Guide、两份排期表与品牌资料 Drive 文件夹。总文件夹按 OEDRO、Cozeware 分组，页面品牌资料入口使用文件夹链接。
-- `content-review.html` 提供现行内容过审标准，`skills.html` 收录 22 份公开版 Markdown 技能，支持阅读、复制和下载；第三方工具仅列名称。漫画画廊 `comics-gallery.html` 按品牌展示成品，可筛选并打开大图。
-- `freshflow.html`、`loyalty.html`、`repurchase.html`、`social-tools.html` 分别承载新风机背景、积分方案与24张设计稿、六种复购办法、54例社媒工具案例。
+- `content-review.html` 提供现行内容过审标准，`skills.html` 收录 10 份公开版 Markdown 技能，支持阅读、复制和下载。漫画画廊 `comics-gallery.html` 按品牌展示成品，可筛选并打开大图。
+- `freshflow.html`、`loyalty.html`、`repurchase.html` 分别展示新风机、积分方案与复购办法。
 - `customer-analytics.html` 只加载聚合统计，`#outreach` 直接选择首批触达样本。`first-outreach-users.html` 是转到聚合统计的兼容入口。
 - 逐客户原数据保留在公开工作区以外。重新聚合时给 `scripts/build-customer-analytics.py --input` 传入私有原件；本地用 `HUB_PRIVATE_OUTREACH_SOURCE` 执行源数据对账，CI 核公开聚合一致性与明细排除。
 - 页面均设 `noindex,nofollow,noarchive`；构建同时发布项目内 `robots.txt`。GitHub Pages 子路径的 robots 文件受源站根规则约束。
@@ -28,28 +28,26 @@ Hub 按部门任务线汇集项目进展、上下文与下载资产，通过 Git
 - `first-outreach.html` / `first-outreach-users.html`：近期访问与累计高消费客户的筛选说明、合并去重名单和分类分页；首批触达页保留筛选与聚合人数；旧名单页转到聚合统计。发布前运行 `node scripts/check-outreach-users.js` 核对公开目录不含逐客户数据。
 
 - `products.html`：产品知识库；1,209 条目录记录按 12 个分类拆分加载，每页只渲染 24 件，完整适配、规格、说明、媒体和政策快照可按商品展开。标题与统计区顶部对齐。
-- `fakesite/`：独立品牌内容站样站，侧栏直接进入首页；包含 Blog、12篇有来源的完整指南及34条可搜索FAQ。采用独立的阅读版式，不套Hub外壳。公开演示禁止索引，不接购物或公司正式发布。
+- `fakesite/`：独立品牌内容站样站，通过独立网址打开；包含 Blog、12篇有来源的完整指南及34条可搜索FAQ。采用独立的阅读版式，不套Hub外壳。公开演示禁止索引，不接购物或公司正式发布。
 - `fakesite/admin/index.html`：与顾客页面分开的员工内容演示；富文本、图片、文章与FAQ、草稿审核、发布快照、撤回、版本记录及备份导入导出均在浏览器内操作。角色切换仅为演示，不是登录或生产权限。公司身份、共享数据/图片存储及发布接口尚未连接。旧`fakesite/editor.html`转入该独立工作台，顾客导航不提供后台入口。
 - 样站检查：`node scripts/check-fakesite.js`；发布流程同时检查源码和最终 Pages 文件。公开目录只包含运行所需网页、脚本、字体和图片，没有研究原件或本地运行记录。
 
-- `index.html`：首页介绍品牌、日常工作与首次阅读顺序，按社媒内容、品牌与产品、社区与邮件、会员与复购、活动系列、用户与市场研究、样例进入各页。
+- `index.html`：首页介绍品牌、日常工作与首次阅读顺序，按社媒内容、品牌与产品、社区与邮件、会员与复购、活动系列、用户与市场研究进入各页。
 - `campaigns.html`：年末活动系列总览，包含两品牌各四轮草案、排期和预算；旧草稿网址重定向至对应的新入口。
 - `research.html`：统一的“AI问卷”，完整界面预览与“开始AI调研问卷”入口。`light-research.html` 保留为同内容兼容入口；独立应用源码位于 `apps/light-research`。
 - `user-voice.html`：OEDRO讨论全网捕捉，以全宽横条纵向展示已核实提及，按原发表日期从新到旧排列，日期未核实的历史线索单独列出；仅在存在已批准记录时呈现洞察与行动。抓取状态和内部处理字段保留在数据中，不占据阅读页面。
 - `first-outreach.html`：首批触达用户，展示筛选区间、分层与试发建议；人数链接进入 `first-outreach-users.html`，查看合并后 5,232 人的聚合统计。
 - 历史上本批打码名单曾获准发布。2026-11-17 改版按最新隐私要求撤下逐客户记录，当前站点展示聚合统计。
 - `discord-invite-plan.html`：邀请加入Discord活动方案，展示待审批的优惠、申领流程、额度与发送批次；未启动，不代表已经发券或发信。两页检查为 `node scripts/check-outreach-pages.js`，已接入源码及最终发布目录的校验。
-- `content-studio.html`：内容生产流程，先展示一个选题形成三平台 AI 图文、人工确认后使用的流程，再说明输入与交付；三平台样稿作为下方实例，完整 Prompt、作品和中文对照进入 `content-pipeline-test.html` 查看。
+- `content-studio.html`：图文制作、过审、排期及提交开发需求的实用步骤。
 - `social-brand.html`：社媒品牌升级讨论方案，产品与购买信息、车主交流内容与平台分工。
-- `merch-plan.html`：OEDRO 周边，含四张概念图、产品优先级和同行实物参考；周边覆盖日常使用、赠送、购买和活动参与。
+- `merch-plan.html`：OEDRO 周边，含四张概念图和产品优先级；周边覆盖日常使用、赠送、购买和活动参与。
 - 两页使用 `brand-plan.css`，正文为静态 HTML，共用 `data/content.json` 导航；验证：`node scripts/check-brand-plans.js`。更新不能把企划改写成已经执行的运营结果。
-- `content-pipeline-test.html`：仅展示当前 Instagram、X 和 YouTube 社区图文的 Prompt、简短目的与作品，中文对照默认展开。历史作品和公开安全的来源、审核记录保留在数据中，不在当前审阅页展示。
 
-  维护说明：Hub 的 `youtube` 对应 Skill 的 `youtube_community`。本次验收范围是静态作品页，完整自动管线尚未通过；Instagram 原生图片为 1122×1402，低于预设目标，保持原尺寸。
 - `flipbooks.html`：Flip Book Demo（翻页书），进入 Brand Story 与 Car Owner Survey
 - `mascot.html`：展示公牛布诺与随行的救援板小伙伴，包含五张角色图与两张社媒、周边场景图；六类应用示意、角色表达与数字素材下载分别有锚点。`data/mascot-kit.json`只收公开安全内容，素材路径和哈希由`check-mascot-page.js`核对；内部确认与厂家材料不进入公开包。
-- `mascot-workflow.html` 跳转 `mascot.html#design-workflow`；Bruno 页合并角色迭代、应用与素材、设计技能，完整工作包可直接下载。
-- 侧栏分别进入“SEO与AI搜索”“Discord频道设计”“品牌口吻”，沿用对应的 `topic.html?slug=...` 网址。侧栏按六条任务线排列；邀请活动归社区与邮件，首批触达归用户与市场研究。`topics.html` 仅保留旧链接所需的资料索引。
+- `mascot-workflow.html` 跳转 `mascot.html#design-workflow`；Bruno 页合并角色迭代、应用与素材、设计技能，设计说明可从技能画廊打开。
+- 侧栏包含 Discord 频道设计和品牌口吻，沿用对应的 `topic.html?slug=...` 网址。邀请活动归社区与邮件，首批触达归用户与市场研究。
 - Discord 配置位于频道结构下方；没有实际用途证据的机器人与空配置区不显示。品牌表达页包含品牌名大小写建议和六个双语场景示例，示例不代表已发送消息。
 - 原“公开信号与用户关系”网址兼容跳转至讨论卡片；页面已移除通用处理流程说明，旧 `#feedback-method` 链接仍可打开。
 - `research-library.html`、`sites-systems.html`、`playbook.html` 已退出导航，只保留旧网址的定向跳转。
@@ -85,27 +83,15 @@ python3 -m http.server 4173
 
 ## 重要工作完成后的更新
 
-本地 Codex 完成重要工作后，准备一份公开安全的成果记录。检查无误后运行：
+正式提交前运行：
 
 ```bash
-python3 scripts/update-hub-record.py --input <记录.json> --dry-run
-python3 scripts/update-hub-record.py --input <记录.json>
-```
-
-记录只更新成果；项目进展栏目已移除，`project_update` 输入会明确拒绝。正式提交前运行：
-
-```bash
-node scripts/check-content-studio.js
 node scripts/test-hub-navigation.js
 node scripts/test-user-voice-render.js
-node scripts/test-content-automation.js
 python3 scripts/test-customer-analytics.py
-node scripts/check-content-pipeline-tests.js
-node scripts/test-content-pipeline-records.js
 node scripts/check-public-pages.js
 node scripts/check-public-user-voice.js
 node scripts/test-public-user-voice-check.js
-python3 scripts/test-update-hub-record.py
 python3 scripts/build-products-data.py
 node scripts/check-products.js
 ```
@@ -163,7 +149,7 @@ node scripts/check-email-templates.js
 
 侧边栏的“AI问卷”进入 `research.html`，可打开云端真实 AI 访谈（https://oedro-light-research.onrender.com/）。GitHub Pages 发布的是入口和界面预览，不执行模型调用。完整 Next.js 应用位于 `apps/light-research`，由 Render 免费 Web Service 运行，回答与访谈进度保存于 Neon 免费 PostgreSQL；模型凭据只配置在服务端。它不进入 Pages 静态发布目录，也不依赖本机开机。
 
-当前只保留 Oliver 选定的 Hawthorne 字体版本。参见应用目录的 README 获取启动和验证命令。
+当前版本使用 Hawthorne 字体。参见应用目录的 README 获取启动和验证命令。
 
 ## 产品资料分享页
 

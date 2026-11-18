@@ -249,7 +249,7 @@ check('deduplication permits matching current/history and rejects conflicts', ()
 });
 
 const source = fs.readFileSync(path.join(root, 'app.js'), 'utf8');
-const renderSource = source.slice(source.indexOf('function voiceThreadContext('), source.indexOf('\nfunction renderTopics('));
+const renderSource = source.slice(source.indexOf('function voiceThreadContext('), source.indexOf('const topicTitleMap'));
 function render(mentions, method) {
   const content = { innerHTML: '' };
   const context = {

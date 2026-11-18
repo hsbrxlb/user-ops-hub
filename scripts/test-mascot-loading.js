@@ -120,7 +120,7 @@ function setup(page = 'mascot', fetcher = async (url) => ({ ok: true, json: asyn
 
   const otherPage = setup('social-brand');
   await flush();
-  assert.deepEqual(otherPage.calls.map((call) => call.url), ['data/content.json', 'data/topics.json']);
+  assert.deepEqual(otherPage.calls.map((call) => call.url), ['data/content.json']);
   assert(otherPage.calls.every((call) => call.options.cache === 'no-store'));
   assert.equal(otherPage.element('#content').innerHTML, '');
   console.log('Mascot loading tests passed: complete static snapshot and zero startup fetches; fallback independent data and failures, 12s timeout, scoped retries, cached requests, ordered startup, unchanged static page path.');
