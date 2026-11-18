@@ -74,8 +74,8 @@ function renderResearch(data) {
         <img src="assets/light-research/hawthorne-preview.jpg?v=20260914-r2" alt="OEDRO AI 调研问卷演示界面" width="1440" height="900">
       </a>
       <div class="research-launch-copy">
-        <p>工作灯调研演示：AI 根据回答继续追问。</p>
-        <a class="research-open" href="https://oedro-light-research.onrender.com/" target="_blank" rel="noopener">开始 AI 调研问卷 ↗</a>
+        <p>工作灯问卷演示：回答后会继续追问。</p>
+        <a class="research-open" href="https://oedro-light-research.onrender.com/" target="_blank" rel="noopener">打开演示 ↗</a>
       </div>
     </section>`;
 }
@@ -310,7 +310,7 @@ function renderUserVoice(data, voice, radar) {
   document.title = `${copy.title || '问题与反馈'}｜${data.site.title}`;
   document.querySelector('meta[name="description"]').content = "OEDRO 货箱盖、脚踏板及车型相关的公开讨论与原帖。";
   document.querySelector('#content').innerHTML = `
-    ${pageHeading(copy.title || '问题与反馈')}
+    ${pageHeading(copy.title || '问题与反馈', "围绕安装、车型适配和选购等问题，找可用的公开讨论。")}
     <section class="section voice-discussions" aria-labelledby="recent-mentions-heading">
       <div class="section-head"><h2 id="recent-mentions-heading">最近 3 天的 OEDRO 提及</h2></div>
       ${currentMentions.length ? renderMentions(currentMentions) : `<p class="empty-state">${currentEmptyText}</p>`}
@@ -367,7 +367,7 @@ function renderDiscord(topic, data) {
   document.title = `${topic.title}｜${data.site.title}`;
   document.querySelector('meta[name="description"]').content = topic.description;
   document.querySelector('#content').innerHTML = `
-    ${pageHeading(topic.title)}
+    ${pageHeading(topic.title, "看两个品牌服务器现有的频道分组和用途。")}
     <nav class="discord-server-nav" aria-label="服务器">
       ${topic.servers.map(server => `<a href="#${escapeHtml(server.id)}">${escapeHtml(server.name)}</a>`).join('')}
     </nav>
@@ -421,7 +421,7 @@ async function renderTopic(data) {
   document.title = `${topic.title}｜${data.site.title}`;
   document.querySelector('meta[name="description"]').content = topic.description;
   document.querySelector('#content').innerHTML = `
-    ${pageHeading(topic.title)}
+    ${pageHeading(topic.title, "OEDRO 先讲清操作，再带出车库搭档的语气。")}
     <div class="topic-layout">
       <article class="topic-body">${sections.map(topicSectionMarkup).join('')}
         ${renderRelatedPages(topic.related_pages)}

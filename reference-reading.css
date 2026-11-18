@@ -39,3 +39,8 @@
 .ref-reading.mascot-main .kit-section p { font-size: 16px; }
 .ref-reading.products-main :is(.catalog-stats dt,.catalog-section-head a,.catalog-section-head > span,.index-number,.filter-group > span,.product-meta,.commercial-line span,.stock-line,.warning-list,.product-detail summary,.spec-list dt,.spec-list dd,.catalog-pagination span,.catalog-footnote) { font-size: 14px; }
 .ref-reading.products-main :is(.catalog-hero p,.product-detail-body p,.product-detail-body li,.fitment) { font-size: 16px; }
+
+#content .research-entry .research-open.external-link {
+  color: #171310;
+  text-decoration: none;
+}
