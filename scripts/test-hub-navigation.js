@@ -9,23 +9,23 @@ const nav = JSON.parse(read('data/content.json')).nav;
 const home = read('index.html');
 assert.ok(home.includes('data-page="home"'));
 assert.ok(!/http-equiv=["']refresh|location\.(?:replace|assign)|location\s*=/.test(home), 'home must not redirect to a topic');
-assert.ok(home.includes('<h1>海外用户运营<br/><span>Hub</span></h1>'));
+assert.ok(home.includes('<h1>海外用户运营 <span>Hub</span></h1>'));
 assert.ok(home.includes('id="breadcrumb-page">首页</strong>'));
 assert.ok(read('app.js').includes("const staticContentPage = ['home',"), 'homepage remains readable if data loading fails');
 assert.ok(read('app.js').includes("page === 'home' ? '首页'"));
 const homeMain = home.match(/<main[^>]*>([\s\S]*?)<\/main>/)[1];
-for (const item of nav.filter(item => item.id !== 'home')) {
+for (const item of nav.filter(item => item.id !== 'home' && !item.reserved)) {
   assert.ok(homeMain.includes('href="' + item.file + '"'), 'homepage links to ' + item.id);
 }
-assert.equal((homeMain.match(/class="section home-directory"/g) || []).length, 6);
+assert.equal((homeMain.match(/class="section home-directory"/g) || []).length, 7);
 assert.ok(read('context.html').includes("location.replace('index.html')"));
 assert.ok(home.includes('base.css') && home.includes('theme.css'), 'keep existing visual system');
 assert.ok(home.includes('class="menu-button"') && home.includes('class="skip-link"'));
 
 
 for (const [id,label] of Object.entries({'discord-community':'Discord 频道设计',research:'AI 问卷',voice:'用户声音','brand-voice-system':'品牌口吻','merch-plan':'周边','first-outreach':'首批触达用户','discord-invite-plan':'Discord 邀请活动',products:'产品知识库',mascot:'吉祥物','ugc-activity':'投稿活动'})) assert.equal(nav.find(item=>item.id===id)?.label,label);
-assert.deepEqual(nav.map(item=>item.id), ['home','content-guides','content-review','studio','skills','social-brand','social-tools','brand-voice-system','mascot','merch-plan','products','freshflow','discord-community','discord-invite-plan','newsletter','email-templates','loyalty','repurchase','ugc-activity','customer-analytics','first-outreach','voice','competitor-experience','research','seo-geo','fakesite','flipbooks']);
-assert.deepEqual([...new Set(nav.map(item=>item.group).filter(Boolean))], ['社媒内容','品牌与产品','社区与邮件','会员与复购','用户与市场研究','样例']);
+assert.deepEqual(nav.map(item=>item.id), ['home','content-guides','content-review','studio','skills','social-brand','social-tools','brand-voice-system','mascot','merch-plan','products','freshflow','discord-community','discord-invite-plan','newsletter','email-templates','loyalty','repurchase','ugc-activity','campaigns-oedro','campaigns-cozeware','customer-analytics','first-outreach','voice','competitor-experience','research','seo-geo','user-segments-oedro','user-segments-cozeware','fakesite','flipbooks']);
+assert.deepEqual([...new Set(nav.map(item=>item.group).filter(Boolean))], ['社媒内容','品牌与产品','社区与邮件','会员与复购','Campaigns','用户与市场研究','样例']);
 for (const id of ['first-outreach', 'discord-invite-plan', 'ugc-activity']) {
   assert.ok(read(`${id}.html`).includes(`data-page="${id}"`));
   assert.ok(read('app.js').includes(`'${id}'`), 'static pages retain their content during navigation loading');

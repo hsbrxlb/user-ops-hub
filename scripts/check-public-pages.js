@@ -111,6 +111,11 @@ if (fs.existsSync(path.join(root, 'data/product-library/latest-manifest.json')))
 
 const data = JSON.parse(fs.readFileSync(path.join(root, 'data', 'content.json'), 'utf8'));
 for (const item of data.nav || []) {
+  if (item.reserved === true && !item.file) continue;
+  if (typeof item.file !== 'string' || !item.file) {
+    errors.push('导航目标未配置：' + item.id);
+    continue;
+  }
   const pathname = item.file.split(/[?#]/)[0];
   if (!fs.existsSync(path.join(root, pathname))) errors.push('导航目标不存在：' + item.file);
 }

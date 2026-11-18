@@ -183,7 +183,12 @@ async function checkRenderedPage() {
   }
   if (!html.includes('<!-- mascot-content:start -->' + rendered + '<!-- mascot-content:end -->')) fail('static gallery must match the full current renderer');
   const staticNavigation = html.match(/<!-- mascot-nav:start -->([^]*?)<!-- mascot-nav:end -->/);
-  if (!staticNavigation || (staticNavigation[1].match(/<a /g) || []).length !== content.nav.length) fail('static navigation must contain every shared navigation entry');
+  const linkedEntries = content.nav.filter(item => !item.reserved);
+  const reservedEntries = content.nav.filter(item => item.reserved);
+  if (!staticNavigation || (staticNavigation[1].match(/<a /g) || []).length !== linkedEntries.length ||
+      (staticNavigation[1].match(/class="nav-reserved" role="link" aria-disabled="true"/g) || []).length !== reservedEntries.length) {
+    fail('static navigation must contain every shared link and disabled reserved entry');
+  }
   if ((rendered.match(/class="evo-character"/g) || []).length !== 1
     || (rendered.match(/class="evo-asset"/g) || []).length !== 7) fail('rendered gallery must show one family and all seven accepted images');
   if ((rendered.match(/<strong>Bruno<\/strong>/g) || []).length !== 6) fail('rendered applications must keep all six Bruno speakers');

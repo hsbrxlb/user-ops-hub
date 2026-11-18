@@ -117,15 +117,19 @@ function rgbaAlpha(token) {
   return match ? Number(match[1]) : null;
 }
 
-for (const token of ['--workspace-surface', '--content-surface', '--sidebar-bg']) {
+for (const token of ['--workspace-surface', '--content-surface']) {
+  if (!theme.includes(token + ': transparent;')) errors.push(`theme.css: ${token} 必须透明，让原画贯穿正文`);
+}
+for (const token of ['--canvas-shade', '--sidebar-bg']) {
   const alpha = rgbaAlpha(token);
-  if (alpha === null || alpha <= 0 || alpha >= 1) errors.push(`theme.css: ${token} 必须是可见且半透明的阅读面`);
+  if (alpha === null || alpha <= 0 || alpha >= 1) errors.push(`theme.css: ${token} 必须保留背景可见性`);
 }
-if (!/\.workspace\s*\{[^}]*background\s*:\s*var\(--workspace-surface\)/s.test(fs.readFileSync(path.join(root, 'base.css'), 'utf8'))) {
-  errors.push('base.css: 工作区必须使用半透明背景面');
+const shell = fs.readFileSync(path.join(root, 'base.css'), 'utf8');
+if (!/\.workspace\s*\{[^}]*background\s*:\s*var\(--workspace-surface\)/s.test(shell)) {
+  errors.push('base.css: 工作区必须引用透明背景 token');
 }
-if (!/\.main-content\s*\{[^}]*background\s*:\s*var\(--content-surface\)/s.test(fs.readFileSync(path.join(root, 'base.css'), 'utf8'))) {
-  errors.push('base.css: 正文必须使用半透明阅读面');
+if (!/\.main-content\s*\{[^}]*background\s*:\s*var\(--content-surface\)/s.test(shell)) {
+  errors.push('base.css: 正文必须引用透明背景 token');
 }
 for (const token of ['--surface:', '--touch-size:', '--content-max:', '--content-wide:', '--content-gallery:', '--sidebar-width:', '--topbar-height:', '--type-h1:', '--space-8:', '--motion-slow:', '--radius-control:']) {
   if (!theme.includes(token)) errors.push(`theme.css 缺少设计token ${token}`);

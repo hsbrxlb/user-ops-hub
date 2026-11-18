@@ -45,18 +45,26 @@ function topicLink(item) {
 }
 
 function renderShell(data) {
+  const parentPage = document.body.dataset.navParent;
   const activePage = page === 'topics' && location.pathname.endsWith('topic.html')
     ? new URLSearchParams(location.search).get('slug')
-    : page;
+    : parentPage || page;
   document.querySelector('#site-title').textContent = '海外用户运营';
   document.querySelector('#site-subtitle').textContent = 'Hub';
-  document.querySelector('#nav-list').innerHTML = data.nav.map((item, index) => `
-    ${item.group && item.group !== data.nav[index - 1]?.group ? '<div class="nav-group">' + escapeHtml(item.group) + '</div>' : ''}
-    <a href="${escapeHtml(item.file)}" data-page="${escapeHtml(item.id)}" ${item.external ? 'aria-label="' + escapeHtml(item.label) + '（离开工作台，进入样站）"' : ''} ${item.id === activePage ? 'aria-current="page"' : ''} class="${item.id === activePage ? 'active' : ''}${item.parent ? ' nav-child' : ''}${item.external ? ' nav-external' : ''}">
-      <span>${escapeHtml(item.label)}</span>${item.external ? '<span aria-hidden="true">↗</span>' : ''}
-    </a>`).join('');
+  document.querySelector('#nav-list').innerHTML = data.nav.map((item, index) => {
+    const group = item.group && item.group !== data.nav[index - 1]?.group
+      ? `<div class="nav-group">${escapeHtml(item.group)}</div>` : '';
+    const label = escapeHtml(item.label);
+    if (item.reserved) return `${group}
+      <span class="nav-reserved" role="link" aria-disabled="true">${label}<span class="nav-reserved-note">预留</span></span>`;
+    const current = item.id === activePage;
+    return `${group}
+      <a href="${escapeHtml(item.file)}" data-page="${escapeHtml(item.id)}" ${item.external ? 'aria-label="' + label + '（离开工作台，进入样站）"' : ''} ${current ? `aria-current="${parentPage ? 'location' : 'page'}"` : ''} class="${current ? 'active' : ''}${item.parent ? ' nav-child' : ''}${item.external ? ' nav-external' : ''}">
+        <span>${label}</span>${item.external ? '<span aria-hidden="true">↗</span>' : ''}
+      </a>`;
+  }).join('');
   const current = data.nav.find((item) => item.id === activePage);
-  document.querySelector('#breadcrumb-page').textContent = current?.label || (page === 'home' ? '首页' : page === 'topics' ? '资料索引' : '');
+  document.querySelector('#breadcrumb-page').textContent = document.body.dataset.breadcrumb || current?.label || (page === 'home' ? '首页' : page === 'topics' ? '资料索引' : '');
 }
 
 
@@ -546,7 +554,7 @@ const contextSupplement = document.querySelector('#context-supplement')?.outerHT
 function restoreContextSupplement() {
   if (contextSupplement && !document.querySelector('#context-supplement')) mainContent.insertAdjacentHTML('beforeend', contextSupplement);
 }
-const staticContentPage = ['home', 'context', 'content-guides', 'content-review', 'skills', 'loyalty', 'repurchase', 'social-tools', 'freshflow', 'competitor-experience', 'customer-analytics', 'mascot-workflow', 'social-brand', 'merch-plan', 'first-outreach', 'discord-invite-plan', 'ugc-activity'].includes(page);
+const staticContentPage = ['home', 'context', 'content-guides', 'content-review', 'skills', 'loyalty', 'repurchase', 'social-tools', 'freshflow', 'competitor-experience', 'customer-analytics', 'mascot-workflow', 'social-brand', 'merch-plan', 'first-outreach', 'discord-invite-plan', 'ugc-activity'].includes(page) || page?.startsWith('campaigns-');
 if (page === 'mascot') {
   if (!document.querySelector('#nav-list').querySelector('a')) initMascotNavigation();
 } else {
