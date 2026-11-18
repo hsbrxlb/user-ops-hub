@@ -1,0 +1,29 @@
+.seg-findings .finding-use,
+.seg-data-note p,
+figure .figure-lede,
+.main-content .page-heading p { font-size: 16px; }
+
+.seg-findings .finding-use {
+  margin: var(--space-2) 0 0;
+  color: var(--text);
+}
+
+.seg-findings .finding-number { font-size: var(--type-h1); }
+
+.seg-data-note {
+  border-top: .5px solid var(--border-strong);
+  padding-block: var(--space-4);
+}
+
+.seg-data-note summary {
+  min-height: var(--touch-size);
+  padding-block: var(--space-2);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.segments .columns, .segments .columns > li { padding-bottom: 16px; }
+
+.segments .finding-label { font-size: 16px; }
+.segments .lrow, .segments .hrow, .segments .states li, .segments .funnel li { padding-bottom: 8px; }
