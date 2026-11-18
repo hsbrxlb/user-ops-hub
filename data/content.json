@@ -168,8 +168,8 @@
     {
       "id": "user-segments-oedro",
       "label": "User segments — OEDRO",
-      "group": "用户与市场研究",
-      "reserved": true
+      "file": "user-segments-oedro.html",
+      "group": "用户与市场研究"
     },
     {
       "id": "user-segments-cozeware",
