@@ -17,15 +17,15 @@ const homeMain = home.match(/<main[^>]*>([\s\S]*?)<\/main>/)[1];
 for (const item of nav.filter(item => item.id !== 'home' && !item.reserved)) {
   assert.ok(homeMain.includes('href="' + item.file + '"'), 'homepage links to ' + item.id);
 }
-assert.equal((homeMain.match(/class="section home-directory"/g) || []).length, 6);
+assert.equal((homeMain.match(/class="section home-directory"/g) || []).length, 7);
 assert.ok(read('context.html').includes("location.replace('index.html')"));
 assert.ok(home.includes('base.css') && home.includes('theme.css'), 'keep existing visual system');
 assert.ok(home.includes('class="menu-button"') && home.includes('class="skip-link"'));
 
 
-for (const [id,label] of Object.entries({'comics-gallery':'漫画画廊',skills:'技能画廊','discord-community':'Discord 频道设计',research:'AI 问卷',voice:'用户声音','brand-voice-system':'品牌口吻','merch-plan':'周边','first-outreach':'首批触达用户','discord-invite-plan':'Discord 邀请活动',products:'产品知识库',mascot:'吉祥物','ugc-activity':'投稿活动'})) assert.equal(nav.find(item=>item.id===id)?.label,label);
-assert.deepEqual(nav.map(item=>item.id), ['home','content-guides','content-review','studio','comics-gallery','skills','social-brand','brand-voice-system','mascot','merch-plan','products','freshflow','discord-community','discord-invite-plan','newsletter','email-templates','loyalty','repurchase','ugc-activity','campaigns-overview','customer-analytics','first-outreach','voice','competitor-experience','research','user-segments-oedro']);
-assert.deepEqual([...new Set(nav.map(item=>item.group).filter(Boolean))], ['社媒内容','品牌与产品','社区与邮件','会员与复购','用户与市场研究']);
+for (const [id, label] of Object.entries({"mascot": "OEDRO 吉祥物", "merch-plan": "OEDRO 周边", "ugc-activity": "车主故事征集", "campaigns-oedro": "OEDRO 年末抽奖", "campaigns-cozeware": "Cozeware 年末抽奖", "user-segments-oedro": "OEDRO 用户分层"})) assert.equal(nav.find(item => item.id === id)?.label, label);
+assert.deepEqual(nav.map(item => item.id), ["home", "content-guides", "content-review", "studio", "comics-gallery", "skills", "social-brand", "brand-voice-system", "mascot", "merch-plan", "products", "freshflow", "discord-community", "discord-invite-plan", "newsletter", "email-templates", "loyalty", "repurchase", "ugc-activity", "campaigns-oedro", "campaigns-cozeware", "customer-analytics", "first-outreach", "voice", "competitor-experience", "research", "user-segments-oedro"]);
+assert.deepEqual([...new Set(nav.map(item => item.group).filter(Boolean))], ["社媒内容", "品牌与产品", "社区与邮件", "会员与复购", "活动", "用户与市场研究"]);
 const staticPages = read('app.js').match(/const staticContentPage = \[([^\]]+)\]/)[1];
 for (const id of ['first-outreach', 'discord-invite-plan', 'ugc-activity', 'comics-gallery', 'skills']) {
   const html = read(`${id}.html`);
@@ -110,6 +110,6 @@ assert.match(JSON.parse(read('data/mascot-workflow.json')).html, /skills\.html#\
 assert.deepEqual(skillCards.sort(), skillIndex.skills.map(skill => skill.name).sort());
 for (const id of ['social-brand', 'merch-plan', 'discord-invite-plan', 'first-outreach', 'ugc-activity', 'customer-analytics']) {
   const source = read(id + '.html');
-  assert.ok(source.indexOf('id="oedro-brand-title"') < source.indexOf('id="cozeware-brand-title"'), id + ': OEDRO precedes Cozeware');
-  assert.ok(source.includes('Cozeware：暂无，制作后放在这里'), id + ': explicit empty brand section');
+  assert.ok(source.includes('id="oedro-brand-title"'), id + ': includes existing brand content');
+  assert.doesNotMatch(source, /brand-empty|暂无，制作后放在这里/);
 }

@@ -7,8 +7,8 @@ const vm = require('node:vm');
 const repoRoot = path.resolve(__dirname, '..');
 const root = process.env.PUBLIC_SITE_ROOT ? path.resolve(repoRoot, process.env.PUBLIC_SITE_ROOT) : repoRoot;
 const plans = [
-  { id: 'social-brand', title: 'OEDRO 社媒品牌升级', visibleTitle: '社媒品牌升级', other: 'merch-plan' },
-  { id: 'merch-plan', title: 'OEDRO 周边', visibleTitle: '周边', other: 'social-brand' }
+  { id: 'social-brand', title: 'OEDRO 社媒品牌升级', visibleTitle: '社媒形象焕新', other: 'merch-plan' },
+  { id: 'merch-plan', title: 'OEDRO 周边', visibleTitle: 'OEDRO 周边', other: 'social-brand' }
 ];
 const navigation = JSON.parse(fs.readFileSync(path.join(root, 'data/content.json'), 'utf8')).nav;
 const application = fs.readFileSync(path.join(root, 'app.js'), 'utf8');

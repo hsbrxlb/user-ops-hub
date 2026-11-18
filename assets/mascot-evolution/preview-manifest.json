@@ -161,21 +161,6 @@
           "quality": 55
         }
       ]
-    },
-    {
-      "source": "assets/background.png",
-      "source_bytes": 2120903,
-      "source_sha256": "7dc174d8d78bca4d895935e355ea81dca234d2bf5eb93b03aa9e70271b84ab92",
-      "variants": [
-        {
-          "path": "assets/background.avif",
-          "bytes": 74595,
-          "sha256": "a96d60c419817a776fa35e28136f00004543e96a281a3f9ef113edb50bf54ac9",
-          "width": 1626,
-          "height": 967,
-          "quality": 65
-        }
-      ]
     }
   ]
 }

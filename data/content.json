@@ -41,7 +41,7 @@
     },
     {
       "id": "social-brand",
-      "label": "社媒品牌升级",
+      "label": "社媒形象焕新",
       "file": "social-brand.html",
       "group": "社媒内容"
     },
@@ -53,13 +53,13 @@
     },
     {
       "id": "mascot",
-      "label": "吉祥物",
+      "label": "OEDRO 吉祥物",
       "file": "mascot.html",
       "group": "品牌与产品"
     },
     {
       "id": "merch-plan",
-      "label": "周边",
+      "label": "OEDRO 周边",
       "file": "merch-plan.html",
       "group": "品牌与产品"
     },
@@ -95,13 +95,13 @@
     },
     {
       "id": "email-templates",
-      "label": "用户邮件模板",
+      "label": "OEDRO 邮件模板",
       "file": "email-templates.html",
       "group": "社区与邮件"
     },
     {
       "id": "loyalty",
-      "label": "积分商城",
+      "label": "OEDRO 积分商城",
       "file": "loyalty.html",
       "group": "会员与复购"
     },
@@ -113,25 +113,31 @@
     },
     {
       "id": "ugc-activity",
-      "label": "投稿活动",
+      "label": "车主故事征集",
       "file": "ugc-activity.html",
-      "group": "会员与复购"
+      "group": "活动"
     },
     {
-      "id": "campaigns-overview",
-      "label": "活动系列",
-      "file": "campaigns.html",
-      "group": "会员与复购"
+      "id": "campaigns-oedro",
+      "label": "OEDRO 年末抽奖",
+      "file": "campaigns-oedro.html",
+      "group": "活动"
+    },
+    {
+      "id": "campaigns-cozeware",
+      "label": "Cozeware 年末抽奖",
+      "file": "campaigns-cozeware.html",
+      "group": "活动"
     },
     {
       "id": "customer-analytics",
-      "label": "用户数据分析",
+      "label": "OEDRO 下单与复购分析",
       "file": "customer-analytics.html",
       "group": "用户与市场研究"
     },
     {
       "id": "first-outreach",
-      "label": "首批触达用户",
+      "label": "首批客户画像与触达话术",
       "file": "first-outreach.html",
       "group": "用户与市场研究"
     },
@@ -143,7 +149,7 @@
     },
     {
       "id": "competitor-experience",
-      "label": "竞品体验报告",
+      "label": "竞品官网购物体验对比",
       "file": "competitor-experience.html",
       "group": "用户与市场研究"
     },
@@ -155,7 +161,7 @@
     },
     {
       "id": "user-segments-oedro",
-      "label": "User segments — OEDRO",
+      "label": "OEDRO 用户分层",
       "file": "user-segments-oedro.html",
       "group": "用户与市场研究"
     }

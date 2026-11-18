@@ -22,13 +22,12 @@ def encode(source, destination, quality, width=None):
 mascot = json.loads((ROOT/'data/mascot.json').read_text())
 paths = [asset['src'] for character in mascot['characters'] for asset in character['assets']] + [asset['src'] for asset in mascot['applications']]
 rows = []
-for path in paths + ['assets/background.png']:
+for path in paths:
     source = ROOT/path
     if source.suffix not in ('.webp','.png'):
         raise ValueError('Unexpected artwork source')
-    variants = [encode(source, source.with_suffix('.avif'), 65 if source.name == 'background.png' else 55)]
-    if source.name != 'background.png':
-        variants.append(encode(source, source.with_name(source.stem+'-768.avif'), 55, 768))
+    variants = [encode(source, source.with_suffix('.avif'), 55)]
+    variants.append(encode(source, source.with_name(source.stem+'-768.avif'), 55, 768))
     rows.append({'source': path, 'source_bytes': source.stat().st_size, 'source_sha256': digest(source), 'variants': variants})
 MANIFEST.write_text(json.dumps({'format':'same-artwork-avif-previews-v1','images':rows},ensure_ascii=False,indent=2)+'\n')
 print(json.dumps({'images':len(rows),'original_bytes':sum(row['source_bytes'] for row in rows),'full_avif_bytes':sum(row['variants'][0]['bytes'] for row in rows),'manifest':MANIFEST.relative_to(ROOT).as_posix()}))

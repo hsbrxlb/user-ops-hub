@@ -90,8 +90,8 @@ if (new Set(sources).size !== sources.length || new Set(codes).size !== codes.le
 
 // Validate committed same-artwork derivatives without requiring a codec at CI time.
 const previewManifest = JSON.parse(read('assets/mascot-evolution/preview-manifest.json'));
-if (previewManifest.format !== 'same-artwork-avif-previews-v1' || previewManifest.images.length !== 8) fail('the same-artwork preview manifest must cover seven gallery images and the background');
-const expectedSources = new Set([...sources, 'assets/background.png']);
+if (previewManifest.format !== 'same-artwork-avif-previews-v1' || previewManifest.images.length !== sources.length) fail('the same-artwork preview manifest must cover all seven mascot gallery images');
+const expectedSources = new Set(sources);
 function avifSize(buffer) {
   if (buffer.toString('ascii', 4, 8) !== 'ftyp') return null;
   const ftypEnd = buffer.readUInt32BE(0);
@@ -116,10 +116,9 @@ for (const entry of previewManifest.images) {
   if (!expectedSources.delete(entry.source)) fail('unexpected or duplicate preview source');
   const original = fs.readFileSync(path.join(root, entry.source));
   if (entry.source_bytes !== original.length || crypto.createHash('sha256').update(original).digest('hex') !== entry.source_sha256) fail(`preview source changed: ${entry.source}`);
-  const background = entry.source === 'assets/background.png';
-  const originalSize = background ? { width: original.readUInt32BE(16), height: original.readUInt32BE(20) } : webpSize(path.join(root, entry.source));
-  const stem = entry.source.replace(/\.(png|webp)$/, '');
-  const expectedVariants = new Set(background ? [stem + '.avif'] : [stem + '.avif', stem + '-768.avif']);
+  const originalSize = webpSize(path.join(root, entry.source));
+  const stem = entry.source.replace(/\.webp$/, '');
+  const expectedVariants = new Set([stem + '.avif', stem + '-768.avif']);
   for (const variant of entry.variants) {
     if (!expectedVariants.delete(variant.path)) fail('unexpected or duplicate AVIF variant');
     const bytes = fs.readFileSync(path.join(root, variant.path));
@@ -174,7 +173,7 @@ async function checkRenderedPage() {
   vm.runInNewContext(script, page);
   await page.window.initMascot();
   const rendered = main.innerHTML;
-  if (!rendered.includes('OEDRO（Bruno）') || !rendered.includes('Cozeware：暂无，制作后放在这里')) fail('brand sections are missing');
+  if (!rendered.includes('OEDRO（Bruno）') || rendered.includes('brand-empty')) fail('brand sections are missing');
   if (rendered.includes(`href="${kit.source_archive}"`)) fail('the archive must not be a public download entry');
   if ((rendered.match(/<picture><source type="image\/avif"/g) || []).length !== 7) fail('all seven gallery images need responsive AVIF sources');
   for (const source of sources) {

@@ -58,7 +58,8 @@ function renderShell(data) {
       </a>`;
   }).join('');
   const current = data.nav.find((item) => item.id === activePage);
-  document.querySelector('#breadcrumb-page').textContent = document.body.dataset.breadcrumb || current?.label || (page === 'home' ? '首页' : page === 'topics' ? '资料索引' : '');
+  const breadcrumb = document.querySelector('#breadcrumb-page');
+  breadcrumb.textContent = document.body.dataset.breadcrumb || current?.label || (page === 'home' ? '首页' : page === 'topics' ? '资料索引' : breadcrumb.textContent);
 }
 
 
@@ -576,23 +577,19 @@ function completeBrandSections() {
     if (!child.classList.contains('page-heading') && child !== supplement) oedro.append(child);
   }
   const cozeware = document.createElement('section');
-  cozeware.className = 'brand-section brand-empty';
+  cozeware.className = 'brand-section';
   cozeware.setAttribute('aria-labelledby', 'cozeware-brand-title');
-  cozeware.innerHTML = '<h2 class="brand-section-title" id="cozeware-brand-title">Cozeware</h2><p>Cozeware：暂无，制作后放在这里</p>';
+  cozeware.innerHTML = '<h2 class="brand-section-title" id="cozeware-brand-title">Cozeware</h2>';
   if (page === 'newsletter' && supplement) {
     const journals = [...supplement.querySelectorAll('.journals > article')];
     if (journals.length === 2) {
       oedro.append(journals[0]);
-      cozeware.classList.remove('brand-empty');
-      cozeware.querySelector('p').remove();
       cozeware.append(journals[1]);
-      const empty = document.createElement('p');
-      empty.textContent = 'Room Notes 邮件样稿：暂无，制作后放在这里';
-      cozeware.append(empty);
       supplement.querySelector('.journals').remove();
     }
   }
-  content.append(oedro, cozeware);
+  content.append(oedro);
+  if (cozeware.children.length > 1) content.append(cozeware);
   if (supplement) content.append(supplement);
 }
 

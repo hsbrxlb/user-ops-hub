@@ -7,8 +7,8 @@ const crypto = require('node:crypto');
 const repoRoot = path.resolve(__dirname, '..');
 const root = process.env.PUBLIC_SITE_ROOT ? path.resolve(repoRoot, process.env.PUBLIC_SITE_ROOT) : repoRoot;
 const errors = [];
-const identityBackground = 'assets/background.png';
-const identityBackgroundSha256 = '7dc174d8d78bca4d895935e355ea81dca234d2bf5eb93b03aa9e70271b84ab92';
+const identityBackground = 'assets/hub-dark.webp';
+const identityBackgroundSha256 = 'ca9edb45ea70f56cbef8dd3cab0bd1980d9aa7c4d60b6635efe6dd83203c85a3';
 const runtimeExtensions = new Set(['.html', '.js', '.css', '.json']);
 const highRiskCopy = [
   ['只…不…', /只[^。！？\n]{0,80}不/],
@@ -63,12 +63,11 @@ for (const file of files) {
     for (const match of source.matchAll(/font-size\s*:\s*([0-9.]+)px/gi)) {
       if (Number(match[1]) < 12) errors.push(`${relative}: 可见字号低于12px: ${match[0]}`);
     }
-    if (!['theme.css', 'mascot.css'].includes(relative) && /--identity-background|var\(--identity-background\)/.test(source)) errors.push(`${relative}: 固定背景变量不得在其他页面覆盖或复用`);
-    for (const match of source.matchAll(/url\([^)]*background\.(?:png|avif)[^)]*\)/gi)) {
+    if (relative !== 'theme.css' && /--identity-background|var\(--identity-background\)/.test(source)) errors.push(`${relative}: 固定背景变量不得在其他页面覆盖或复用`);
+    for (const match of source.matchAll(/url\([^)]*(?:background\.(?:png|avif)|hub-dark\.webp)[^)]*\)/gi)) {
       const canonical = relative === 'theme.css' && match[0] === `url('${identityBackground}')`;
-      const mascotDerivative = relative === 'mascot.css' && ["url('assets/background.avif')", "url('assets/background.png')"].includes(match[0]);
-      if (!canonical && !mascotDerivative) {
-        errors.push(`${relative}: 只有 theme.css 的 Hub 固定流体背景可以作为全页背景`);
+      if (!canonical) {
+        errors.push(`${relative}: 只有 theme.css 的 Hub 选定深色背景可以作为全页背景`);
       }
     }
     if (/@import\s+url\([^)]*fonts\./i.test(source)) errors.push(`${relative}: 字体不得通过CSS @import加载`);
@@ -83,10 +82,10 @@ for (const file of walk(assetRoot)) {
 
 const identityBackgroundPath = path.join(root, identityBackground);
 if (!fs.existsSync(identityBackgroundPath)) {
-  errors.push(`${identityBackground}: Hub 固定流体背景缺失`);
+  errors.push(`${identityBackground}: Hub 选定深色背景缺失`);
 } else {
   const actualHash = crypto.createHash('sha256').update(fs.readFileSync(identityBackgroundPath)).digest('hex');
-  if (actualHash !== identityBackgroundSha256) errors.push(`${identityBackground}: 固定流体背景被替换`);
+  if (actualHash !== identityBackgroundSha256) errors.push(`${identityBackground}: 选定深色背景被替换`);
 }
 
 if (!process.env.PUBLIC_SITE_ROOT && !fs.existsSync(path.join(root, 'design.md'))) errors.push('缺少 design.md');
@@ -95,21 +94,13 @@ if (navigation.nav.some(item => item.id === 'overview') || navigation.overview) 
 const emailRenderer = fs.readFileSync(path.join(root, 'email-templates.js'), 'utf8');
 if (/discord-member-offer|email-files|email-proposal/.test(emailRenderer)) errors.push('邮件页不得恢复未批准优惠预览或技术说明区');
 const theme = fs.readFileSync(path.join(root, 'theme.css'), 'utf8');
-const identityReferences = theme.match(/url\('assets\/background\.png'\)/g) || [];
+const identityReferences = theme.match(/url\('assets\/hub-dark\.webp'\)/g) || [];
 const bodyBefore = theme.match(/body::before\s*\{([^}]*)\}/s)?.[1] || '';
 if (identityReferences.length !== 1 || !theme.includes(`--identity-background: url('${identityBackground}')`) || !bodyBefore.includes('var(--identity-background)')) {
-  errors.push(`theme.css: 固定 PNG 必须作为唯一背景变量默认值，由 body::before 引用`);
+  errors.push(`theme.css: 选定深色图 必须作为唯一背景变量默认值，由 body::before 引用`);
 }
-const mascotTheme = fs.readFileSync(path.join(root, 'mascot.css'), 'utf8');
-const derivativeRule = `body[data-page="mascot"] {
-    --identity-background: image-set(url('assets/background.avif') type('image/avif'), url('assets/background.png') type('image/png'));
-  }`;
-if (!mascotTheme.includes(derivativeRule)
-  || !mascotTheme.includes("@supports (background-image: image-set(url('assets/background.avif') type('image/avif')))")) errors.push('mascot.css: 同画面 AVIF 背景必须限定本页并保留 PNG 回退');
-if ((mascotTheme.match(/--identity-background\s*:/g) || []).length !== 1) errors.push('mascot.css: 背景衍生只允许一次限定覆盖');
-if (!fs.existsSync(path.join(root, 'assets/background.avif'))) errors.push('mascot.css: AVIF 背景衍生缺失');
 if (/display\s*:\s*none|visibility\s*:\s*hidden|opacity\s*:\s*0(?:\D|$)/i.test(bodyBefore)) {
-  errors.push('theme.css: Hub 固定流体背景不得隐藏');
+  errors.push('theme.css: Hub 选定深色背景不得隐藏');
 }
 
 function rgbaAlpha(token) {

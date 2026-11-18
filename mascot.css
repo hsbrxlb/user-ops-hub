@@ -1,9 +1,3 @@
-@supports (background-image: image-set(url('assets/background.avif') type('image/avif'))) {
-  body[data-page="mascot"] {
-    --identity-background: image-set(url('assets/background.avif') type('image/avif'), url('assets/background.png') type('image/png'));
-  }
-}
-
 :root {
   --evo-paper: #eeeae1;
 }
