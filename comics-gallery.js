@@ -1,18 +1,20 @@
 (() => {
-  const filter = (type, button) => {
-    const group = button.closest('.cg-filter');
-    group.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
-    document.querySelectorAll('.cg-works .cg-piece').forEach((piece) => {
-      piece.hidden = type !== 'all' && piece.dataset.type !== type;
-    });
-    document.querySelectorAll('.cg-set').forEach((set) => {
-      const visible = set.querySelector('.cg-piece:not([hidden])');
-      set.querySelector('.cg-empty').hidden = Boolean(visible);
-    });
-  };
-
-  document.addEventListener('click', (event) => {
-    const filterButton = event.target.closest('.cg-filter button');
-    if (filterButton) filter(filterButton.dataset.filter, filterButton);
+  const filters = document.querySelector('.cg-filter');
+  if (!filters) return;
+  filters.addEventListener('click', (event) => {
+    const control = event.target.closest('button[data-filter]');
+    if (!control) return;
+    const type = control.dataset.filter;
+    for (const button of filters.querySelectorAll('button')) {
+      button.setAttribute('aria-pressed', String(button === control));
+    }
+    for (const group of document.querySelectorAll('.cg-brand')) {
+      let visible = false;
+      for (const story of group.querySelectorAll('.cg-story')) {
+        story.hidden = type !== 'all' && story.dataset.type !== type;
+        if (!story.hidden) visible = true;
+      }
+      group.hidden = !visible;
+    }
   });
 })();

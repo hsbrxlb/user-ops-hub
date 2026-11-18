@@ -516,7 +516,7 @@ const contextSupplement = document.querySelector('#context-supplement')?.outerHT
 function restoreContextSupplement() {
   if (contextSupplement && !document.querySelector('#context-supplement')) mainContent.insertAdjacentHTML('beforeend', contextSupplement);
 }
-const staticContentPage = ['home', 'context', 'studio', 'content-guides', 'content-review', 'comics-gallery', 'skills', 'loyalty', 'repurchase', 'freshflow', 'competitor-experience', 'customer-analytics', 'mascot-workflow', 'social-brand', 'merch-plan', 'first-outreach', 'discord-invite-plan', 'ugc-activity', 'user-segments-oedro'].includes(page) || page?.startsWith('campaigns-');
+const staticContentPage = ['home', 'context', 'studio', 'content-guides', 'content-review', 'comics-gallery', 'skills', 'loyalty', 'repurchase', 'freshflow', 'competitor-experience', 'customer-analytics', 'mascot-workflow', 'social-brand', 'merch-plan', 'first-outreach', 'discord-invite-plan', 'ugc-activity', 'user-segments-oedro', 'feed-oedro', 'feed-cozeware-ac', 'feed-cozeware-freshflow'].includes(page) || page?.startsWith('campaigns-');
 if (page === 'mascot') {
   if (!document.querySelector('#nav-list').querySelector('a')) initMascotNavigation();
 } else {

@@ -1,0 +1,120 @@
+.main-content[class*="feed-"][class$="-main"] {
+  max-width: 1180px;
+}
+
+.feed-entry {
+  margin: 0;
+  padding: var(--space-7) 0;
+  border-top: .5px solid var(--border-strong);
+}
+
+#content .feed-entry h2 {
+  margin: 0 0 var(--space-2);
+  font-size: clamp(22px, 3vw, 29px);
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.feed-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-5);
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.feed-meta select,
+.feed-gallery-controls button,
+.feed-thumbs button {
+  color: var(--text);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-control);
+  background: var(--input-bg);
+  min-block-size: var(--touch-size);
+}
+
+.feed-meta select { padding-inline: var(--space-3); }
+
+.feed-caption {
+  max-width: 73ch;
+  margin: var(--space-4) 0 var(--space-5);
+  font-size: 17px;
+  line-height: 1.62;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.feed-visual {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-2);
+}
+
+.feed-large {
+  display: block;
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.feed-large img {
+  display: block;
+  max-inline-size: 100%;
+  max-block-size: 80dvh;
+  inline-size: auto;
+  block-size: auto;
+}
+
+.feed-gallery-controls,
+.feed-thumbs {
+  display: flex;
+  max-inline-size: 100%;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.feed-gallery-controls button {
+  min-inline-size: var(--touch-size);
+  padding: 0;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.feed-count {
+  min-inline-size: 54px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.feed-thumbs {
+  padding-block: 2px;
+  overflow-x: auto;
+}
+
+.feed-thumbs button {
+  flex: none;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.feed-thumbs img {
+  display: block;
+  width: 54px;
+  height: 62px;
+  object-fit: contain;
+}
+
+.feed-thumbs button[aria-current] {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+@media (max-width: 680px) {
+  .feed-entry { padding-block: var(--space-6); }
+  .feed-caption { font-size: 16px; }
+}

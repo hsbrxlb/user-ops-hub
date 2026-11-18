@@ -24,7 +24,7 @@ assert.ok(home.includes('class="menu-button"') && home.includes('class="skip-lin
 
 
 for (const [id, label] of Object.entries({"mascot": "OEDRO 吉祥物", "merch-plan": "OEDRO 周边", "ugc-activity": "车主故事征集", "campaigns-oedro": "OEDRO 年末抽奖", "campaigns-cozeware": "Cozeware 年末抽奖", "user-segments-oedro": "OEDRO 用户分层"})) assert.equal(nav.find(item => item.id === id)?.label, label);
-assert.deepEqual(nav.map(item => item.id), ["home", "content-guides", "content-review", "studio", "comics-gallery", "skills", "social-brand", "brand-voice-system", "mascot", "merch-plan", "products", "freshflow", "discord-community", "discord-invite-plan", "newsletter", "email-templates", "loyalty", "repurchase", "ugc-activity", "campaigns-oedro", "campaigns-cozeware", "customer-analytics", "first-outreach", "voice", "competitor-experience", "research", "user-segments-oedro"]);
+assert.deepEqual(nav.map(item => item.id), ["home", "content-guides", "content-review", "studio", "comics-gallery", "feed-oedro", "feed-cozeware-ac", "feed-cozeware-freshflow", "skills", "social-brand", "brand-voice-system", "mascot", "merch-plan", "products", "freshflow", "discord-community", "discord-invite-plan", "newsletter", "email-templates", "loyalty", "repurchase", "ugc-activity", "campaigns-oedro", "campaigns-cozeware", "customer-analytics", "first-outreach", "voice", "competitor-experience", "research", "user-segments-oedro"]);
 assert.deepEqual([...new Set(nav.map(item => item.group).filter(Boolean))], ["社媒内容", "品牌与产品", "社区与邮件", "会员与复购", "活动", "用户与市场研究"]);
 const staticPages = read('app.js').match(/const staticContentPage = \[([^\]]+)\]/)[1];
 for (const id of ['first-outreach', 'discord-invite-plan', 'ugc-activity', 'comics-gallery', 'skills']) {
