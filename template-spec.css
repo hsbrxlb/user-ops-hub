@@ -1,0 +1,11 @@
+.template-preview-main { max-width: 960px; }
+.template-spec { padding-block: var(--space-5) var(--space-7); }
+.template-spec li, .template-spec dt, .template-spec dd { font-size: 16px; }
+.template-spec ul { padding-inline-start: 1.3em; }
+.template-spec dl { display: grid; grid-template-columns: minmax(7rem, 1fr) minmax(0, 3fr); gap: 12px 20px; }
+.template-spec dt { font-weight: 650; }
+.template-spec dd { margin: 0; }
+@media (max-width: 640px) {
+ .template-spec dl { grid-template-columns: 1fr; row-gap: 4px; }
+ .template-spec dd { margin-bottom: 12px; }
+}

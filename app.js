@@ -516,7 +516,7 @@ const contextSupplement = document.querySelector('#context-supplement')?.outerHT
 function restoreContextSupplement() {
   if (contextSupplement && !document.querySelector('#context-supplement')) mainContent.insertAdjacentHTML('beforeend', contextSupplement);
 }
-const staticContentPage = ['home', 'context', 'studio', 'content-guides', 'content-review', 'comics-gallery', 'skills', 'loyalty', 'repurchase', 'freshflow', 'competitor-experience', 'customer-analytics', 'mascot-workflow', 'social-brand', 'merch-plan', 'first-outreach', 'discord-invite-plan', 'ugc-activity', 'user-segments-oedro', 'feed-oedro', 'feed-cozeware-ac', 'feed-cozeware-freshflow'].includes(page) || page?.startsWith('campaigns-');
+const staticContentPage = ['home', 'email-templates', 'context', 'studio', 'content-guides', 'content-review', 'comics-gallery', 'skills', 'loyalty', 'repurchase', 'freshflow', 'competitor-experience', 'customer-analytics', 'mascot-workflow', 'social-brand', 'merch-plan', 'first-outreach', 'discord-invite-plan', 'ugc-activity', 'user-segments-oedro', 'feed-oedro', 'feed-cozeware-ac', 'feed-cozeware-freshflow', 'loyalty-cozeware', 'mascot-cozeware', 'email-templates-cozeware'].includes(page) || page?.startsWith('campaigns-');
 if (page === 'mascot') {
   if (!document.querySelector('#nav-list').querySelector('a')) initMascotNavigation();
 } else {
@@ -566,7 +566,7 @@ function completeBrandSections() {
   const content = document.querySelector('#content');
   if (!content?.querySelector('.page-heading') || content.getAttribute('aria-busy') === 'true' || content.querySelector('.brand-section')) return;
   const topic = content.dataset.topic;
-  if (!['voice', 'email-templates', 'newsletter', 'flipbooks'].includes(page)
+  if (!['voice', 'newsletter', 'flipbooks'].includes(page)
     && !(page === 'topics' && topic === 'brand-voice-system')) return;
   const supplement = content.querySelector('#context-supplement');
   const oedro = document.createElement('section');

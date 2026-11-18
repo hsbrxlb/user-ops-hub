@@ -76,6 +76,12 @@
       "group": "品牌与产品"
     },
     {
+      "id": "mascot-cozeware",
+      "label": "Cozeware 吉祥物",
+      "file": "mascot-cozeware.html",
+      "group": "品牌与产品"
+    },
+    {
       "id": "merch-plan",
       "label": "OEDRO 周边",
       "file": "merch-plan.html",
@@ -118,9 +124,21 @@
       "group": "社区与邮件"
     },
     {
+      "id": "email-templates-cozeware",
+      "label": "Cozeware 邮件模板",
+      "file": "email-templates-cozeware.html",
+      "group": "社区与邮件"
+    },
+    {
       "id": "loyalty",
       "label": "OEDRO 积分商城",
       "file": "loyalty.html",
+      "group": "会员与复购"
+    },
+    {
+      "id": "loyalty-cozeware",
+      "label": "Cozeware 积分商城",
+      "file": "loyalty-cozeware.html",
       "group": "会员与复购"
     },
     {

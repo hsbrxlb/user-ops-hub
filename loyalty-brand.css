@@ -1,0 +1,51 @@
+.loyalty-brand-main { max-width: 1160px; }
+
+.loyalty-full { margin: 0 0 var(--space-6); }
+.loyalty-full a { display: block; }
+.loyalty-full img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+}
+
+.loyalty-crop {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr);
+  align-items: center;
+  gap: var(--space-5) var(--space-6);
+  border-top: .5px solid var(--border-strong);
+  padding: var(--space-6) 0;
+}
+
+.loyalty-crop img { display: block; max-width: 100%; height: auto; }
+
+#content .loyalty-crop h2 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--type-h2);
+}
+
+.loyalty-crop p { margin: 0; font-size: 16px; }
+
+.loyalty-more,
+.loyalty-rules {
+  border-top: .5px solid var(--border-strong);
+}
+
+.loyalty-more > summary,
+.loyalty-rules > summary {
+  min-height: var(--touch-size);
+  padding: var(--space-3) 0;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.loyalty-rules > section { padding-block: var(--space-5); }
+.loyalty-rules .table-scroll { max-width: 100%; overflow: auto; }
+
+@media (max-width: 740px) {
+  .loyalty-crop {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+}
