@@ -31,7 +31,7 @@
     const m = state.manifest;
     return `
       <nav class="family-nav" aria-label="产品品牌"><button type="button" data-family="oedro" aria-pressed="${state.family === 'oedro'}">OEDRO 官网目录</button><button type="button" data-family="cozeware" aria-pressed="${state.family === 'cozeware'}">Cozeware</button><a href="product-library.html">分享产品库</a></nav><header class="catalog-hero">
-        <div><h1>${h(m.title)}</h1><p>${h(m.description)}</p></div>
+        <div><h1>${h(m.title)}</h1><p>查 OEDRO、Cozeware 的产品类别、型号和规格，可按品牌和类别查找。</p></div>
         <dl class="catalog-stats">
           <div><dt>商品</dt><dd>${m.productCount.toLocaleString('zh-CN')}</dd></div>
           <div><dt>分类</dt><dd>${m.categories.length}</dd></div>

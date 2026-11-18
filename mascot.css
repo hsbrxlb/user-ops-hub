@@ -197,3 +197,6 @@
   .evo-character-head p { font-size: 15px; }
   .evo-assets { gap: 28px; }
 }
+
+.ref-reading.mascot-main .evo-toc a, .ref-reading.mascot-main small { font-size: 14px; }
+.ref-reading.mascot-main .kit-section p { font-size: 16px; }
