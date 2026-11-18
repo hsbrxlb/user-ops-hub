@@ -5,6 +5,7 @@
   const frameSelector = 'iframe.email-frame, iframe.newsletter-frame';
   const originalLink = /\.(?:avif|gif|jpe?g|png|svg|webp)$/i;
   const rendered = new WeakMap();
+  const decorated = new WeakSet();
   const seenFrames = new WeakMap();
   const triggers = '.hub-image-trigger, [data-pages]';
   const scriptURL = document.currentScript.src;
@@ -174,11 +175,12 @@
   }
 
   function decorate(img, inFrame = false) {
-    if (!img.getAttribute('src') || img.closest(excluded) || img.closest(triggers)) return;
+    if (decorated.has(img) || !img.getAttribute('src') || img.closest(excluded) || img.closest(triggers)) return;
     if (inFrame && !img.classList.contains('email-image') && (!img.alt || Number(img.width) < 160)) return;
     const anchor = img.closest('a[href]');
     const host = img.closest('picture') || img;
     if (!host.parentNode) return;
+    decorated.add(img);
     const target = source(img);
     const group = img.closest('[data-image-group], .evo-gallery, .media-strip');
     const siblings = group ? [...group.querySelectorAll('img')].filter((candidate) => !candidate.closest(excluded)) : [img];
@@ -192,7 +194,7 @@
       const markup = button('hub-image-trigger', [labels.open, target.alt].filter(Boolean).join(' · '));
       trigger = inFrame ? img.ownerDocument.adoptNode(markup) : markup;
       if (anchor) {
-        if (!anchor.classList.contains('hub-image-linked')) {
+        if (!anchor.parentElement.classList.contains('hub-image-linked')) {
           const wrap = anchor.ownerDocument.createElement('span');
           wrap.className = 'hub-image-linked';
           anchor.replaceWith(wrap);
