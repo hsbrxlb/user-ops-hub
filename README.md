@@ -134,7 +134,7 @@ Bluesky检查每天通过现有Tavily免费额度运行1组限定`bsky.app`的`O
 
 ## 设计与发布检查
 
-Hub 的设计规则见 design.md。当前背景为 assets/hub-dark.webp，由共享 theme.css 引用。
+Hub 的设计规则见 design.md。暖米白背景 assets/hub-light.webp 由共享 theme.css 引用。
 
 980px 以下导航收起、表格采用键值行，手机菜单支持触摸、Tab 和 Escape，并恢复原焦点。导航打开时隐藏后方正文以避免文字重影，底图保持可见。数据加载失败可重试；空项目列表明确提示，而不是留下空白。
 

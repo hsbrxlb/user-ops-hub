@@ -4,7 +4,7 @@
   const denominator = document.querySelector('#scope-denominator');
   const switches = [...document.querySelectorAll('[data-scope]')];
   const number = new Intl.NumberFormat('en-US');
-  const colors = ['#78b7ff', '#68d5bf', '#f3ba89', '#bf9bfa', '#f18e9b', '#bdd57b', '#94a4bd'];
+  const colors = ['#3b6996', '#32766a', '#9f542e', '#7352a5', '#a84760', '#607127', '#52647b'];
   let dataset;
   let scope = typeof location !== 'undefined' && location.hash === '#outreach' ? 'outreach' : 'snapshot';
   const esc = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));

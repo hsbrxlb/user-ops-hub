@@ -16,7 +16,7 @@ button.hub-image-trigger {
 }
 
 .hub-image-trigger:focus-visible {
-  outline: 2px solid var(--accent, #f4cf87);
+  outline: 2px solid var(--accent, #804619);
   outline-offset: 3px;
 }
 
@@ -37,17 +37,17 @@ button.hub-image-aux {
   place-items: center;
   inline-size: 44px;
   block-size: 44px;
-  color: #fbf6ee;
-  background: #201d1a;
-  border: 1px solid #716961;
+  color: var(--text, #2c2119);
+  background: var(--surface, #fffaf1);
+  border: 1px solid var(--media-edge, #aa9682);
   border-radius: 3px;
 }
 
 .hub-image-viewer {
-  --viewer-bg: #1b1816;
-  --viewer-text: #faf4eb;
-  --viewer-line: #70645a;
-  --viewer-accent: #f4cf87;
+  --viewer-bg: var(--nav-active, #ebd9c3);
+  --viewer-text: var(--text, #2c2119);
+  --viewer-line: var(--border-strong, #9e8570);
+  --viewer-accent: var(--accent, #804619);
   position: fixed;
   inset: 0;
   inline-size: min(94vw, calc(100vw - 18px));
@@ -67,7 +67,7 @@ button.hub-image-aux {
   grid-template-rows: 44px minmax(0, 1fr) auto;
 }
 
-.hub-image-viewer::backdrop { background: rgb(15 12 10 / 94%); }
+.hub-image-viewer::backdrop { background: var(--viewer-scrim, rgb(251 244 232 / 97%)); }
 
 .hub-image-viewer button {
   min-inline-size: 44px;
@@ -131,6 +131,8 @@ button.hub-image-aux {
   max-inline-size: 100cqi;
   max-block-size: 100cqb;
   object-fit: contain;
+  outline: 1px solid var(--media-edge, #aa9682);
+  outline-offset: -1px;
 }
 
 .hub-image-stage.is-original {

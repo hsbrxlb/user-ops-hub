@@ -7,8 +7,8 @@ const crypto = require('node:crypto');
 const repoRoot = path.resolve(__dirname, '..');
 const root = process.env.PUBLIC_SITE_ROOT ? path.resolve(repoRoot, process.env.PUBLIC_SITE_ROOT) : repoRoot;
 const errors = [];
-const identityBackground = 'assets/hub-dark.webp';
-const identityBackgroundSha256 = 'ca9edb45ea70f56cbef8dd3cab0bd1980d9aa7c4d60b6635efe6dd83203c85a3';
+const identityBackground = 'assets/hub-light.webp';
+const identityBackgroundSha256 = 'f0a17d43f6ee15e600e5e6553c4c2fdde7906c130c6f39ce0b4df8de6b5f1ac3';
 const runtimeExtensions = new Set(['.html', '.js', '.css', '.json']);
 const highRiskCopy = [
   ['只…不…', /只[^。！？\n]{0,80}不/],
@@ -64,10 +64,10 @@ for (const file of files) {
       if (Number(match[1]) < 12) errors.push(`${relative}: 可见字号低于12px: ${match[0]}`);
     }
     if (relative !== 'theme.css' && /--identity-background|var\(--identity-background\)/.test(source)) errors.push(`${relative}: 固定背景变量不得在其他页面覆盖或复用`);
-    for (const match of source.matchAll(/url\([^)]*(?:background\.(?:png|avif)|hub-dark\.webp)[^)]*\)/gi)) {
+    for (const match of source.matchAll(/url\([^)]*(?:background\.(?:png|avif)|hub-(?:dark|light)\.webp)[^)]*\)/gi)) {
       const canonical = relative === 'theme.css' && match[0] === `url('${identityBackground}')`;
       if (!canonical) {
-        errors.push(`${relative}: 只有 theme.css 的 Hub 选定深色背景可以作为全页背景`);
+        errors.push(`${relative}: 只有 theme.css 的 Hub 选定浅色背景可以作为全页背景`);
       }
     }
     if (/@import\s+url\([^)]*fonts\./i.test(source)) errors.push(`${relative}: 字体不得通过CSS @import加载`);
@@ -82,10 +82,10 @@ for (const file of walk(assetRoot)) {
 
 const identityBackgroundPath = path.join(root, identityBackground);
 if (!fs.existsSync(identityBackgroundPath)) {
-  errors.push(`${identityBackground}: Hub 选定深色背景缺失`);
+  errors.push(`${identityBackground}: Hub 选定浅色背景缺失`);
 } else {
   const actualHash = crypto.createHash('sha256').update(fs.readFileSync(identityBackgroundPath)).digest('hex');
-  if (actualHash !== identityBackgroundSha256) errors.push(`${identityBackground}: 选定深色背景被替换`);
+  if (actualHash !== identityBackgroundSha256) errors.push(`${identityBackground}: 选定浅色背景被替换`);
 }
 
 if (!process.env.PUBLIC_SITE_ROOT && !fs.existsSync(path.join(root, 'design.md'))) errors.push('缺少 design.md');
@@ -94,13 +94,13 @@ if (navigation.nav.some(item => item.id === 'overview') || navigation.overview) 
 const emailRenderer = fs.readFileSync(path.join(root, 'email-templates.js'), 'utf8');
 if (/discord-member-offer|email-files|email-proposal/.test(emailRenderer)) errors.push('邮件页不得恢复未批准优惠预览或技术说明区');
 const theme = fs.readFileSync(path.join(root, 'theme.css'), 'utf8');
-const identityReferences = theme.match(/url\('assets\/hub-dark\.webp'\)/g) || [];
+const identityReferences = theme.match(/url\('assets\/hub-light\.webp'\)/g) || [];
 const bodyBefore = theme.match(/body::before\s*\{([^}]*)\}/s)?.[1] || '';
 if (identityReferences.length !== 1 || !theme.includes(`--identity-background: url('${identityBackground}')`) || !bodyBefore.includes('var(--identity-background)')) {
-  errors.push(`theme.css: 选定深色图 必须作为唯一背景变量默认值，由 body::before 引用`);
+  errors.push(`theme.css: 选定浅色图 必须作为唯一背景变量默认值，由 body::before 引用`);
 }
 if (/display\s*:\s*none|visibility\s*:\s*hidden|opacity\s*:\s*0(?:\D|$)/i.test(bodyBefore)) {
-  errors.push('theme.css: Hub 选定深色背景不得隐藏');
+  errors.push('theme.css: Hub 选定浅色背景不得隐藏');
 }
 
 function rgbaAlpha(token) {

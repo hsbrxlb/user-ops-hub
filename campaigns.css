@@ -1,16 +1,16 @@
 /* 年末活动系列：总览排期、预算与各轮子页。品牌色只用于区分 OEDRO 与 Cozeware。 */
 .campaigns {
-  --c-oedro: #f4cf87;
-  --c-coze: #a9d3c3;
-  --c-reserve: rgba(226, 226, 214, .42);
-  --c-rule: rgba(210, 215, 192, .2);
-  --c-track: rgba(210, 215, 192, .1);
+  --c-oedro: var(--accent);
+  --c-coze: #28594e;
+  --c-reserve: var(--border-strong);
+  --c-rule: var(--border);
+  --c-track: var(--border);
   font-variant-numeric: tabular-nums;
 }
 @media (min-width: 1181px) {
   .main-content.campaigns { width: min(var(--content-wide), calc(100% - 64px)); }
 }
-.campaigns ::selection { background: rgba(244, 207, 135, .32); color: var(--text); }
+.campaigns ::selection { background: #c7a77e; color: var(--text); }
 .campaigns a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .campaigns .section { border-top: .5px solid var(--border-strong); padding-block: var(--space-7); }
 .campaigns h2 { margin: 0; font-size: var(--type-h2); line-height: 1.4; font-weight: 600; letter-spacing: -.02em; color: var(--text); }
@@ -44,7 +44,7 @@
 .tl-item::before { content: ''; position: absolute; top: 6px; left: 0; right: 9px; height: 4px; border-radius: 2px 0 0 2px; background: var(--c-oedro); opacity: .9; }
 .tl-item::after { content: ''; position: absolute; top: 3px; right: 0; width: 10px; height: 10px; border-radius: 50%; background: var(--c-oedro); }
 .tl-coze::before, .tl-coze::after { background: var(--c-coze); }
-.tl-item strong { color: var(--text); font-size: var(--type-h4); font-weight: 600; line-height: 1.5; text-decoration: underline; text-decoration-color: rgba(243, 242, 235, .35); text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.tl-item strong { color: var(--text); font-size: var(--type-h4); font-weight: 600; line-height: 1.5; text-decoration: underline; text-decoration-color: var(--text-muted); text-underline-offset: 4px; text-decoration-thickness: 1px; }
 .tl-item:hover strong { text-decoration-color: currentColor; }
 .tl-topic { font-size: var(--type-small); line-height: 1.6; color: var(--text-secondary); }
 .tl-cost { margin-top: var(--space-2); color: var(--accent); font-size: var(--type-small); font-weight: 600; }
@@ -68,8 +68,8 @@
 .bgt-bar .b-oedro { background: var(--c-oedro); }
 .bgt-bar .b-coze { background: var(--c-coze); }
 .bgt-bar .b-res { background: var(--c-reserve); }
-.bgt-bar .b-promo { background: rgba(226, 226, 214, .26); }
-.bgt-bar .b-room { background: transparent; border: 1px dashed rgba(226, 226, 214, .5); }
+.bgt-bar .b-promo { background: var(--border); }
+.bgt-bar .b-room { background: transparent; border: 1px dashed var(--text-muted); }
 .bgt-scale { display: flex; justify-content: space-between; margin: var(--space-2) 0 0; color: var(--text-muted); font-size: var(--type-meta); }
 .bgt-keys { display: grid; grid-template-columns: repeat(6, auto); justify-content: start; gap: var(--space-2) var(--space-6); margin: var(--space-4) 0 0; padding: 0; list-style: none; }
 .bgt-keys li { display: flex; flex-direction: column; color: var(--text-secondary); font-size: var(--type-small); line-height: 1.5; }
@@ -79,8 +79,8 @@
 .sw.b-oedro { background: var(--c-oedro); }
 .sw.b-coze { background: var(--c-coze); }
 .sw.b-res { background: var(--c-reserve); }
-.sw.b-promo { background: rgba(226, 226, 214, .26); }
-.sw.b-room { border: 1px dashed rgba(226, 226, 214, .6); }
+.sw.b-promo { background: var(--border); }
+.sw.b-room { border: 1px dashed var(--text-muted); }
 
 .ledger { width: 100%; margin-top: var(--space-7); border-collapse: collapse; font-size: 15px; }
 .ledger caption { text-align: left; margin-bottom: var(--space-3); color: var(--text); font-size: var(--type-h3); font-weight: 600; }
@@ -90,7 +90,7 @@
 .ledger thead .th-c { color: var(--c-coze); }
 .ledger tbody th { color: var(--text); font-weight: 600; white-space: nowrap; }
 .ledger tbody th span { display: block; color: var(--text-muted); font-size: var(--type-meta); font-weight: 400; }
-.ledger td a { color: var(--text-secondary); text-decoration: underline; text-decoration-color: rgba(226, 226, 214, .35); text-underline-offset: 4px; }
+.ledger td a { color: var(--text-secondary); text-decoration: underline; text-decoration-color: var(--border); text-underline-offset: 4px; }
 .ledger td a:hover { color: var(--text); text-decoration-color: currentColor; }
 .ledger .num { text-align: right; white-space: nowrap; color: var(--text); padding-right: 0; }
 .ledger .amt { display: block; color: var(--text); font-weight: 600; }
@@ -146,7 +146,7 @@
 .detail-block ul { margin: 0; padding-left: 1.1em; }
 .detail-block li + li { margin-top: var(--space-1); }
 
-.post { margin: 0; padding: var(--space-6); background: rgba(9, 12, 9, .28); border-top: 2px solid var(--c-oedro); border-radius: 0 0 4px 4px; }
+.post { margin: 0; padding: var(--space-6); background: var(--surface-raised); border-top: 2px solid var(--c-oedro); border-radius: 0 0 4px 4px; }
 .brand-coze .post { border-top-color: var(--c-coze); }
 .post-from { display: flex; justify-content: space-between; gap: var(--space-4); margin: 0 0 var(--space-4) !important; color: var(--text-muted); font-size: var(--type-meta); }
 .post h3 { margin: 0 0 var(--space-3); font-size: var(--type-h3); line-height: 1.45; }

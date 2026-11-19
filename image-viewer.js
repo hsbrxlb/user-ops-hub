@@ -233,7 +233,7 @@
         seenFrames.set(frame, doc);
         const style = doc.createElement('link');
         style.rel = 'stylesheet';
-        style.href = new URL('image-viewer.css?v=hub15', scriptURL);
+        style.href = new URL('image-viewer.css?v=hub18', scriptURL);
         doc.head.append(style);
         doc.querySelectorAll('img').forEach((img) => decorate(img, true));
         doc.addEventListener('click', activate);

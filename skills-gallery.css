@@ -1,5 +1,5 @@
 /* 技能画廊：像一排排书架，卡片只用细线、字重和暖金印记区分。 */
-.skills-gallery { --sg-rule: rgba(210, 215, 192, .22); }
+.skills-gallery { --sg-rule: var(--border); }
 @media (min-width: 1181px) {
   .main-content.skills-gallery { width: min(var(--content-wide), calc(100% - 64px)); }
 }
@@ -54,10 +54,10 @@
 .sg-detail-does { max-width: 60ch; margin: var(--space-3) 0 0; color: var(--text-secondary); font-size: 17px; line-height: 1.75; }
 .sg-detail-meta { margin: var(--space-3) 0 0; color: var(--text-muted); font-size: var(--type-meta); }
 .sg-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin-top: var(--space-5); }
-.sg-btn { display: inline-flex; align-items: center; justify-content: center; min-height: var(--touch-size); padding: 0 var(--space-5); border: .5px solid var(--accent); border-radius: var(--radius-control); background: var(--accent); color: #080a08; font: inherit; font-size: var(--type-small); font-weight: 600; text-decoration: none; cursor: pointer; }
-.sg-btn:hover { background: #f8dca3; }
+.sg-btn { display: inline-flex; align-items: center; justify-content: center; min-height: var(--touch-size); padding: 0 var(--space-5); border: .5px solid var(--accent); border-radius: var(--radius-control); background: var(--accent); color: var(--on-accent); font: inherit; font-size: var(--type-small); font-weight: 600; text-decoration: none; cursor: pointer; }
+.sg-btn:hover { background: var(--accent); }
 .sg-btn-quiet { background: transparent; color: var(--accent); }
-.sg-btn-quiet:hover { background: rgba(244, 207, 135, .1); }
+.sg-btn-quiet:hover { background: var(--nav-hover); }
 .sg-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .sg-copied { color: var(--text-muted); font-size: var(--type-small); }
 
@@ -74,8 +74,8 @@
 .sg-md strong { color: var(--text); font-weight: 600; }
 .sg-md a { color: var(--accent); }
 .sg-md blockquote { padding-left: var(--space-4); border-left: 1px solid var(--border-strong); color: var(--text); }
-.sg-md code { padding: 1px 5px; border-radius: 3px; background: rgba(8, 10, 8, .5); color: var(--text); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .88em; }
-.sg-md pre { max-width: 100%; margin: 0 0 var(--space-5); padding: var(--space-4) var(--space-5); overflow-x: auto; border: .5px solid var(--sg-rule); border-radius: var(--radius-control); background: rgba(8, 10, 8, .55); }
+.sg-md code { padding: 1px 5px; border-radius: 3px; background: var(--surface-raised); color: var(--text); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .88em; }
+.sg-md pre { max-width: 100%; margin: 0 0 var(--space-5); padding: var(--space-4) var(--space-5); overflow-x: auto; border: .5px solid var(--sg-rule); border-radius: var(--radius-control); background: var(--surface); }
 .sg-md pre code { padding: 0; background: transparent; font-size: 13.5px; line-height: 1.7; }
 .sg-table { max-width: 100%; margin: 0 0 var(--space-5); overflow-x: auto; }
 .sg-md table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.65; }
