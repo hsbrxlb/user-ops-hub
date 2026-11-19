@@ -2,33 +2,99 @@
   max-width: 1180px;
 }
 
-.feed-dates {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-bottom: var(--space-6);
+.feed-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(224px, 250px);
+  gap: clamp(28px, 5vw, 70px);
+  align-items: start;
 }
 
-#content .feed-dates a {
-  display: inline-flex;
+.feed-calendar {
+  position: sticky;
+  top: calc(var(--topbar-height) + var(--space-4));
+  grid-column: 2;
+  grid-row: 1;
+  padding: var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.feed-calendar-head {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) 42px;
   align-items: center;
-  min-height: var(--touch-size);
-  padding-inline: var(--space-4);
-  border: 1px solid var(--border-strong);
-  border-radius: 999px;
-  background: var(--input-bg);
-  color: var(--text-secondary);
+  margin-bottom: var(--space-2);
+  text-align: center;
+}
+
+.feed-calendar-month { font-weight: 650; }
+.feed-calendar-head button {
+  min-height: 40px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--accent);
+  cursor: pointer;
+}
+.feed-calendar-head button:hover { border-color: var(--border-strong); }
+.feed-calendar-head button:disabled { opacity: .4; cursor: default; }
+
+.feed-calendar-grid, .feed-calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  text-align: center;
+  font-size: 14px;
+}
+.feed-calendar-weekdays { color: var(--text-secondary); margin-bottom: var(--space-1); }
+.feed-calendar-grid > :is(a, span) {
+  display: grid;
+  place-items: center;
+  min-height: 32px;
+  color: var(--text-muted);
+}
+#content .feed-calendar-grid a {
+  background: var(--nav-hover);
+  color: var(--accent);
+  border-radius: 6px;
   text-decoration: none;
-  font-size: var(--type-nav);
+  font-weight: 650;
+}
+#content .feed-calendar-grid a:hover { text-decoration: underline; }
+#content .feed-calendar-grid a[aria-current] {
+  background: var(--accent);
+  color: var(--on-accent);
 }
 
-#content .feed-dates a:is(:hover, [aria-current]) {
-  border-color: var(--accent);
-  background: var(--nav-active);
-  color: var(--nav-active-text);
-}
-
+.feed-picker { display: none; }
+.feed-days { grid-column: 1; grid-row: 1; }
 .feed-day { scroll-margin-top: calc(var(--topbar-height) + var(--space-4)); }
+
+@media (max-width: 1050px) {
+  .feed-layout { display: block; }
+  .feed-calendar { display: none; }
+  .feed-picker {
+    position: sticky;
+    top: var(--topbar-height);
+    z-index: 3;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    align-items: center;
+    padding-block: var(--space-2);
+    background: var(--page-bg);
+  }
+  .feed-picker select {
+    max-width: 100%;
+    min-height: var(--touch-size);
+    padding-inline: var(--space-3);
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+    color: var(--text);
+    background: var(--surface);
+  }
+  .feed-day { scroll-margin-top: calc(var(--topbar-height) + 74px); }
+}
 
 #content .feed-day > h2 {
   margin: var(--space-7) 0 var(--space-4);
@@ -67,19 +133,6 @@
 }
 
 .feed-meta select { padding-inline: var(--space-3); }
-
-.feed-status {
-  padding: 2px var(--space-2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-control);
-  color: var(--status-pending);
-  background: var(--status-pending-bg);
-}
-
-.feed-status[data-published="true"] {
-  color: var(--status-done);
-  background: var(--status-done-bg);
-}
 
 .feed-caption {
   max-width: 73ch;

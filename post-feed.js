@@ -1,42 +1,69 @@
 (() => {
-  const dates = document.querySelector('.feed-dates');
-  const days = document.querySelector('.feed-days');
-  if (dates && days) {
-    const zone = 'Asia/Shanghai';
-    const iso = new Intl.DateTimeFormat('sv-SE', { timeZone: zone });
-    const monthDay = new Intl.DateTimeFormat('zh-CN', { month: 'long', day: 'numeric', timeZone: zone });
-    const now = Date.now();
-    const today = iso.format(now);
-    const tomorrow = iso.format(now + 86400000);
-    const sortDates = (a, b) => {
-      const [first, second] = [a.dataset.date, b.dataset.date];
-      if (first >= today && second >= today) return first.localeCompare(second);
-      if (first < today && second < today) return second.localeCompare(first);
-      return first >= today ? -1 : 1;
-    };
-    const label = (key) => {
-      const date = monthDay.format(new Date(key + 'T12:00:00+08:00'));
-      if (key === today) return '今天 ' + date;
-      if (key === tomorrow) return '明天 ' + date;
-      return date;
-    };
-    for (const link of [...dates.children].sort(sortDates)) {
-      link.textContent = label(link.dataset.date);
-      dates.append(link);
-    }
-    for (const section of [...days.children].sort(sortDates)) {
-      section.querySelector('h2').textContent = label(section.dataset.date);
-      days.append(section);
-    }
-    function markDate() {
-      const key = location.hash || dates.firstElementChild?.hash;
-      for (const link of dates.children) {
-        if (link.hash === key) link.setAttribute('aria-current', 'location');
-        else link.removeAttribute('aria-current');
+  const calendar = document.querySelector('.feed-calendar');
+  const picker = document.querySelector('#feed-date-select');
+  const days = [...document.querySelectorAll('.feed-day')];
+  if (calendar && picker && days.length) {
+    const keys = days.map(day => day.dataset.date);
+    const months = [...new Set(keys.map(key => key.slice(0, 7)))];
+    const available = new Set(keys);
+    const dateKey = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Shanghai' });
+    const now = Date.parse(dateKey.format(Date.now()));
+    const closest = keys.reduce((best, key) =>
+      Math.abs(Date.parse(key) - now) < Math.abs(Date.parse(best) - now) ? key : best);
+    let selected = closest;
+    let month = months.indexOf(selected.slice(0, 7));
+
+    function drawMonth() {
+      const [year, number] = months[month].split('-').map(Number);
+      const grid = calendar.querySelector('.feed-calendar-grid');
+      calendar.querySelector('.feed-calendar-month').textContent = `${year}年${number}月`;
+      calendar.querySelector('[data-month-step="-1"]').disabled = month === 0;
+      calendar.querySelector('[data-month-step="1"]').disabled = month === months.length - 1;
+      const cells = [];
+      const offset = (new Date(Date.UTC(year, number - 1, 1)).getUTCDay() + 6) % 7;
+      for (let i = 0; i < offset; i++) cells.push('<span aria-hidden="true"></span>');
+      const count = new Date(Date.UTC(year, number, 0)).getUTCDate();
+      for (let date = 1; date <= count; date++) {
+        const key = months[month] + '-' + String(date).padStart(2, '0');
+        if (!available.has(key)) {
+          cells.push(`<span aria-hidden="true">${date}</span>`);
+          continue;
+        }
+        const label = picker.querySelector(`option[value="${key}"]`).textContent;
+        const current = key === selected ? ' aria-current="date"' : '';
+        cells.push(`<a href="#day-${key}" data-date="${key}" aria-label="${label}"${current}>${date}</a>`);
       }
+      grid.innerHTML = cells.join('');
     }
-    markDate();
-    window.addEventListener('hashchange', markDate);
+
+    function select(key) {
+      selected = key;
+      month = months.indexOf(key.slice(0, 7));
+      picker.value = key;
+      drawMonth();
+    }
+
+    function go(key, align) {
+      if (!available.has(key)) return;
+      select(key);
+      if (align) document.getElementById('day-' + key).scrollIntoView({ block: 'start', behavior: 'instant' });
+    }
+
+    calendar.addEventListener('click', (event) => {
+      const arrow = event.target.closest('[data-month-step]');
+      if (!arrow || arrow.disabled) return;
+      month += Number(arrow.dataset.monthStep);
+      drawMonth();
+    });
+    picker.addEventListener('change', () => {
+      const key = picker.value;
+      history.replaceState(null, '', '#day-' + key);
+      go(key, true);
+    });
+    window.addEventListener('hashchange', () => go(location.hash.slice(5), true));
+    const initial = location.hash.slice(5);
+    go(available.has(initial) ? initial : closest, false);
+    requestAnimationFrame(() => go(selected, true));
   }
 
   const updateImage = (entry, position) => {
