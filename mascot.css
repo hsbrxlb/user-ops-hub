@@ -200,3 +200,11 @@
 
 .ref-reading.mascot-main .evo-toc a, .ref-reading.mascot-main small { font-size: 14px; }
 .ref-reading.mascot-main .kit-section p { font-size: 16px; }
+
+.bruno-turnaround { margin-block: 1.8rem; }
+.bruno-view-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(.5rem, 2vw, 1.1rem); }
+.bruno-view-grid figure { margin: 0; min-width: 0; }
+.bruno-view-grid img { display:block; width:100%; height:auto; border-radius:.75rem; }
+.bruno-view-grid figcaption { margin-block-start:.3rem; text-align:center; font-size:.9375rem; }
+.bruno-view-grid figcaption a { display:inline-block; min-height:2rem; padding:.35rem .2rem; color:inherit; text-decoration:none; }
+.bruno-view-grid figcaption a:hover, .bruno-view-grid figcaption a:focus-visible { text-decoration:underline; }

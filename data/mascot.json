@@ -58,7 +58,30 @@
           "height": 1254
         }
       ],
-      "avatar_src": "assets/mascot-evolution/bull-v2/BULL-V2-AVATAR.webp"
+      "avatar_src": "assets/mascot-evolution/bull-v2/BULL-V2-AVATAR.webp",
+      "turnaround": [
+        {
+          "src": "assets/mascot-evolution/bruno-views/01-front.webp",
+          "width": 768,
+          "height": 768,
+          "caption": "正面",
+          "alt": "Bruno · 布诺，正面"
+        },
+        {
+          "src": "assets/mascot-evolution/bruno-views/02-side.webp",
+          "width": 768,
+          "height": 768,
+          "caption": "侧面",
+          "alt": "Bruno · 布诺，侧面"
+        },
+        {
+          "src": "assets/mascot-evolution/bruno-views/03-back.webp",
+          "width": 768,
+          "height": 768,
+          "caption": "背面",
+          "alt": "Bruno · 布诺，背面"
+        }
+      ]
     }
   ],
   "applications": [

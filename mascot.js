@@ -21,12 +21,24 @@
       + '</div>';
   }
 
+  function turnaroundMarkup(character) {
+    if (!character.turnaround?.length) return '';
+    return '<section class="bruno-turnaround" aria-label="Bruno 三视图"><h3>三视图</h3>'
+      + '<div class="bruno-view-grid" data-image-group="bruno-views">'
+      + character.turnaround.map((asset) =>
+        '<figure><a href="' + safe(asset.src) + '"><img src="' + safe(asset.src)
+        + '" alt="' + safe(asset.alt) + '" width="' + asset.width + '" height="' + asset.height + '" loading="lazy" decoding="async"></a>'
+        + '<figcaption><a href="' + safe(asset.src) + '" download data-preview-checked="true" aria-label="下载 ' + safe(asset.alt) + '">'
+        + safe(asset.caption) + ' ↓</a></figcaption></figure>').join('')
+      + '</div></section>';
+  }
+
   function characterMarkup(character) {
     return '<section class="evo-character" id="' + safe(character.id) + '" data-searchable>'
       + '<header class="evo-character-head">'
       + '<div><h2><span lang="en">' + safe(character.name_en) + '</span> · ' + safe(character.name_cn) + '</h2>'
       + '<p>' + safe(character.blurb) + '</p></div></header>'
-      + characterImages(character) + '</section>';
+      + turnaroundMarkup(character) + characterImages(character) + '</section>';
   }
 
   function tocMarkup(characters) {
