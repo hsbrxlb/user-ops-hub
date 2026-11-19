@@ -2,13 +2,45 @@
   max-width: 1180px;
 }
 
+.feed-dates {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+#content .feed-dates a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-size);
+  padding-inline: var(--space-4);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--input-bg);
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: var(--type-nav);
+}
+
+#content .feed-dates a:is(:hover, [aria-current]) {
+  border-color: var(--accent);
+  background: var(--nav-active);
+  color: var(--nav-active-text);
+}
+
+.feed-day { scroll-margin-top: calc(var(--topbar-height) + var(--space-4)); }
+
+#content .feed-day > h2 {
+  margin: var(--space-7) 0 var(--space-4);
+}
+
 .feed-entry {
   margin: 0;
-  padding: var(--space-7) 0;
+  padding: var(--space-5) 0 var(--space-7);
   border-top: .5px solid var(--border-strong);
 }
 
-#content .feed-entry h2 {
+#content .feed-entry h3 {
   margin: 0 0 var(--space-2);
   font-size: clamp(22px, 3vw, 29px);
   line-height: 1.25;
@@ -35,6 +67,19 @@
 }
 
 .feed-meta select { padding-inline: var(--space-3); }
+
+.feed-status {
+  padding: 2px var(--space-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  color: var(--status-pending);
+  background: var(--status-pending-bg);
+}
+
+.feed-status[data-published="true"] {
+  color: var(--status-done);
+  background: var(--status-done-bg);
+}
 
 .feed-caption {
   max-width: 73ch;
