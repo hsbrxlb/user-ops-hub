@@ -29,9 +29,15 @@
 
   function shellMarkup() {
     const m = state.manifest;
+    const cozeware = state.family === 'cozeware';
+    const brand = cozeware ? 'Cozeware' : 'OEDRO';
+    const title = `${brand} 产品知识库`;
+    const docName = cozeware ? 'Cozeware_产品与官方资料汇总.md' : 'OEDRO_产品与官方资料汇总.md';
+    const docBytes = cozeware ? '497512' : '3869332';
+    const docSize = cozeware ? '497.5 KB' : '3.87 MB';
     return `
-      <nav class="family-nav" aria-label="产品品牌"><button type="button" data-family="oedro" aria-pressed="${state.family === 'oedro'}">OEDRO 官网目录</button><button type="button" data-family="cozeware" aria-pressed="${state.family === 'cozeware'}">Cozeware</button><a href="product-library.html">分享产品库</a></nav><header class="catalog-hero">
-        <div><h1>${h(m.title)}</h1><p>查 OEDRO、Cozeware 的产品类别、型号和规格，可按品牌和类别查找。</p></div>
+      <nav class="family-nav" aria-label="产品品牌目录"><a href="products.html"${cozeware ? '' : ' aria-current="page"'}>OEDRO</a><a href="products-cozeware.html"${cozeware ? ' aria-current="page"' : ''}>Cozeware</a><a href="product-library.html">分享产品库</a></nav><header class="catalog-hero">
+        <div><h1>${title}</h1><p>按官网分类查找 ${brand} 的型号、规格和安装资料。</p></div>
         <dl class="catalog-stats">
           <div><dt>商品</dt><dd>${m.productCount.toLocaleString('zh-CN')}</dd></div>
           <div><dt>分类</dt><dd>${m.categories.length}</dd></div>
@@ -41,8 +47,8 @@
         <p class="catalog-coverage" role="note"><strong>目录核对</strong><span>${h(m.coverageText || `${m.uncoveredSitemapUrls || 0} 条链接未形成商品记录。`)} 图片文字的核对范围见商品详情。</span></p>
       </header>
       <nav class="catalog-downloads" aria-label="品牌资料总稿">
-        <a href="data/product-library/brand-summaries/${encodeURIComponent('OEDRO_产品与官方资料汇总.md')}" download="OEDRO_产品与官方资料汇总.md" data-download-bytes="3869332" title="3,869,332 字节"><span class="download-icon" aria-hidden="true">⤓</span> 下载 OEDRO 官网总稿（MD，3.87 MB）</a>
-        <a href="data/product-library/brand-summaries/${encodeURIComponent('Cozeware_产品与官方资料汇总.md')}" download="Cozeware_产品与官方资料汇总.md" data-download-bytes="497512" title="497,512 字节"><span class="download-icon" aria-hidden="true">⤓</span> 下载 Cozeware 总稿（MD，497.5 KB）</a>
+        <a href="data/product-library/brand-summaries/${encodeURIComponent(docName)}" download="${docName}" data-download-bytes="${docBytes}"><span class="download-icon" aria-hidden="true">⤓</span> 下载 ${brand} 总稿（MD，${docSize}）</a>
+        ${cozeware ? '<a href="freshflow.html">FreshFlow 新风机</a>' : ''}
       </nav>
       <form id="product-search" class="product-search"><label for="sku-query">查商品名称或 SKU</label><input id="sku-query" type="search" autocomplete="off"><button type="submit">查找</button></form>
       <section class="catalog-section category-section" aria-labelledby="category-heading">
@@ -292,7 +298,6 @@
     state.manifest = manifest; state.category = null;
     document.title = `${manifest.title}｜产品资料库`;
     document.querySelector('#content').innerHTML = shellMarkup();
-    document.querySelectorAll('[data-family]').forEach(button => button.addEventListener('click', () => startFamily(button.dataset.family)));
     document.querySelectorAll('[data-category]').forEach(button => button.addEventListener('click', () => loadCategory(button.dataset.category)));
     document.querySelector('#policy-list .load-policies').addEventListener('click', loadPolicies);
     document.querySelector('#product-search').addEventListener('submit', searchProducts);
@@ -310,6 +315,14 @@
     }
   }
   let initialization;
-  window.initProducts = () => initialization ||= startFamily(new URLSearchParams(location.search).get('brand') === 'cozeware' ? 'cozeware' : 'oedro');
+  window.initProducts = () => {
+    const route = document.body.dataset.page;
+    const params = new URLSearchParams(location.search);
+    if (route === 'products' && params.get('brand') === 'cozeware') {
+      location.replace(`products-cozeware.html?${params}${location.hash}`);
+      return;
+    }
+    return initialization ||= startFamily(route === 'products-cozeware' ? 'cozeware' : 'oedro');
+  };
   document.addEventListener('DOMContentLoaded', () => window.initProducts());
 })();

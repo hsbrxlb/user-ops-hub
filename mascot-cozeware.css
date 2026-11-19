@@ -1,48 +1,28 @@
 .cozeware-mascot-main { max-width: 1150px; }
-.cozeware-mascot-main .candidates > h2 { display: none; }
-
-.candidate {
+.candidate { padding-block: clamp(1.75rem, 5vw, 4rem); border-top: 1px solid var(--border); }
+.candidate-intro {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-3) var(--space-5);
-  align-items: start;
-  padding: var(--space-6) 0;
-  border-top: .5px solid var(--border-strong);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 360px);
+  gap: clamp(1rem, 5vw, 4rem);
+  align-items: center;
 }
-
-#content .candidate h3 {
-  grid-column: 1 / -1;
-  margin: 0;
-  font-size: var(--type-h2);
-  line-height: 1.4;
-}
-
-.candidate p { margin: 0; font-size: 17px; }
-.candidate p, .candidate ul { grid-column: 2; }
-.candidate ul { padding-inline-start: 1.4em; }
-
-.candidate .product-media {
-  grid-row: 2 / span 3;
-  grid-column: 1;
-}
-
-.candidate a {
+.candidate-intro h2 { margin-block: 0 .35em; }
+.candidate-intro p { max-width: 28em; }
+.candidate figure { min-width: 0; margin: 0; }
+.candidate figure a { display: block; }
+.candidate figure img {
   display: block;
-  grid-column: auto;
-}
-
-.candidate img {
   width: 100%;
   height: auto;
-  display: block;
+  border: 1px solid var(--border);
+  border-radius: 4px;
 }
-
-@media (max-width: 730px) {
-  .candidate {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .candidate p, .candidate ul, .candidate .product-media {
-    grid-column: 1;
-  }
-  .candidate .product-media { grid-row: auto; }
+.candidate-intro figure img { max-height: 360px; object-fit: contain; }
+.candidate section { margin-top: clamp(1.5rem, 4vw, 3rem); }
+.mascot-poses { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(.55rem, 2vw, 1.6rem); }
+.mascot-poses img { aspect-ratio: 1; object-fit: contain; background: var(--paper, #fbf5ed); }
+.mascot-poses figcaption { margin-top: .4rem; font-size: .9375rem; }
+@media (max-width: 680px) {
+  .candidate-intro { grid-template-columns: minmax(0, 1fr); }
+  .candidate-intro figure { max-width: 420px; }
 }

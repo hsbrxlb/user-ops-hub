@@ -24,7 +24,7 @@
   function characterMarkup(character) {
     return '<section class="evo-character" id="' + safe(character.id) + '" data-searchable>'
       + '<header class="evo-character-head">'
-      + '<div><h2>' + safe(character.name_cn) + '<span lang="en">（' + safe(character.name_en) + '）</span></h2>'
+      + '<div><h2><span lang="en">' + safe(character.name_en) + '</span> · ' + safe(character.name_cn) + '</h2>'
       + '<p>' + safe(character.blurb) + '</p></div></header>'
       + characterImages(character) + '</section>';
   }
@@ -88,7 +88,7 @@
       ]);
       document.title = data.title + '｜海外用户运营 Hub';
       document.querySelector('meta[name="description"]').content = data.meta_description;
-      document.querySelector('#content').innerHTML = '<header class="page-heading evo-heading"><h1>OEDRO 吉祥物</h1></header><section class="brand-section" aria-labelledby="oedro-brand-title"><h2 class="brand-section-title" id="oedro-brand-title">OEDRO（Bruno）</h2>'
+      document.querySelector('#content').innerHTML = '<header class="page-heading evo-heading"><h1>OEDRO 吉祥物</h1></header><section class="brand-section" aria-labelledby="oedro-brand-title"><h2 class="brand-section-title" id="oedro-brand-title">OEDRO</h2>'
         + '<div class="evo-layout">' + tocMarkup(data.characters)
         + '<div class="evo-character-list"><section id="iteration" class="mascot-section"><h2>角色迭代</h2>'
         + data.characters.map((character) => characterMarkup(character)).join('')

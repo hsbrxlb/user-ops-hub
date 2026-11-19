@@ -125,3 +125,9 @@
 .fact-text { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14px; }
 .catalog-hero h1 { font-size: clamp(24px,3vw,34px); }
 @media (max-width:760px) { .shared-library { position: relative; z-index: 1; margin: 16px auto; padding: 16px; } .product-search label { width: 100%; } }
+
+.family-nav a[aria-current="page"] {
+  color: var(--text);
+  font-weight: 700;
+  text-decoration-thickness: 2px;
+}

@@ -1,4 +1,12 @@
 (() => {
+  const setImageRatio = (button, width, height) => {
+    if (width > 0 && height > 0) button.style.setProperty('--feed-ratio', width / height);
+  };
+  for (const button of document.querySelectorAll('.feed-large')) {
+    const image = button.querySelector('img');
+    setImageRatio(button, Number(image.getAttribute('width')), Number(image.getAttribute('height')));
+  }
+
   const calendar = document.querySelector('.feed-calendar');
   const picker = document.querySelector('#feed-date-select');
   const days = [...document.querySelectorAll('.feed-day')];
@@ -63,7 +71,18 @@
     window.addEventListener('hashchange', () => go(location.hash.slice(5), true));
     const initial = location.hash.slice(5);
     go(available.has(initial) ? initial : closest, false);
-    requestAnimationFrame(() => go(selected, true));
+    let manualNavigation = false;
+    for (const type of ['pointerdown', 'wheel', 'touchstart', 'keydown', 'hashchange']) {
+      window.addEventListener(type, () => { manualNavigation = true; }, { once: true, passive: true });
+    }
+    const alignInitialDate = () => {
+      if (!manualNavigation) requestAnimationFrame(() => {
+        if (!manualNavigation) go(selected, true);
+      });
+    };
+    alignInitialDate();
+    document.fonts?.ready.then(alignInitialDate);
+    if (document.readyState !== 'complete') window.addEventListener('load', alignInitialDate, { once: true });
   }
 
   const updateImage = (entry, position) => {
@@ -76,6 +95,7 @@
     const dimensions = thumbs[index].querySelector('img');
     image.width = dimensions.width;
     image.height = dimensions.height;
+    setImageRatio(large, dimensions.width, dimensions.height);
     image.src = pictures[index];
     for (const [i, thumb] of thumbs.entries()) {
       if (i === index) thumb.setAttribute('aria-current', 'true');

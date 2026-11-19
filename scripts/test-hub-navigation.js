@@ -23,8 +23,8 @@ assert.ok(home.includes('base.css') && home.includes('theme.css'), 'keep existin
 assert.ok(home.includes('class="menu-button"') && home.includes('class="skip-link"'));
 
 
-for (const [id, label] of Object.entries({"mascot": "OEDRO 吉祥物", "merch-plan": "OEDRO 周边", "ugc-activity": "车主故事征集", "campaigns-oedro": "OEDRO 年末抽奖", "campaigns-cozeware": "Cozeware 年末抽奖", "user-segments-oedro": "OEDRO 用户分层"})) assert.equal(nav.find(item => item.id === id)?.label, label);
-assert.deepEqual(nav.map(item => item.id), ["home", "content-guides", "content-review", "studio", "comics-gallery", "feed-oedro", "feed-cozeware-ac", "feed-cozeware-freshflow", "skills", "social-brand", "brand-voice-system", "mascot", "mascot-cozeware", "merch-plan", "products", "freshflow", "discord-community", "discord-invite-plan", "newsletter", "email-templates", "email-templates-cozeware", "loyalty", "loyalty-cozeware", "repurchase", "ugc-activity", "campaigns-oedro", "campaigns-cozeware", "customer-analytics", "first-outreach", "voice", "competitor-experience", "research", "user-segments-oedro"]);
+for (const [id, label] of Object.entries({"mascot": "OEDRO 吉祥物", "merch-plan": "OEDRO 周边", "ugc-activity": "OEDRO 车主故事征集", "campaigns-oedro": "OEDRO 年末抽奖", "campaigns-cozeware": "Cozeware 年末抽奖", "user-segments-oedro": "OEDRO 用户分层"})) assert.equal(nav.find(item => item.id === id)?.label, label);
+assert.deepEqual(nav.map(item => item.id), ["home", "content-guides", "content-guides-oedro", "content-guides-cozeware", "content-review", "studio", "comics-gallery", "feed-oedro", "feed-cozeware-ac", "feed-cozeware-freshflow", "skills", "social-brand", "brand-voice-system", "brand-voice-cozeware", "mascot", "mascot-cozeware", "merch-plan", "merch-cozeware", "products", "products-cozeware", "freshflow", "discord-community", "discord-community-cozeware", "discord-invite-plan", "newsletter", "newsletter-cozeware", "email-templates", "email-templates-cozeware", "loyalty", "loyalty-cozeware", "repurchase", "ugc-activity", "campaigns-oedro", "campaigns-cozeware", "customer-analytics", "first-outreach", "voice", "competitor-experience", "research", "user-segments-oedro"]);
 assert.deepEqual([...new Set(nav.map(item => item.group).filter(Boolean))], ["社媒内容", "品牌与产品", "社区与邮件", "会员与复购", "活动", "用户与市场研究"]);
 const staticPages = read('app.js').match(/const staticContentPage = \[([^\]]+)\]/)[1];
 for (const id of ['first-outreach', 'discord-invite-plan', 'ugc-activity', 'comics-gallery', 'skills']) {
@@ -84,7 +84,7 @@ assert.ok(!/href="sema-/.test(home));
 
 // Resource entries disclose their actual type and size and preserve source files.
 assert.ok(!homeMain.includes('hub-hero-media') && !/Bruno|mascot-kit\//.test(homeMain), 'homepage has no mascot showcase');
-const guides = read('content-guides.html');
+const guides = ['content-guides.html','content-guides-oedro.html','content-guides-cozeware.html'].map(read).join('\n');
 for (const id of ['1NJArYiaoi8NqiUCKW9d93Y-EieA6TkFL', '1xVehYVMVfieKDRxjTGtK0zl0lDdjPfd_', '1hQ1_4GUxj7oGoGnAHdSN2Iyl38itZtXe', '1ouN9F_a-USEeE85369Z9GjcGFhZt41-y', '1CreDhIbUz5AUU-Z_fLeJc7ILuzkNv9kj']) {
   assert.ok(guides.includes('https://drive.google.com/drive/folders/' + id), 'brand folder is linked: ' + id);
 }

@@ -72,3 +72,18 @@
   .plan-flow.relationship li { display: block; }
   .plan-flow.relationship li:not(:last-child)::after { content: '↓'; display: block; padding: var(--space-1) 0; }
 }
+
+.merch-image-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); }
+.merch-hat-colors { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; padding: 0; list-style: none; }
+.merch-hat-colors li { display: grid; align-content: start; gap: .4rem; }
+.hat-colors {
+  display: block;
+  max-width: 12rem;
+  height: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: linear-gradient(to right,var(--hat-main) 0 57%,var(--hat-mesh) 57% 87%,var(--hat-mark) 87%);
+}
+@media (max-width: 650px) {
+  .merch-image-pair, .merch-hat-colors { grid-template-columns: minmax(0, 1fr); }
+}

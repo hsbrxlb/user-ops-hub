@@ -369,7 +369,7 @@ function renderDiscord(topic, data) {
   document.title = `${topic.title}｜${data.site.title}`;
   document.querySelector('meta[name="description"]').content = topic.description;
   document.querySelector('#content').innerHTML = `
-    ${pageHeading(topic.title, "看两个品牌服务器现有的频道分组和用途。")}
+    ${pageHeading(topic.title)}
     <nav class="discord-server-nav" aria-label="服务器">
       ${topic.servers.map(server => `<a href="#${escapeHtml(server.id)}">${escapeHtml(server.name)}</a>`).join('')}
     </nav>
@@ -409,21 +409,32 @@ function renderRelatedPages(pages = []) {
 
 async function renderTopic(data) {
   const slug = new URLSearchParams(window.location.search).get('slug') || 'discord-community';
-  if (!['discord-community', 'brand-voice-system'].includes(slug)) {
+  if (slug === 'discord-community' && location.hash === '#cozeware') {
+    location.replace('topic.html?slug=discord-community-cozeware#cozeware');
+    return;
+  }
+  if (!['discord-community', 'discord-community-cozeware', 'brand-voice-system', 'brand-voice-cozeware'].includes(slug)) {
     document.title = `专题已下线｜${data.site.title}`;
     document.querySelector('#content').innerHTML = '<header class="page-heading"><h1>专题已下线</h1><p><a href="index.html">返回首页查看现有资料</a></p></header>';
     return;
   }
-  const response = await fetch(`data/topics/${encodeURIComponent(slug)}.json`, { cache: 'no-store' });
+  const isDiscord = slug.startsWith('discord-community');
+  const source = isDiscord ? 'discord-community' : slug;
+  const response = await fetch(`data/topics/${encodeURIComponent(source)}.json`, { cache: 'no-store' });
   if (!response.ok) throw new Error('专题加载失败');
   const topic = await response.json();
   document.querySelector('#content').dataset.topic = slug;
-  if (slug === 'discord-community') return renderDiscord(topic, data);
+  if (isDiscord) {
+    const brand = slug === 'discord-community-cozeware' ? 'cozeware' : 'oedro';
+    const server = topic.servers.find(item => item.id === brand);
+    renderDiscord({ title: `${server.name} Discord 频道`, description: server.scope, servers: [server] }, data);
+    return;
+  }
   const sections = visibleTopicSections(topic);
   document.title = `${topic.title}｜${data.site.title}`;
   document.querySelector('meta[name="description"]').content = topic.description;
   document.querySelector('#content').innerHTML = `
-    ${pageHeading(topic.title, "OEDRO 先讲清操作，再带出车库搭档的语气。")}
+    ${pageHeading(topic.title, topic.description)}
     <div class="topic-layout">
       <article class="topic-body">${sections.map(topicSectionMarkup).join('')}
         ${renderRelatedPages(topic.related_pages)}
@@ -510,7 +521,7 @@ async function init() {
   if (page === 'topics' && location.pathname.endsWith('topic.html')) await renderTopic(data);
   if (page === 'email-templates') await window.initEmailTemplates?.();
   if (page === 'newsletter') await window.initNewsletter?.();
-  if (page === 'products') await window.initProducts?.();
+  if (page === 'products' || page === 'products-cozeware') await window.initProducts?.();
 }
 
 const mainContent = document.querySelector('#content');
@@ -518,7 +529,7 @@ const contextSupplement = document.querySelector('#context-supplement')?.outerHT
 function restoreContextSupplement() {
   if (contextSupplement && !document.querySelector('#context-supplement')) mainContent.insertAdjacentHTML('beforeend', contextSupplement);
 }
-const staticContentPage = ['home', 'email-templates', 'context', 'studio', 'content-guides', 'content-review', 'comics-gallery', 'skills', 'loyalty', 'repurchase', 'freshflow', 'competitor-experience', 'customer-analytics', 'mascot-workflow', 'social-brand', 'merch-plan', 'first-outreach', 'discord-invite-plan', 'ugc-activity', 'user-segments-oedro', 'feed-oedro', 'feed-cozeware-ac', 'feed-cozeware-freshflow', 'loyalty-cozeware', 'mascot-cozeware', 'email-templates-cozeware'].includes(page) || page?.startsWith('campaigns-');
+const staticContentPage = ['home', 'email-templates', 'context', 'studio', 'content-guides', 'content-guides-oedro', 'content-guides-cozeware', 'content-review', 'comics-gallery', 'skills', 'loyalty', 'repurchase', 'freshflow', 'competitor-experience', 'customer-analytics', 'mascot-workflow', 'social-brand', 'merch-plan', 'merch-cozeware', 'first-outreach', 'discord-invite-plan', 'ugc-activity', 'user-segments-oedro', 'feed-oedro', 'feed-cozeware-ac', 'feed-cozeware-freshflow', 'loyalty-cozeware', 'mascot-cozeware', 'email-templates-cozeware', 'newsletter-cozeware'].includes(page) || page?.startsWith('campaigns-');
 if (page === 'mascot') {
   if (!document.querySelector('#nav-list').querySelector('a')) initMascotNavigation();
 } else {
@@ -567,9 +578,7 @@ if (typeof MutationObserver !== 'undefined') {
 function completeBrandSections() {
   const content = document.querySelector('#content');
   if (!content?.querySelector('.page-heading') || content.getAttribute('aria-busy') === 'true' || content.querySelector('.brand-section')) return;
-  const topic = content.dataset.topic;
-  if (!['voice', 'newsletter', 'flipbooks'].includes(page)
-    && !(page === 'topics' && topic === 'brand-voice-system')) return;
+  if (!['voice', 'newsletter', 'flipbooks'].includes(page)) return;
   const supplement = content.querySelector('#context-supplement');
   const oedro = document.createElement('section');
   oedro.className = 'brand-section';

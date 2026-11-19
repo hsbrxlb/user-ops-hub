@@ -151,6 +151,7 @@
 
 .feed-large {
   display: block;
+  inline-size: min(100%, calc(80dvh * var(--feed-ratio, 1)));
   max-width: 100%;
   padding: 0;
   border: 0;
@@ -162,7 +163,7 @@
   display: block;
   max-inline-size: 100%;
   max-block-size: 80dvh;
-  inline-size: auto;
+  inline-size: 100%;
   block-size: auto;
 }
 

@@ -1,0 +1,31 @@
+{
+  "slug": "brand-voice-cozeware",
+  "title": "Cozeware 品牌口吻",
+  "description": "像细心的家里人，讲冷暖、通风和一个房间怎么用。",
+  "sections": [
+    {
+      "id": "brand-tone",
+      "title": "从房间里的问题说起",
+      "paragraphs": [
+        "口吻温和，带一点小幽默。先说读者在家里碰到的具体问题，再说可以怎么做。"
+      ]
+    },
+    {
+      "id": "product-facts",
+      "title": "把产品作用说清",
+      "paragraphs": [
+        "先查产品和安装条件，再写冷暖、换气或选购。说到 FreshFlow 时，讲清它把经过过滤的室外空气送进房间。"
+      ]
+    }
+  ],
+  "related_pages": [
+    {
+      "label": "Cozeware 内容指南",
+      "href": "content-guides-cozeware.html"
+    },
+    {
+      "label": "Cozeware 帖子样例",
+      "href": "feed-cozeware-ac.html"
+    }
+  ]
+}

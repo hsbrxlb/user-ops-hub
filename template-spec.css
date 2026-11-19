@@ -22,3 +22,21 @@
  .template-spec dd { margin-bottom: 12px; }
  .template-samples { grid-template-columns: minmax(0, 1fr); }
 }
+
+.email-template-card {
+  padding-block: clamp(1.5rem, 4vw, 3rem);
+  border-top: 1px solid var(--border);
+  scroll-margin-top: 5rem;
+}
+
+.email-template-card h2 { margin-block: 0 .4em; }
+.email-template-card > p { margin-block: 0 .8em; }
+.email-template-card .template-samples {
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: clamp(.6rem, 2vw, 1.5rem);
+  margin-top: 1.25rem;
+}
+.email-template-card img {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}

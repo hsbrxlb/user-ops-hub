@@ -173,7 +173,7 @@ async function checkRenderedPage() {
   vm.runInNewContext(script, page);
   await page.window.initMascot();
   const rendered = main.innerHTML;
-  if (!rendered.includes('OEDRO（Bruno）') || rendered.includes('brand-empty')) fail('brand sections are missing');
+  if (!rendered.includes('<span lang="en">Bruno</span> · 布诺') || rendered.includes('brand-empty')) fail('brand sections are missing');
   if (rendered.includes(`href="${kit.source_archive}"`)) fail('the archive must not be a public download entry');
   if ((rendered.match(/<picture><source type="image\/avif"/g) || []).length !== 7) fail('all seven gallery images need responsive AVIF sources');
   for (const source of sources) {
