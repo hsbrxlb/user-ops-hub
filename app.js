@@ -318,7 +318,8 @@ function renderUserVoice(data, voice, radar) {
     <section class="section voice-discussions" aria-labelledby="history-mentions-heading">
       <div class="section-head"><h2 id="history-mentions-heading">历史提及</h2></div>
       <p class="voice-coverage">检索仍有覆盖缺口；无法访问、原帖身份或日期未核实的线索，不计入已核实记录。</p>
-      ${historyMentions.length ? renderMentions(historyMentions) : '<p class="empty-state">暂无历史提及</p>'}
+      ${historyMentions.length ? renderMentions(historyMentions) : currentMentions.length || undatedMentions.length || legacyItems.length
+        ? '<p class="empty-state">暂无历史提及</p>' : '<p class="empty-state">暂无公开问题记录</p>'}
     </section>
     ${undatedMentions.length || legacyItems.length ? `<section class="section voice-discussions" aria-labelledby="unverified-mentions-heading">
       <details class="voice-archived">
