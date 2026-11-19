@@ -265,7 +265,7 @@
     },
     {
       "file": "07-scenes/01-freshflow-armchair.png",
-      "sha256": "432bd95ba7ba60c49ba4a6623439d48afaba6e7de501b8704a5ab95411bb5200",
+      "sha256": "816cf9cc5987c3ed405f8c99bb58ae6abfcf3ae4a6425a7876833ade0bebe4bc",
       "pixels": [
         1400,
         1010
@@ -273,7 +273,7 @@
     },
     {
       "file": "07-scenes/02-freshflow-window-seat.png",
-      "sha256": "4eadfa80714b5d4a8417a645f08589724a49a753e858ef798e7ce4227142cd5d",
+      "sha256": "30c3096b80949117ef016a63487c1481098e9f047a436b6adf6a968e00a74005",
       "pixels": [
         1400,
         954

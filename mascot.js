@@ -35,6 +35,7 @@
 
   function characterMarkup(character) {
     return '<section class="evo-character" id="' + safe(character.id) + '" data-searchable>'
+      + (character.id === "character-06-bison" ? '<p class="model-library-link"><a href="mascot-models.html#bruno">Character sheet and downloads</a> · <a href="visual-assets.html#oedro">Visual asset manual</a></p>' : "")
       + '<header class="evo-character-head">'
       + '<div><h2><span lang="en">' + safe(character.name_en) + '</span> · ' + safe(character.name_cn) + '</h2>'
       + '<p>' + safe(character.blurb) + '</p></div></header>'
