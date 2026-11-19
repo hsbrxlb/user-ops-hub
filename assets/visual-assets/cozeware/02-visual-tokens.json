@@ -1,0 +1,81 @@
+{
+  "brand": "Cozeware",
+  "palette": [
+    {
+      "name": "ink",
+      "hex": "#202C29",
+      "rgb": [
+        32,
+        44,
+        41
+      ]
+    },
+    {
+      "name": "accent",
+      "hex": "#28584A",
+      "rgb": [
+        40,
+        88,
+        74
+      ]
+    },
+    {
+      "name": "muted",
+      "hex": "#4D645B",
+      "rgb": [
+        77,
+        100,
+        91
+      ]
+    },
+    {
+      "name": "paper",
+      "hex": "#F6F3ED",
+      "rgb": [
+        246,
+        243,
+        237
+      ]
+    },
+    {
+      "name": "surface",
+      "hex": "#FFFFFF",
+      "rgb": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "tint",
+      "hex": "#DFE8E1",
+      "rgb": [
+        223,
+        232,
+        225
+      ]
+    },
+    {
+      "name": "warm",
+      "hex": "#965A43",
+      "rgb": [
+        150,
+        90,
+        67
+      ]
+    },
+    {
+      "name": "line",
+      "hex": "#B8C7BE",
+      "rgb": [
+        184,
+        199,
+        190
+      ]
+    }
+  ],
+  "fonts": [
+    "Manrope"
+  ],
+  "font_status": "Production-guide open font references; brand-owned typography pending."
+}

@@ -1,0 +1,82 @@
+{
+  "brand": "OEDRO",
+  "palette": [
+    {
+      "name": "ink",
+      "hex": "#172B3A",
+      "rgb": [
+        23,
+        43,
+        58
+      ]
+    },
+    {
+      "name": "accent",
+      "hex": "#17629D",
+      "rgb": [
+        23,
+        98,
+        157
+      ]
+    },
+    {
+      "name": "muted",
+      "hex": "#4A606E",
+      "rgb": [
+        74,
+        96,
+        110
+      ]
+    },
+    {
+      "name": "paper",
+      "hex": "#F5F3EC",
+      "rgb": [
+        245,
+        243,
+        236
+      ]
+    },
+    {
+      "name": "surface",
+      "hex": "#FFFFFF",
+      "rgb": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "tint",
+      "hex": "#EAF1F5",
+      "rgb": [
+        234,
+        241,
+        245
+      ]
+    },
+    {
+      "name": "warm",
+      "hex": "#97572D",
+      "rgb": [
+        151,
+        87,
+        45
+      ]
+    },
+    {
+      "name": "line",
+      "hex": "#B5C4CC",
+      "rgb": [
+        181,
+        196,
+        204
+      ]
+    }
+  ],
+  "fonts": [
+    "Barlow Condensed",
+    "Source Sans 3"
+  ],
+  "font_status": "Production-guide open font references; brand-owned typography pending."
+}

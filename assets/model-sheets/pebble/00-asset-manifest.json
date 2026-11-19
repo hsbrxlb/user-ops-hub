@@ -1,0 +1,411 @@
+{
+  "name": {
+    "en": "Pebble",
+    "zh": "小石"
+  },
+  "brand": "Cozeware",
+  "completion": [
+    {
+      "item": "Turnaround",
+      "available": true,
+      "contents": "4 aligned PNGs",
+      "location": "01-turnaround/01-front.png"
+    },
+    {
+      "item": "Expressions",
+      "available": true,
+      "contents": "8 PNGs",
+      "location": "02-expressions/"
+    },
+    {
+      "item": "Actions",
+      "available": true,
+      "contents": "6 PNGs, including product interaction",
+      "location": "03-actions/03-hold-product.png"
+    },
+    {
+      "item": "Palette",
+      "available": true,
+      "contents": "HEX, RGB and color card",
+      "location": "04-palette/03-model-spec.json"
+    },
+    {
+      "item": "Usage",
+      "available": true,
+      "contents": "Do / avoid and placement guide",
+      "location": "06-usage/02-placement.png"
+    },
+    {
+      "item": "Structure and silhouette",
+      "available": true,
+      "contents": "Head units and isolated silhouette",
+      "location": "05-scale/02-silhouette.png"
+    },
+    {
+      "item": "Lineup and product scale",
+      "available": true,
+      "contents": "Lineup and product comparison",
+      "location": "05-scale/01-scale-and-proportions.png",
+      "lineup": "../../01-character-lineup.png"
+    },
+    {
+      "item": "Small assets",
+      "available": true,
+      "contents": "Avatar, stickers, Discord emotes and 32 px icon",
+      "location": "08-ready-to-use/icon/01-icon-32.png"
+    },
+    {
+      "item": "Seasonal costumes",
+      "available": true,
+      "contents": "2 seasonal and 2 holiday PNGs",
+      "location": "09-costumes/"
+    },
+    {
+      "item": "Persona",
+      "available": true,
+      "contents": "One-line persona, 3 phrases, do / avoid",
+      "location": "04-palette/03-model-spec.json"
+    },
+    {
+      "item": "Source assets",
+      "available": true,
+      "contents": "Transparent PNGs and source manifest",
+      "location": "00-asset-manifest.json",
+      "vector": "Native raster character masters; editable SVG icons and social templates are supplied in the brand kit."
+    }
+  ],
+  "assets": [
+    {
+      "file": "01-turnaround/01-front.png",
+      "sha256": "df77a28f3480bf5e31aebe87cda306dd376b835d5d162b453e35f9e7ea1b05f5",
+      "pixels": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "file": "01-turnaround/02-three-quarter.png",
+      "sha256": "120457060d4a7bcb1536316811a0cf6758b960ad7c0c79d4fdf190d7f4cf8e1e",
+      "pixels": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "file": "01-turnaround/03-side.png",
+      "sha256": "7ca17588ded9cdda3166d8b3d49e7c0a2edb17d4238c0e6f20d07a39c6889393",
+      "pixels": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "file": "01-turnaround/04-back.png",
+      "sha256": "4d3b9d7776c7a9c4a8d50ef314599da1996eca5c6dfdb4173b7c7a189cd1e1ab",
+      "pixels": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "file": "02-expressions/01-side-eye.png",
+      "sha256": "e8cdb3a92adf21388c85ff802ea8cd1f88e4dcc9a1121fe82ab7b4e7d4e75c2a",
+      "pixels": [
+        640,
+        640
+      ]
+    },
+    {
+      "file": "02-expressions/02-annoyed.png",
+      "sha256": "ebb1f6d1043a10a9fab986b0dfe9623f1b29a475cd523fe3f9a220d8a2f79e33",
+      "pixels": [
+        640,
+        640
+      ]
+    },
+    {
+      "file": "02-expressions/03-content.png",
+      "sha256": "a7e9a0007988e399c7dc35097b9b92f3579b2efc18fc8288ada5c5d1b639fc89",
+      "pixels": [
+        640,
+        640
+      ]
+    },
+    {
+      "file": "02-expressions/04-curious.png",
+      "sha256": "732a0dd4b7fd7a538b0a59203566c33c87329fe7d1d4e6a94224af1775d3259b",
+      "pixels": [
+        640,
+        640
+      ]
+    },
+    {
+      "file": "02-expressions/05-surprised.png",
+      "sha256": "917e6f0e8e15298e2803921b2ae04751472f27767045dfd9c0a455909d247a4a",
+      "pixels": [
+        640,
+        640
+      ]
+    },
+    {
+      "file": "02-expressions/06-sleepy.png",
+      "sha256": "368ba2dfdeec69b4605a7cc7c2704371f4f146cf3a6c095a59b12a93dc097d91",
+      "pixels": [
+        640,
+        640
+      ]
+    },
+    {
+      "file": "02-expressions/07-pleased.png",
+      "sha256": "5ef729cf35defe492c9b295f55b28fe473f251cbe447ad8cd9e142272a571ceb",
+      "pixels": [
+        640,
+        640
+      ]
+    },
+    {
+      "file": "02-expressions/08-worried.png",
+      "sha256": "9986b24b0aba4d9cd4ab0e9ad26e6735a70bcf53ba529d0418a1e8dc53c2c903",
+      "pixels": [
+        640,
+        640
+      ]
+    },
+    {
+      "file": "03-actions/01-wave.png",
+      "sha256": "55f7401db4ce9c2c56b0ec3b44890145ee39c57e17ab07422b327f78cdf2d243",
+      "pixels": [
+        800,
+        800
+      ]
+    },
+    {
+      "file": "03-actions/02-point.png",
+      "sha256": "a0d0181e5c8855ddb42abe62ee37200434a0b19e4ae70ecae26f90f80c160ffd",
+      "pixels": [
+        800,
+        800
+      ]
+    },
+    {
+      "file": "03-actions/03-hold-product.png",
+      "sha256": "4d585704e21bfd35e82cdc7b2d20e4fdcba57fead95da6f92bef2f3406435053",
+      "pixels": [
+        800,
+        800
+      ]
+    },
+    {
+      "file": "03-actions/04-think.png",
+      "sha256": "8c0290d29cd8374cba2d413dbb180a163fd8ccaccd7c4fd7d11257e91108aa17",
+      "pixels": [
+        800,
+        800
+      ]
+    },
+    {
+      "file": "03-actions/05-celebrate.png",
+      "sha256": "850f2f1c8d41503c4c3e13da1f78b5b0303588211133316d1331a3b6371a1918",
+      "pixels": [
+        800,
+        800
+      ]
+    },
+    {
+      "file": "03-actions/06-sleep.png",
+      "sha256": "63f6c25350111b70dca568e9a937d0ae60d4a2282f02835226c2f2dcc150aa0c",
+      "pixels": [
+        800,
+        800
+      ]
+    },
+    {
+      "file": "04-palette/02-color-card.png",
+      "sha256": "0c9cc16ddfffdf57a34f81220b48cd260ddb4e2e08a275e4e48539aa8db1ef3b",
+      "pixels": [
+        1100,
+        820
+      ]
+    },
+    {
+      "file": "04-palette/03-model-spec.json",
+      "sha256": "216d55b060ba7867999e22448d2c6f189c4db761edaa32f0a362ea2ae11a82c4"
+    },
+    {
+      "file": "05-scale/01-scale-and-proportions.png",
+      "sha256": "c8405f061feb944c8ab78dde75901f392ae0de4693b6f0324200a62940429982",
+      "pixels": [
+        1400,
+        920
+      ]
+    },
+    {
+      "file": "05-scale/02-silhouette.png",
+      "sha256": "cac67e3d56ab9f6dda3259b14071c90a854d0dea4b03a98d2030ac7e020514bb",
+      "pixels": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "file": "06-usage/01-usage.png",
+      "sha256": "1afed763e6a7d90c0718694e3f4daf429c1129376b8f3de66739be6fcceee4cd",
+      "pixels": [
+        1400,
+        1040
+      ]
+    },
+    {
+      "file": "06-usage/02-placement.png",
+      "sha256": "d3d142f026afce43cc589b21c0cd66138e776063df657fecfec4cf0f2d2f7acf",
+      "pixels": [
+        1200,
+        800
+      ]
+    },
+    {
+      "file": "07-scenes/01-freshflow-armchair.png",
+      "sha256": "432bd95ba7ba60c49ba4a6623439d48afaba6e7de501b8704a5ab95411bb5200",
+      "pixels": [
+        1400,
+        1010
+      ]
+    },
+    {
+      "file": "07-scenes/02-freshflow-window-seat.png",
+      "sha256": "4eadfa80714b5d4a8417a645f08589724a49a753e858ef798e7ce4227142cd5d",
+      "pixels": [
+        1400,
+        954
+      ]
+    },
+    {
+      "file": "08-ready-to-use/avatar/01-avatar.png",
+      "sha256": "13840df7f532655d354e390157bb546b9a31871ddc0eb0ce026fc40d5bd1f89f",
+      "pixels": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "08-ready-to-use/discord/01-side-eye.png",
+      "sha256": "6b41f84bd4b96cea3f1cc6d3cbc80cc0258575e2b58cd6f438579fc03c126ebc",
+      "pixels": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "08-ready-to-use/discord/02-content.png",
+      "sha256": "6308ee58b7ac7a6686a10d0b99160bb57a7d5d1434fb8924a84355630a93a448",
+      "pixels": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "08-ready-to-use/discord/03-surprised.png",
+      "sha256": "38f35b4076554b8014a315ef5d70a8d6a1b6c7cd01052d1a87764a537f66d4ef",
+      "pixels": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "08-ready-to-use/discord/04-sleepy.png",
+      "sha256": "ffaf8de284a17d4ad9fca8344bd42f0c4db0bc00ca59008b0425e8890d0cdc37",
+      "pixels": [
+        128,
+        128
+      ]
+    },
+    {
+      "file": "08-ready-to-use/icon/01-icon-32.png",
+      "sha256": "c15a405c6dc16fa74928ded92a7029a89192b47bf875071e4bdd7f1816e347a8",
+      "pixels": [
+        32,
+        32
+      ]
+    },
+    {
+      "file": "08-ready-to-use/stickers/01-wave.png",
+      "sha256": "151daaa5c6b665a3a642244d931704a2a50197975e842750915b8685d47843e9",
+      "pixels": [
+        640,
+        640
+      ]
+    },
+    {
+      "file": "08-ready-to-use/stickers/02-think.png",
+      "sha256": "8fa3cca71b8a30b7b329b5ac6e53074686fa2e52b6ab8aefd94dd29c4b83c4ab",
+      "pixels": [
+        640,
+        640
+      ]
+    },
+    {
+      "file": "08-ready-to-use/stickers/03-celebrate.png",
+      "sha256": "18b06490174e69c056a7be1602c15859d9747b70b7c0757a404a08973cd4b153",
+      "pixels": [
+        640,
+        640
+      ]
+    },
+    {
+      "file": "08-ready-to-use/stickers/04-sleep.png",
+      "sha256": "c2fddd52c61e264338492b92c6217377a59dba497c538e5191d26efef331fc12",
+      "pixels": [
+        640,
+        640
+      ]
+    },
+    {
+      "file": "08-ready-to-use/stickers/05-annoyed.png",
+      "sha256": "cdfafb506073b17b15a82ef0a4aa0dbfce225a073c6a03ebfd7e64f8f3c8225e",
+      "pixels": [
+        640,
+        640
+      ]
+    },
+    {
+      "file": "08-ready-to-use/stickers/06-surprised.png",
+      "sha256": "f868b950d8d60472eecc17db9431c766a1e24438255b9c195fe0d46d4fa037a8",
+      "pixels": [
+        640,
+        640
+      ]
+    },
+    {
+      "file": "09-costumes/01-summer.png",
+      "sha256": "6efe61171cf7dcb08a85c524c01e885e212cc6f5ee8acf8d403a88a5937a361a",
+      "pixels": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "09-costumes/02-winter.png",
+      "sha256": "ae8b8520fbc62b3e584acb4375904a01edd89ef4f0e46f42cdd825148d77e3c1",
+      "pixels": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "09-costumes/03-halloween.png",
+      "sha256": "6b23e1b4fd570d1a71b04ccc9a92d7449dd34bb916316c2d00611b1e6f0d385d",
+      "pixels": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "09-costumes/04-holiday.png",
+      "sha256": "b95f68b519e8c6b8627e30e310eff4d0c04155b1de5f41631af037f20188357a",
+      "pixels": [
+        768,
+        768
+      ]
+    }
+  ]
+}

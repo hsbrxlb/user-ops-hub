@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+<title>Cozeware story editable template</title>
+<defs><clipPath id="image-clip"><rect x="72" y="492" width="936" height="1118" rx="27"/></clipPath></defs>
+<rect width="1080" height="1920" fill="#F6F3ED"/>
+<text x="76" y="254" fill="#28584A" font-family="Arial,sans-serif" font-size="33" letter-spacing="3">Story 1080x1920 px</text>
+<text x="76" y="350" fill="#202C29" font-family="Manrope, Arial, sans-serif" font-weight="700" font-size="66"><tspan x="76" dy="0">One Small Comfort Story</tspan></text>
+<g id="image-slot" clip-path="url(#image-clip)">
+<rect id="insert-image" x="72" y="492" width="936" height="1118" fill="#DFE8E1"/>
+<path d="M72 1398l280-234 182 116 187-172 287 268v224H72z" fill="#B8C7BE" opacity=".48"/>
+<circle cx="750" cy="676" r="69" fill="#F6F3ED"/>
+<text x="540" y="1545" text-anchor="middle" fill="#202C29" font-family="Arial,sans-serif" font-size="32">Place approved artwork here</text></g>
+<rect x="76" y="1663" width="76" height="5" rx="2" fill="#28584A"/>
+</svg>

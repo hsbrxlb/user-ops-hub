@@ -1,0 +1,105 @@
+{
+  "name": {
+    "en": "Pebble",
+    "zh": "小石"
+  },
+  "brand": "Cozeware",
+  "colors": [
+    {
+      "role": "Primary",
+      "name": "coat",
+      "hex": "#AA9887",
+      "rgb": [
+        170,
+        152,
+        135
+      ]
+    },
+    {
+      "role": "Secondary",
+      "name": "bib",
+      "hex": "#F4E4C7",
+      "rgb": [
+        244,
+        228,
+        199
+      ]
+    },
+    {
+      "role": "Secondary",
+      "name": "inner_ears",
+      "hex": "#BE9077",
+      "rgb": [
+        190,
+        144,
+        119
+      ]
+    },
+    {
+      "role": "Outline",
+      "name": "outline",
+      "hex": "#4D3E31",
+      "rgb": [
+        77,
+        62,
+        49
+      ]
+    }
+  ],
+  "canvas_px": [
+    1024,
+    1024
+  ],
+  "artwork_height_px": 588,
+  "baseline_y_px": 790,
+  "height_in_head_units": 3.11,
+  "head_unit_definition": "Ear tip to chin",
+  "relative_product_width": 0.93,
+  "minimum_display_px": {
+    "full_body": 96,
+    "avatar": 64,
+    "icon": 32
+  },
+  "clear_space_ratio": 0.125,
+  "costume_source_sha256": "29bc3eed8767f0d12fb43397e3d711be6654ac20d8da9bd355fafe2d583086b7",
+  "persona": {
+    "persona": "A slim taupe house cat who claims the best seat and quietly observes.",
+    "phrases": [
+      "This seat is taken.",
+      "Noted.",
+      "I saw that."
+    ],
+    "do": [
+      "Place her on a seat or sill, watching.",
+      "Keep the hooked tail and pale socks visible.",
+      "Use a dry side-eye instead of big gestures."
+    ],
+    "avoid": [
+      "Making her look cute-aggressive or mean.",
+      "Hiding the pale bib behind accessories.",
+      "Straightening the hooked tail."
+    ],
+    "preserve": "Natural slim taupe cat with pointed ears, pale bib and socks, one hooked tail and a dry side-eye.",
+    "costumes": [
+      {
+        "name": "Summer Light Neckerchief",
+        "note": "A light neckerchief that sits above the pale bib."
+      },
+      {
+        "name": "Winter Light Scarf",
+        "note": "A thin scarf with the pale bib and ears still showing."
+      },
+      {
+        "name": "Halloween Orange Cape",
+        "note": "A small orange cape that leaves the hooked tail visible."
+      },
+      {
+        "name": "Holiday Bow",
+        "note": "A small bow at the collar that doesn't cover the bib."
+      }
+    ]
+  },
+  "aliases": [
+    "石咪"
+  ]
+}

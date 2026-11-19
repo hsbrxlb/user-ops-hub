@@ -1,0 +1,102 @@
+{
+  "name": {
+    "en": "Oolong",
+    "zh": "乌浪"
+  },
+  "brand": "Cozeware",
+  "colors": [
+    {
+      "role": "Primary",
+      "name": "coat",
+      "hex": "#FDC687",
+      "rgb": [
+        253,
+        198,
+        135
+      ]
+    },
+    {
+      "role": "Secondary",
+      "name": "muzzle",
+      "hex": "#D89D67",
+      "rgb": [
+        216,
+        157,
+        103
+      ]
+    },
+    {
+      "role": "Secondary",
+      "name": "cushion",
+      "hex": "#D6CDA2",
+      "rgb": [
+        214,
+        205,
+        162
+      ]
+    },
+    {
+      "role": "Outline",
+      "name": "outline",
+      "hex": "#432A0F",
+      "rgb": [
+        67,
+        42,
+        15
+      ]
+    }
+  ],
+  "canvas_px": [
+    1024,
+    1024
+  ],
+  "artwork_height_px": 588,
+  "baseline_y_px": 790,
+  "height_in_head_units": 1.84,
+  "head_unit_definition": "Top of cap to chin",
+  "relative_product_width": 0.74,
+  "minimum_display_px": {
+    "full_body": 96,
+    "avatar": 64,
+    "icon": 32
+  },
+  "clear_space_ratio": 0.125,
+  "costume_source_sha256": "29bc3eed8767f0d12fb43397e3d711be6654ac20d8da9bd355fafe2d583086b7",
+  "persona": {
+    "persona": "A golden capybara who is quietly curious and never in a hurry.",
+    "phrases": [
+      "No rush.",
+      "Hm, interesting.",
+      "Let's sit with it."
+    ],
+    "do": [
+      "Give him slow, calm poses with room to breathe.",
+      "Keep the broad dark muzzle and sleepy eyes clear.",
+      "Pair him with the olive cushion in lived-in rooms."
+    ],
+    "avoid": [
+      "Rushed or frantic action poses.",
+      "Covering the muzzle or eyes with accessories.",
+      "Making him look human or overly cartoonish."
+    ],
+    "preserve": "Natural golden capybara with a broad dark muzzle, sleepy eyes and an olive cushion.",
+    "costumes": [
+      {
+        "name": "Summer Light Neckerchief",
+        "note": "A light neckerchief resting under the chin, with the muzzle left clear."
+      },
+      {
+        "name": "Winter Light Scarf",
+        "note": "A soft scarf wrapped loosely, with the sleepy eyes fully visible."
+      },
+      {
+        "name": "Halloween Orange Cape",
+        "note": "A small orange cape that leaves the cushion and body outline readable."
+      },
+      {
+        "name": "Holiday Bow",
+        "note": "A small bow at the neck that doesn't cover the muzzle."
+      }
+    ]
+  }
+}

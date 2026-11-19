@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350">
+<title>Cozeware feed editable template</title>
+<defs><clipPath id="image-clip"><rect x="72" y="360" width="936" height="880" rx="27"/></clipPath></defs>
+<rect width="1080" height="1350" fill="#F6F3ED"/>
+<text x="76" y="130" fill="#28584A" font-family="Arial,sans-serif" font-size="33" letter-spacing="3">Feed 1080x1350 px</text>
+<text x="76" y="226" fill="#202C29" font-family="Manrope, Arial, sans-serif" font-weight="700" font-size="66"><tspan x="76" dy="0">Window Light Feed</tspan></text>
+<g id="image-slot" clip-path="url(#image-clip)">
+<rect id="insert-image" x="72" y="360" width="936" height="880" fill="#DFE8E1"/>
+<path d="M72 1028l280-234 182 116 187-172 287 268v224H72z" fill="#B8C7BE" opacity=".48"/>
+<circle cx="750" cy="544" r="69" fill="#F6F3ED"/>
+<text x="540" y="1175" text-anchor="middle" fill="#202C29" font-family="Arial,sans-serif" font-size="32">Place approved artwork here</text></g>
+<rect x="76" y="1293" width="76" height="5" rx="2" fill="#28584A"/>
+</svg>

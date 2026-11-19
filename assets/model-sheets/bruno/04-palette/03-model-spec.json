@@ -1,0 +1,112 @@
+{
+  "name": {
+    "en": "Bruno",
+    "zh": "布诺"
+  },
+  "brand": "OEDRO",
+  "colors": [
+    {
+      "role": "Primary",
+      "name": "coat",
+      "hex": "#A05428",
+      "rgb": [
+        160,
+        84,
+        40
+      ]
+    },
+    {
+      "role": "Secondary",
+      "name": "horns",
+      "hex": "#E3CAAA",
+      "rgb": [
+        227,
+        202,
+        170
+      ]
+    },
+    {
+      "role": "Secondary",
+      "name": "jacket",
+      "hex": "#39332F",
+      "rgb": [
+        57,
+        51,
+        47
+      ]
+    },
+    {
+      "role": "Secondary",
+      "name": "bag_accent",
+      "hex": "#CD6525",
+      "rgb": [
+        205,
+        101,
+        37
+      ]
+    },
+    {
+      "role": "Outline",
+      "name": "outline",
+      "hex": "#251D19",
+      "rgb": [
+        37,
+        29,
+        25
+      ]
+    }
+  ],
+  "canvas_px": [
+    1024,
+    1024
+  ],
+  "artwork_height_px": 588,
+  "baseline_y_px": 790,
+  "height_in_head_units": 4.08,
+  "head_unit_definition": "Horn tip to chin",
+  "relative_product_width": 0.38,
+  "minimum_display_px": {
+    "full_body": 96,
+    "avatar": 64,
+    "icon": 32
+  },
+  "clear_space_ratio": 0.125,
+  "costume_source_sha256": "d035f885bcc58f600c5f4fe82cb102d5f8613913a8398689e3a4e1dba553259d",
+  "persona": {
+    "persona": "A pragmatic, friendly and honest adult bull who keeps garage talk plain and clear.",
+    "phrases": [
+      "Let's look at it.",
+      "Check the fitment first.",
+      "Plain and simple."
+    ],
+    "do": [
+      "Show him in garage daylight with honest product shapes.",
+      "Keep his cap, horns and muzzle fully visible.",
+      "Point to verified details instead of promising results."
+    ],
+    "avoid": [
+      "Dressing him as a mechanic or technician.",
+      "Implying he confirms safety or vehicle fitment.",
+      "Making him cartoonishly childlike or loud."
+    ],
+    "preserve": "Rust-brown anthropomorphic bull with ivory upward horns, tan muzzle, dark knit mesh work cap, workwear, orange clasp and red piping.",
+    "costumes": [
+      {
+        "name": "Summer Workwear Bandanna",
+        "note": "A light bandanna at the neck, kept clear of the clasp and piping."
+      },
+      {
+        "name": "Winter Open Sherpa Work Vest",
+        "note": "An open sherpa vest over workwear, so the clasp and piping still show."
+      },
+      {
+        "name": "Halloween Pumpkin-Orange Scarf",
+        "note": "A pumpkin-orange scarf worn loose, away from the horns and cap."
+      },
+      {
+        "name": "Holiday Pine-Green Vest Accent",
+        "note": "A pine-green accent on the vest only, with no extra props."
+      }
+    ]
+  }
+}
