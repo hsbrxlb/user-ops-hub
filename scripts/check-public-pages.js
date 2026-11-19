@@ -59,11 +59,12 @@ for (const file of codeFiles) {
     const analyticsDefinition = path.relative(root, file) === 'customer-analytics.js' && match[0] === '<details class="analytics-footnote">';
     const intentionalProductDetail = /class="[^"]*(?:product-detail|catalog-policy)/.test(match[0]);
     const competitorEvidence = path.relative(root, file) === 'competitor-experience.html' && match[0] === '<details class="evidence-details">';
+    const unverifiedVoiceArchive = path.relative(root, file) === 'app.js' && match[0] === '<details class="voice-archived">';
     const loyaltyReference = /^loyalty(?:-cozeware)?\.html$/.test(path.relative(root, file))
       && /class="(?:loyalty-more|loyalty-rules)"/.test(match[0]);
     const revisedReference = /^(?:campaigns(?:-oedro|-cozeware)?|campaign-(?:oedro|cozeware)-r[1-4]|user-segments-oedro)\.html$/.test(path.relative(root, file))
       && /class="(?:camp-notes|camp-budget-extra|seg-data-note)"/.test(match[0]);
-    if (!revisedReference && !loyaltyReference && !competitorEvidence && !intentionalHistory && !demoFaq && !mobileArticleToc && !draftControls && !emailImportFiles && !analyticsDefinition && !intentionalProductDetail && !/\bopen\b/i.test(match[0])) errors.push(path.relative(root, file) + ' 有正文details未默认展开：' + match[0]);
+    if (!revisedReference && !loyaltyReference && !competitorEvidence && !unverifiedVoiceArchive && !intentionalHistory && !demoFaq && !mobileArticleToc && !draftControls && !emailImportFiles && !analyticsDefinition && !intentionalProductDetail && !/\bopen\b/i.test(match[0])) errors.push(path.relative(root, file) + ' 有正文details未默认展开：' + match[0]);
   }
   for (const match of source.matchAll(/<[^>]+aria-expanded="false"[^>]*>/gi)) {
     const sampleMenu = /^fakesite\/[^/]+\.html$/.test(path.relative(root,file)) && /class="menu-toggle"/.test(match[0]);
