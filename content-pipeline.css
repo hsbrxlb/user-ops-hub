@@ -11,13 +11,13 @@
 .pipeline-heading h1 { font-size: clamp(27px, calc(3vw - 1px), var(--type-h1)); }
 .pipeline-record-index { display: flex; flex-wrap: wrap; gap: var(--space-5); padding-bottom: var(--space-5); }
 .pipeline-record-index a { display: grid; gap: var(--space-1); }
-.pipeline-record-index time { color: var(--text-muted); font-size: 12px; }
+.pipeline-record-index time { color: var(--text-muted); font-size: 14px; }
 .pipeline-record { border-top: 1px solid var(--border-strong); }
 .pipeline-record-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--space-3); padding: var(--space-4) 0; }
 .pipeline-record-head > div { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2) var(--space-4); }
-.pipeline-record-head time, .pipeline-record-head > div > span { color: var(--text-muted); font-size: 12px; }
+.pipeline-record-head time, .pipeline-record-head > div > span { color: var(--text-muted); font-size: 14px; }
 .pipeline-record-head h2 { margin: 0; font-size: 17px; }
-.record-status { width: max-content; padding: 0; color: var(--status-pending); background: transparent; border: 0; font-size: 12px; font-weight: 700; }
+.record-status { width: max-content; padding: 0; color: var(--status-pending); background: transparent; border: 0; font-size: 14px; font-weight: 700; }
 .record-status.status-ready { color: var(--status-ready); }
 .record-status.status-blocked { color: var(--status-blocked); }
 .record-status.status-done { color: var(--status-done); }
@@ -43,7 +43,7 @@
 .platform-text { min-width: 0; }
 .platform-translation { margin-top: var(--space-4); border-top: 1px solid var(--border); }
 .platform-translation .platform-copy { color: var(--text-secondary); font-size: 15px; }
-.platform-media-state { margin: 0 0 var(--space-5); padding-bottom: var(--space-3); border-bottom: 1px solid var(--border); color: var(--status-blocked); font-size: 13px; }
+.platform-media-state { margin: 0 0 var(--space-5); padding-bottom: var(--space-3); border-bottom: 1px solid var(--border); color: var(--status-blocked); font-size: 14px; }
 .platform-copy { font-size: 16px; line-height: 1.75; color: var(--text); overflow-wrap: anywhere; }
 .platform-copy p { margin: 0 0 var(--space-4); white-space: pre-wrap; }
 .platform-copy p:last-child { margin-bottom: 0; }

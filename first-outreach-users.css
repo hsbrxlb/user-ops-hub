@@ -6,7 +6,7 @@
 .list-pagination button:disabled { opacity:.4; cursor:default; }
 .list-pagination button:not(:disabled):hover { border-color:var(--accent); color:var(--accent); }
 .list-scroll { max-height:68vh; overflow:auto; border-block:1px solid var(--border-strong); background:var(--surface-raised); }
-.outreach-table { width:100%; border-collapse:separate; border-spacing:0; font-size:13px; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.outreach-table { width:100%; border-collapse:separate; border-spacing:0; font-size:14px; white-space:nowrap; font-variant-numeric:tabular-nums; }
 .outreach-table th,.outreach-table td { padding:14px 16px; text-align:left; border-bottom:1px solid var(--border); }
 .outreach-table th { position:sticky; top:0; z-index:1; background:var(--surface); color:var(--accent); font-weight:600; }
 .outreach-table tbody tr:nth-child(even) { background:rgba(128, 70, 25, .035); }

@@ -153,7 +153,7 @@
 .post p { margin: 0; max-width: 62ch; color: var(--text-secondary); font-size: 15px; line-height: 1.75; }
 .post p + p { margin-top: var(--space-3); }
 .post .post-key { color: var(--text); }
-.post .post-fine { color: var(--text-muted); font-size: 13px; line-height: 1.7; }
+.post .post-fine { color: var(--text-muted); font-size: 14px; line-height: 1.7; }
 .post-caption { margin: var(--space-3) 0 0; color: var(--text-muted); font-size: var(--type-meta); }
 
 .next-nav { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-7); margin: 0; padding: 0; list-style: none; }

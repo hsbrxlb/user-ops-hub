@@ -312,7 +312,7 @@ function renderUserVoice(data, voice, radar) {
   document.querySelector('#content').innerHTML = `
     ${pageHeading(copy.title || '问题与反馈', "围绕安装、车型适配和选购等问题，找可用的公开讨论。")}
     <section class="section voice-discussions" aria-labelledby="recent-mentions-heading">
-      <div class="section-head"><h2 id="recent-mentions-heading">最近 3 天的 OEDRO 提及</h2></div>
+      <div class="section-head"><h2 id="recent-mentions-heading">最新一批 OEDRO 提及</h2></div>
       ${currentMentions.length ? renderMentions(currentMentions) : `<p class="empty-state">${currentEmptyText}</p>`}
     </section>
     <section class="section voice-discussions" aria-labelledby="history-mentions-heading">
@@ -320,8 +320,9 @@ function renderUserVoice(data, voice, radar) {
       <p class="voice-coverage">检索仍有覆盖缺口；无法访问、原帖身份或日期未核实的线索，不计入已核实记录。</p>
       ${historyMentions.length ? renderMentions(historyMentions) : '<p class="empty-state">暂无历史提及</p>'}
     </section>
-    <section class="section voice-discussions" aria-labelledby="unverified-mentions-heading">
-      <div class="section-head"><h2 id="unverified-mentions-heading">待核实的历史线索</h2></div>
+    ${undatedMentions.length || legacyItems.length ? `<section class="section voice-discussions" aria-labelledby="unverified-mentions-heading">
+      <details class="voice-archived">
+      <summary id="unverified-mentions-heading">待核实的历史线索（${undatedMentions.length + legacyItems.length} 条）</summary>
       ${undatedMentions.length ? renderMentions(undatedMentions) : ''}
       ${legacyItems.length ? `<div class="voice-thread-list">
         ${legacyItems.map((item) => {
@@ -333,8 +334,8 @@ function renderUserVoice(data, voice, radar) {
           </article>`;
         }).join('')}
       </div>` : ''}
-      ${legacyItems.length || undatedMentions.length ? '' : '<p class="empty-state">暂无公开问题记录</p>'}
-    </section>
+      </details>
+    </section>` : ''}
     ${insights.length ? `<section class="section user-voice-surface">
       <div class="section-head"><h2>已确认的洞察与行动</h2></div>
       <div class="voice-insights">
