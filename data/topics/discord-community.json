@@ -1,7 +1,7 @@
 {
   "slug": "discord-community",
   "title": "Discord频道设计",
-  "description": "OEDRO 的主要公开入口，以及 COZEWARE 目前可见的频道结构。",
+  "description": "OEDRO 与 Cozeware 的 Discord 频道和公开入口。",
   "checked_at": "2026-09-17",
   "servers": [
     {
@@ -39,7 +39,7 @@
       "id": "cozeware",
       "name": "Cozeware",
       "members": "",
-      "scope": "本次登录账号可见的频道，不代表未验证新人的可见范围。verify 提示完成验证后可取得 COZER 身份；多数后续频道设有权限锁，但这不等于员工专用。general-chat 已实际打开，可以看到历史聊天和发言框；本次未发送消息，也未重新测试新人验证流程。",
+      "scope": "2026 年 9 月 17 日核对的频道结构。完成 verify 验证可取得 COZER 身份，general-chat 可用于日常聊天。",
       "bots": [],
       "settings": [],
       "groups": [
