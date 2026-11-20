@@ -215,8 +215,8 @@ function safeMentionLink(value, platform, objectId) {
       && matchesId(`mycarquest.com:${url.pathname}`);
   }
   const forumHost = host.replace(/^www\./, '');
-  if (platform === '汽车论坛' && ['ram-rho.com', 'f150lightningforum.com'].includes(forumHost)) {
-    const replyPattern = forumHost === 'ram-rho.com'
+  if (platform === '汽车论坛' && ['ram-rho.com', 'ramforum.com', 'f150lightningforum.com'].includes(forumHost)) {
+    const replyPattern = forumHost !== 'f150lightningforum.com'
       ? /^\/threads\/[^/]+\.\d+\/post-(\d+)\/?$/i
       : /^\/forum\/threads\/[^/]+\.\d+\/post-(\d+)\/?$/i;
     const reply = replyPattern.exec(url.pathname);

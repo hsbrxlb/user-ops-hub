@@ -23,3 +23,8 @@ body[data-page="voice"] .page-heading { padding-bottom: 32px; }
   font-weight: 600;
   cursor: pointer;
 }
+
+body[data-page="voice"] .voice-discussions { margin-block-start: var(--space-5); }
+body[data-page="voice"] .voice-date { margin-block: 0 var(--space-3); color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+body[data-page="voice"] .voice-thread-summary { font-size: var(--type-body); }
+body[data-page="voice"] .voice-thread:first-child { border-top: 0; }

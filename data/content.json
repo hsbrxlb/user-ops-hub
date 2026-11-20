@@ -315,8 +315,9 @@
     "participation": "参与前说明研究目的、回答用途和联系范围，取得明确同意，并记录分项许可。参与者可跳过问题或结束参与，退出后不再继续邀请；营销联系和内容复用需另行取得许可。"
   },
   "user_voice": {
-    "meta_description": "OEDRO公开问题与反馈的阶段性工作汇总。",
-    "title": "用户声音",
+    "meta_description": "OEDRO 汽配的全网公开讨论和已核实原帖。",
+    "title": "OEDRO 用户讨论",
+    "review_date": "2026-11-20",
     "description": "记录本机问题处理工作的公开汇总、重复主题、结论和后续动作。",
     "snapshot_title": "最近汇总",
     "snapshot": [

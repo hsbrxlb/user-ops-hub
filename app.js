@@ -217,8 +217,8 @@ function renderUserVoice(data, voice, radar) {
         && matchesId(`mycarquest.com:${url.pathname}`);
     }
     const forumHost = host.replace(/^www\./, '');
-    if (platform === '汽车论坛' && ['ram-rho.com', 'f150lightningforum.com'].includes(forumHost)) {
-      const replyPattern = forumHost === 'ram-rho.com'
+    if (platform === '汽车论坛' && ['ram-rho.com', 'ramforum.com', 'f150lightningforum.com'].includes(forumHost)) {
+      const replyPattern = forumHost !== 'f150lightningforum.com'
         ? /^\/threads\/[^/]+\.\d+\/post-(\d+)\/?$/i
         : /^\/forum\/threads\/[^/]+\.\d+\/post-(\d+)\/?$/i;
       const reply = replyPattern.exec(url.pathname);
@@ -291,6 +291,9 @@ function renderUserVoice(data, voice, radar) {
     const bounds = publicationBounds(item.publication);
     return bounds !== null && bounds[0] >= windowStart && bounds[1] < windowEnd;
   }));
+  const batchDates = [mentions?.batch?.window_start, mentions?.batch?.window_end]
+    .filter(awareTimestamp).map((value) => new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Shanghai' }).format(Date.parse(value)));
+  const lastReview = calendarDate(copy.review_date) ? copy.review_date : '';
   const currentKeys = new Set(currentMentions.map(mentionKey));
   const storedHistory = uniqueMentions(visibleMentions(mentions?.history));
   const historyMentions = orderMentionIntervals(storedHistory.filter((item) =>
@@ -310,15 +313,17 @@ function renderUserVoice(data, voice, radar) {
   document.title = `${copy.title || '问题与反馈'}｜${data.site.title}`;
   document.querySelector('meta[name="description"]').content = "OEDRO 货箱盖、脚踏板及车型相关的公开讨论与原帖。";
   document.querySelector('#content').innerHTML = `
-    ${pageHeading(copy.title || '问题与反馈', "围绕安装、车型适配和选购等问题，找可用的公开讨论。")}
+    ${pageHeading(copy.title || '问题与反馈', "从公开讨论里找安装、车型适配、质量和售后问题。")}
     <section class="section voice-discussions" aria-labelledby="recent-mentions-heading">
-      <div class="section-head"><h2 id="recent-mentions-heading">最新一批 OEDRO 提及</h2></div>
+      <div class="section-head"><h2 id="recent-mentions-heading">最近公开批次</h2></div>
+      ${batchDates.length === 2 ? `<p class="voice-date">检索窗口 <time>${batchDates[0]}</time> 至 <time>${batchDates[1]}</time></p>` : ''}
       ${currentMentions.length ? renderMentions(currentMentions) : `<p class="empty-state">${currentEmptyText}</p>`}
     </section>
     <section class="section voice-discussions" aria-labelledby="history-mentions-heading">
       <div class="section-head"><h2 id="history-mentions-heading">历史提及</h2></div>
-      <p class="voice-coverage">检索仍有覆盖缺口；无法访问、原帖身份或日期未核实的线索，不计入已核实记录。</p>
-      ${historyMentions.length ? renderMentions(historyMentions) : currentMentions.length || undatedMentions.length || legacyItems.length
+      ${lastReview ? `<p class="voice-date">最近一次补核 <time datetime="${lastReview}">${lastReview}</time></p>` : ''}
+      
+      ${historyMentions.length ? `<details class="voice-archived"><summary>查看历史原帖（${historyMentions.length} 条）</summary>${renderMentions(historyMentions)}</details>` : currentMentions.length || undatedMentions.length || legacyItems.length
         ? '<p class="empty-state">暂无历史提及</p>' : '<p class="empty-state">暂无公开问题记录</p>'}
     </section>
     ${undatedMentions.length || legacyItems.length ? `<section class="section voice-discussions" aria-labelledby="unverified-mentions-heading">
