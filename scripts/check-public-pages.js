@@ -56,6 +56,8 @@ for (const file of codeFiles) {
     const mobileArticleToc = /^fakesite\/[^/]+\.html$/.test(path.relative(root,file)) && /class="mobile-toc"/.test(match[0]);
     const draftControls = path.relative(root, file) === 'fakesite/editor.html' && /class="draft-(settings|tools)"/.test(match[0]);
     const emailImportFiles = path.relative(root, file) === 'email-templates.js' && match[0] === '<details class="email-files">';
+    const emailPreviewSpec = /^email-templates(?:-cozeware)?\.html$/.test(path.relative(root, file))
+      && match[0] === '<details class="email-preview-spec">';
     const analyticsDefinition = path.relative(root, file) === 'customer-analytics.js' && match[0] === '<details class="analytics-footnote">';
     const intentionalProductDetail = /class="[^"]*(?:product-detail|catalog-policy)/.test(match[0]);
     const competitorEvidence = path.relative(root, file) === 'competitor-experience.html' && match[0] === '<details class="evidence-details">';
@@ -64,7 +66,7 @@ for (const file of codeFiles) {
       && /class="(?:loyalty-more|loyalty-rules)"/.test(match[0]);
     const revisedReference = /^(?:campaigns(?:-oedro|-cozeware)?|campaign-(?:oedro|cozeware)-r[1-4]|user-segments-oedro)\.html$/.test(path.relative(root, file))
       && /class="(?:camp-notes|camp-budget-extra|seg-data-note)"/.test(match[0]);
-    if (!revisedReference && !loyaltyReference && !competitorEvidence && !unverifiedVoiceArchive && !intentionalHistory && !demoFaq && !mobileArticleToc && !draftControls && !emailImportFiles && !analyticsDefinition && !intentionalProductDetail && !/\bopen\b/i.test(match[0])) errors.push(path.relative(root, file) + ' 有正文details未默认展开：' + match[0]);
+    if (!revisedReference && !loyaltyReference && !competitorEvidence && !unverifiedVoiceArchive && !intentionalHistory && !demoFaq && !mobileArticleToc && !draftControls && !emailImportFiles && !emailPreviewSpec && !analyticsDefinition && !intentionalProductDetail && !/\bopen\b/i.test(match[0])) errors.push(path.relative(root, file) + ' 有正文details未默认展开：' + match[0]);
   }
   for (const match of source.matchAll(/<[^>]+aria-expanded="false"[^>]*>/gi)) {
     const sampleMenu = /^fakesite\/[^/]+\.html$/.test(path.relative(root,file)) && /class="menu-toggle"/.test(match[0]);
