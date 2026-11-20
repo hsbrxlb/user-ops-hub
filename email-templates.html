@@ -11,9 +11,9 @@
 <title>OEDRO 邮件模板｜海外用户运营 Hub</title>
 <link href="base.css?v=hub18qa" rel="stylesheet"/>
 <link href="theme.css?v=hub18qa" rel="stylesheet"/>
-<link href="hub-refresh.css?v=hub18qa" rel="stylesheet"/>
+<link href="hub-refresh.css?v=hub21" rel="stylesheet"/>
 <link rel="stylesheet" href="image-viewer.css?v=hub18"/>
-<link rel="stylesheet" href="template-spec.css?v=hub16"/>
+<link rel="stylesheet" href="email-previews.css?v=hub21">
 </head>
 <body data-page="email-templates">
 <a class="skip-link" href="#content">跳到正文</a>
@@ -78,46 +78,96 @@
 <button aria-expanded="false" aria-label="打开导航" class="menu-button" type="button">☰</button>
 <div class="breadcrumb">海外用户运营 / <strong id="breadcrumb-page">OEDRO 邮件模板</strong></div>
 </header>
-<main id="content" class="main-content template-preview-main"><header class="page-heading"><h1>OEDRO 邮件模板</h1></header>
-<section class="section template-spec"><h2>邮件用途</h2>
-<ul>
-<li>新订阅欢迎和弃单提醒。</li>
-<li>活动通知用于公布参与方式。</li>
-<li>The Glovebox 分享实用的用车知识。</li>
-<li>新品邮件介绍新产品。</li>
-<li>问卷邀请用于收集产品体验。</li>
-<li>Discord 邀请引导用户加入社区。</li>
-</ul>
-</section>
-<section class="section template-spec"><h2>活动通知规格</h2>
-<dl>
-<dt>版面宽度</dt>
-<dd>桌面 600px，手机 100%。</dd>
-<dt>内容边距</dt>
-<dd>桌面 36px，手机 21px，≤365px 为 17px。</dd>
-<dt>Logo 与主图</dt>
-<dd>Logo 宽 120px。主图 528×302px，按 2× 图源制作。</dd>
-<dt>字号</dt>
-<dd>标题：桌面 42px，手机 33px，窄手机 30px。正文 17px。导航和页脚 14px。</dd>
-<dt>按钮</dt>
-<dd>字号 16px，高 48px。</dd>
-<dt>背景色</dt>
-<dd>外底 #EADBCF，内底 #FFF7ED，页脚 #F4E6D8。</dd>
-<dt>品牌蓝</dt>
-<dd>按钮和标题用 #1B529C。</dd>
-<dt>字体</dt>
-<dd>标题 Mont，正文 Roboto，正文黑色。</dd>
-<dt>按活动填写</dt>
-<dd>主题、摘要、资格、活动日期、按钮链接、配图。</dd>
-<dt>页脚</dt>
-<dd>含服务信息、隐私、退订。</dd>
-<dt>首屏</dt>
-<dd>左对齐：官网标志及导航，车内脚垫实拍，活动日程与参加条件。</dd>
-</dl></section>
+<main class="main-content template-preview-main" id="content"><header class="page-heading"><h1>OEDRO 邮件模板</h1></header>
+<article class="email-review" id="welcome">
+  <h2>新订阅欢迎</h2>
+  <p>感谢新订阅者加入，邀请他们先浏览配件，并说明如何准备车型信息。</p>
+  <div class="email-widths" role="group" aria-label="新订阅欢迎预览宽度">
+    <button type="button" data-email-width="desktop" aria-pressed="false">电脑版</button>
+    <button type="button" data-email-width="mobile" aria-pressed="false">手机版</button>
+  </div>
+  <div class="email-preview-shell">
+    <iframe class="email-frame" src="assets/email/preview/oedro-welcome.html" title="OEDRO 新订阅欢迎邮件" sandbox="allow-same-origin" loading="eager" referrerpolicy="no-referrer"></iframe>
+  </div>
+  <details class="email-preview-spec"><summary>查看版式规格</summary><ul><li>桌面版 600px，手机版 390px。</li></ul></details>
+</article>
+<article class="email-review" id="cart">
+  <h2>弃单提醒</h2>
+  <p>让可触达的弃单用户回到自己的购物车，并在下单前核对适配。</p>
+  <div class="email-widths" role="group" aria-label="弃单提醒预览宽度">
+    <button type="button" data-email-width="desktop" aria-pressed="false">电脑版</button>
+    <button type="button" data-email-width="mobile" aria-pressed="false">手机版</button>
+  </div>
+  <div class="email-preview-shell">
+    <iframe class="email-frame" src="assets/email/preview/oedro-cart.html" title="OEDRO 弃单提醒邮件" sandbox="allow-same-origin" loading="lazy" referrerpolicy="no-referrer"></iframe>
+  </div>
+  <details class="email-preview-spec"><summary>查看版式规格</summary><ul><li>桌面版 600px，手机版 390px。</li></ul></details>
+</article>
+<article class="email-review" id="event">
+  <h2>活动或抽奖通知</h2>
+  <p>适合用一张奖品图和三句参加说明邀请车友报名。</p>
+  <div class="email-widths" role="group" aria-label="活动或抽奖通知预览宽度">
+    <button type="button" data-email-width="desktop" aria-pressed="false">电脑版</button>
+    <button type="button" data-email-width="mobile" aria-pressed="false">手机版</button>
+  </div>
+  <div class="email-preview-shell">
+    <iframe class="email-frame" src="assets/email/preview/oedro-event.html" title="OEDRO 活动或抽奖通知邮件" sandbox="allow-same-origin" loading="lazy" referrerpolicy="no-referrer"></iframe>
+  </div>
+  <details class="email-preview-spec"><summary>查看版式规格</summary><ul><li>1：600 × 300px 顶图，替换照片及替代文字</li></ul></details>
+</article>
+<article class="email-review" id="journal">
+  <h2>The Glovebox 期刊</h2>
+  <p>每期先交付一个能直接用的汽车小技巧，本例说明如何核对货箱尺寸。</p>
+  <div class="email-widths" role="group" aria-label="The Glovebox 期刊预览宽度">
+    <button type="button" data-email-width="desktop" aria-pressed="false">电脑版</button>
+    <button type="button" data-email-width="mobile" aria-pressed="false">手机版</button>
+  </div>
+  <div class="email-preview-shell">
+    <iframe class="email-frame" src="assets/email/preview/oedro-journal.html" title="OEDRO The Glovebox 期刊邮件" sandbox="allow-same-origin" loading="lazy" referrerpolicy="no-referrer"></iframe>
+  </div>
+  <details class="email-preview-spec"><summary>查看版式规格</summary><ul><li>桌面版 600px，手机版 390px。</li></ul></details>
+</article>
+<article class="email-review" id="launch">
+  <h2>新品</h2>
+  <p>用装车图和产品细节介绍新品，把读者带到商品详情核对适配。</p>
+  <div class="email-widths" role="group" aria-label="新品预览宽度">
+    <button type="button" data-email-width="desktop" aria-pressed="false">电脑版</button>
+    <button type="button" data-email-width="mobile" aria-pressed="false">手机版</button>
+  </div>
+  <div class="email-preview-shell">
+    <iframe class="email-frame" src="assets/email/preview/oedro-launch.html" title="OEDRO 新品邮件" sandbox="allow-same-origin" loading="lazy" referrerpolicy="no-referrer"></iframe>
+  </div>
+  <details class="email-preview-spec"><summary>查看版式规格</summary><ul><li>桌面版 600px，手机版 390px。</li></ul></details>
+</article>
+<article class="email-review" id="survey">
+  <h2>问卷邀请</h2>
+  <p>邀请用户讲清挑配件时的实际经历，用具体问题帮助他们回忆。</p>
+  <div class="email-widths" role="group" aria-label="问卷邀请预览宽度">
+    <button type="button" data-email-width="desktop" aria-pressed="false">电脑版</button>
+    <button type="button" data-email-width="mobile" aria-pressed="false">手机版</button>
+  </div>
+  <div class="email-preview-shell">
+    <iframe class="email-frame" src="assets/email/preview/oedro-survey.html" title="OEDRO 问卷邀请邮件" sandbox="allow-same-origin" loading="lazy" referrerpolicy="no-referrer"></iframe>
+  </div>
+  <details class="email-preview-spec"><summary>查看版式规格</summary><ul><li>桌面版 600px，手机版 390px。</li></ul></details>
+</article>
+<article class="email-review" id="discord">
+  <h2>Discord 邀请</h2>
+  <p>邀请读者去 OEDRO Discord 提问、交流适配与分享安装经验。</p>
+  <div class="email-widths" role="group" aria-label="Discord 邀请预览宽度">
+    <button type="button" data-email-width="desktop" aria-pressed="false">电脑版</button>
+    <button type="button" data-email-width="mobile" aria-pressed="false">手机版</button>
+  </div>
+  <div class="email-preview-shell">
+    <iframe class="email-frame" src="assets/email/preview/oedro-discord.html" title="OEDRO Discord 邀请邮件" sandbox="allow-same-origin" loading="lazy" referrerpolicy="no-referrer"></iframe>
+  </div>
+  <details class="email-preview-spec"><summary>查看版式规格</summary><ul><li>桌面版 600px，手机版 390px。</li></ul></details>
+</article>
 </main>
 </div>
 </div>
 <script src="app.js?v=hub19"></script>
 <script src="image-viewer.js?v=hub18"></script>
+<script defer src="email-previews.js?v=hub21"></script>
 </body>
 </html>

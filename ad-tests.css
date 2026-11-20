@@ -89,3 +89,9 @@
   }
   .ad-test-details { grid-template-columns: minmax(0, 1fr); gap: var(--space-3); }
 }
+
+.ad-test-art { display: block; }
+.ad-test .ad-test-card { margin: var(--space-4) 0 0; }
+.ad-test-card a { display: block; width: fit-content; }
+.ad-test-card img { display: block; width: auto; height: auto; max-width: 100%; border: 1px solid var(--border); border-radius: .5rem; }
+.ad-test-card figcaption { margin-top: .45rem; color: var(--text-secondary); }
