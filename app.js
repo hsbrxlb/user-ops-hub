@@ -74,7 +74,7 @@ function renderResearch(data) {
         <img src="assets/light-research/hawthorne-preview.jpg?v=20260914-r2" alt="OEDRO AI 调研问卷演示界面" width="1440" height="900">
       </a>
       <div class="research-launch-copy">
-        <p>工作灯问卷演示：回答后会继续追问。</p>
+        <p>工作灯问卷演示：答完会继续追问。</p>
         <a class="research-open" href="https://oedro-light-research.onrender.com/" target="_blank" rel="noopener">打开演示 ↗</a>
       </div>
     </section>`;
@@ -550,7 +550,7 @@ if (page === 'mascot') {
       console.error(error);
       return;
     }
-    mainContent.innerHTML = '<div class="load-error" role="alert"><h1>页面暂时无法加载</h1><p>检查连接后重试，或返回首页。</p><button type="button" id="reload-page">重试</button><a href="index.html">返回首页</a></div>';
+    mainContent.innerHTML = '<div class="load-error" role="alert"><h1>页面暂时无法加载</h1><p>检查连接后重试，或回首页。</p><button type="button" id="reload-page">重试</button><a href="index.html">返回首页</a></div>';
     document.querySelector('#reload-page').addEventListener('click', () => location.reload());
     console.error(error);
   }).finally(() => { restoreContextSupplement(); mainContent.setAttribute('aria-busy', 'false'); });

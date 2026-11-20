@@ -104,7 +104,7 @@
 
   function definitionList(values) {
     const entries = Object.entries(values || {});
-    return entries.length ? `<dl class="spec-list">${entries.map(([key, value]) => `<div><dt>${h(key)}</dt><dd>${h(value)}</dd></div>`).join('')}</dl>` : '<p class="detail-empty">官网快照未提供这一项。</p>';
+    return entries.length ? `<dl class="spec-list">${entries.map(([key, value]) => `<div><dt>${h(key)}</dt><dd>${h(value)}</dd></div>`).join('')}</dl>` : '<p class="detail-empty">官网快照没提供这一项。</p>';
   }
 
   function detailMarkup(item) {
@@ -119,14 +119,14 @@
       ${item.description ? `<section><h4>产品说明</h4><p>${h(item.description)}</p></section>` : ''}
       ${item.highlights?.length ? `<section><h4>产品卖点</h4><ul>${item.highlights.map((value) => `<li>${h(value)}</li>`).join('')}</ul></section>` : ''}
       ${usage.length ? `<section><h4>使用条件</h4><ul>${usage.map(value => `<li>${h(typeof value === 'string' ? value : value.official_text)}</li>`).join('')}</ul></section>` : ''}
-      ${item.conflicts?.length ? `<section><h4>官网资料中的冲突</h4><pre class="fact-text">${h(JSON.stringify(item.conflicts, null, 2))}</pre></section>` : ''}
+      ${item.conflicts?.length ? `<section><h4>官网资料里的冲突</h4><pre class="fact-text">${h(JSON.stringify(item.conflicts, null, 2))}</pre></section>` : ''}
       <section><h4>规格</h4>${definitionList(item.specifications)}</section>
       ${item.package.length ? `<section><h4>包装清单</h4><ul>${item.package.map((value) => `<li>${h(value.name)}${value.num ? ` × ${h(value.num)}` : ''}</li>`).join('')}</ul></section>` : ''}
-      <section><h4>安装与文档</h4>${item.installation.notes ? `<p>${h(item.installation.notes)}</p>` : ''}${documents.length ? `<ul>${documents.map((doc) => `<li><a href="${h(doc.url)}" target="_blank" rel="noreferrer">${h(doc.name || '安装文件')} ↗</a></li>`).join('')}</ul>` : "<p class=\"detail-empty\">官网没有可用的安装文件。</p>"}</section>
+      <section><h4>安装与文档</h4>${item.installation.notes ? `<p>${h(item.installation.notes)}</p>` : ''}${documents.length ? `<ul>${documents.map((doc) => `<li><a href="${h(doc.url)}" target="_blank" rel="noreferrer">${h(doc.name || '安装文件')} ↗</a></li>`).join('')}</ul>` : "<p class=\"detail-empty\">官网上没有安装文件。</p>"}</section>
       ${(item.faq || []).length ? `<section><h4>官网问答</h4><p>答复可能涉及多个型号，参数请对照本条规格和冲突内容。</p><dl class="product-faq">${item.faq.map(faq => `<div><dt>${h(faq.question)}</dt><dd>${h(faq.answer)}</dd></div>`).join('')}</dl></section>` : ''}
       ${warranty.length ? `<section><h4>商品页的质保说明</h4><ul>${warranty.map((value) => `<li>${h(value.label)}：${h(value.value)}</li>`).join('')}</ul></section>` : ''}
       ${variants.length > 1 ? `<section><h4>版本</h4><p>官网快照记录 ${variants.length} 个 SKU 选项。</p></section>` : ''}
-      ${imageFacts.length ? `<section><h4>图片中已核对的事实</h4><ul>${imageFacts.flatMap(fact => (fact.facts || []).map(text => `<li>${h(text)}${(fact.limitations || []).length ? `<p>${fact.limitations.map(h).join(' ')}</p>` : ''} <a href="${h(fact.url || fact.image_url)}" target="_blank" rel="noreferrer">图片来源 ↗</a></li>`)).join('')}</ul></section>` : ''}
+      ${imageFacts.length ? `<section><h4>图片里已核对的事实</h4><ul>${imageFacts.flatMap(fact => (fact.facts || []).map(text => `<li>${h(text)}${(fact.limitations || []).length ? `<p>${fact.limitations.map(h).join(' ')}</p>` : ''} <a href="${h(fact.url || fact.image_url)}" target="_blank" rel="noreferrer">图片来源 ↗</a></li>`)).join('')}</ul></section>` : ''}
       <section><h4>图片文字核对范围</h4><p>${h(imageReview.reviewed_urls?.length || 0)} 张已核对；${h(imageReview.unreviewed_urls?.length ?? images.length)} 张未逐张核对。未核对图片中的参数不能按另一型号推断。</p></section>
       ${images.length ? `<section><h4>官网图片 · ${images.length}</h4><div class="media-strip">${images.map((url, imageIndex) => `<a href="${h(url)}" target="_blank" rel="noreferrer"><img src="${h(url)}" alt="${h(item.name)} · 图片 ${imageIndex + 1}" width="320" height="320" loading="lazy" decoding="async"></a>`).join('')}</div></section>` : ''}
       <p><a href="${h(item.url)}" target="_blank" rel="noreferrer">打开对应官方来源 ↗</a></p>
@@ -210,7 +210,7 @@
     } catch (error) {
       if (requestId !== state.requestId) return;
       document.querySelector('#product-grid').setAttribute('aria-busy', 'false');
-      document.querySelector('#product-grid').innerHTML = "<div class=\"catalog-load-error\" role=\"alert\"><strong>这组商品暂时未载入</strong><p>检查连接后可重新尝试。</p><button type=\"button\" id=\"retry-category\">重试</button></div>";
+      document.querySelector('#product-grid').innerHTML = "<div class=\"catalog-load-error\" role=\"alert\"><strong>这组商品暂时未载入</strong><p>检查连接后可以重试。</p><button type=\"button\" id=\"retry-category\">重试</button></div>";
       document.querySelector('#catalog-toolbar').innerHTML = '';
       document.querySelector('#catalog-pagination').innerHTML = '';
       document.querySelector('#catalog-status').textContent = `${category.name} · 加载失败`;
@@ -230,7 +230,7 @@
       if (policyFamily !== state.family) return;
       target.innerHTML = `<div class="policy-list">${data.policies.map((item) => `<details class="catalog-policy"><summary><span>${h(item.title)}</span><small>${h(dateText(item.capturedAt))}</small></summary><div><p>${h(item.officialText)}</p><a href="${h(item.url)}" target="_blank" rel="noreferrer">打开官网政策 ↗</a></div></details>`).join('')}</div>`;
     } catch (error) {
-      target.innerHTML = "<div class=\"catalog-load-error\" role=\"alert\"><strong>官网政策暂时未载入</strong><p>检查连接后可重新尝试。</p><button type=\"button\" id=\"retry-policies\">重试</button></div>";
+      target.innerHTML = "<div class=\"catalog-load-error\" role=\"alert\"><strong>官网政策暂时未载入</strong><p>检查连接后可以重试。</p><button type=\"button\" id=\"retry-policies\">重试</button></div>";
       document.querySelector('#retry-policies').addEventListener('click', loadPolicies);
       console.error(error);
     }

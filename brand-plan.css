@@ -117,3 +117,16 @@
 @media (max-width: 680px) {
   .merch-atlas-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 }
+
+.freshflow-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 265px), 1fr));
+  gap: var(--space-5);
+  margin-block: var(--space-5);
+}
+.freshflow-links article {
+  padding: var(--space-4);
+  border-inline-start: 2px solid var(--accent);
+}
+.freshflow-links h4 { margin: 0 0 var(--space-2); }
+.freshflow-links p { margin: 0; }
