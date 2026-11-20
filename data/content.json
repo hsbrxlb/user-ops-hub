@@ -64,6 +64,12 @@
       "group": "社媒内容"
     },
     {
+      "id": "ad-tests",
+      "label": "广告测试",
+      "file": "ad-tests.html",
+      "group": "社媒内容"
+    },
+    {
       "id": "skills",
       "label": "技能画廊",
       "file": "skills.html",

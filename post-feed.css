@@ -217,3 +217,27 @@
   .feed-entry { padding-block: var(--space-6); }
   .feed-caption { font-size: 16px; }
 }
+
+.feed-schedule-link {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: .375rem .7rem;
+  max-width: 73ch;
+  margin: var(--space-3) 0 0;
+  font-size: var(--type-meta);
+  line-height: 1.5;
+}
+
+.feed-schedule-link-label {
+  padding: .15em .55em;
+  border-radius: .35rem;
+  color: var(--nav-active-text);
+  background: var(--nav-active);
+  font-weight: 650;
+}
+
+.feed-schedule-link a {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}

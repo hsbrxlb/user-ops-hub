@@ -156,3 +156,5 @@ node scripts/check-email-templates.js
 `product-library.html` 是供同事直接浏览的独立入口，复用产品图片、分类、详情与 `data/products` 数据，不加载 Hub 导航或工作计划。它仍是公开静态页面，独立入口不构成访问控制。
 
 “下载 Markdown”在浏览器本地生成当前分类、品牌及资料状态筛选下的全部记录，包含所有分页。文件保留清单、分类元信息与每条产品的完整 JSON 字段，供 AI 读取；价格库存是原抓取时快照。无上传或模型调用。验证：`node scripts/check-product-library.js` 和 `node scripts/check-products.js`。
+
+FreshFlow 帖子页每次更新后都从 Cozeware Content Plan 的 Schedule 表读取 Date（B）、Post ID（E）及 Link（T）。保留该页每条帖子的对应行，空链接写空值，链接单元格优先取实际超链接。把这些行转换成含 `day`、`id`、`url` 的 JSON 数组（`day` 用 `YYYY-MM-DD`），通过标准输入交给 `node scripts/update-freshflow-schedule-links.js`，再检查提交差异。脚本按 ID 和日期匹配，只在有网址的卡片下显示链接，旧链接清空后也会移除。
