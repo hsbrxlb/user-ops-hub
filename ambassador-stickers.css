@@ -1,0 +1,37 @@
+#content #ambassador-stickers {
+  scroll-margin-top: 5rem;
+}
+
+#ambassador-stickers p {
+  font-size: 1rem;
+  max-width: 62ch;
+}
+
+.ambassador-sticker-designs {
+  display: grid;
+  gap: var(--space-5);
+}
+
+#content #ambassador-stickers .ambassador-sticker-designs figure {
+  max-inline-size: min(100%, 48rem);
+  margin: 0;
+}
+
+#content .ambassador-sticker-designs a {
+  display: block;
+}
+
+#content #ambassador-stickers .ambassador-sticker-proof {
+  max-inline-size: 100%;
+  margin-block: var(--space-6);
+}
+
+.ambassador-sticker-thumbnails {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+#content .ambassador-sticker-thumbnails img {
+  width: min(100%, 16rem);
+}
