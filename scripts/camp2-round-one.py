@@ -1,7 +1,7 @@
 """Render the campaign entry page and change only the matching Hub round-one page."""
 
 import argparse
-from html import escape
+from html import escape, unescape
 from pathlib import Path
 import re
 from urllib.parse import urlparse
@@ -77,7 +77,7 @@ def public_page(brand, state, form_url):
       <p>One prize: {facts["prize"]}. Approximate retail value: {facts["value"]}. The sponsor covers standard shipping to an eligible U.S. address. The winner is responsible for any applicable taxes. The prize is nontransferable and has no cash alternative.</p>
       <h2>4. Notification and claim</h2>
       <p>The sponsor will announce the winner’s anonymous entry ID on this page and in its official Discord server and email the winner privately on November 30, 2026, at 10:00 a.m. ET. Reply to the official notice within 48 hours to claim. The winner will supply a shipping address privately. If the selected entrant is ineligible, declines or misses the claim deadline, the sponsor will contact the next alternate, who also has 48 hours to reply.</p>
-      <p>The sponsor will never ask you to pay to claim a prize or ask for a password, verification code, card number or identity document.</p>
+      <p>Claiming is free. The sponsor needs only your acceptance reply and an eligible shipping address to deliver the prize.</p>
       <h2>5. Privacy and responses</h2>
       <p>Entry details are used to administer the giveaway, verify eligibility, contact the winner and deliver the prize. The sponsor may retain records for fulfillment, disputes and applicable legal obligations. Entering does not subscribe you to marketing. Public use of your answer requires separate permission. See the <a href="{facts["privacy"]}">{facts["name"]} Privacy Policy</a>.</p>
       <h2>6. Platform disclosure</h2>
@@ -120,24 +120,26 @@ def main():
     parser.add_argument("--form-url", default="")
     parser.add_argument("--output", type=Path, default=ROOT)
     args = parser.parse_args()
-    if args.form_url:
-        parsed = urlparse(args.form_url)
+    hub_name = f"campaign-{args.brand}-r1.html"
+    source = (ROOT / hub_name).read_text(encoding="utf-8")
+    existing = re.search(r'href="(https://(?:docs\.google\.com/forms/|forms\.gle/)[^"]+)"', source)
+    form_url = args.form_url or (unescape(existing[1]) if existing else "")
+    if form_url:
+        parsed = urlparse(form_url)
         if parsed.scheme != "https" or parsed.netloc not in {"forms.gle", "docs.google.com"}:
             parser.error("Use the verified Google Forms respondent URL.")
         if parsed.netloc == "docs.google.com" and not re.fullmatch(
             r"/forms/d/(?:e/)?[a-zA-Z0-9_-]+/viewform", parsed.path
         ):
             parser.error("Use a Google Forms viewform URL, not the editor.")
-    if args.state == "open" and not args.form_url:
+    if args.state == "open" and not form_url:
         parser.error("Open mode requires a verified respondent URL.")
     args.output.mkdir(parents=True, exist_ok=True)
-    hub_name = f"campaign-{args.brand}-r1.html"
-    source = (ROOT / hub_name).read_text(encoding="utf-8")
     (args.output / hub_name).write_text(
-        update_hub(source, args.brand, args.state, args.form_url), encoding="utf-8"
+        update_hub(source, args.brand, args.state, form_url), encoding="utf-8"
     )
     (args.output / f"rules-{args.brand}-r1.html").write_text(
-        public_page(args.brand, args.state, args.form_url), encoding="utf-8"
+        public_page(args.brand, args.state, form_url), encoding="utf-8"
     )
 
 
