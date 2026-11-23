@@ -479,6 +479,9 @@ window.hubNav = (function createHubNav() {
   const currentLink = () => nav.querySelector('a[aria-current]');
   const pageKey = location.pathname + location.search;
   const saveScroll = () => {
+    // Only a position that shows the current page's entry is worth remembering.
+    const current = currentLink();
+    if (current && !fullyVisible(current)) return;
     const saved = read('sessionStorage', keys.scroll) || {};
     const pages = saved.pages && typeof saved.pages === 'object' ? saved.pages : {};
     pages[pageKey] = sidebar.scrollTop;
@@ -494,13 +497,34 @@ window.hubNav = (function createHubNav() {
     });
   }
 
-  function reveal(link = currentLink()) {
-    if (!link || !link.getClientRects().length) return;
+  function fullyVisible(link) {
+    if (!link.getClientRects().length) return true;
     const box = sidebar.getBoundingClientRect();
     const item = link.getBoundingClientRect();
-    if (item.top < box.top + 16 || item.bottom > box.bottom - 16) {
+    return item.top >= box.top && item.bottom <= box.bottom;
+  }
+
+  // center: deep links and restores; nearest: smallest move after a resize or a group toggle.
+  function reveal(link = currentLink(), mode = 'center') {
+    if (!link || !link.getClientRects().length || sidebar.clientHeight === 0) return;
+    const box = sidebar.getBoundingClientRect();
+    const item = link.getBoundingClientRect();
+    const margin = 16;
+    if (item.top >= box.top + margin && item.bottom <= box.bottom - margin) return;
+    if (mode === 'nearest') {
+      sidebar.scrollTop += item.top < box.top + margin ? item.top - box.top - margin : item.bottom - box.bottom + margin;
+    } else {
       sidebar.scrollTop += item.top - box.top - (box.height - item.height) / 2;
     }
+  }
+
+  // Layout can still shift after the first restore (window resizing, fonts, images),
+  // so re-check on the next frames and whenever the layout changes.
+  // Timers rather than animation frames, so the check also runs in background tabs.
+  let settleTimer = 0;
+  function settle(mode = 'nearest') {
+    clearTimeout(settleTimer);
+    settleTimer = setTimeout(() => reveal(currentLink(), mode), 60);
   }
 
   function markCurrent(id) {
@@ -523,11 +547,16 @@ window.hubNav = (function createHubNav() {
       sidebar.scrollTop += offsetInSidebar(current) - anchor.top;
     } else {
       // Refresh, back and forward: this page's own last position, else the last page's.
+      // Refresh, back and forward use this page's own position. A page opened fresh has
+      // none, so its entry is centred instead of borrowing another page's position.
       const saved = read('sessionStorage', keys.scroll) || {};
-      const top = saved.pages?.[pageKey] ?? saved.last;
+      const top = saved.pages?.[pageKey] ?? (current ? null : saved.last);
       if (typeof top === 'number') sidebar.scrollTop = top;
     }
     reveal(current);
+    // The first seconds after opening a page are when layout still moves (window being
+    // resized, fonts and images arriving); re-check a few times.
+    [120, 600, 1500, 3000].forEach((delay) => setTimeout(() => reveal(currentLink(), 'center'), delay));
   }
 
   nav.addEventListener('click', (event) => {
@@ -545,7 +574,17 @@ window.hubNav = (function createHubNav() {
     const saved = read('localStorage', keys.open) || {};
     saved[details.closest('.nav-branch').dataset.branch] = details.open;
     write('localStorage', keys.open, saved);
+    settle();
   }, true);
+  window.addEventListener('resize', () => settle(), { passive: true });
+  // Any change to the sidebar's height or the list's height (viewport, fonts, groups).
+  if (typeof ResizeObserver === 'function') {
+    const watcher = new ResizeObserver(() => settle());
+    watcher.observe(sidebar);
+    watcher.observe(nav);
+  }
+  window.addEventListener('load', () => settle());
+  document.fonts?.ready?.then(() => settle());
   let pending = false;
   sidebar.addEventListener('scroll', () => {
     if (pending) return;
