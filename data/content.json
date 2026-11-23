@@ -10,6 +10,12 @@
       "file": "index.html"
     },
     {
+      "id": "daily-ops",
+      "label": "用户运营每日工作",
+      "file": "daily-ops.html",
+      "group": "社媒内容"
+    },
+    {
       "id": "content-guides",
       "label": "内容指南",
       "file": "content-guides.html",
@@ -227,7 +233,7 @@
     },
     {
       "id": "voice",
-      "label": "OEDRO 用户声音",
+      "label": "OEDRO 原帖摘录",
       "file": "user-voice.html",
       "group": "用户与市场研究"
     },
@@ -316,7 +322,7 @@
   },
   "user_voice": {
     "meta_description": "OEDRO 汽配的全网公开讨论和已核实原帖。",
-    "title": "OEDRO 用户讨论",
+    "title": "OEDRO 原帖摘录",
     "review_date": "2026-11-20",
     "description": "记录本机问题处理工作的公开汇总、重复主题、结论和后续动作。",
     "snapshot_title": "最近汇总",

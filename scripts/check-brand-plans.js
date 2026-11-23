@@ -59,7 +59,9 @@ async function checkPlan(plan) {
     assert.equal(refreshed.length, 10, 'merch-plan: eight prior images and two car-interior proposals');
     assert.equal(new Set(refreshed).size, 10, 'merch-plan: no duplicate refreshed image');
     assert.doesNotMatch(html, /src="assets\/(?:brand-plan\/merch-|brand-social\/daily-merch|brand-social\/r6\/references\/singular-cotton-cap)/, 'merch-plan: superseded soft caps removed from active page');
-    assert.match(html, /trucker hat/, 'merch-plan: current cap construction specified');
+    for (const detail of ['卡车网帽', '挺括前片', '网布后片', '弯帽檐', '可调节后扣']) {
+      assert.ok(html.includes(detail), 'merch-plan: current cap construction includes ' + detail);
+    }
     assert.match(html, /不是当前网帽规格的报价/, 'merch-plan: old budget must not imply a new quote');
   }
   if (plan.id === 'social-brand') {
