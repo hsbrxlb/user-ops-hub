@@ -14,7 +14,7 @@ assert.ok(home.includes('id="breadcrumb-page">首页</strong>'));
 assert.ok(read('app.js').includes("const staticContentPage = ['home',"), 'homepage remains readable if data loading fails');
 assert.ok(read('app.js').includes("page === 'home' ? '首页'"));
 const homeMain = home.match(/<main[^>]*>([\s\S]*?)<\/main>/)[1];
-for (const item of nav.filter(item => item.id !== 'home' && !item.reserved)) {
+for (const item of nav.filter(item => item.id !== 'home' && !item.reserved && !item.parent)) {
   assert.ok(homeMain.includes('href="' + item.file + '"'), 'homepage links to ' + item.id);
 }
 assert.equal((homeMain.match(/class="section home-directory"/g) || []).length, 7);
@@ -24,7 +24,20 @@ assert.ok(home.includes('class="menu-button"') && home.includes('class="skip-lin
 
 
 for (const [id, label] of Object.entries({"mascot": "OEDRO 吉祥物", "merch-plan": "OEDRO 周边", "ugc-activity": "OEDRO 车主故事征集", "campaigns-oedro": "OEDRO 年末抽奖", "campaigns-cozeware": "Cozeware 年末抽奖", "user-segments-oedro": "OEDRO 用户分层"})) assert.equal(nav.find(item => item.id === id)?.label, label);
-assert.deepEqual(nav.map(item => item.id), ["home", "daily-ops", "content-guides", "content-guides-oedro", "content-guides-cozeware", "content-review", "studio", "comics-gallery", "feed-oedro", "feed-cozeware", "ad-tests", "skills", "social-brand", "brand-voice-system", "brand-voice-cozeware", "mascot", "mascot-cozeware", "merch-plan", "merch-cozeware", "products", "products-cozeware", "freshflow", "discord-community", "discord-community-cozeware", "discord-invite-plan", "newsletter", "newsletter-cozeware", "email-templates", "email-templates-cozeware", "loyalty", "loyalty-cozeware", "repurchase", "ugc-activity", "campaigns-oedro", "campaigns-cozeware", "customer-analytics", "first-outreach", "voice", "competitor-experience", "research", "user-segments-oedro"]);
+assert.deepEqual(nav.filter(item => !item.parent).map(item => item.id), ["home", "daily-ops", "content-guides", "content-review", "studio", "comics-gallery", "feed-oedro", "feed-cozeware", "ad-tests", "skills", "social-brand", "brand-voice-system", "brand-voice-cozeware", "mascot", "mascot-cozeware", "merch-plan", "merch-cozeware", "products", "products-cozeware", "discord-community", "discord-community-cozeware", "newsletter", "newsletter-cozeware", "email-templates", "email-templates-cozeware", "loyalty", "loyalty-cozeware", "repurchase", "ugc-activity", "campaigns-oedro", "campaigns-cozeware", "customer-analytics", "first-outreach", "voice", "competitor-experience", "research", "user-segments-oedro"]);
+// Sub-pages sit directly after their parent and only one level deep.
+const branches = { "content-guides": ["content-guides-oedro", "content-guides-cozeware"], mascot: ["mascot-friends"], "products-cozeware": ["freshflow"], "discord-community": ["discord-invite-plan"],
+  "campaigns-oedro": [1, 2, 3, 4].map(n => `campaigns-oedro-r${n}`), "campaigns-cozeware": [1, 2, 3, 4].map(n => `campaigns-cozeware-r${n}`) };
+for (const [parent, children] of Object.entries(branches)) {
+  assert.deepEqual(nav.filter(item => item.parent === parent).map(item => item.id), children, parent + ' children');
+  const at = nav.findIndex(item => item.id === parent);
+  assert.deepEqual(nav.slice(at + 1, at + 1 + children.length).map(item => item.id), children, parent + ' children follow it');
+}
+assert.ok(nav.every(item => !item.parent || !nav.find(p => p.id === item.parent).parent), 'one level of nesting');
+// Every page carries the same built sidebar, so navigation works without JavaScript.
+assert.equal(require('child_process').spawnSync(process.execPath, [path.join(root, 'scripts/build-nav.js'), '--check']).status, 0, 'run node scripts/build-nav.js');
+assert.match(read('campaign-oedro-r2.html'), /<details class="nav-children" open>[^]*data-page="campaigns-oedro-r2" class="active nav-child" aria-current="page"/);
+assert.match(read('mascot-friends.html'), /data-page="mascot" class="nav-ancestor"[^]*data-page="mascot-friends" class="active nav-child" aria-current="page"/);
 assert.deepEqual([...new Set(nav.map(item => item.group).filter(Boolean))], ["社媒内容", "品牌与产品", "社区与邮件", "会员与复购", "活动", "用户与市场研究"]);
 const staticPages = read('app.js').match(/const staticContentPage = \[([^\]]+)\]/)[1];
 for (const id of ['first-outreach', 'discord-invite-plan', 'ugc-activity', 'comics-gallery', 'skills']) {
@@ -34,7 +47,7 @@ for (const id of ['first-outreach', 'discord-invite-plan', 'ugc-activity', 'comi
 }
 for (const id of ['comics-gallery', 'skills']) {
   assert.equal(nav.find(item => item.id === id)?.group, '社媒内容');
-  assert.match(read(`${id}.html`), new RegExp(`<a aria-current="page" class="active" data-page="${id}"`));
+  assert.match(read(`${id}.html`), new RegExp(`data-page="${id}" class="active" aria-current="page"`));
 }
 assert.ok(nav.some(item => item.id === 'products' && item.file === 'products.html'));
 assert.ok(!nav.some(item => ['research-library', 'sites-systems', 'playbook'].includes(item.id)));

@@ -51,6 +51,7 @@ Hub 按部门任务线汇集项目进展、上下文与下载资产，通过 Git
 - Discord 配置位于频道结构下方；没有实际用途证据的机器人与空配置区不显示。品牌表达页包含品牌名大小写建议和六个双语场景示例，示例不代表已发送消息。
 - 原“公开信号与用户关系”网址兼容跳转至讨论卡片；页面已移除通用处理流程说明，旧 `#feedback-method` 链接仍可打开。
 - `research-library.html`、`sites-systems.html`、`playbook.html` 已退出导航，只保留旧网址的定向跳转。
+- 侧栏只在 `data/content.json` 定义一次：子页写 `parent`，紧跟在父页之后，只分一级。改完运行 `node scripts/build-nav.js`，把同一份侧栏写进每个页面（无脚本也能导航），CI 用 `--check` 核对。侧栏记住滚动位置（本标签页）和展开的分组（本浏览器），当前页所在分组自动展开。
 
 `content-studio.html` 为只读流程介绍页，与独立样稿页复用 `data/content-pipeline-tests.json` 的当前作品数据，分别渲染概览与完整样稿；页面不触发生成或发布，不提供表单、登录或数据库。
 

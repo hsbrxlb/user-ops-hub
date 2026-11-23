@@ -27,7 +27,7 @@ async function checkPlan(plan) {
   }
   assert.match(html, /<nav[^>]+id="nav-list"[^>]*>[\s\S]*?<\/nav>/, `${plan.id}: navigation is available to the shared shell`);
   assert.ok(navigation.some(item => item.id === plan.id && item.file === `${plan.id}.html`), `${plan.id}: registered navigation route`);
-  const body = html.replace(/<!--[\s\S]*?-->/g, '');
+  const body = html.replace(/<!--[\s\S]*?-->/g, '').replace(/<nav[^>]+id="nav-list"[^>]*>[\s\S]*?<\/nav>/, ''); // sidebar groups fold navigation, not page content
   assert.doesNotMatch(body, /<(?:form|input|select|textarea|details)\b/i, `${plan.id}: reference page must not collect data or hide content`);
   assert.doesNotMatch(body, /\/Users\/|file:\/\/|Oliver|Blair|张叶丛|姜安頔|\b(?:api[_-]?key|password|cookie|token)\b/i, `${plan.id}: private information`);
   assert.doesNotMatch(body, /class="[^"]*\bstatus(?:-|\s|"\b)|20\d{2}-\d{2}-\d{2}/, `${plan.id}: no date or status badge`);

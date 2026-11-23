@@ -66,7 +66,9 @@ for (const file of codeFiles) {
       && /class="(?:loyalty-more|loyalty-rules)"/.test(match[0]);
     const revisedReference = /^(?:campaigns(?:-oedro|-cozeware)?|campaign-(?:oedro|cozeware)-r[1-4]|user-segments-oedro)\.html$/.test(path.relative(root, file))
       && /class="(?:camp-notes|camp-budget-extra|seg-data-note)"/.test(match[0]);
-    if (!revisedReference && !loyaltyReference && !competitorEvidence && !unverifiedVoiceArchive && !intentionalHistory && !demoFaq && !mobileArticleToc && !draftControls && !emailImportFiles && !emailPreviewSpec && !analyticsDefinition && !intentionalProductDetail && !/\bopen\b/i.test(match[0])) errors.push(path.relative(root, file) + ' 有正文details未默认展开：' + match[0]);
+    // Sidebar groups fold sub-pages in the navigation, not page content.
+    const sidebarTree = /^<details class="nav-children"/.test(match[0]);
+    if (!sidebarTree && !revisedReference && !loyaltyReference && !competitorEvidence && !unverifiedVoiceArchive && !intentionalHistory && !demoFaq && !mobileArticleToc && !draftControls && !emailImportFiles && !emailPreviewSpec && !analyticsDefinition && !intentionalProductDetail && !/\bopen\b/i.test(match[0])) errors.push(path.relative(root, file) + ' 有正文details未默认展开：' + match[0]);
   }
   for (const match of source.matchAll(/<[^>]+aria-expanded="false"[^>]*>/gi)) {
     const sampleMenu = /^fakesite\/[^/]+\.html$/.test(path.relative(root,file)) && /class="menu-toggle"/.test(match[0]);

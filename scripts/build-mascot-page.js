@@ -22,7 +22,7 @@ async function renderMascotPage() {
   vm.createContext(context);
   // Reuse the shared navigation renderer without executing browser startup.
   const app = read('app.js');
-  const functions = ['escapeHtml', 'renderShell'].map((name) => {
+  const functions = ['escapeHtml', 'navMarkup', 'renderShell'].map((name) => {
     const match = app.match(new RegExp(`function ${name}\\([^]*?\\n}`, 'm'));
     if (!match) throw new Error(`Cannot find shared renderer: ${name}`);
     return match[0];

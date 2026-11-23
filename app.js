@@ -22,7 +22,10 @@ function setSidebar(open, restoreFocus = true) {
   document.body.classList.toggle('nav-open', open);
   if (overlay) overlay.hidden = !open;
   menuButton?.setAttribute('aria-expanded', String(open));
-  if (open) sidebar?.querySelector('.nav-close')?.focus();
+  if (open) {
+    sidebar?.querySelector('.nav-close')?.focus({ preventScroll: true });
+    window.hubNav?.reveal();
+  }
   else if (restoreFocus && compactNavigation.matches) {
     requestAnimationFrame(() => {
       if (!sidebar?.classList.contains('open') && compactNavigation.matches) menuButton?.focus();
@@ -38,26 +41,42 @@ function sectionHead(title, action = '') {
   return `<div class="section-head"><h2>${escapeHtml(title)}</h2>${action}</div>`;
 }
 
+// The sidebar is defined once in data/content.json. scripts/build-nav.js writes this same
+// markup into every page so navigation works before (and without) JavaScript.
+function navMarkup(nav, pageId, parentId = '') {
+  const activeId = nav.some((item) => item.id === pageId) ? pageId : parentId || pageId;
+  const active = nav.find((item) => item.id === activeId);
+  const link = (item) => {
+    const label = escapeHtml(item.label);
+    if (item.reserved) return `<span class="nav-reserved" role="link" aria-disabled="true">${label}<span class="nav-reserved-note">预留</span></span>`;
+    const current = item.id === activeId;
+    const classes = [current && 'active', item.parent && 'nav-child', active?.parent === item.id && 'nav-ancestor', item.external && 'nav-external'].filter(Boolean).join(' ');
+    return `<a href="${escapeHtml(item.file)}" data-page="${escapeHtml(item.id)}"${classes ? ` class="${classes}"` : ''}${current ? ` aria-current="${activeId === pageId ? 'page' : 'location'}"` : ''}${item.external ? ` aria-label="${label}（离开工作台，进入样站）"` : ''}><span>${label}</span>${item.external ? '<span aria-hidden="true">↗</span>' : ''}</a>`;
+  };
+  let group = '';
+  return nav.filter((item) => !item.parent).map((item) => {
+    const heading = item.group && item.group !== group ? `\n<div class="nav-group">${escapeHtml(item.group)}</div>` : '';
+    group = item.group || group;
+    const children = nav.filter((child) => child.parent === item.id);
+    if (!children.length) return `${heading}\n${link(item)}`;
+    const open = active && (active.id === item.id || active.parent === item.id);
+    return `${heading}\n<div class="nav-branch" data-branch="${escapeHtml(item.id)}">${link(item)}<details class="nav-children"${open ? ' open' : ''}><summary aria-label="${escapeHtml(item.label)}的子页（${children.length}）"><span class="nav-chevron" aria-hidden="true"></span></summary>${children.map(link).join('')}</details></div>`;
+  }).join('') + '\n';
+}
+
 function renderShell(data) {
   const parentPage = document.body.dataset.navParent;
   const activePage = page === 'topics' && location.pathname.endsWith('topic.html')
     ? new URLSearchParams(location.search).get('slug')
-    : parentPage || page;
+    : page;
   document.querySelector('#site-title').textContent = '海外用户运营';
   document.querySelector('#site-subtitle').textContent = 'Hub';
-  document.querySelector('#nav-list').innerHTML = data.nav.map((item, index) => {
-    const group = item.group && item.group !== data.nav[index - 1]?.group
-      ? `<div class="nav-group">${escapeHtml(item.group)}</div>` : '';
-    const label = escapeHtml(item.label);
-    if (item.reserved) return `${group}
-      <span class="nav-reserved" role="link" aria-disabled="true">${label}<span class="nav-reserved-note">预留</span></span>`;
-    const current = item.id === activePage;
-    return `${group}
-      <a href="${escapeHtml(item.file)}" data-page="${escapeHtml(item.id)}" ${item.external ? 'aria-label="' + label + '（离开工作台，进入样站）"' : ''} ${current ? `aria-current="${parentPage ? 'location' : 'page'}"` : ''} class="${current ? 'active' : ''}${item.parent ? ' nav-child' : ''}${item.external ? ' nav-external' : ''}">
-        <span>${label}</span>${item.external ? '<span aria-hidden="true">↗</span>' : ''}
-      </a>`;
-  }).join('');
-  const current = data.nav.find((item) => item.id === activePage);
+  const navigation = document.querySelector('#nav-list');
+  if (!String(navigation.innerHTML).includes('data-page=')) {
+    navigation.innerHTML = navMarkup(data.nav, activePage, parentPage);
+    window.hubNav?.restore();
+  }
+  const current = data.nav.find((item) => item.id === activePage) || data.nav.find((item) => item.id === parentPage);
   const breadcrumb = document.querySelector('#breadcrumb-page');
   breadcrumb.textContent = document.body.dataset.breadcrumb || current?.label || (page === 'home' ? '首页' : page === 'topics' ? '资料索引' : breadcrumb.textContent);
 }
@@ -447,6 +466,99 @@ async function renderTopic(data) {
     </div>`;
 }
 
+// Sidebar memory: the sidebar keeps its own place when the reader moves between pages.
+// Scroll position lives in sessionStorage (this tab only); opened branches live in
+// localStorage. Storage can be unavailable, so every access falls back silently.
+window.hubNav = (function createHubNav() {
+  const nav = document.querySelector('#nav-list');
+  if (!sidebar || !nav || typeof nav.querySelectorAll !== 'function') return null;
+  const keys = { open: 'hub-nav-open', scroll: 'hub-nav-scroll', anchor: 'hub-nav-anchor' };
+  const read = (area, key) => { try { return JSON.parse(window[area].getItem(key) || 'null'); } catch { return null; } };
+  const write = (area, key, value) => { try { window[area].setItem(key, JSON.stringify(value)); } catch { /* storage blocked */ } };
+  const remove = (area, key) => { try { window[area].removeItem(key); } catch { /* storage blocked */ } };
+  const currentLink = () => nav.querySelector('a[aria-current]');
+  const pageKey = location.pathname + location.search;
+  const saveScroll = () => {
+    const saved = read('sessionStorage', keys.scroll) || {};
+    const pages = saved.pages && typeof saved.pages === 'object' ? saved.pages : {};
+    pages[pageKey] = sidebar.scrollTop;
+    write('sessionStorage', keys.scroll, { last: sidebar.scrollTop, pages });
+  };
+  const offsetInSidebar = (element) => element.getBoundingClientRect().top - sidebar.getBoundingClientRect().top;
+
+  function applyOpenState() {
+    const saved = read('localStorage', keys.open) || {};
+    nav.querySelectorAll('.nav-branch').forEach((branch) => {
+      const details = branch.querySelector('details');
+      if (details) details.open = !!branch.querySelector('a[aria-current]') || saved[branch.dataset.branch] === true;
+    });
+  }
+
+  function reveal(link = currentLink()) {
+    if (!link || !link.getClientRects().length) return;
+    const box = sidebar.getBoundingClientRect();
+    const item = link.getBoundingClientRect();
+    if (item.top < box.top + 16 || item.bottom > box.bottom - 16) {
+      sidebar.scrollTop += item.top - box.top - (box.height - item.height) / 2;
+    }
+  }
+
+  function markCurrent(id) {
+    const link = id && nav.querySelector(`a[data-page="${CSS.escape(id)}"]`);
+    if (!link) return;
+    link.classList.add('active');
+    link.setAttribute('aria-current', 'page');
+    const branch = link.closest('.nav-branch');
+    const parent = branch?.querySelector(':scope > a');
+    if (parent && parent !== link) parent.classList.add('nav-ancestor');
+  }
+
+  function restore() {
+    applyOpenState();
+    const current = currentLink();
+    const anchor = read('sessionStorage', keys.anchor);
+    remove('sessionStorage', keys.anchor);
+    if (anchor && current && anchor.id === current.dataset.page) {
+      // Arrived by clicking this entry: put it back at the height where it was clicked.
+      sidebar.scrollTop += offsetInSidebar(current) - anchor.top;
+    } else {
+      // Refresh, back and forward: this page's own last position, else the last page's.
+      const saved = read('sessionStorage', keys.scroll) || {};
+      const top = saved.pages?.[pageKey] ?? saved.last;
+      if (typeof top === 'number') sidebar.scrollTop = top;
+    }
+    reveal(current);
+  }
+
+  nav.addEventListener('click', (event) => {
+    const summary = event.target.closest('summary');
+    if (summary) { summary.parentElement.dataset.userToggle = 'true'; return; }
+    const link = event.target.closest('a[data-page]');
+    if (!link) return;
+    write('sessionStorage', keys.anchor, { id: link.dataset.page, top: offsetInSidebar(link) });
+    saveScroll();
+  });
+  nav.addEventListener('toggle', (event) => {
+    const details = event.target;
+    if (!details.dataset?.userToggle) return;
+    delete details.dataset.userToggle;
+    const saved = read('localStorage', keys.open) || {};
+    saved[details.closest('.nav-branch').dataset.branch] = details.open;
+    write('localStorage', keys.open, saved);
+  }, true);
+  let pending = false;
+  sidebar.addEventListener('scroll', () => {
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(() => { pending = false; saveScroll(); });
+  }, { passive: true });
+  window.addEventListener('pagehide', saveScroll);
+
+  if (page === 'topics') markCurrent(new URLSearchParams(location.search).get('slug'));
+  if (nav.querySelector('a')) restore();
+  return { restore, reveal, markCurrent };
+})();
+
 if (sidebar) {
   sidebar.id = 'workspace-navigation';
   sidebar.insertAdjacentHTML('afterbegin', '<button class="nav-close" type="button" aria-label="关闭导航">×</button>');
@@ -461,7 +573,7 @@ document.addEventListener('keydown', (event) => {
   if (!sidebar?.classList.contains('open')) return;
   if (event.key === 'Escape') { event.preventDefault(); setSidebar(false); }
   if (event.key === 'Tab') {
-    const items = [...sidebar.querySelectorAll('a[href],button')];
+    const items = [...sidebar.querySelectorAll('a[href],button,summary')].filter((item) => item.getClientRects().length);
     const first = items[0];
     const last = items[items.length - 1];
     if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
@@ -534,7 +646,7 @@ const contextSupplement = document.querySelector('#context-supplement')?.outerHT
 function restoreContextSupplement() {
   if (contextSupplement && !document.querySelector('#context-supplement')) mainContent.insertAdjacentHTML('beforeend', contextSupplement);
 }
-const staticContentPage = ['home', 'email-templates', 'context', 'studio', 'content-guides', 'content-guides-oedro', 'content-guides-cozeware', 'daily-ops', 'content-review', 'comics-gallery', 'skills', 'loyalty', 'repurchase', 'freshflow', 'competitor-experience', 'customer-analytics', 'mascot-workflow', 'social-brand', 'merch-plan', 'merch-cozeware', 'first-outreach', 'discord-invite-plan', 'ugc-activity', 'user-segments-oedro', 'feed-oedro', 'feed-cozeware', 'ad-tests', 'loyalty-cozeware', 'mascot-cozeware', 'email-templates-cozeware', 'newsletter-cozeware'].includes(page) || page?.startsWith('campaigns-');
+const staticContentPage = ['home', 'email-templates', 'context', 'studio', 'content-guides', 'content-guides-oedro', 'content-guides-cozeware', 'daily-ops', 'content-review', 'comics-gallery', 'skills', 'loyalty', 'repurchase', 'freshflow', 'competitor-experience', 'customer-analytics', 'mascot-workflow', 'social-brand', 'merch-plan', 'merch-cozeware', 'first-outreach', 'discord-invite-plan', 'ugc-activity', 'user-segments-oedro', 'feed-oedro', 'feed-cozeware', 'ad-tests', 'loyalty-cozeware', 'mascot-cozeware', 'mascot-friends', 'email-templates-cozeware', 'newsletter-cozeware'].includes(page) || page?.startsWith('campaigns-');
 if (page === 'mascot') {
   if (!document.querySelector('#nav-list').querySelector('a')) initMascotNavigation();
 } else {

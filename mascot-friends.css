@@ -1,0 +1,68 @@
+/* Bruno & Friends: a cast sheet. Portraits share one 4:5 paper frame, so a new
+   image only needs the same file name under assets/bruno-friends/. */
+.bf-main { --bf-paper: #e3d5cb; max-width: 1280px; }
+.bf-heading .bf-kicker { margin: 0 0 8px; font-size: 14px; }
+.bf-heading h1 span { display: block; margin-top: 6px; color: var(--text-muted); font-size: 16px; font-weight: 450; letter-spacing: .04em; }
+.bf-heading > p:last-child { max-width: 62ch; }
+
+#content .bf-lineup { max-inline-size: min(100%, 1100px); margin: 0 0 var(--space-6); }
+#content .bf-lineup img { max-block-size: none; }
+.bf-lineup a, .bf-portrait, .bf-matt-images a, .bf-examples a { display: block; }
+.bf-lineup img { display: block; width: 100%; height: auto; background: var(--bf-paper); }
+
+.bf-jump { display: flex; flex-wrap: wrap; gap: 4px 20px; margin: 0 0 var(--space-7); padding-bottom: var(--space-3); border-bottom: .5px solid var(--border); }
+.bf-jump a { display: inline-flex; align-items: center; min-height: 44px; font-size: 15px; }
+
+.bf-section { margin-top: var(--space-8); }
+.bf-section > h2 { margin: 0 0 var(--space-5); padding-top: var(--space-4); border-top: .5px solid var(--border); }
+
+.bf-portrait { aspect-ratio: 4 / 5; overflow: hidden; background: var(--bf-paper); }
+.bf-portrait img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+.bf-role { margin: 0 0 4px; color: var(--accent); font-size: 14px; letter-spacing: .06em; }
+.bf-copy h3 { margin: 0 0 var(--space-3); }
+.bf-copy h3 span { font-weight: 650; }
+.bf-copy > p { margin: 0 0 var(--space-3); line-height: 1.8; }
+.bf-copy blockquote { margin: var(--space-4) 0 2px; padding-left: 14px; border-left: 2px solid var(--accent); color: var(--text); font-size: 18px; font-weight: 550; line-height: 1.5; }
+.bf-copy .bf-quote-zh { margin: 0; padding-left: 16px; color: var(--text-muted); font-size: 15px; }
+.bf-copy .bf-quote-zh.bf-silent { padding-left: 0; }
+
+.bf-feature { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-7); align-items: start; }
+.bf-feature + .bf-feature { margin-top: var(--space-8); }
+.bf-feature .bf-copy h3 { font-size: 28px; }
+.bf-feature .bf-copy { max-width: 62ch; }
+
+.bf-matt-images { display: grid; gap: var(--space-3); }
+.bf-matt-images figure { margin: 0; }
+.bf-matt-images img { display: block; width: 100%; height: auto; background: #fff; }
+.bf-matt-images figure:last-child { width: 56%; justify-self: end; }
+.bf-matt-images figcaption, .bf-examples figcaption { margin-top: 6px; color: var(--text-muted); font-size: 14px; }
+
+.bf-spec { margin-top: var(--space-5); padding-top: var(--space-4); border-top: .5px solid var(--border); }
+.bf-spec h4 { margin: var(--space-4) 0 var(--space-2); font-size: 16px; }
+.bf-spec h4:first-child { margin-top: 0; }
+.bf-spec p, .bf-spec li { line-height: 1.75; }
+.bf-spec ol { margin: 0 0 var(--space-3); padding-left: 1.4em; }
+
+.bf-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-7) var(--space-6); }
+.bf-card .bf-portrait { margin-bottom: var(--space-4); }
+.bf-card .bf-copy h3 { font-size: 22px; }
+
+.bf-rules { max-width: 70ch; margin: 0 0 var(--space-6); padding-left: 1.4em; }
+.bf-rules li { margin-bottom: var(--space-3); line-height: 1.8; }
+.bf-rules strong { color: var(--text); }
+.bf-examples { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); max-width: 880px; }
+.bf-examples figure { margin: 0; }
+.bf-examples img { display: block; width: 100%; height: auto; }
+
+@media (max-width: 1100px) { .bf-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 680px) {
+  .bf-feature { grid-template-columns: 1fr; gap: var(--space-5); }
+  .bf-feature .bf-portrait { max-width: 420px; }
+  .bf-grid { grid-template-columns: 1fr; }
+  .bf-card { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: var(--space-4); align-items: start; }
+  .bf-card .bf-portrait { margin-bottom: 0; }
+  .bf-examples { grid-template-columns: 1fr; }
+  .bf-feature .bf-copy h3 { font-size: 24px; }
+}
+.bf-main [id] { scroll-margin-top: 84px; }
