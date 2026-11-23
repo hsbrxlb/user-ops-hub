@@ -10,7 +10,7 @@ Hub 按部门任务线汇集项目进展、上下文与下载资产，通过 Git
 
 - `context.html` 保留旧链接并跳转首页。品牌、产品、权限申请、画风和工作流程按主题并入相应页面；首页提供首次阅读入口。
 - `content-guides.html` 连接两个 Content Guide、两份排期表与品牌资料 Drive 文件夹。总文件夹按 OEDRO、Cozeware 分组，页面品牌资料入口使用文件夹链接。
-- `content-review.html` 提供现行内容过审标准，`skills.html` 收录 10 份公开版 Markdown 技能，支持阅读、复制和下载。漫画画廊 `comics-gallery.html` 按品牌展示成品，可筛选并打开大图。
+- `content-review.html` 提供现行内容过审标准，`skills.html` 收录 10 份公开版 Markdown 技能，支持阅读、复制和下载。多种绘画风格 `comics-gallery.html` 按品牌展示成品，可筛选并打开大图。
 - `freshflow.html`、`loyalty.html`、`repurchase.html` 分别展示新风机、积分方案与复购办法。
 - `customer-analytics.html` 只加载聚合统计，`#outreach` 直接选择首批触达样本。`first-outreach-users.html` 是转到聚合统计的兼容入口。
 - 逐客户原数据保留在公开工作区以外。重新聚合时给 `scripts/build-customer-analytics.py --input` 传入私有原件；本地用 `HUB_PRIVATE_OUTREACH_SOURCE` 执行源数据对账，CI 核公开聚合一致性与明细排除。
