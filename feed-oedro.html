@@ -13,7 +13,7 @@
 <link href="theme.css?v=hub22" rel="stylesheet"/>
 <link href="hub-refresh.css?v=hub24" rel="stylesheet"/>
 <link rel="stylesheet" href="image-viewer.css?v=hub18"/>
-<link rel="stylesheet" href="post-feed.css?v=hub23"/>
+<link rel="stylesheet" href="post-feed.css?v=hub26-status"/>
 </head>
 <body data-page="feed-oedro">
 <a class="skip-link" href="#content">跳到正文</a>
@@ -91,8 +91,9 @@
   3. Change data-post, data-purpose (space-separated slugs from the list below), image paths, width/height,
      the <h3> title, the Chinese .post-context line, and one .post-caption block per platform.
      The first platform button and caption are shown; the others keep the hidden attribute.
-  4. Multi-image posts: list every image in data-pages separated by "|", and add a .post-thumbs block.
-  5. Purpose slugs (post-feed.js redraws the pills and the filter from data-purpose):
+  4. For the review batch, copy the bilingual .post-status from a card with the same status.
+  5. Multi-image posts: list every image in data-pages separated by "|", and add a .post-thumbs block.
+  6. Purpose slugs (post-feed.js redraws the pills and the filter from data-purpose):
      product-promo discord-invite exclusive-discount user-campaign giveaway user-story how-to education comic
      trend seasonal holiday-sale brand creator-collab new-arrival
      floor-mats tonneau-cover running-boards bumper under-seat-storage truck-bed-toolbox fitment (Oedro) / ac freshflow installation (Cozeware)
@@ -400,7 +401,7 @@ What's the first thing you check when it starts to rain?</p></div>
 <div class="post-body">
 <ul class="post-purpose" aria-label="用途"><li data-tag="comic">漫画<span lang="en">Comic</span></li><li data-tag="seasonal">应季场景<span lang="en">Seasonal</span></li><li data-tag="trend">蹭热点<span lang="en">Trend</span></li><li data-tag="floor-mats" class="is-product">脚垫<span lang="en">Floor mats</span></li></ul>
 <h3 lang="en">Thanksgiving Gravy Run</h3>
-<p class="post-context">过节路上洒了肉汁，脚垫的高边和沟槽兜住了这一锅。</p>
+<p class="post-context"><span class="post-status" data-status="ready">可发 <span lang="en">Ready to post</span></span>过节路上洒了肉汁，脚垫的高边和沟槽兜住了这一锅。</p>
 <div class="post-platforms"><div class="post-platform-switch" role="group" aria-label="平台"><button type="button" data-platform="Instagram" aria-pressed="true">Instagram</button><button type="button" data-platform="Facebook" aria-pressed="false">Facebook</button><button type="button" data-platform="X" aria-pressed="false">X</button><button type="button" data-platform="Threads" aria-pressed="false">Threads</button></div><button type="button" class="post-copy">复制配文</button></div>
 <div class="post-caption" data-feed-platform="Instagram"><p class="feed-caption" lang="en">The F-150 owner handed a friend the keys so he could hold Grandma&#x27;s gravy with both hands, which is a bold move when the road has a railroad crossing. Swipe to see where the gravy ends up. Check your cab and seat layout to find the right OEDRO floor liners for your truck.</p></div>
 <div class="post-caption" data-feed-platform="Facebook" hidden><p class="feed-caption" lang="en">The F-150 owner let a friend drive so he could hold the gravy pot with both hands. Holiday logistics are rarely simple. OEDRO floor liners have raised edges and Y-shaped channels that catch liquid, and the liners wipe clean. Check cab and seat layout for OEDRO floor liners.</p></div>
@@ -416,7 +417,7 @@ What's the first thing you check when it starts to rain?</p></div>
 <div class="post-body">
 <ul class="post-purpose" aria-label="用途"><li data-tag="comic">漫画<span lang="en">Comic</span></li><li data-tag="seasonal">应季场景<span lang="en">Seasonal</span></li><li data-tag="running-boards" class="is-product">踏板<span lang="en">Running boards</span></li></ul>
 <h3 lang="en">Real Truck Guys</h3>
-<p class="post-context">结霜时跨不上抬高的皮卡，邻居最后还是搭了有踏板的车。</p>
+<p class="post-context"><span class="post-status" data-status="review">待审 <span lang="en">In review</span></span>结霜时跨不上抬高的皮卡，邻居最后还是搭了有踏板的车。</p>
 <div class="post-platforms"><div class="post-platform-switch" role="group" aria-label="平台"><button type="button" data-platform="Instagram" aria-pressed="true">Instagram</button><button type="button" data-platform="Facebook" aria-pressed="false">Facebook</button><button type="button" data-platform="X" aria-pressed="false">X</button><button type="button" data-platform="Threads" aria-pressed="false">Threads</button></div><button type="button" class="post-copy">复制配文</button></div>
 <div class="post-caption" data-feed-platform="Instagram"><p class="feed-caption" lang="en">Getting into a truck with a full coffee is a skill most of us learn the hard way. Step height decides how that goes. The driver kept his coffee upright. OEDRO two-step running boards fit 2015-2026 Ford F-150 SuperCrew.</p></div>
 <div class="post-caption" data-feed-platform="Facebook" hidden><p class="feed-caption" lang="en">A lot of truck owners say they don&#x27;t need a step until the day they do. A lowered step and perforated tread make climbing into a tall cab feel a little less like a stunt. The neighbor is still working on admitting that, but he&#x27;s been a good sport about the ride. OEDRO two-step running boards fit 2015-2026 Ford F-150 SuperCrew.</p></div>
@@ -427,28 +428,6 @@ What's the first thing you check when it starts to rain?</p></div>
 </section>
 <section class="feed-day" data-date="2026-11-25" id="day-2026-11-25" aria-labelledby="title-2026-11-25">
 <h2 id="title-2026-11-25"><span class="day-date">11月25日</span><span class="day-week">周三</span></h2>
-<article class="post" data-post="the-passenger-picks-the-ride" data-purpose="comic seasonal running-boards">
-<div class="post-media">
-<button class="feed-large" type="button" aria-label="查看大图" data-title="The Passenger Picks the Ride" data-pages="assets/feed/the-passenger-picks-the-ride/1.webp|assets/feed/the-passenger-picks-the-ride/2.webp"><img src="assets/feed/the-passenger-picks-the-ride/1.webp" alt="The Passenger Picks the Ride" width="1080" height="1350" loading="lazy"></button>
-<div class="post-thumbs"><button type="button" data-feed-thumb="0" aria-label="第 1 张漫画" aria-current="true"><img src="assets/feed/the-passenger-picks-the-ride/1.webp" alt="" width="1080" height="1350" loading="lazy" data-no-zoom></button><button type="button" data-feed-thumb="1" aria-label="第 2 张漫画"><img src="assets/feed/the-passenger-picks-the-ride/2.webp" alt="" width="1080" height="1350" loading="lazy" data-no-zoom></button></div>
-</div>
-<div class="post-body">
-<ul class="post-purpose" aria-label="用途"><li data-tag="comic">漫画<span lang="en">Comic</span></li><li data-tag="seasonal">应季场景<span lang="en">Seasonal</span></li><li data-tag="running-boards" class="is-product">踏板<span lang="en">Running boards</span></li></ul>
-<h3 lang="en">The Passenger Picks the Ride</h3>
-<p class="post-context">老金毛顺着踏板进了邻居的车，自己选好了搭哪辆车。</p>
-<div class="post-platforms"><div class="post-platform-switch" role="group" aria-label="平台"><button type="button" data-platform="Instagram" aria-pressed="true">Instagram</button><button type="button" data-platform="Facebook" aria-pressed="false">Facebook</button><button type="button" data-platform="X" aria-pressed="false">X</button><button type="button" data-platform="Threads" aria-pressed="false">Threads</button></div><button type="button" class="post-copy">复制配文</button></div>
-<div class="post-caption" data-feed-platform="Instagram"><p class="feed-caption" lang="en">The senior golden retriever has a calm face and no interest in explaining himself. His owner has a truck, the neighbor has an F-150, and the ruling is coming in the second card.
-
-OEDRO two-step running boards fit 2015-2026 Ford F-150 SuperCrew.</p></div>
-<div class="post-caption" data-feed-platform="Facebook" hidden><p class="feed-caption" lang="en">The dog&#x27;s owner has a lifted truck and plenty of pride in it. His senior golden has a calm face and firm opinions, and he picked the neighbor&#x27;s F-150 without a single bark. The truck owner got outvoted by a dog.
-
-OEDRO two-step running boards fit 2015-2026 Ford F-150 SuperCrew.</p></div>
-<div class="post-caption" data-feed-platform="X" hidden><p class="feed-caption" lang="en">A truck owner lost a vote to a golden retriever who never even raised his voice. The dog has decided. OEDRO two-step running boards fit 2015-2026 Ford F-150 SuperCrew.</p></div>
-<div class="post-caption" data-feed-platform="Threads" hidden><p class="feed-caption" lang="en">Every group has one member who just stares until the plan changes. This one never gave the big lifted truck a chance.
-
-OEDRO two-step running boards fit 2015-2026 Ford F-150 SuperCrew.</p></div>
-</div>
-</article>
 <article class="post" data-post="a-snowman-rides-in-back" data-purpose="comic seasonal tonneau-cover">
 <div class="post-media">
 <button class="feed-large" type="button" aria-label="查看大图" data-title="A Snowman Rides in Back" data-pages="assets/feed/a-snowman-rides-in-back/1.webp|assets/feed/a-snowman-rides-in-back/2.webp"><img src="assets/feed/a-snowman-rides-in-back/1.webp" alt="A Snowman Rides in Back" width="1080" height="1350" loading="lazy"></button>
@@ -457,7 +436,7 @@ OEDRO two-step running boards fit 2015-2026 Ford F-150 SuperCrew.</p></div>
 <div class="post-body">
 <ul class="post-purpose" aria-label="用途"><li data-tag="comic">漫画<span lang="en">Comic</span></li><li data-tag="seasonal">应季场景<span lang="en">Seasonal</span></li><li data-tag="tonneau-cover" class="is-product">货箱盖<span lang="en">Tonneau cover</span></li></ul>
 <h3 lang="en">A Snowman Rides in Back</h3>
-<p class="post-context">孩子坚持带小雪人去过节，折叠货箱盖下面刚好有它的位置。</p>
+<p class="post-context"><span class="post-status" data-status="ready">可发 <span lang="en">Ready to post</span></span>孩子坚持带小雪人去过节，折叠货箱盖下面刚好有它的位置。</p>
 <div class="post-platforms"><div class="post-platform-switch" role="group" aria-label="平台"><button type="button" data-platform="Instagram" aria-pressed="true">Instagram</button><button type="button" data-platform="Facebook" aria-pressed="false">Facebook</button><button type="button" data-platform="X" aria-pressed="false">X</button><button type="button" data-platform="Threads" aria-pressed="false">Threads</button></div><button type="button" class="post-copy">复制配文</button></div>
 <div class="post-caption" data-feed-platform="Instagram"><p class="feed-caption" lang="en">A truck owner made one offhand comment about the cover, and his niece took it as literally as a person can. A snowman is involved now, and Grandma has no idea what is about to happen at her door.
 
@@ -482,7 +461,7 @@ The OEDRO hard tri-fold cover fits 2015-2026 Ford F-150 with a 5.5-ft bed only.<
 <div class="post-body">
 <ul class="post-purpose" aria-label="用途"><li data-tag="comic">漫画<span lang="en">Comic</span></li><li data-tag="seasonal">应季场景<span lang="en">Seasonal</span></li><li data-tag="under-seat-storage" class="is-product">座椅下储物盒<span lang="en">Under-seat storage</span></li></ul>
 <h3 lang="en">Backup Pie</h3>
-<p class="post-context">感恩节的派总是先吃光，后座下的储物盒藏着整只备用派。</p>
+<p class="post-context"><span class="post-status" data-status="ready">可发 <span lang="en">Ready to post</span></span>感恩节的派总是先吃光，后座下的储物盒藏着整只备用派。</p>
 <div class="post-platforms"><div class="post-platform-switch" role="group" aria-label="平台"><button type="button" data-platform="Instagram" aria-pressed="true">Instagram</button><button type="button" data-platform="Facebook" aria-pressed="false">Facebook</button><button type="button" data-platform="X" aria-pressed="false">X</button><button type="button" data-platform="Threads" aria-pressed="false">Threads</button></div><button type="button" class="post-copy">复制配文</button></div>
 <div class="post-caption" data-feed-platform="Instagram"><p class="feed-caption" lang="en">The host&#x27;s Thanksgiving plan has one line blacked out, and he has no intention of explaining it. Dessert is involved, and that is all the briefing allows.
 
@@ -504,7 +483,7 @@ The OEDRO under-seat organizer fits 2015-2026 Ford F-150 SuperCrew.</p></div>
 <div class="post-body">
 <ul class="post-purpose" aria-label="用途"><li data-tag="comic">漫画<span lang="en">Comic</span></li><li data-tag="seasonal">应季场景<span lang="en">Seasonal</span></li><li data-tag="tonneau-cover" class="is-product">货箱盖<span lang="en">Tonneau cover</span></li></ul>
 <h3 lang="en">One Star</h3>
-<p class="post-context">浣熊惦记货箱里的剩菜，扒不开盖，转头给三折盖打了一星。</p>
+<p class="post-context"><span class="post-status" data-status="ready">可发 <span lang="en">Ready to post</span></span>浣熊惦记货箱里的剩菜，扒不开盖，转头给三折盖打了一星。</p>
 <div class="post-platforms"><div class="post-platform-switch" role="group" aria-label="平台"><button type="button" data-platform="Instagram" aria-pressed="true">Instagram</button><button type="button" data-platform="Facebook" aria-pressed="false">Facebook</button><button type="button" data-platform="X" aria-pressed="false">X</button><button type="button" data-platform="Threads" aria-pressed="false">Threads</button></div><button type="button" class="post-copy">复制配文</button></div>
 <div class="post-caption" data-feed-platform="Instagram"><p class="feed-caption" lang="en">This is a raccoon who takes reviews seriously. He has thoughts about the bed, and the rating is waiting in the image.
 
@@ -529,7 +508,7 @@ The OEDRO hard tri-fold cover fits 2015-2026 Ford F-150 with a 5.5-ft bed only.<
 <div class="post-body">
 <ul class="post-purpose" aria-label="用途"><li data-tag="comic">漫画<span lang="en">Comic</span></li><li data-tag="seasonal">应季场景<span lang="en">Seasonal</span></li><li data-tag="trend">蹭热点<span lang="en">Trend</span></li><li data-tag="bumper" class="is-product">保险杠<span lang="en">Bumper</span></li></ul>
 <h3 lang="en">Black Friday Shopping Cart</h3>
-<p class="post-context">黑五停车场拍成野生动物纪录片，跑掉的购物车撞上了越野车的前保险杠。</p>
+<p class="post-context"><span class="post-status" data-status="review">待审 <span lang="en">In review</span></span>黑五停车场拍成野生动物纪录片，跑掉的购物车撞上了越野车的前保险杠。</p>
 <div class="post-platforms"><div class="post-platform-switch" role="group" aria-label="平台"><button type="button" data-platform="Instagram" aria-pressed="true">Instagram</button><button type="button" data-platform="Facebook" aria-pressed="false">Facebook</button><button type="button" data-platform="X" aria-pressed="false">X</button><button type="button" data-platform="Threads" aria-pressed="false">Threads</button></div><button type="button" class="post-copy">复制配文</button></div>
 <div class="post-caption" data-feed-platform="Instagram"><p class="feed-caption" lang="en">A lone shopping cart has left the herd and is crossing the lot with great determination. Few creatures are this committed on Black Friday. A parked Wrangler waits ahead.
 
@@ -551,7 +530,7 @@ The OEDRO full-width front bumper fits 2007-2018 Jeep Wrangler JK and JK Unlimit
 <div class="post-body">
 <ul class="post-purpose" aria-label="用途"><li data-tag="comic">漫画<span lang="en">Comic</span></li><li data-tag="seasonal">应季场景<span lang="en">Seasonal</span></li><li data-tag="tonneau-cover" class="is-product">货箱盖<span lang="en">Tonneau cover</span></li></ul>
 <h3 lang="en">Cute Truck</h3>
-<p class="post-context">雨夹雪淋软了大皮卡上的纸箱，软卷盖下的货物还是干的。</p>
+<p class="post-context"><span class="post-status" data-status="ready">可发 <span lang="en">Ready to post</span></span>雨夹雪淋软了大皮卡上的纸箱，软卷盖下的货物还是干的。</p>
 <div class="post-platforms"><div class="post-platform-switch" role="group" aria-label="平台"><button type="button" data-platform="Instagram" aria-pressed="true">Instagram</button><button type="button" data-platform="Facebook" aria-pressed="false">Facebook</button><button type="button" data-platform="X" aria-pressed="false">X</button><button type="button" data-platform="Threads" aria-pressed="false">Threads</button></div><button type="button" class="post-copy">复制配文</button></div>
 <div class="post-caption" data-feed-platform="Instagram"><p class="feed-caption" lang="en">A dad called his daughter&#x27;s Maverick a cute truck, and the sky seems to have heard him. A bulk run and some sleet are on the way.
 
@@ -568,6 +547,28 @@ The OEDRO soft roll-up bed cover fits 2022-2026 Ford Maverick with a 4.5-ft bed.
 </section>
 <section class="feed-day" data-date="2026-11-28" id="day-2026-11-28" aria-labelledby="title-2026-11-28">
 <h2 id="title-2026-11-28"><span class="day-date">11月28日</span><span class="day-week">周六</span></h2>
+<article class="post" data-post="the-bodyguard" data-purpose="comic seasonal floor-mats">
+<div class="post-media">
+<button class="feed-large" type="button" aria-label="查看大图" data-title="The Bodyguard" data-pages="assets/feed/the-bodyguard/1-a26d47ca9234.webp|assets/feed/the-bodyguard/2-d61bcffcad81.webp|assets/feed/the-bodyguard/3-0f775271ba9d.webp"><img src="assets/feed/the-bodyguard/1-a26d47ca9234.webp" alt="The Bodyguard" width="1122" height="1402" loading="lazy"></button>
+<div class="post-thumbs"><button type="button" data-feed-thumb="0" aria-label="第 1 张漫画" aria-current="true"><img src="assets/feed/the-bodyguard/1-a26d47ca9234.webp" alt="" width="1122" height="1402" loading="lazy" data-no-zoom></button><button type="button" data-feed-thumb="1" aria-label="第 2 张漫画"><img src="assets/feed/the-bodyguard/2-d61bcffcad81.webp" alt="" width="1122" height="1402" loading="lazy" data-no-zoom></button><button type="button" data-feed-thumb="2" aria-label="第 3 张漫画"><img src="assets/feed/the-bodyguard/3-0f775271ba9d.webp" alt="" width="1122" height="1402" loading="lazy" data-no-zoom></button></div>
+</div>
+<div class="post-body">
+<ul class="post-purpose" aria-label="用途"><li data-tag="comic">漫画<span lang="en">Comic</span></li><li data-tag="seasonal">应季场景<span lang="en">Seasonal</span></li><li data-tag="floor-mats" class="is-product">脚垫<span lang="en">Floor mats</span></li></ul>
+<h3 lang="en">The Bodyguard</h3>
+<p class="post-context"><span class="post-status" data-status="review">待审 <span lang="en">In review</span></span>脚垫像电影里的保镖一样接住湿靴子带进来的泥雪，收工还说今天很平静。</p>
+<div class="post-platforms"><div class="post-platform-switch" role="group" aria-label="平台"><button type="button" data-platform="Instagram" aria-pressed="true">Instagram</button><button type="button" data-platform="Facebook" aria-pressed="false">Facebook</button><button type="button" data-platform="X" aria-pressed="false">X</button><button type="button" data-platform="Threads" aria-pressed="false">Threads</button></div><button type="button" class="post-copy">复制配文</button></div>
+<div class="post-caption" data-feed-platform="Instagram"><p class="feed-caption" lang="en">The floor liner files a daily report on everything that crosses the cab floor. His high edges and Y-shaped channels trap liquid, mud, and snow, and the final entry is a surprise.
+
+Check your cab and seat layout before ordering OEDRO floor liners.</p></div>
+<div class="post-caption" data-feed-platform="Facebook" hidden><p class="feed-caption" lang="en">The floor liner is a floor liner with a plan for every boot that climbs in. His raised edges and Y-shaped channels catch liquid, snow, and dirt, and he wipes clean when the shift is over. When the carpet below wakes up and asks what happened, The floor liner just shrugs.
+
+Check your cab and seat layout before ordering OEDRO floor liners.</p></div>
+<div class="post-caption" data-feed-platform="X" hidden><p class="feed-caption" lang="en">The floor liner had the boots handled before anyone noticed. Quiet day, he says. Check your cab and seat layout before ordering OEDRO floor liners.</p></div>
+<div class="post-caption" data-feed-platform="Threads" hidden><p class="feed-caption" lang="en">Some coworkers do all the work and then act like nothing happened. The floor liner is that guy, and the carpet underneath has no idea how busy the morning was.
+
+Check your cab and seat layout before ordering OEDRO floor liners.</p></div>
+</div>
+</article>
 <article class="post" data-post="two-locks" data-purpose="comic truck-bed-toolbox">
 <div class="post-media">
 <button class="feed-large" type="button" aria-label="查看大图" data-title="Two Locks" data-pages="assets/feed/two-locks/1.webp|assets/feed/two-locks/2.webp"><img src="assets/feed/two-locks/1.webp" alt="Two Locks" width="1122" height="1402" loading="lazy"></button>
@@ -576,7 +577,7 @@ The OEDRO soft roll-up bed cover fits 2022-2026 Ford Maverick with a 4.5-ft bed.
 <div class="post-body">
 <ul class="post-purpose" aria-label="用途"><li data-tag="comic">漫画<span lang="en">Comic</span></li><li data-tag="truck-bed-toolbox" class="is-product">货箱工具箱<span lang="en">Truck bed toolbox</span></li></ul>
 <h3 lang="en">Two Locks</h3>
-<p class="post-context">浣熊猜中支架挂锁的密码，转出了工具箱，箱盖还得用钥匙。</p>
+<p class="post-context"><span class="post-status" data-status="review">待审 <span lang="en">In review</span></span>浣熊猜中支架挂锁的密码，转出了工具箱，箱盖还得用钥匙。</p>
 <div class="post-platforms"><div class="post-platform-switch" role="group" aria-label="平台"><button type="button" data-platform="Instagram" aria-pressed="true">Instagram</button><button type="button" data-platform="Facebook" aria-pressed="false">Facebook</button><button type="button" data-platform="X" aria-pressed="false">X</button><button type="button" data-platform="Threads" aria-pressed="false">Threads</button></div><button type="button" class="post-copy">复制配文</button></div>
 <div class="post-caption" data-feed-platform="Instagram"><p class="feed-caption" lang="en">A raccoon cracked the truck owner&#x27;s padlock code on the very first try, and then the toolbox swung out with him still sitting on it for a ride nobody planned. Check the year for your driver-side OEDRO F-150 toolbox.</p></div>
 <div class="post-caption" data-feed-platform="Facebook" hidden><p class="feed-caption" lang="en">The raccoon is sure he&#x27;s a genius after his first padlock guess opens the bracket on an F-150 toolbox. The padlock only handles the bracket, and the lid has its own key lock, which the raccoon hasn&#x27;t thought about yet. Check the year for your driver-side OEDRO F-150 toolbox.</p></div>
