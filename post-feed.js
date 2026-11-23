@@ -20,12 +20,14 @@
     'tonneau-cover': ['货箱盖', 'Tonneau cover'],
     'running-boards': ['踏板', 'Running boards'],
     bumper: ['保险杠', 'Bumper'],
+    'under-seat-storage': ['座椅下储物盒', 'Under-seat storage'],
+    'truck-bed-toolbox': ['货箱工具箱', 'Truck bed toolbox'],
     fitment: ['车型适配', 'Fitment'],
     ac: ['空调', 'AC'],
     freshflow: ['新风机', 'FreshFlow'],
     installation: ['安装', 'Installation']
   };
-  const PRODUCT = new Set(['floor-mats', 'tonneau-cover', 'running-boards', 'bumper', 'fitment', 'ac', 'freshflow', 'installation']);
+  const PRODUCT = new Set(['floor-mats', 'tonneau-cover', 'running-boards', 'bumper', 'under-seat-storage', 'truck-bed-toolbox', 'fitment', 'ac', 'freshflow', 'installation']);
   const ORDER = Object.keys(PURPOSES);
   const WEEK = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
 
