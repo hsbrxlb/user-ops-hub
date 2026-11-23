@@ -93,9 +93,9 @@
     const image = large.querySelector('img');
     const thumbs = [...entry.querySelectorAll('[data-feed-thumb]')];
     const dimensions = thumbs[index].querySelector('img');
-    image.width = dimensions.width;
-    image.height = dimensions.height;
-    setImageRatio(large, dimensions.width, dimensions.height);
+    image.width = Number(dimensions.getAttribute('width'));
+    image.height = Number(dimensions.getAttribute('height'));
+    setImageRatio(large, Number(image.getAttribute('width')), Number(image.getAttribute('height')));
     image.src = pictures[index];
     for (const [i, thumb] of thumbs.entries()) {
       if (i === index) thumb.setAttribute('aria-current', 'true');

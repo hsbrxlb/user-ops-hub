@@ -248,3 +248,10 @@
   font-size: 1rem;
   line-height: 1.6;
 }
+
+.feed-purpose {
+  padding: .1em .65em;
+  border: 1px solid var(--border-strong);
+  border-radius: 1em;
+  font-size: .875em;
+}
