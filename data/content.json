@@ -53,20 +53,14 @@
     },
     {
       "id": "feed-oedro",
-      "label": "OEDRO 帖子",
+      "label": "Oedro Post Schedule",
       "file": "feed-oedro.html",
       "group": "社媒内容"
     },
     {
-      "id": "feed-cozeware-ac",
-      "label": "Cozeware 空调帖子",
-      "file": "feed-cozeware-ac.html",
-      "group": "社媒内容"
-    },
-    {
-      "id": "feed-cozeware-freshflow",
-      "label": "Cozeware 新风机帖子",
-      "file": "feed-cozeware-freshflow.html",
+      "id": "feed-cozeware",
+      "label": "Cozeware Post Schedule",
+      "file": "feed-cozeware.html",
       "group": "社媒内容"
     },
     {

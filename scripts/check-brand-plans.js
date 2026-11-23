@@ -56,8 +56,9 @@ async function checkPlan(plan) {
     assert.doesNotMatch(html, /xiexingift\.com|ouyihats\.com|亚克力印刷款与软胶款/, 'merch-plan: superseded sourcing direction must not return');
     assert.match(html, /不是正式报价或已批准预算/, 'merch-plan: planning numbers cannot become approved quote or budget');
     const refreshed = [...html.matchAll(/src="(assets\/merch-trucker\/[^\"]+)"/g)].map(match => match[1]);
-    assert.equal(refreshed.length, 10, 'merch-plan: eight prior images and two car-interior proposals');
-    assert.equal(new Set(refreshed).size, 10, 'merch-plan: no duplicate refreshed image');
+    assert.equal(refreshed.length, 6, 'merch-plan: six earlier concept images kept for comparison');
+    assert.equal(new Set(refreshed).size, 6, 'merch-plan: no duplicate refreshed image');
+    assert.doesNotMatch(html, /merch-atlas\/(?:0[123]|12|15|2[234])-|07-product-crew|08-product-wear|car-air-freshener|car-tissue-holder|BULL-V2-MERCH/, 'merch-plan: withdrawn mascot-led designs stay off the page');
     assert.doesNotMatch(html, /src="assets\/(?:brand-plan\/merch-|brand-social\/daily-merch|brand-social\/r6\/references\/singular-cotton-cap)/, 'merch-plan: superseded soft caps removed from active page');
     for (const detail of ['卡车网帽', '挺括前片', '网布后片', '弯帽檐', '可调节后扣']) {
       assert.ok(html.includes(detail), 'merch-plan: current cap construction includes ' + detail);

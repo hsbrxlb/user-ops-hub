@@ -15,7 +15,7 @@ function publishedUrl(value) {
   return escape(value);
 }
 
-const file = path.join(__dirname, '..', 'feed-cozeware-freshflow.html');
+const file = path.join(__dirname, '..', 'feed-cozeware.html');
 const original = fs.readFileSync(file, 'utf8');
 const rows = JSON.parse(fs.readFileSync(0, 'utf8'));
 const schedule = new Map();
@@ -27,16 +27,18 @@ for (const { id, day, url } of rows) {
 }
 
 let links = 0;
-const days = /(<section [^>]*class="feed-day" data-date="([^"]+)"[^>]*>)([\s\S]*?)(<\/section>)/g;
-const posts = /(<article class="feed-entry" data-post="([^"]+)"><header>[\s\S]*?)(<\/header>)/g;
-const updated = original.replace(days, (_, open, day, body, close) => open + body.replace(posts, ($match, header, id, end) => {
+const days = /(<section class="feed-day" data-date="([^"]+)"[^>]*>)([\s\S]*?)(<\/section>)/g;
+// Only FreshFlow posts (data-purpose contains "freshflow") are synced from the Schedule sheet.
+const posts = /(<article class="post" data-post="([^"]+)" data-purpose="([^"]*)"[^>]*>[\s\S]*?)(<\/div>\n<\/article>)/g;
+const updated = original.replace(days, (_, open, day, body, close) => open + body.replace(posts, ($match, post, id, purpose, end) => {
+  if (!purpose.split(/\s+/).includes('freshflow')) return $match;
   const row = schedule.get(id);
   if (!row || row.day !== day) throw new Error(`No matching Schedule row for ${id} on ${day}`);
-  const clean = header.replace(/<p class="feed-schedule-link">[\s\S]*?<\/p>/, '');
+  const clean = post.replace(/\n?<p class="feed-schedule-link">[\s\S]*?<\/p>/, '').trimEnd() + '\n';
   const url = publishedUrl(row.url);
   if (!url) return clean + end;
   links += 1;
-  return clean + `<p class="feed-schedule-link"><span class="feed-schedule-link-label">链接</span><a href="${url}" target="_blank" rel="noopener noreferrer">${url}<span aria-hidden="true"> ↗</span></a></p>` + end;
+  return clean + `<p class="feed-schedule-link"><span class="feed-schedule-link-label">链接</span><a href="${url}" target="_blank" rel="noopener noreferrer">${url}<span aria-hidden="true"> ↗</span></a></p>\n` + end;
 }) + close);
 
 if (updated !== original) fs.writeFileSync(file, updated);
