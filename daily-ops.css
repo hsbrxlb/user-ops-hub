@@ -29,3 +29,7 @@
   .ops-card { padding: 20px 18px 16px; }
   .ops-hero p { font-size: 16px; }
 }
+.main-content.ref-reading, .ops, .ops-grid > li, .ops-card { min-width: 0; }
+.ops { width: 100%; box-sizing: border-box; }
+.ops-card li, .ops-purpose, .ops-hero p { overflow-wrap: anywhere; }
+@media (max-width: 760px) { .ops-weekly { flex-direction: column; align-items: flex-start; } .ops-weekly ul { flex-direction: column; } }
