@@ -88,7 +88,7 @@
       const metrics = [['有历史订单',buyers],['多次下单',buyers-one.count],['已订阅',subscribed.count]];
       view.innerHTML = `<section class="analytics-overview" aria-label="客户基础结构">${ring(frequency,data.total)}<dl class="metric-list">${metrics.map(([label,count]) => `<div><dt>${label}</dt><dd>${value(count,data.total)}</dd></div>`).join('')}</dl>${scope === 'outreach' ? "<p class=\"analytics-note\">名单来自 2026 年 6 月 17 日至 9 月 15 日的官网访问者和高消费客户。</p>" : ''}</section><section class="analytics-section">${heading('01','购买次数')}${frequencyPlot(frequency,data.total)}</section><section class="analytics-section">${heading('02','历史累计订单金额')}${amountPlot(amount,data.total)}</section><section class="analytics-section">${heading('03','邮件订阅状态')}${arcChart(subscription,data.total,'邮件订阅状态')}</section>${scope === 'outreach' ? outreachExtra(data) : ''}<details class="analytics-footnote"><summary>数据口径</summary><p>所有百分比以当前所选范围的客户总人数为分母。${data.as_of ? '统计日期：'+esc(data.as_of)+'。' : ''}订单与金额为历史累计，退款及取消订单的扣除情况尚未核实；多次下单指累计 2 单及以上。全体统计来自当天分次筛选，少量新增客户可能造成细微差异。弧线各轨道的完整长度均代表当前范围的 100%，端点圆点仅用于标记位置。</p></details>`;
     } catch (error) {
-      view.innerHTML = '<p class="load-message" role="alert">数据未通过完整性核对，暂不展示图表。</p><button type="button" class="retry-button" data-retry>重新加载</button>';
+      view.innerHTML = '<p class="load-message" role="alert">数据未通过完整性核对，可重新加载。</p><button type="button" class="retry-button" data-retry>重新加载</button>';
     }
   }
   async function load() {

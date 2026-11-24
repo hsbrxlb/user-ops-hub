@@ -372,7 +372,7 @@
   ],
   "research": {
     "title": "OEDRO 工作灯问卷",
-    "meta_description": "打开 OEDRO AI 文字访谈，查看调研准备、结果整理与参与说明。",
+    "meta_description": "OEDRO 工作灯问卷，根据回答继续追问。",
     "description": "工作灯 AI 调研问卷演示，根据回答继续追问。",
     "prepare": [
       "写明需要回答的问题、目标人群和希望比较的方案。",

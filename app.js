@@ -89,12 +89,12 @@ function renderResearch(data) {
   document.querySelector('#content').innerHTML = `
     ${pageHeading(r.title)}
     <section class="section research-entry">
-      <a class="research-preview" href="https://oedro-light-research.onrender.com/" target="_blank" rel="noopener" aria-label="预览并打开 AI 调研问卷">
-        <img src="assets/light-research/hawthorne-preview.jpg?v=20260914-r2" alt="OEDRO AI 调研问卷演示界面" width="1440" height="900">
+      <a class="research-preview" href="https://oedro-light-research.onrender.com/" target="_blank" rel="noopener" aria-label="打开 OEDRO 工作灯问卷">
+        <img src="assets/light-research/hawthorne-preview.jpg?v=20260914-r2" alt="OEDRO 工作灯问卷界面示意" width="1440" height="900">
       </a>
       <div class="research-launch-copy">
-        <p>工作灯问卷演示：答完会继续追问。</p>
-        <a class="research-open" href="https://oedro-light-research.onrender.com/" target="_blank" rel="noopener">打开演示 ↗</a>
+        <p>问卷会根据你的回答继续追问。</p>
+        <a class="research-open" href="https://oedro-light-research.onrender.com/" target="_blank" rel="noopener">开始问卷 ↗</a>
       </div>
     </section>`;
 }
@@ -102,7 +102,7 @@ function renderResearch(data) {
 function renderFlipbooks(data) {
   const flipbooks = data.flipbooks;
   document.title = `${flipbooks.title}｜${data.site.title}`;
-  document.querySelector('meta[name="description"]').content = "OEDRO 互动翻页书演示。";
+  document.querySelector('meta[name="description"]').content = "OEDRO 品牌故事和车主问卷。";
   document.querySelector('#content').innerHTML = `
     ${pageHeading(flipbooks.title)}
     <section class="section flipbook-demo-grid" aria-label="两本翻页书">
@@ -312,7 +312,6 @@ function renderUserVoice(data, voice, radar) {
   }));
   const batchDates = [mentions?.batch?.window_start, mentions?.batch?.window_end]
     .filter(awareTimestamp).map((value) => new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Shanghai' }).format(Date.parse(value)));
-  const lastReview = calendarDate(copy.review_date) ? copy.review_date : '';
   const currentKeys = new Set(currentMentions.map(mentionKey));
   const storedHistory = uniqueMentions(visibleMentions(mentions?.history));
   const historyMentions = orderMentionIntervals(storedHistory.filter((item) =>
@@ -322,10 +321,10 @@ function renderUserVoice(data, voice, radar) {
   const legacyItems = radarItems.filter((item) => !knownMentions.some((known) =>
     safeMentionLink(item.source_link, known.platform, known.object_id)));
   const currentEmptyText = !mentions || radar?.method === 'verified_mention_history_migration'
-    ? "三天批次尚未进行首次定时采集。"
-    : "本期 3 天窗口内暂无日期和原文均已核实的 OEDRO 提及。";
+    ? "近期暂无可查看的原帖。"
+    : "这三天暂无已核实的 OEDRO 原帖。";
   const renderMentions = (items) => `<div class="voice-thread-list">${items.map((item) => `<article class="voice-thread voice-mention" data-searchable>
-    <div class="voice-thread-meta">${item.publication.date ? `<time datetime="${escapeHtml(item.publication.published_at || item.publication.date)}">${escapeHtml(item.publication.date)}</time>` : '<span class="voice-thread-undated">日期不明 · 待核实</span>'}<span class="voice-thread-category">${escapeHtml(item.platform)}</span></div>
+    <div class="voice-thread-meta">${item.publication.date ? `<time datetime="${escapeHtml(item.publication.published_at || item.publication.date)}">${escapeHtml(item.publication.date)}</time>` : '<span class="voice-thread-undated">日期待核实</span>'}<span class="voice-thread-category">${escapeHtml(item.platform)}</span></div>
     <p class="voice-thread-summary">${escapeHtml(item.summary)}</p>
     <a class="voice-thread-link" href="${escapeHtml(item.source_link)}" target="_blank" rel="noopener noreferrer">查看原帖 <span aria-hidden="true">↗</span></a>
   </article>`).join('')}</div>`;
@@ -334,14 +333,12 @@ function renderUserVoice(data, voice, radar) {
   document.querySelector('#content').innerHTML = `
     ${pageHeading(copy.title || '问题与反馈', "从公开讨论里找安装、车型适配、质量和售后问题。")}
     <section class="section voice-discussions" aria-labelledby="recent-mentions-heading">
-      <div class="section-head"><h2 id="recent-mentions-heading">最近公开批次</h2></div>
+      <div class="section-head"><h2 id="recent-mentions-heading">近期原帖</h2></div>
       ${batchDates.length === 2 ? `<p class="voice-date">检索窗口 <time>${batchDates[0]}</time> 至 <time>${batchDates[1]}</time></p>` : ''}
       ${currentMentions.length ? renderMentions(currentMentions) : `<p class="empty-state">${currentEmptyText}</p>`}
     </section>
     <section class="section voice-discussions" aria-labelledby="history-mentions-heading">
       <div class="section-head"><h2 id="history-mentions-heading">历史提及</h2></div>
-      ${lastReview ? `<p class="voice-date">最近一次补核 <time datetime="${lastReview}">${lastReview}</time></p>` : ''}
-      
       ${historyMentions.length ? `<details class="voice-archived"><summary>查看历史原帖（${historyMentions.length} 条）</summary>${renderMentions(historyMentions)}</details>` : currentMentions.length || undatedMentions.length || legacyItems.length
         ? '<p class="empty-state">暂无历史提及</p>' : '<p class="empty-state">暂无公开问题记录</p>'}
     </section>

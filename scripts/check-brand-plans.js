@@ -66,7 +66,7 @@ async function checkPlan(plan) {
     assert.match(html, /不是当前网帽规格的报价/, 'merch-plan: old budget must not imply a new quote');
   }
   if (plan.id === 'social-brand') {
-    assert.match(html, /(?:不是|并非)真实用户留言/, 'social-brand: illustrative comment examples remain distinguishable from testimony');
+    assert.match(html, /<h3>模拟评论与回复<\/h3>/, 'social-brand: illustrative comment examples remain distinguishable from testimony');
     assert.doesNotMatch(html, /<h[23][^>]*>[^<]*半年/, 'social-brand: no invented duration in test topic heading');
   }
   if (sources.length) assert.equal(footer, '', `${plan.id}: references stay outside reading UI`);

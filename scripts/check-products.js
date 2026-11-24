@@ -43,6 +43,6 @@ if (!/initProducts/.test(fs.readFileSync(path.join(root, 'products.js'), 'utf8')
 const productsJs = fs.readFileSync(path.join(root, 'products.js'), 'utf8');
 if (!/requestId !== state\.requestId/.test(productsJs)) fail('category requests are missing stale-response protection');
 if (!/retry-category/.test(productsJs) || !/retry-policies/.test(productsJs)) fail('interactive data loads are missing retry controls');
-if (!/uncoveredSitemapUrls/.test(productsJs) || !/目录核对/.test(productsJs)) fail('public catalog coverage gap is not rendered');
+if (!/class="catalog-footnote">\$\{h\(m\.coverageText \|\| `\$\{m\.uncoveredSitemapUrls/.test(productsJs)) fail('public catalog coverage gap is not rendered');
 
 console.log(`Product catalog check passed: ${count} products, ${manifest.categories.length} categories.`);

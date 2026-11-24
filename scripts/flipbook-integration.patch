@@ -14,3 +14,27 @@ diff --git a/src/BookShell.tsx b/src/BookShell.tsx
        cancelAnimationFrame(resizeFrame);
        resizeFrame = requestAnimationFrame(() => {
          if (!disposed && engine.getPageCollection()) {
+diff --git a/src/App.tsx b/src/App.tsx
+--- a/src/App.tsx
++++ b/src/App.tsx
+@@ -198,5 +198,5 @@
+         scrim: "warm",
+-        eyebrow: "Owner field notes / Browser edition",
++        eyebrow: "Owner Field Notes",
+         title: "Five pages. Your real experience.",
+-        body: "No account. No submission. Kept in this browser only.",
++        body: "Your answers stay in this browser.",
+       }}
+@@ -329,3 +329,3 @@
+       <h2>{answerCount} of {questions.length}<br />pages answered.</h2>
+-      <span>{storageStatus === "available" ? "Saved in this browser. Nothing leaves this site." : "Kept in this page for now. Browser storage is unavailable."} A live study would present the next step and consent choices separately.</span>
++      <span>{storageStatus === "available" ? "Saved in this browser." : "Answers stay on this page while it is open."}</span>
+       {answerCount > 0 && (
+diff --git a/src/data.ts b/src/data.ts
+--- a/src/data.ts
++++ b/src/data.ts
+@@ -167,3 +167,3 @@
+     prompt: "If OEDRO could improve one thing for owners like you, what should it be?",
+-    support: "Say it in your own words. Nothing is sent from this demo.",
++    support: "Say it in your own words.",
+     type: "text",

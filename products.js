@@ -37,14 +37,13 @@
     const docSize = cozeware ? '497.5 KB' : '3.87 MB';
     return `
       <nav class="family-nav" aria-label="产品品牌目录"><a href="products.html"${cozeware ? '' : ' aria-current="page"'}>OEDRO</a><a href="products-cozeware.html"${cozeware ? ' aria-current="page"' : ''}>Cozeware</a><a href="product-library.html">分享产品库</a></nav><header class="catalog-hero">
-        <div><h1>${title}</h1><p>按官网分类查找 ${brand} 的型号、规格和安装资料。</p></div>
+        <div><h1>${title}</h1></div>
         <dl class="catalog-stats">
           <div><dt>商品</dt><dd>${m.productCount.toLocaleString('zh-CN')}</dd></div>
           <div><dt>分类</dt><dd>${m.categories.length}</dd></div>
           <div><dt>品牌</dt><dd>${Object.keys(m.brandCounts).length}</dd></div>
           <div><dt>快照</dt><dd>${h(dateText(m.capturedAt))}</dd></div>
         </dl>
-        <p class="catalog-coverage" role="note"><strong>目录核对</strong><span>${h(m.coverageText || `${m.uncoveredSitemapUrls || 0} 条链接未形成商品记录。`)} 图片文字的核对范围见商品详情。</span></p>
       </header>
       <nav class="catalog-downloads" aria-label="品牌资料总稿">
         <a href="data/product-library/brand-summaries/${encodeURIComponent(docName)}" download="${docName}" data-download-bytes="${docBytes}"><span class="download-icon" aria-hidden="true">⤓</span> 下载 ${brand} 总稿（MD，${docSize}）</a>
@@ -65,7 +64,7 @@
         <div class="catalog-section-head"><div><span class="index-number">03</span><h2 id="policy-heading">官网政策快照</h2></div></div>
         <div id="policy-list"><button class="load-policies" type="button">查看官网政策与相关资料</button></div>
       </section>
-      <p class="catalog-footnote">${m.notes.map(h).join(' ')}</p>`;
+      <p class="catalog-footnote">${h(m.coverageText || `${m.uncoveredSitemapUrls || 0} 条链接未形成商品记录。`)} ${m.notes.map(h).join(' ')}</p>`;
   }
 
   function visibleProducts() {
@@ -127,9 +126,9 @@
       ${warranty.length ? `<section><h4>商品页的质保说明</h4><ul>${warranty.map((value) => `<li>${h(value.label)}：${h(value.value)}</li>`).join('')}</ul></section>` : ''}
       ${variants.length > 1 ? `<section><h4>版本</h4><p>官网快照记录 ${variants.length} 个 SKU 选项。</p></section>` : ''}
       ${imageFacts.length ? `<section><h4>图片里已核对的事实</h4><ul>${imageFacts.flatMap(fact => (fact.facts || []).map(text => `<li>${h(text)}${(fact.limitations || []).length ? `<p>${fact.limitations.map(h).join(' ')}</p>` : ''} <a href="${h(fact.url || fact.image_url)}" target="_blank" rel="noreferrer">图片来源 ↗</a></li>`)).join('')}</ul></section>` : ''}
-      <section><h4>图片文字核对范围</h4><p>${h(imageReview.reviewed_urls?.length || 0)} 张已核对；${h(imageReview.unreviewed_urls?.length ?? images.length)} 张未逐张核对。未核对图片中的参数不能按另一型号推断。</p></section>
+      <section><h4>图片文字核对范围</h4><p>${h(imageReview.reviewed_urls?.length || 0)} 张已核对；${h(imageReview.unreviewed_urls?.length ?? images.length)} 张未逐张核对。</p></section>
       ${images.length ? `<section><h4>官网图片 · ${images.length}</h4><div class="media-strip">${images.map((url, imageIndex) => `<a href="${h(url)}" target="_blank" rel="noreferrer"><img src="${h(url)}" alt="${h(item.name)} · 图片 ${imageIndex + 1}" width="320" height="320" loading="lazy" decoding="async"></a>`).join('')}</div></section>` : ''}
-      <p><a href="${h(item.url)}" target="_blank" rel="noreferrer">打开对应官方来源 ↗</a></p>
+      <p><a href="${h(item.url)}" target="_blank" rel="noreferrer">查看官网商品 ↗</a></p>
       <p class="snapshot-note">资料快照：${h(dateText(item.capturedAt))}。价格、库存、评价和适配以官网当前页面为准。</p>`;
   }
 

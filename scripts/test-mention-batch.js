@@ -276,13 +276,13 @@ check('rendered sections sort publication, remove cross-batch duplicates, and pr
   assert.equal((html.match(/安装讨论 later/g) || []).length, 1);
   assert(html.indexOf('安装讨论 dateonly') < html.indexOf('安装讨论 oldpost'));
   assert(html.indexOf('安装讨论 oldpost') < html.indexOf('安装讨论 unknown'));
-  assert(html.includes('<time datetime="2026-10-08">2026-10-08</time>')); assert(html.includes('日期不明'));
+  assert(html.includes('<time datetime="2026-10-08">2026-10-08</time>')); assert(html.includes('日期待核实'));
   assert(html.indexOf('历史提及') < html.indexOf('待核实的历史线索'));
   const historySection = html.split('id="history-mentions-heading"')[1].split('</section>')[0];
   const unverifiedSection = html.split('id="unverified-mentions-heading"')[1].split('</section>')[0];
   assert(!historySection.includes('安装讨论 unknown'), 'undated mentions stay outside verified history');
   assert(unverifiedSection.includes('安装讨论 unknown'));
-  assert(unverifiedSection.includes('日期不明 · 待核实'));
+  assert(unverifiedSection.includes('日期待核实'));
   assert(!unverifiedSection.includes('<time'), 'undated and legacy clues never acquire collection dates');
   assert(html.includes('已确认的洞察与行动')); assert(html.includes('常见问题'));
   assert.equal((html.match(/voice-thread(?: voice-mention)?" data-searchable/g) || []).length, legacy.items.length + 5);
@@ -349,19 +349,19 @@ check('native Reddit comments under one thread remain separate from each other a
 });
 check('render empty state is exact and malformed current dates stay outside current section', () => {
   const html = render();
-  assert(html.includes('三天批次尚未进行首次定时采集。'));
+  assert(html.includes('近期暂无可查看的原帖。'));
   const migration = fixture(); migration.batch.items = [];
-  assert(render(migration, 'verified_mention_history_migration').includes('三天批次尚未进行首次定时采集。'));
-  assert(!render(migration, 'verified_mention_history_migration').includes('本期 3 天窗口内暂无日期和原文均已核实的 OEDRO 提及。'));
-  assert(render(migration, 'verified_mention_72h_cloud_batch').includes('本期 3 天窗口内暂无日期和原文均已核实的 OEDRO 提及。'));
+  assert(render(migration, 'verified_mention_history_migration').includes('近期暂无可查看的原帖。'));
+  assert(!render(migration, 'verified_mention_history_migration').includes('这三天暂无已核实的 OEDRO 原帖。'));
+  assert(render(migration, 'verified_mention_72h_cloud_batch').includes('这三天暂无已核实的 OEDRO 原帖。'));
   const candidate = fixture(); candidate.batch.items[0].publication.published_at = '2026-10-11T09:00:00';
-  assert(render(candidate).includes('本期 3 天窗口内暂无日期和原文均已核实的 OEDRO 提及。'));
+  assert(render(candidate).includes('这三天暂无已核实的 OEDRO 原帖。'));
   candidate.batch.items = [mention('outside', '2026-09-01T09:00:00Z')];
-  assert(render(candidate).includes('本期 3 天窗口内暂无日期和原文均已核实的 OEDRO 提及。'));
+  assert(render(candidate).includes('这三天暂无已核实的 OEDRO 原帖。'));
   candidate.batch.items = [mention('microinside', '2026-10-12T01:29:59.999999999Z')];
-  assert(!render(candidate).includes('本期 3 天窗口内暂无日期和原文均已核实的 OEDRO 提及。'));
+  assert(!render(candidate).includes('这三天暂无已核实的 OEDRO 原帖。'));
   candidate.batch.items = [mention('microoutside', '2026-10-12T01:30:00.000000001Z')];
-  assert(render(candidate).includes('本期 3 天窗口内暂无日期和原文均已核实的 OEDRO 提及。'));
+  assert(render(candidate).includes('这三天暂无已核实的 OEDRO 原帖。'));
 });
 check('render date-only text survives timezone changes and HTML is escaped', () => {
   const candidate = fixture(); candidate.batch.items[0].publication = { date: '2026-10-10', published_at: null, precision: 'date', source_timezone: null };
