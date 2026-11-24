@@ -189,6 +189,12 @@
       "group": "社区与邮件"
     },
     {
+      "id": "ugc-engine",
+      "label": "用户晒单与积分",
+      "file": "ugc-engine.html",
+      "group": "会员与复购"
+    },
+    {
       "id": "loyalty",
       "label": "OEDRO 积分商城",
       "file": "loyalty.html",
