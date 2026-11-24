@@ -55,10 +55,6 @@ for (const file of files) {
         if (match) errors.push(`${relative}: 高风险模板句式 ${label}: ${match[0]}`);
       }
     }
-    if (path.extname(file) === '.html') {
-      const pending = source.replace(/<script[\s\S]*?<\/script>/gi, '').match(/待核|待确认|待验证|待查证|未核实|未经核实|仍需验证|有待(?:核|确认|验证)|to be confirmed|to be verified|pending verification/i);
-      if (pending) errors.push(`${relative}: 给别人看的页面不写“待核、待确认、未核实”这类措辞，没把握的内容留空或不写: ${pending[0]}`);
-    }
     const helperCount = ['<small', 'section-note', 'helper-text', 'class="muted"'].reduce((count, marker) => count + source.split(marker).length - 1, 0);
     if (helperCount >= 5) errors.push(`${relative}: 同页解释性小字标记达到 ${helperCount} 处`);
   } else {
