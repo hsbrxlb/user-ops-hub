@@ -261,6 +261,13 @@ def render(row, scratch, assets, repo=None):
         note = f' · {escape(reason["zh"])} <span lang="en">{public_text(reason["en"])}</span>'
     clock = public_text(row.get("time", ""))
     timing = f' · <span lang="en">{clock}</span>' if clock else ""
+    placements = row.get("scheduled_platforms", list(PLATFORMS))
+    if placements != list(PLATFORMS):
+        if not isinstance(placements, list) or not placements or not all(
+                isinstance(name, str) and name.strip() for name in placements):
+            raise ValueError(f"{ident}: expected the scheduled platform names")
+        timing += f' · <span class="post-placement" lang="en">{public_text(", ".join(placements))}</span>'
+
     links = [f'<a href="{escape(row["images"])}" lang="en">Images</a>']
     if row["captions"].startswith("https://"):
         links.append(f'<a href="{escape(row["captions"])}" lang="en">Captions</a>')
