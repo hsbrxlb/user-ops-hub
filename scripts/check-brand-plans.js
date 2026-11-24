@@ -56,6 +56,15 @@ async function checkPlan(plan) {
   if (plan.id === 'merch-plan') {
     for (const category of ['cup', 'scent', 'hat', 'tee', 'hoodie', 'tote', 'decal', 'grip', 'card']) {
       assert.ok(ids.has(category), 'merch-plan: missing product category ' + category);
+      const start = '<!-- goods:' + category + ':start -->';
+      const end = '<!-- goods:' + category + ':end -->';
+      const catalog = html.split(start)[1]?.split(end)[0] || '';
+      const expected = category === 'decal' ? 3 : 2;
+      const photos = [...catalog.matchAll(/<img src="(assets\/merch-collection\/[^"]+\.webp)"/g)];
+      assert.equal(new Set(photos.map(match => match[1])).size, expected, 'merch-plan: unexpected number of alternatives for ' + category);
+      assert.equal((catalog.match(/<details class="goods-rfq">/g) || []).length, expected, 'merch-plan: each variant needs an order specification');
+      assert.equal((catalog.match(/<button type="button" class="goods-copy">/g) || []).length, expected, 'merch-plan: each specification can be copied');
+
     }
     for (const region of ['packaging', 'shipping']) {
       const start = '<!-- ' + region + ':start -->';
