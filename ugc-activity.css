@@ -11,3 +11,6 @@
 @media (max-width: 600px) {
   .garage-stories .newsletter-controls a { flex-basis: 100%; margin-left: 0; }
 }
+
+/* The preview script scales the full desktop layout to the available canvas. */
+body[data-page="ugc-activity"] .newsletter-frame { max-width: none; }
