@@ -1,3 +1,5 @@
+/* Each chapter already gives its interface preview a separate column. */
+#content.ugc-reading { --hub-inline-media-width: 100%; }
 .ugc-engine{--ugc-ink:#3b2a1d;--ugc-ink2:#65503c;--ugc-gold:#866827;--ugc-goldt:#7a5c22;--ugc-goldl:#d9bf86;--ugc-rule:#dccfb6;--ugc-paper:#fffcf6;--ugc-sand:#f2e8d6;
 container-type:inline-size;container-name:ugc;display:block;position:relative;box-sizing:border-box;width:100%;max-width:100%;min-width:0;margin:0;padding:0;color:var(--ugc-ink);font-family:inherit;font-size:max(16px,1rem);line-height:1.75;overflow-wrap:anywhere;word-break:normal;line-break:strict;text-align:left}
 .ugc-engine *,.ugc-engine *::before,.ugc-engine *::after{box-sizing:border-box;min-width:0}
