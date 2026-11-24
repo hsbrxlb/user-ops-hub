@@ -23,66 +23,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Render mascot page
-        run: |
-          node scripts/build-mascot-page.js
-          node scripts/build-nav.js --check
-      - name: Test public user voice boundary
-        run: |
-          node scripts/test-public-user-voice-check.js
-          node scripts/check-public-pages.js
-          node scripts/check-fakesite.js
-          node scripts/check-anti-slop.js
-          node scripts/check-field-books.js
-          node scripts/check-products.js
-          node scripts/check-product-library.js
-      - name: Test public demand radar boundary
-        run: |
-          node scripts/check-demand-radar.js
-          node scripts/test-demand-radar-check.js
-          node scripts/test-mention-batch.js
-          python scripts/test_daily_demand_radar.py
-      - name: Validate static work records
-        run: |
-          node scripts/check-brand-plans.js
-          node scripts/check-outreach-pages.js
-          node scripts/check-outreach-users.js
-          node scripts/check-email-templates.js
-          node scripts/check-newsletter.js
-          node scripts/test-hub-navigation.js
-          node scripts/test-user-voice-render.js
-          node scripts/test-customer-analytics-render.js
-          python3 scripts/test-customer-analytics.py
-          node scripts/check-mascot-page.js
-          node scripts/test-mascot-loading.js
       - name: Build public artifact
-        run: |
-          mkdir public-dist
-          cp .nojekyll robots.txt *.html *.js *.css public-dist/
-          cp -R data experiences fakesite skills public-dist/
-          rsync -a --exclude='/onboarding/*.webp' assets/ public-dist/assets/
-      - name: Validate complete public artifact
-        run: |
-          PUBLIC_SITE_ROOT=public-dist python3 scripts/test-customer-analytics.py
-          PUBLIC_SITE_ROOT=public-dist node scripts/check-public-user-voice.js
-          PUBLIC_SITE_ROOT=public-dist node scripts/check-demand-radar.js
-          PUBLIC_SITE_ROOT=public-dist node scripts/check-mascot-page.js
-          PUBLIC_SITE_ROOT=public-dist node scripts/check-public-pages.js
-          PUBLIC_SITE_ROOT=public-dist node scripts/check-outreach-pages.js
-          PUBLIC_SITE_ROOT=public-dist node scripts/check-outreach-users.js
-          PUBLIC_SITE_ROOT=public-dist node scripts/check-fakesite.js
-          PUBLIC_SITE_ROOT=public-dist node scripts/check-anti-slop.js
-          PUBLIC_SITE_ROOT=public-dist node scripts/check-field-books.js
-          PUBLIC_SITE_ROOT=public-dist node scripts/check-products.js
-          PUBLIC_SITE_ROOT=public-dist node scripts/check-product-library.js
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
+        run: scripts/build-public.sh
       - name: Upload static site
         uses: actions/upload-pages-artifact@v3
         with:
           path: public-dist
-      - name: Allow Pages artifact metadata to propagate
-        run: sleep 25
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4

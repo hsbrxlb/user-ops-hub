@@ -2,9 +2,20 @@
 
 线上：<https://hsbrxlb.github.io/user-ops-hub/>
 
+## 推送前的本机检查 · Local release checks
+
+```sh
+git config --local core.hooksPath .githooks
+scripts/qa-local.sh
+```
+
+推送前在本机跑这个入口，全过才推；没过就改了再跑。The pre-push hook tests the outgoing commit. For an API release, run `scripts/qa-local.sh BASE TIP` against the actual remote parent and the exact commit to publish. After a rebase, test the new commit.
+
+The copy checker and its adjacent allowlist come from the local QA installation. If the checkout lacks `scripts/check-artifact-copy.py`, set `git config --local hub.copyGate /absolute/path/to/check-artifact-copy.py`. Stage reader-facing edits before checking their copy. Run `node scripts/build-nav.js` after navigation edits and `node scripts/build-mascot-page.js` after changing its inputs. Commit the generated HTML. Pages packages the committed files with `scripts/build-public.sh`, uploads the artifact and deploys it.
+
 Hub 按部门任务线汇集项目进展、上下文与下载资产，通过 GitHub Pages 公开访问。
 
-研究、分析、内容生成、方案和文件制作继续由本地 Codex 与现有本地工具完成。Hub页面不调用AI、不提供在线编辑，也不保存完整私有工作数据。OEDRO公开问题由本机Codex自动任务每天检查，GitHub Actions只在收到代码推送后校验并发布网页。
+研究、分析、内容生成、方案和文件制作继续由本地 Codex 与现有本地工具完成。Hub页面不调用AI、不提供在线编辑，也不保存完整私有工作数据。OEDRO公开问题由本机Codex自动任务每天检查，GitHub Actions只在收到代码推送后发布网页。
 
 ## 当前发布入口
 
@@ -13,7 +24,7 @@ Hub 按部门任务线汇集项目进展、上下文与下载资产，通过 Git
 - `content-review.html` 提供现行内容过审标准，`skills.html` 收录 10 份公开版 Markdown 技能，支持阅读、复制和下载。多种绘画风格 `comics-gallery.html` 按品牌展示成品，可筛选并打开大图。
 - `freshflow.html`、`loyalty.html`、`repurchase.html` 分别展示新风机、积分方案与复购办法。
 - `customer-analytics.html` 只加载聚合统计，`#outreach` 直接选择首批触达样本。`first-outreach-users.html` 是转到聚合统计的兼容入口。
-- 逐客户原数据保留在公开工作区以外。重新聚合时给 `scripts/build-customer-analytics.py --input` 传入私有原件；本地用 `HUB_PRIVATE_OUTREACH_SOURCE` 执行源数据对账，CI 核公开聚合一致性与明细排除。
+- 逐客户原数据保留在公开工作区以外。重新聚合时给 `scripts/build-customer-analytics.py --input` 传入私有原件；本地用 `HUB_PRIVATE_OUTREACH_SOURCE` 执行源数据对账，本机核公开聚合一致性与明细排除。
 - 页面均设 `noindex,nofollow,noarchive`；构建同时发布项目内 `robots.txt`。GitHub Pages 子路径的 robots 文件受源站根规则约束。
 
 ## 当前页面
@@ -30,7 +41,7 @@ Hub 按部门任务线汇集项目进展、上下文与下载资产，通过 Git
 - `products.html`：产品知识库；1,209 条目录记录按 12 个分类拆分加载，每页只渲染 24 件，完整适配、规格、说明、媒体和政策快照可按商品展开。标题与统计区顶部对齐。
 - `fakesite/`：独立品牌内容站样站，通过独立网址打开；包含 Blog、12篇有来源的完整指南及34条可搜索FAQ。采用独立的阅读版式，不套Hub外壳。公开演示禁止索引，不接购物或公司正式发布。
 - `fakesite/admin/index.html`：与顾客页面分开的员工内容演示；富文本、图片、文章与FAQ、草稿审核、发布快照、撤回、版本记录及备份导入导出均在浏览器内操作。角色切换仅为演示，不是登录或生产权限。公司身份、共享数据/图片存储及发布接口尚未连接。旧`fakesite/editor.html`转入该独立工作台，顾客导航不提供后台入口。
-- 样站检查：`node scripts/check-fakesite.js`；发布流程同时检查源码和最终 Pages 文件。公开目录只包含运行所需网页、脚本、字体和图片，没有研究原件或本地运行记录。
+- 样站检查：`node scripts/check-fakesite.js`；本机同时检查源码和最终 Pages 文件。公开目录只包含运行所需网页、脚本、字体和图片，没有研究原件或本地运行记录。
 
 - `index.html`：首页介绍品牌、日常工作与首次阅读顺序，按社媒内容、品牌与产品、社区与邮件、会员与复购、活动系列、用户与市场研究进入各页。
 - `campaigns.html`：年末活动系列总览，包含两品牌各四轮草案、排期和预算；旧草稿网址重定向至对应的新入口。
@@ -51,7 +62,7 @@ Hub 按部门任务线汇集项目进展、上下文与下载资产，通过 Git
 - Discord 配置位于频道结构下方；没有实际用途证据的机器人与空配置区不显示。品牌表达页包含品牌名大小写建议和六个双语场景示例，示例不代表已发送消息。
 - 原“公开信号与用户关系”网址兼容跳转至讨论卡片；页面已移除通用处理流程说明，旧 `#feedback-method` 链接仍可打开。
 - `research-library.html`、`sites-systems.html`、`playbook.html` 已退出导航，只保留旧网址的定向跳转。
-- 侧栏只在 `data/content.json` 定义一次：子页写 `parent`，紧跟在父页之后，只分一级。改完运行 `node scripts/build-nav.js`，把同一份侧栏写进每个页面（无脚本也能导航），CI 用 `--check` 核对。侧栏记住滚动位置（本标签页）和展开的分组（本浏览器），当前页所在分组自动展开。
+- 侧栏只在 `data/content.json` 定义一次：子页写 `parent`，紧跟在父页之后，只分一级。改完运行 `node scripts/build-nav.js`，把同一份侧栏写进每个页面（无脚本也能导航），本机用 `--check` 核对。侧栏记住滚动位置（本标签页）和展开的分组（本浏览器），当前页所在分组自动展开。
 
 `content-studio.html` 为只读流程介绍页，与独立样稿页复用 `data/content-pipeline-tests.json` 的当前作品数据，分别渲染概览与完整样稿；页面不触发生成或发布，不提供表单、登录或数据库。
 
@@ -68,9 +79,9 @@ Hub 按部门任务线汇集项目进展、上下文与下载资产，通过 Git
 
 ## 吉祥物页加载
 
-`mascot.html` 的导航、完整正文及首屏样式在发布时从现有 JSON、渲染器和三份 CSS 生成，打开页面无需等待数据请求，关闭 JavaScript 也能阅读。CI 自动运行 `node scripts/build-mascot-page.js`；本地修改导航或吉祥物数据后，运行同一命令更新 HTML。`node scripts/build-mascot-page.js --check` 检查同步情况。
+`mascot.html` 的导航、完整正文及首屏样式在本机从现有 JSON、渲染器和三份 CSS 生成，打开页面无需等待数据请求，关闭 JavaScript 也能阅读。修改导航或吉祥物数据后，运行 `node scripts/build-mascot-page.js` 并提交生成的 HTML。`node scripts/build-mascot-page.js --check` 检查同步情况。
 
-未预生成的页面仍有 12 秒请求超时与局部重试。首屏优先加载两张角色图，其他图片按需加载。七张展示图提供 768px 与原尺寸 AVIF 预览，WebP 与原图链接保留；固定背景使用同画面 AVIF 并保留 PNG 回退。图片修改后，在支持 AVIF 的 Pillow 环境运行 `python3 scripts/build-mascot-previews.py`，再重建 HTML。提交的 `assets/mascot-evolution/preview-manifest.json` 保存原图与变体散列和尺寸，CI 检查同步与完整性，不在线调用图片服务。回归检查：`node scripts/test-mascot-loading.js`。
+未预生成的页面仍有 12 秒请求超时与局部重试。首屏优先加载两张角色图，其他图片按需加载。七张展示图提供 768px 与原尺寸 AVIF 预览，WebP 与原图链接保留；固定背景使用同画面 AVIF 并保留 PNG 回退。图片修改后，在支持 AVIF 的 Pillow 环境运行 `python3 scripts/build-mascot-previews.py`，再重建 HTML。提交的 `assets/mascot-evolution/preview-manifest.json` 保存原图与变体散列和尺寸，本机检查同步与完整性，不在线调用图片服务。回归检查：`node scripts/test-mascot-loading.js`。
 
 ## 本地预览
 
@@ -99,7 +110,7 @@ node scripts/check-products.js
 
 本地预览确认后提交并推送，GitHub Actions会自动发布。
 
-用户数据分析更新时，将已核实的后台计数作为 `--snapshot` 输入运行 `scripts/build-customer-analytics.py`，首批样本从既有 `data/outreach-users.json` 聚合。省略 `--snapshot` 会生成待补数据状态，不能覆盖已核实的全体快照。`test-customer-analytics.py` 只读取并核对已发布聚合，不重写数据；发布流程同时检查源码和最终产物中的聚合文件。
+用户数据分析更新时，将已核实的后台计数作为 `--snapshot` 输入运行 `scripts/build-customer-analytics.py`，首批样本从既有 `data/outreach-users.json` 聚合。省略 `--snapshot` 会生成待补数据状态，不能覆盖已核实的全体快照。`test-customer-analytics.py` 只读取并核对已发布聚合，不重写数据；本机同时检查源码和最终产物中的聚合文件。
 
 ## 成果展示
 
@@ -123,7 +134,7 @@ node scripts/check-products.js
 
 当前继续使用静态 HTML、CSS、JavaScript、JSON、GitHub仓库和GitHub Pages。不接Supabase、Firebase、Cloudflare数据库、登录系统或AI API。
 
-公开问题检查由本机Codex自动任务每天北京时间09:17运行。Codex调用固定版本的私有OEDRO扫描代码，使用Tavily、YouTube和Bluesky只读接口。公开安全的完整快照、查询游标和去重状态会先写入本机耐久outbox；Hub工作区有其他改动时仍继续扫描，只延迟公开发布。发布使用独立临时Git工作区，并且只允许提交`data/demand-radar.json`和`.github/demand-radar-state.json`。扫描临时目录、SQLite、原始批次和日志不会进入Git。GitHub Actions不再定时扫描，只负责校验推送内容和发布Pages。
+公开问题检查由本机Codex自动任务每天北京时间09:17运行。Codex调用固定版本的私有OEDRO扫描代码，使用Tavily、YouTube和Bluesky只读接口。公开安全的完整快照、查询游标和去重状态会先写入本机耐久outbox；Hub工作区有其他改动时仍继续扫描，只延迟公开发布。发布使用独立临时Git工作区，并且只允许提交`data/demand-radar.json`和`.github/demand-radar-state.json`。扫描临时目录、SQLite、原始批次和日志不会进入Git。GitHub Actions不再定时扫描，负责发布 Pages。
 
 YouTube检查每天执行8组固定查询，每组最多查看3个视频、每个视频最多20条顶层评论，并接收接口直接附带的回复。页面公开本轮视频、评论、回复和不可读取视频的请求结果数；作者和完整原文不会公开。不同查询可能产生重复结果。这扩大了免费官方API的覆盖，但不等于能搜索YouTube全站所有评论或全部回复。
 

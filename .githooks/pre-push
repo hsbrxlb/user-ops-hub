@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+zero=0000000000000000000000000000000000000000
+while read -r local_ref tip remote_ref base; do
+  [[ $tip == "$zero" || $remote_ref != refs/heads/* ]] && continue
+  if [[ $base == "$zero" ]]; then
+    base=$(git hash-object -w -t tree /dev/null)
+  fi
+  if ! git cat-file -e "$base^{tree}" 2>/dev/null; then
+    echo "Fetch $remote_ref, rebase your changes and retry the push." >&2
+    exit 1
+  fi
+  scripts/qa-local.sh "$base" "$tip" </dev/null
+done
