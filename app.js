@@ -324,7 +324,7 @@ function renderUserVoice(data, voice, radar) {
     ? "近期暂无可查看的原帖。"
     : "这三天暂无已核实的 OEDRO 原帖。";
   const renderMentions = (items) => `<div class="voice-thread-list">${items.map((item) => `<article class="voice-thread voice-mention" data-searchable>
-    <div class="voice-thread-meta">${item.publication.date ? `<time datetime="${escapeHtml(item.publication.published_at || item.publication.date)}">${escapeHtml(item.publication.date)}</time>` : '<span class="voice-thread-undated">日期待核实</span>'}<span class="voice-thread-category">${escapeHtml(item.platform)}</span></div>
+    <div class="voice-thread-meta">${item.publication.date ? `<time datetime="${escapeHtml(item.publication.published_at || item.publication.date)}">${escapeHtml(item.publication.date)}</time>` : ''}<span class="voice-thread-category">${escapeHtml(item.platform)}</span></div>
     <p class="voice-thread-summary">${escapeHtml(item.summary)}</p>
     <a class="voice-thread-link" href="${escapeHtml(item.source_link)}" target="_blank" rel="noopener noreferrer">查看原帖 <span aria-hidden="true">↗</span></a>
   </article>`).join('')}</div>`;
@@ -344,13 +344,13 @@ function renderUserVoice(data, voice, radar) {
     </section>
     ${undatedMentions.length || legacyItems.length ? `<section class="section voice-discussions" aria-labelledby="unverified-mentions-heading">
       <details class="voice-archived">
-      <summary id="unverified-mentions-heading">待核实的历史线索（${undatedMentions.length + legacyItems.length} 条）</summary>
+      <summary id="unverified-mentions-heading">更多原帖（${undatedMentions.length + legacyItems.length} 条）</summary>
       ${undatedMentions.length ? renderMentions(undatedMentions) : ''}
       ${legacyItems.length ? `<div class="voice-thread-list">
         ${legacyItems.map((item) => {
           const thread = voiceThreadContext(item);
           return `<article class="voice-thread" data-searchable>
-            <div class="voice-thread-meta"><span class="voice-thread-undated">日期未核实</span><span class="voice-thread-category">${escapeHtml(sourceLabels[item.source_family] || item.source_family)}</span></div>
+            <div class="voice-thread-meta"><span class="voice-thread-category">${escapeHtml(sourceLabels[item.source_family] || item.source_family)}</span></div>
             <div class="voice-thread-summary"><h2>${escapeHtml(thread.heading)}</h2><p class="voice-thread-community">${escapeHtml(thread.community)}</p></div>
             <a class="voice-thread-link" href="${escapeHtml(item.source_link)}" target="_blank" rel="noopener noreferrer" aria-label="查看原帖：${escapeHtml(thread.heading)}">查看原帖 <span aria-hidden="true">↗</span></a>
           </article>`;

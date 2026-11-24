@@ -111,7 +111,7 @@ def build(rows, snapshot):
         "subscription": buckets(status, subscriptions),
         "subscription_purchase": [{"key": key, "label": label, **cross[key]} for key, label in subscriptions],
         "source_membership": buckets(membership, [("recent_only", "仅近期访问来源"), ("high_only", "仅高消费来源"), ("both", "两类来源重叠")]),
-        "limitations": ["这是近期访问与高消费筛选后的名单，不能代表全体客户。", "金额沿用历史订单总额，尚未核实退款和取消订单的扣除口径。", "名单没有注册日期和订单日期，不能据此分析注册分布或销售趋势。"]
+        "limitations": ["这是近期访问与高消费筛选后的名单，不能代表全体客户。", "金额为后台历史累计订单金额。净收入以财务记录为准。", "名单没有注册日期和订单日期，不能据此分析注册分布或销售趋势。"]
     }
     return {"schema_version": 1, "snapshot": snapshot, "outreach": outreach}
 

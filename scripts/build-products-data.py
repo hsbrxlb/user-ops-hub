@@ -156,11 +156,20 @@ def main():
 
     report = json.loads(REPORT_PATH.read_text(encoding="utf-8")) if REPORT_PATH.exists() else {}
     report_results = report.get("results", {})
-    uncovered_sitemap_urls = int(
-        report_results.get("uncovered_redirects")
-        or report_results.get("failed_or_uncovered")
-        or len(report.get("failures", []))
+    verified_redirects = int(report_results.get("verified_invalid_urls") or 0)
+    unresolved = int(report_results.get("true_failed_or_unresolved") or 0)
+    reported_total = report_results.get("failed_or_uncovered")
+    uncovered_sitemap_urls = int(reported_total) if reported_total is not None else max(
+        verified_redirects + unresolved,
+        int(report_results.get("uncovered_redirects") or 0),
+        len(report.get("failures", [])),
     )
+    other_missing = max(0, uncovered_sitemap_urls - verified_redirects)
+    coverage = []
+    if verified_redirects:
+        coverage.append(f"{verified_redirects} 条站点地图链接跳回首页，未计入商品总数。")
+    if other_missing:
+        coverage.append(f"{other_missing} 条站点地图链接未生成商品记录。")
 
     manifest = {
         "title": "OEDRO 官网产品资料库",
@@ -173,11 +182,11 @@ def main():
         "warningCounts": dict(warnings),
         "duplicateRecords": duplicate_records,
         "uncoveredSitemapUrls": uncovered_sitemap_urls,
+        "coverageText": "".join(coverage),
         "categories": categories,
         "policyFile": "data/products/policies.json",
         "notes": [
             "价格、库存、评分和配送信息是抓取时快照，购买或对外引用前请打开官网复核。",
-            f"另有 {uncovered_sitemap_urls} 条官网站点地图商品链接跳转首页，无法形成商品记录；本页没有把它们计入商品总数。",
             "分类 1009 是官网接口中的测试商品，保留用于完整性核对，不作为正式选品。",
         ],
     }

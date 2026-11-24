@@ -34,7 +34,7 @@
   "policyFile": "data/cozeware-products/policies.json",
   "policyCount": 90,
   "uncoveredSitemapUrls": 0,
-  "coverageText": "27 个商品页已保存；0 条商品链接待核。",
+  "coverageText": "27 个商品页均已记录。",
   "notes": [
     "价格、库存、活动与预售阶段须在引用前打开对应官网页面核对。"
   ],
