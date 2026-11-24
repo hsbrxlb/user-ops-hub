@@ -253,6 +253,12 @@ def render(row, scratch, assets, repo=None):
                       f'<p class="feed-caption" lang="en">{public_text(copy[name])}</p></div>')
 
     rework = ' · 图稿需重做 <span lang="en">Needs rework</span>' if row.get("needs_rework") else ""
+    note = ""
+    if "review_reason" in row:
+        reason = row["review_reason"]
+        if not isinstance(reason, dict) or not all(isinstance(reason.get(k), str) and reason[k].strip() for k in ("zh", "en")):
+            raise ValueError(f"{ident}: provide both languages for the review reason")
+        note = f' · {escape(reason["zh"])} <span lang="en">{public_text(reason["en"])}</span>'
     clock = public_text(row.get("time", ""))
     timing = f' · <span lang="en">{clock}</span>' if clock else ""
     links = [f'<a href="{escape(row["images"])}" lang="en">Images</a>']
@@ -273,7 +279,7 @@ def render(row, scratch, assets, repo=None):
         f'data-pages="{"|".join(paths)}">{img(0, title)}</button>',
         *gallery, '</div>', '<div class="post-body">', f'<h3 lang="en">{title}</h3>',
         f'<p class="post-context"><span class="post-status" data-status="{status_slug}">{status_zh} '
-        f'<span lang="en">{status_en}</span></span>{rework}{timing}</p>',
+        f'<span lang="en">{status_en}</span></span>{rework}{note}{timing}</p>',
         f'<div class="post-platforms"><div class="post-platform-switch" role="group" aria-label="平台">'
         f'{"".join(buttons)}</div><button type="button" class="post-copy">复制配文</button></div>',
         *blocks, f'<p class="post-links">{" · ".join(links)}</p>', *schedule_link,
