@@ -19,7 +19,7 @@
 }
 
 .loyalty-crop > .hub-image-trigger { width: 100%; }
-.loyalty-crop img { display: block; width: 100%; height: auto; }
+.loyalty-crop img { display: block; width: auto; max-width: 100%; height: auto; }
 
 #content .loyalty-crop h2 {
   margin: 0 0 var(--space-2);
