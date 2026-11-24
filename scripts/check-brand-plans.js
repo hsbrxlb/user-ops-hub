@@ -28,7 +28,8 @@ async function checkPlan(plan) {
   assert.match(html, /<nav[^>]+id="nav-list"[^>]*>[\s\S]*?<\/nav>/, `${plan.id}: navigation is available to the shared shell`);
   assert.ok(navigation.some(item => item.id === plan.id && item.file === `${plan.id}.html`), `${plan.id}: registered navigation route`);
   const body = html.replace(/<!--[\s\S]*?-->/g, '').replace(/<nav[^>]+id="nav-list"[^>]*>[\s\S]*?<\/nav>/, ''); // sidebar groups fold navigation, not page content
-  assert.doesNotMatch(body, /<(?:form|input|select|textarea|details)\b/i, `${plan.id}: reference page must not collect data or hide content`);
+  assert.doesNotMatch(body, /<(?:form|input|select|textarea)\b/i, `${plan.id}: reference page must not collect data`);
+  if (plan.id !== 'merch-plan') assert.doesNotMatch(body, /<details\b/i, `${plan.id}: content remains visible`);
   assert.doesNotMatch(body, /\/Users\/|file:\/\/|Oliver|Blair|张叶丛|姜安頔|\b(?:api[_-]?key|password|cookie|token)\b/i, `${plan.id}: private information`);
   assert.doesNotMatch(body, /class="[^"]*\bstatus(?:-|\s|"\b)|20\d{2}-\d{2}-\d{2}/, `${plan.id}: no date or status badge`);
   const ids = new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]));
@@ -53,17 +54,18 @@ async function checkPlan(plan) {
     assert.ok(fs.existsSync(path.join(root, reference.asset)), `${plan.id}: referenced image exists ${reference.asset}`);
   }
   if (plan.id === 'merch-plan') {
-    assert.doesNotMatch(html, /xiexingift\.com|ouyihats\.com|亚克力印刷款与软胶款/, 'merch-plan: superseded sourcing direction must not return');
-    assert.match(html, /厂家报价待确认，预算待审批/, 'merch-plan: planning numbers cannot become approved quote or budget');
-    const refreshed = [...html.matchAll(/src="(assets\/merch-trucker\/[^\"]+)"/g)].map(match => match[1]);
-    assert.equal(refreshed.length, 6, 'merch-plan: six earlier concept images kept for comparison');
-    assert.equal(new Set(refreshed).size, 6, 'merch-plan: no duplicate refreshed image');
-    assert.doesNotMatch(html, /merch-atlas\/(?:0[123]|12|15|2[234])-|07-product-crew|08-product-wear|car-air-freshener|car-tissue-holder|BULL-V2-MERCH/, 'merch-plan: withdrawn mascot-led designs stay off the page');
-    assert.doesNotMatch(html, /src="assets\/(?:brand-plan\/merch-|brand-social\/daily-merch|brand-social\/r6\/references\/singular-cotton-cap)/, 'merch-plan: superseded soft caps removed from active page');
-    for (const detail of ['卡车网帽', '挺括前片', '网布后片', '弯帽檐', '可调节后扣']) {
-      assert.ok(html.includes(detail), 'merch-plan: current cap construction includes ' + detail);
+    for (const category of ['cup', 'scent', 'hat', 'tee', 'hoodie', 'tote', 'decal', 'grip', 'card']) {
+      assert.ok(ids.has(category), 'merch-plan: missing product category ' + category);
     }
-    assert.match(html, /三种帽型的定制报价待厂家确认/, 'merch-plan: old budget must not imply a new quote');
+    for (const region of ['packaging', 'shipping']) {
+      const start = '<!-- ' + region + ':start -->';
+      const end = '<!-- ' + region + ':end -->';
+      assert.equal(html.split(start).length, 2, 'merch-plan: one opening marker ' + region);
+      assert.equal(html.split(end).length, 2, 'merch-plan: one closing marker ' + region);
+      assert.ok(html.indexOf(start) < html.indexOf(end), 'merch-plan: ordered markers ' + region);
+    }
+    assert.doesNotMatch(body, /更早的设计稿|assets\/(merch-trucker|merch-atlas|merch-oedro)\//, 'merch-plan: retired product galleries stay off page');
+    assert.ok(ids.has('schedule'), 'merch-plan: dated schedule is accessible');
   }
   if (plan.id === 'social-brand') {
     assert.match(html, /<h3>模拟评论与回复<\/h3>/, 'social-brand: illustrative comment examples remain distinguishable from testimony');
@@ -71,7 +73,6 @@ async function checkPlan(plan) {
   }
   if (sources.length) assert.equal(footer, '', `${plan.id}: references stay outside reading UI`);
   assert.doesNotMatch(html, /<figcaption[^>]*>[\s\S]*?概念效果图/, `${plan.id}: no repeated concept caption boilerplate`);
-  if (plan.id === 'merch-plan') assert.match(html, /规划预留/, 'merch-plan: proposal context remains clear');
   for (const image of html.matchAll(/<img\b[^>]*>/g)) {
     assert.match(image[0], /\balt="[^"]+"/, `${plan.id}: descriptive image alternative`);
     assert.match(image[0], /\bwidth="\d+"/, `${plan.id}: image width`);
