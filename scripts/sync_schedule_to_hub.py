@@ -53,13 +53,15 @@ def get(url, limit=32_000_000):
 
 
 def captions(url):
-    public_url(url, {"docs.google.com"})
-    match = re.fullmatch(r"/document/d/([\w-]+)(?:/(?:edit|view))?/?", urlsplit(url).path)
-    if not match:
-        raise ValueError("Expected a native Google Docs captions link")
-    source = get(f"https://docs.google.com/document/d/{match[1]}/export?format=txt", 250_000)
-    parts = re.split(r"(?m)^[ \t]*(Instagram|Facebook|X|Threads)[ \t]*:?[ \t]*$",
-                     source.decode("utf-8-sig").replace("\r\n", "\n").replace("\r", "\n"))
+    source = url
+    if url.startswith("https://"):
+        public_url(url, {"docs.google.com"})
+        match = re.fullmatch(r"/document/d/([\w-]+)(?:/(?:edit|view))?/?", urlsplit(url).path)
+        if not match:
+            raise ValueError("Expected a native Google Docs captions link")
+        source = get(f"https://docs.google.com/document/d/{match[1]}/export?format=txt", 250_000).decode("utf-8-sig")
+    parts = re.split(r"(?m)^[ \t]*(?:#{1,6}[ \t]+)?(Instagram|Facebook|X|Threads)[ \t]*:?[ \t]*$",
+                     source.replace("\r\n", "\n").replace("\r", "\n"))
     labels = parts[1::2]
     result = {tag: value.strip() for tag, value in zip(labels, parts[2::2])}
     if len(labels) != len(PLATFORMS) or set(result) != set(PLATFORMS) or not all(result.values()):
@@ -75,12 +77,17 @@ def drive_file(url):
     return match[1]
 
 
+def hub_image(url):
+    return url.startswith(SITE) and bool(re.fullmatch(
+        r"assets/feed/[A-Za-z0-9_/-]+\.(?:jpe?g|png|webp)", url[len(SITE):], re.I))
+
+
 def is_webp(data):
     return data.startswith(b"RIFF") and data[8:12] == b"WEBP"
 
 
 def image_bytes(url):
-    data = get("https://drive.google.com/uc?export=download&id=" + drive_file(url))
+    data = get(url if hub_image(url) else "https://drive.google.com/uc?export=download&id=" + drive_file(url))
     if not (data.startswith((b"\xff\xd8\xff", b"\x89PNG\r\n\x1a\n", b"GIF8")) or is_webp(data)):
         raise ValueError("Drive did not return a supported image")
     return data
@@ -106,7 +113,9 @@ def validate_rows(rows, brand):
                 ident.casefold() in seen):
             raise ValueError("Schedule requires unique, safe Post IDs")
         seen.add(ident.casefold())
-        for flag in ("withdrawn", "removed"):
+        if row.get("previous_id") and not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]{0,63}", row["previous_id"]):
+            raise ValueError(f"{ident}: invalid previous Hub card ID")
+        for flag in ("withdrawn", "removed", "status_only"):
             if flag in row and not isinstance(row[flag], bool):
                 raise ValueError(f"{ident}: {flag} must be a boolean")
         if row.get("removed"):
@@ -116,6 +125,10 @@ def validate_rows(rows, brand):
         if row.get("withdrawn"):
             if row.get("images") not in HOLD:
                 raise ValueError(f"{ident}: use the verified Schedule withdrawal reason")
+            continue
+        if row.get("status_only"):
+            if row["status"] not in {"In review", "In review – do not post yet"}:
+                raise ValueError(f"{ident}: status-only is for an existing card on hold")
             continue
         if row["product"] not in PRODUCTS[brand]:
             raise ValueError(f"{ident}: unexpected brand or product")
@@ -134,6 +147,10 @@ def validate_rows(rows, brand):
 
 
 def media_urls(row):
+    if hub_image(row["images"]):
+        if row.get("image_files", [row["images"]]) != [row["images"]]:
+            raise ValueError(f'{row["id"]}: image list disagrees with the Hub image link')
+        return [row["images"]]
     url = public_url(row["images"], {"drive.google.com"})
     files = row.get("image_files", [])
     if re.fullmatch(r"/drive/(?:u/\d+/)?folders/[\w-]+/?", urlsplit(url).path):
@@ -146,6 +163,27 @@ def media_urls(row):
     if len({drive_file(item) for item in files}) != len(files):
         raise ValueError(f'{row["id"]}: duplicate Drive image')
     return files
+
+
+def check_ready_rows(brand, rows):
+    ready = [dict(row, image_files=media_urls(row)) for row in rows
+             if not removed(row) and row["status"] == "Ready to post"]
+    if not ready:
+        return
+    gate = Path.home() / "AI/scripts/agent_bus/bus.py"
+    if not gate.is_file():
+        raise ValueError("Ready to post requires the Content Plan approval service")
+    result = subprocess.run(
+        [sys.executable, "-B", str(gate), "--root", str(gate.parent),
+         "content", "check-hub", {"cozeware": "Cozeware", "oedro": "OEDRO"}[brand]],
+        input=json.dumps(ready), text=True, capture_output=True, timeout=150,
+    )
+    if result.returncode:
+        try:
+            issues = "; ".join(json.loads(result.stdout)["errors"])
+        except (ValueError, KeyError, TypeError):
+            issues = ""
+        raise ValueError(issues or "Could not verify Content Plan release approval")
 
 
 def render(row, scratch, assets):
@@ -196,8 +234,9 @@ def render(row, scratch, assets):
 
     clock = public_text(row.get("time", ""))
     timing = f' · <span lang="en">{clock}</span>' if clock else ""
-    links = [f'<a href="{escape(row["images"])}" lang="en">Images</a>',
-             f'<a href="{escape(row["captions"])}" lang="en">Captions</a>']
+    links = [f'<a href="{escape(row["images"])}" lang="en">Images</a>']
+    if row["captions"].startswith("https://"):
+        links.append(f'<a href="{escape(row["captions"])}" lang="en">Captions</a>')
     if row.get("published"):
         links.append(f'<a href="{escape(public_url(row["published"]))}" lang="en">Published post</a>')
     schedule_link = []
@@ -221,16 +260,59 @@ def render(row, scratch, assets):
     ])
 
 
+def matching_card_ids(sections, rows):
+    cards = {}
+    for section in sections:
+        for post in POSTS.finditer(section[0]):
+            if post[1] in cards:
+                raise ValueError(f"{post[1]}: duplicate Hub card")
+            heading = re.search(r"<h3\b[^>]*>(.*?)</h3>", post[0], re.S)
+            title = unescape(re.sub(r"<[^>]+>", "", heading[1])) if heading else ""
+            cards[post[1]] = (section[1], " ".join(title.split()).casefold())
+    claimed = {}
+    for row in rows:
+        ident = row["id"]
+        previous = row.get("previous_id")
+        title = " ".join(row.get("title", "").split()).casefold()
+        matches = {key for key, info in cards.items()
+                   if key in (ident, previous) or (title and info == (row.get("date"), title)
+                                                  and not re.match(r"^[\dA-Z]", key))}
+        if len(matches) > 1 or any(key in claimed for key in matches):
+            raise ValueError(f"{ident}: ambiguous Hub card match")
+        if row.get("status_only") and not matches:
+            raise ValueError(f"{ident}: supply the existing Hub card ID or its matching date and title")
+        for key in matches:
+            claimed[key] = row
+    return claimed
+
+
+def hold_card(card, row):
+    ident, status = row["id"], row["status"]
+    slug, label_zh, label_en = STATUSES[status]
+    opening, end, body = card.partition(">")
+    opening = re.sub(r' data-post="[^"]+"', f' data-post="{ident}"', opening)
+    opening = re.sub(r' data-schedule-status="[^"]+"', "", opening)
+    badge = (f'<p class="post-context"><span class="post-status" data-status="{slug}">'
+             f'{label_zh} <span lang="en">{label_en}</span></span></p>')
+    body, count = re.subn(r'<p class="post-context">.*?</p>', badge, body, count=1, flags=re.S)
+    if not count:
+        body, count = re.subn(r'(</h3>)', r'\1' + badge, body, count=1)
+    if not count:
+        raise ValueError(f"{ident}: existing Hub card has no status or heading")
+    return opening + f' data-schedule-status="{status}"' + end + body
+
+
 def render_feed(original, rows, scratch, assets):
     sections = list(DAYS.finditer(original))
     if not sections:
         raise ValueError("Hub feed layout has changed")
     # A day section consists of its heading and cards. Keep unrelated sections intact.
-    updates = {row["id"]: row for row in rows}
-    replacements = {row["id"]: render(row, scratch, assets) for row in rows if not removed(row)}
+    updates = matching_card_ids(sections, rows)
+    replacements = {row["id"]: render(row, scratch, assets) for row in rows
+                    if not removed(row) and not row.get("status_only")}
     pending = defaultdict(list)
     for row in rows:
-        if not removed(row):
+        if row["id"] in replacements:
             pending[row["date"]].append(row["id"])
     output = {}
     for section in sections:
@@ -239,10 +321,14 @@ def render_feed(original, rows, scratch, assets):
             row = updates.get(post[1])
             if row is None:
                 return post[0]
+            if row.get("status_only"):
+                if row["date"] != day:
+                    raise ValueError(f'{row["id"]}: existing Hub card is on another date')
+                return hold_card(post[0], row)
             if removed(row) or row["date"] != day:
                 return ""
-            pending[day].remove(post[1])
-            return replacements[post[1]]
+            pending[day].remove(row["id"])
+            return replacements[row["id"]]
         body = POSTS.sub(replace, section[0])
         if pending[day]:
             body = body[:-len("</section>")] + "\n".join(replacements[ident] for ident in pending.pop(day)) + "\n</section>"
@@ -261,7 +347,9 @@ def render_feed(original, rows, scratch, assets):
 
 def verify(html, rows):
     current = {}
-    for day in DAYS.finditer(html):
+    sections = list(DAYS.finditer(html))
+    aliases = matching_card_ids(sections, rows)
+    for day in sections:
         for card in POSTS.finditer(day[0]):
             if card[1] in current:
                 raise ValueError(f"{card[1]}: duplicate Hub card")
@@ -269,7 +357,7 @@ def verify(html, rows):
     for row in rows:
         ident = row["id"]
         if removed(row):
-            if ident in current:
+            if any(match is row for match in aliases.values()):
                 raise ValueError(f"{ident}: withdrawn card still present")
             continue
         if ident not in current:
@@ -277,10 +365,12 @@ def verify(html, rows):
         day, card = current[ident]
         if day != row["date"] or f'data-schedule-status="{row["status"]}"' not in card:
             raise ValueError(f"{ident}: Hub date or status differs")
+        if row.get("status_only"):
+            continue
         if f'<h3 lang="en">{public_text(row["title"])}</h3>' not in card:
             raise ValueError(f"{ident}: Hub title differs")
         for field in ("images", "captions", "published", "url"):
-            if row.get(field) and f'href="{escape(row[field])}"' not in card:
+            if row.get(field, "").startswith("https://") and f'href="{escape(row[field])}"' not in card:
                 raise ValueError(f"{ident}: Hub {field} link differs")
         if bool(row.get("url")) != ('class="feed-schedule-link"' in card):
             raise ValueError(f"{ident}: Hub Schedule Link presence differs")
@@ -296,6 +386,9 @@ def verify_live(feed, rows, repo):
         ident = row["id"]
         if removed(row):
             print(f"{ident}: absent from {SITE}{feed}")
+            continue
+        if row.get("status_only"):
+            print(f'{SITE}{feed}#day-{row["date"]} · {ident} · {row["status"]}')
             continue
         _, card = current[ident]
         for platform, value in captions(row["captions"]).items():
@@ -345,6 +438,7 @@ def main():
             return
         if not options.repo or not options.scratch or not options.scratch.is_dir():
             parser.error("provide --repo and an existing --scratch directory")
+        check_ready_rows(options.brand, rows)
         path = options.repo / feed
         original = path.read_text(encoding="utf-8")
         assets = {}
