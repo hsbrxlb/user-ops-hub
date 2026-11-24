@@ -115,9 +115,12 @@ def validate_rows(rows, brand):
         seen.add(ident.casefold())
         if row.get("previous_id") and not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]{0,63}", row["previous_id"]):
             raise ValueError(f"{ident}: invalid previous Hub card ID")
-        for flag in ("withdrawn", "removed", "status_only"):
+        for flag in ("withdrawn", "removed", "status_only", "needs_rework"):
             if flag in row and not isinstance(row[flag], bool):
                 raise ValueError(f"{ident}: {flag} must be a boolean")
+        if row.get("needs_rework") and (removed(row) or row.get("status_only") or
+                                        row.get("status") not in {"In review", "In review – do not post yet"}):
+            raise ValueError(f"{ident}: a rework preview requires current artwork and captions in review")
         if row.get("removed"):
             continue
         if date.fromisoformat(row["date"]).isoformat() != row["date"]:
@@ -249,6 +252,7 @@ def render(row, scratch, assets, repo=None):
         blocks.append(f'<div class="post-caption" data-feed-platform="{name}"{hidden}>'
                       f'<p class="feed-caption" lang="en">{public_text(copy[name])}</p></div>')
 
+    rework = ' · 图稿需重做 <span lang="en">Needs rework</span>' if row.get("needs_rework") else ""
     clock = public_text(row.get("time", ""))
     timing = f' · <span lang="en">{clock}</span>' if clock else ""
     links = [f'<a href="{escape(row["images"])}" lang="en">Images</a>']
@@ -269,7 +273,7 @@ def render(row, scratch, assets, repo=None):
         f'data-pages="{"|".join(paths)}">{img(0, title)}</button>',
         *gallery, '</div>', '<div class="post-body">', f'<h3 lang="en">{title}</h3>',
         f'<p class="post-context"><span class="post-status" data-status="{status_slug}">{status_zh} '
-        f'<span lang="en">{status_en}</span></span>{timing}</p>',
+        f'<span lang="en">{status_en}</span></span>{rework}{timing}</p>',
         f'<div class="post-platforms"><div class="post-platform-switch" role="group" aria-label="平台">'
         f'{"".join(buttons)}</div><button type="button" class="post-copy">复制配文</button></div>',
         *blocks, f'<p class="post-links">{" · ".join(links)}</p>', *schedule_link,
@@ -384,6 +388,8 @@ def verify(html, rows):
             raise ValueError(f"{ident}: Hub date or status differs")
         if row.get("status_only"):
             continue
+        if bool(row.get("needs_rework")) != ('<span lang="en">Needs rework</span>' in card):
+            raise ValueError(f"{ident}: artwork review differs")
         if f'<h3 lang="en">{public_text(row["title"])}</h3>' not in card:
             raise ValueError(f"{ident}: Hub title differs")
         for field in ("images", "captions", "published", "url"):
