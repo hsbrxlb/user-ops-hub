@@ -1,103 +1,58 @@
 {
   "page": "merch-plan.html",
-  "checked_at": "2026-09-15",
-  "pricing_basis": {
-    "advanced_cap": "Supplier storefront indexed certain caps USD1.80-5.80 MOQ50; final specifications and domestic tax/delivery quote pending",
-    "haixing": "User supplied research USD1.85-5.75 MOQ50 unverified; actual supplier storefront price negotiable",
-    "jiabo": "User supplied USD0.28-0.85 MOQ50 unverified; primary page verifies moldUSD65-200, sample8-10days with conflicting FAQ2-7days, bulk15-17days",
-    "renhui": "User supplied USD0.30-0.80 MOQ100 unverified; general supplier FAQ usually500, magnet-specific quote missing",
-    "planning": "RMB25-45/cap for50; first100 magnets goods+mold RMB700-2000. Domestic freight per supplier RMB30-80 is a rough planning assumption requiring actual weight/carrier quotation. No approved budget; US transportation excluded."
-  },
+  "checked_at": "2026-11-24",
   "sources": [
     {
-      "url": "https://acapchina.en.alibaba.com/zh_CN/",
-      "supports": "Selected cap listings USD1.80-5.80 MOQ50, not final custom order quote"
+      "url": "https://www.starbucks.com/menu/product/480/hot",
+      "supports": "美国咖啡杯的 12 美制液量盎司选项"
     },
     {
-      "url": "https://singular-society.com/products/cotton-cap",
-      "supports": "Brand disclosure names A Cap Ltd as Shanghai Advanced Cap Manufacturing Co.,Ltd; no OEDRO batch quality guarantee"
+      "url": "https://www.littletrees.com/product-types?id=8&page=0",
+      "supports": "棉纤维车载香片形态"
     },
     {
-      "url": "https://hxmcaps.gys.cn/",
-      "supports": "Supplier storefront has caps and embroidery; prices negotiable"
+      "url": "https://richardsonsports.com/categories/the-112-trucker-hat-collection",
+      "supports": "卡车帽的前片与网背结构"
     },
     {
-      "url": "https://www.jiabocrafts.com/Metal-Fridge-Magnets-pl6095906.html",
-      "supports": "Official metal magnet category"
+      "url": "https://retail.comfortcolors.com/en-us/comfort-colors-1717",
+      "supports": "纯棉 T 恤的布料与成衣洗水"
     },
     {
-      "url": "https://www.jiabocrafts.com/Stock-Blank-Fridge-Magnet-Zinc-Alloy-Magnets-for-Fridge-pd46304927.html",
-      "supports": "Official customization, moldUSD65-200, sample8-10days conflicting FAQ2-7days, bulk15-17days"
+      "url": "https://www.independenttradingco.com/products/ind4000",
+      "supports": "重磅连帽卫衣的棉面与抓绒组织"
     },
     {
-      "url": "https://suppliers.alibaba.com/zhongshan-renhui-metal-co-ltd_4038278066",
-      "supports": "Supplier page exists; AI overview and generic FAQ do not establish magnet-specific quote or quality"
+      "url": "https://www.llbean.com/llb/shop/33381",
+      "supports": "重型帆布托特的包底与车缝"
     },
     {
-      "url": "https://www.roughcountry.com/product/rough-country-mesh-hat-84119",
-      "supports": "Richardson 112 网帽与棕色品牌章，SKU84119"
+      "url": "https://www.azleg.gov/ars/28/00959-01.htm",
+      "supports": "亚利桑那州车窗贴纸的下角位置"
     },
     {
-      "url": "https://www.lasfit.com/products/black-round-neck-t-shirt",
-      "supports": "十周年黑色圆领T恤；商品页存在不代表当前可购。"
+      "url": "https://www.leg.state.fl.us/Statutes/index.cfm?App_mode=Display_Statute&URL=0300-0399/0316/Sections/0316.2952.html",
+      "supports": "佛罗里达州前挡用途限制"
     },
     {
-      "url": "https://www.lasfit.com/blogs/news/everything-you-need-to-know-about-lasfit-10th-anniversary",
-      "supports": "2025年周年活动使用T恤作为奖品。"
+      "url": "https://www.nysenate.gov/legislation/laws/VAT/375",
+      "supports": "纽约州玻璃贴纸与授权"
     },
     {
-      "url": "https://www.weathertech.com/weathertech-water-bottle.html",
-      "supports": "Water Bottle 运动水瓶，8ABTL1，日常携带场景。"
+      "url": "https://codes.ohio.gov/ohio-revised-code/section-4513.24",
+      "supports": "俄亥俄州前挡下角尺寸"
     },
     {
-      "url": "https://www.roughcountry.com/lifestyle",
-      "supports": "品牌周边"
+      "url": "https://patents.google.com/patent/US11988325B2/en",
+      "supports": "手机握持支架的美国结构权利要求"
     },
     {
-      "url": "https://www.roughcountry.com/gallery",
-      "supports": "车主改装展示"
+      "url": "https://www.vistaprint.com/marketing-materials/standard-postcards?Paper+Stock=Uncoated",
+      "supports": "无涂布明信片的常用尺寸与纸型"
     },
     {
-      "url": "https://www.lasfit.com/pages/community-gallery",
-      "supports": "车型与产品之间的连接"
-    },
-    {
-      "url": "https://www.weathertech.com/home/merchandise/",
-      "supports": "周边产品"
-    },
-    {
-      "url": "https://www.oedro.com/article/shipping-delivery-policy.html?aid=91",
-      "supports": "配送网络"
-    },
-    {
-      "url": "https://support.threadless.com/article/165-how-are-the-submissions-chosen",
-      "supports": "投稿选择机制"
-    },
-    {
-      "url": "https://help.x.com/en/using-x/x-polls",
-      "supports": "投票限制"
-    }
-  ],
-  "reference_images": [
-    {
-      "asset": "assets/brand-social/r6/references/jiabo-metal-magnet.jpg",
-      "source": "https://5lrorwxhopqlrik.leadongcdn.com/cloud/lmBqmKnmRioSrrorrqko/1.jpg",
-      "use": "Official Jiabo metal magnet product photo, not OEDRO sample"
-    },
-    {
-      "asset": "assets/brand-social/r6/references/singular-cotton-cap.jpg",
-      "source": "https://singular-society.com/cdn/shop/files/Cotton_Cap_Pink_0015_677706c1-fe81-48c1-947c-f98c206f05f9.jpg?v=1719559044&width=1500",
-      "use": "Official product photo supporting manufacturer's disclosed client reference, not quoted OEDRO hat"
-    },
-    {
-      "asset": "assets/merch-references/lasfit-shirt.png",
-      "source": "https://www.lasfit.com/cdn/shop/files/black-round-neck-t-shirt-XL_2_grande.png?v=1788854743",
-      "use": "单张商品缩略图配对应官网链接，用于比较周边形式，不冒充 OEDRO 产品。"
-    },
-    {
-      "asset": "assets/merch-references/weathertech-bottle.jpg",
-      "source": "https://images.weathertech.com/c80a2a2f-38c8-4ae5-bd2f-b1af00326f0d/WT_Bottle_13_Original%20file.jpg?fit=bounds&height=800&width=800",
-      "use": "单张商品缩略图配对应官网链接，用于比较周边形式，不冒充 OEDRO 产品。"
+      "url": "https://support.moo.com/hc/en-us/articles/48422397144852-Gold-Foil-Business-Cards",
+      "supports": "烫箔卡片的线宽和留白"
     }
   ]
 }

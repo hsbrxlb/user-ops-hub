@@ -79,3 +79,29 @@
 .mp-doc .goods-section>h2::before{content:none}
 
 .mp-doc .goods-grid::before,.mp-doc .goods-grid::after{content:none}
+
+/* Keep the selector compact and give the product photograph the full card. */
+#content.mp .mp-doc { --mp-indent: 0px; }
+#content.mp .mp-toc { margin: 0 0 1.3rem; }
+#content.mp .mp-toc summary, #content.mp .goods-placement summary {
+  color: #0d4d95;
+  cursor: pointer;
+  padding: .75rem 0;
+  font-size: 1rem;
+  font-weight: 650;
+}
+#content.mp .mp-toc summary span, #content.mp .goods-placement summary span {
+  margin-left: .4em;
+  font-weight: 450;
+}
+#content.mp .mp-toc ol { margin-top: .5rem; }
+#content.mp .mp-toc a { color: #0d4d95; text-decoration: none; }
+#content.mp .mp-toc .mp-toc-next a { color: white; }
+#content.mp .goods-section { padding: clamp(1.8rem, 4vw, 3.4rem) 0; border-top: 1px solid #c6cacf; }
+#content.mp .goods-section h2 { padding-left: 0; }
+#content.mp .goods-option figure a { display: block; padding: 0; }
+#content.mp .goods-option figure img { inset: 0; width: 100%; height: 100%; inline-size: 100%; block-size: 100%; object-fit: contain; }
+#content.mp .goods-feedback { margin: .4rem; font-size: 1rem; color: #0d4d95; }
+#content.mp .goods-placement { margin: .5rem 0 1.3rem; max-width: 60rem; }
+#content.mp .goods-placement p { font-size: 1rem; line-height: 1.7; }
+#content.mp .goods-spec { white-space: pre-wrap; font-size: 1rem; }
