@@ -150,10 +150,13 @@ def validate_rows(rows, brand):
 
 
 def media_urls(row):
-    if hub_image(row["images"]):
-        if row.get("image_files", [row["images"]]) != [row["images"]]:
-            raise ValueError(f'{row["id"]}: image list disagrees with the Hub image link')
-        return [row["images"]]
+    links = row["images"].splitlines()
+    if links and hub_image(links[0]):
+        if not all(hub_image(link) for link in links) or len(set(links)) != len(links):
+            raise ValueError(f'{row["id"]}: expected distinct Hub image URLs in Schedule order')
+        if row.get("image_files", links) != links:
+            raise ValueError(f'{row["id"]}: image list disagrees with Schedule')
+        return links
     url = public_url(row["images"], {"drive.google.com"})
     files = row.get("image_files", [])
     if re.fullmatch(r"/drive/(?:u/\d+/)?folders/[\w-]+/?", urlsplit(url).path):
@@ -171,6 +174,8 @@ def media_urls(row):
 def check_schedule_changes(brand, rows, original):
     sections = list(DAYS.finditer(original))
     matched = matching_card_ids(sections, rows)
+    matched_cards = {post[1]: post[0] for day in sections for post in POSTS.finditer(day[0])
+                     if post[1] in matched}
     frozen = "2026-11-24" if brand == "cozeware" else None
     if frozen:
         old_ids = {p[1] for day in sections if day[1] == frozen for p in POSTS.finditer(day[0])}
@@ -179,11 +184,24 @@ def check_schedule_changes(brand, rows, original):
     requests = []
     for row in rows:
         candidate = dict(row)
+        candidate.pop("previous_status", None)
         if not removed(row) and row["status"] == "Ready to post":
             candidate["image_files"] = media_urls(row)
         for old_id, source in matched.items():
-            if source is row and old_id != row["id"]:
+            if source is not row:
+                continue
+            if old_id != row["id"]:
                 candidate["previous_id"] = old_id
+            card = matched_cards[old_id]
+            status = re.search(r' data-schedule-status="([^"]+)"', card.partition(">")[0])
+            badge = re.search(r'<span class="post-status" data-status="([^"]+)"', card)
+            previous = status[1] if status else None
+            fallback = {"ready": "Ready to post", "posted": "Posted",
+                        "scheduled": "Scheduled", "review": "In review"}
+            badge_status = fallback.get(badge[1]) if badge else None
+            if previous not in STATUSES or badge_status in {"Ready to post", "Posted", "Scheduled"}:
+                previous = badge_status or previous
+            candidate["previous_status"] = previous if previous in STATUSES else "unknown"
         requests.append(candidate)
     gate = Path.home() / "AI/scripts/agent_bus/bus.py"
     if not gate.is_file():
@@ -268,7 +286,10 @@ def render(row, scratch, assets, repo=None):
             raise ValueError(f"{ident}: expected the scheduled platform names")
         timing += f' · <span class="post-placement" lang="en">{public_text(", ".join(placements))}</span>'
 
-    links = [f'<a href="{escape(row["images"])}" lang="en">Images</a>']
+    image_links = row["images"].splitlines()
+    links = [f'<a href="{escape(url)}" lang="en">Images</a>' if len(image_links) == 1
+             else f'<a href="{escape(url)}" lang="en">Image {i}</a>'
+             for i, url in enumerate(image_links, 1)]
     if row["captions"].startswith("https://"):
         links.append(f'<a href="{escape(row["captions"])}" lang="en">Captions</a>')
     if row.get("published"):
@@ -405,7 +426,9 @@ def verify(html, rows):
             raise ValueError(f"{ident}: artwork review differs")
         if f'<h3 lang="en">{public_text(row["title"])}</h3>' not in card:
             raise ValueError(f"{ident}: Hub title differs")
-        for field in ("images", "captions", "published", "url"):
+        if any(f'href="{escape(url)}"' not in card for url in row["images"].splitlines()):
+            raise ValueError(f"{ident}: Hub image links differ")
+        for field in ("captions", "published", "url"):
             if row.get(field, "").startswith("https://") and f'href="{escape(row[field])}"' not in card:
                 raise ValueError(f"{ident}: Hub {field} link differs")
         if bool(row.get("url")) != ('class="feed-schedule-link"' in card):
