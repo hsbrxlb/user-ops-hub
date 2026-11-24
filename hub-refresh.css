@@ -15,10 +15,6 @@ a, button { transition: color 200ms ease-out, background-color 200ms ease-out, b
 :where(h1, h2, h3) { text-wrap: balance; }
 :where(p, li, dd) { text-wrap: pretty; }
 :where(img, video, iframe) { max-width: 100%; }
-#content :is(.hub-image-trigger > img, .hub-image-trigger > picture img, [data-pages] > img, .email-frame, .newsletter-frame) {
-  outline: 1px solid var(--media-edge);
-  outline-offset: -1px;
-}
 :where(td, th, dd) { font-variant-numeric: tabular-nums; }
 
 .sidebar { border-right-width: .5px; scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent; }

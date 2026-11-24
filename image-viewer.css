@@ -131,8 +131,6 @@ button.hub-image-aux {
   max-inline-size: 100cqi;
   max-block-size: 100cqb;
   object-fit: contain;
-  outline: 1px solid var(--media-edge, #aa9682);
-  outline-offset: -1px;
 }
 
 .hub-image-stage.is-original {
