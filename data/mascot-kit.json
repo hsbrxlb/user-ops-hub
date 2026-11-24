@@ -165,7 +165,7 @@
       "channel": "AI问卷",
       "speaker": "Bruno",
       "copy": "I’m Bruno, OEDRO’s AI research guide. You can skip a question or stop whenever you like. What would you like to improve about your current setup?",
-      "purpose": "角色放在开场和追问旁，让问题更容易回答，同时保留跳过和停止选项。"
+      "purpose": "Bruno 在开场和追问时出现。用户可以跳过问题或结束访谈。"
     },
     {
       "channel": "网站购物助手",
@@ -177,25 +177,25 @@
       "channel": "Discord",
       "speaker": "Bruno",
       "copy": "What’s the one thing in your tool bag you always reach for? Mine’s just a prop, so I’m taking notes.",
-      "purpose": "用一个具体问题邀请车主分享，角色不冒充具有驾驶或维修经历的人。"
+      "purpose": "Bruno 以品牌角色身份提一个具体问题，邀请车主分享。"
     },
     {
       "channel": "社媒",
       "speaker": "Bruno",
       "copy": "The toolbox finally has company. What should this little red sidekick help with next?",
-      "purpose": "围绕公牛和工具包里的红色伙伴展开，让真实用户故事继续成为主角。"
+      "purpose": "由 Bruno 和红色救援板引出车主的真实故事。"
     },
     {
       "channel": "反馈感谢邮件",
       "speaker": "Bruno",
       "copy": "Thanks for sharing what worked and what didn’t. That’s useful to hear.",
-      "purpose": "有真实反馈时，以轻量方式出现在结尾，不挤占正文、发件信息和退订入口。"
+      "purpose": "收到真实反馈后，可在邮件结尾放 Bruno。发件信息和退订链接保持可见。"
     },
     {
       "channel": "The Glovebox",
       "speaker": "Bruno",
       "copy": "Before your next project, keep the instructions for your exact product within reach. One less thing to hunt for.",
-      "purpose": "作为栏目旁的搭档，点出一个实用细节；阅读内容仍放在前面。"
+      "purpose": "正文先给实用技巧。Bruno 可在栏目旁点出一个具体细节。"
     }
   ],
   "bundle_asset_ids": [

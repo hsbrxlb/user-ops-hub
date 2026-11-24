@@ -45,13 +45,13 @@
 
   function friendsMarkup() {
     return '<a class="friends-entry" href="mascot-friends.html"><img src="assets/bruno-friends/lineup.webp" alt="Bruno 和漫画固定配角的阵容" width="1536" height="1024" loading="lazy" decoding="async">'
-      + '<span><strong>Bruno 和朋友们</strong><span lang="en">Bruno &amp; Friends</span><span>漫画里的七位固定角色，以及怎么用 →</span></span></a>';
+      + '<span><strong>Bruno 和朋友们</strong><span lang="en">Bruno &amp; Friends</span><span>漫画角色与出场规则 →</span></span></a>';
   }
 
   function tocMarkup(characters) {
-    return '<nav class="evo-toc" aria-label="本页跳转"><strong>本页</strong><div class="evo-toc-list">'
+    return '<nav class="evo-toc" aria-label="角色与素材目录"><strong>角色与素材</strong><div class="evo-toc-list">'
       + characters.map((character) => '<a href="#' + safe(character.id) + '">' + safe(character.name_cn) + '</a>').join('')
-      + '<a class="evo-section-link" href="#iteration">角色迭代</a><a class="evo-section-link" href="#applications">应用与素材</a><a class="evo-section-link" href="#design-workflow">设计技能</a><a class="evo-section-link" href="#character-voice">角色表达</a><a class="evo-section-link" href="#digital-assets">数字素材</a></div></nav>';
+      + '<a class="evo-section-link" href="#iteration">角色造型</a><a class="evo-section-link" href="#applications">应用与素材</a><a class="evo-section-link" href="#design-workflow">设计技能</a><a class="evo-section-link" href="#character-voice">角色表达</a><a class="evo-section-link" href="#digital-assets">数字素材</a></div></nav>';
   }
 
   function sceneApplicationsMarkup(assets) {
@@ -63,7 +63,6 @@
     const avatar = kit.assets.find((asset) => asset.id === 'avatar-128-png');
     const poses = ['pose-welcome-768-webp', 'pose-explain-768-webp'].map((id) => kit.assets.find((asset) => asset.id === id));
     return '<section class="evo-applications" id="applications" aria-labelledby="evo-applications-title"><h2 id="evo-applications-title">应用示意</h2>'
-      + "<p>同一位车库搭档，出现在问卷、社群、购物答疑和阅读内容中。</p>"
       + '<div class="kit-poses">' + poses.map((asset, index) => '<figure><a href="' + safe(asset.src) + '"><img src="' + safe(asset.src)
         + '" alt="' + safe(asset.alt) + '" width="' + asset.width + '" height="' + asset.height + '" loading="lazy"></a><figcaption>'
         + (index === 0 ? '挥手欢迎' : "协助查看细节") + '</figcaption></figure>').join('') + '</div>'
@@ -79,7 +78,7 @@
     return '<section class="kit-section" id="character-voice"><h2>角色表达</h2>'
       + "<p>Bruno 是一头成年公牛，像一位有本事、愿意搭把手的车库伙伴：直接、实用，也带一点轻松的幽默。</p>"
       + "<p>每次给出一个有用细节，或提出一个容易回答的具体问题。氛围轻松时语气轻快，用户遇到故障或安全问题时则保持认真。</p>"
-      + "<p>名字统一显示为 Bruno，AI 身份在首次互动的介绍正文中说明；品牌帖保留真实发件团队。角色不冒充车主，不编造购买、安装或驾驶经历。车型适配、商品性能和安全相关回答均以准确资料为准。</p></section>";
+      + "<p>Bruno 以品牌角色身份说话。AI 身份在首次互动时说明。品牌帖署名为实际发帖团队。购买、安装或驾驶经历只引用有来源的车主故事。车型适配、商品性能和安全信息以核实过的资料为准。</p></section>";
   }
 
   function downloadsMarkup(kit) {
@@ -109,7 +108,7 @@
       document.querySelector('meta[name="description"]').content = data.meta_description;
       document.querySelector('#content').innerHTML = '<header class="page-heading evo-heading"><h1>OEDRO 吉祥物</h1></header><section class="brand-section" aria-labelledby="oedro-brand-title"><h2 class="brand-section-title" id="oedro-brand-title">OEDRO</h2>'
         + '<div class="evo-layout">' + tocMarkup(data.characters)
-        + '<div class="evo-character-list"><section id="iteration" class="mascot-section"><h2>角色迭代</h2>'
+        + '<div class="evo-character-list"><section id="iteration" class="mascot-section"><h2>角色造型</h2>'
         + data.characters.map((character) => characterMarkup(character)).join('')
         + sceneApplicationsMarkup(data.applications)
         + '</section><section id="applications" class="mascot-section"><h2>应用与素材</h2>'
