@@ -62,8 +62,12 @@ async function checkPlan(plan) {
       const expected = category === 'decal' ? 3 : 2;
       const photos = [...catalog.matchAll(/<img src="(assets\/merch-collection\/[^"]+\.webp)"/g)];
       assert.equal(new Set(photos.map(match => match[1])).size, expected, 'merch-plan: unexpected number of alternatives for ' + category);
-      assert.equal((catalog.match(/<details class="goods-rfq">/g) || []).length, expected, 'merch-plan: each variant needs an order specification');
-      assert.equal((catalog.match(/<button type="button" class="goods-copy">/g) || []).length, expected, 'merch-plan: each specification can be copied');
+      const options = catalog.split('<div class="goods-option">').slice(1);
+      assert.equal(options.length, expected, 'merch-plan: expected a product description for each variant');
+      for (const option of options) {
+        assert.match(option, /<h3>(?:<span lang="en">)?[^<]+[\s\S]*?<p>[^<]+<\/p>/, 'merch-plan: product name and specifications');
+        assert.doesNotMatch(option, /goods-rfq|goods-copy|下载规格文本/, 'merch-plan: keep supplier tools out of product cards');
+      }
 
     }
     for (const region of ['packaging', 'shipping']) {
