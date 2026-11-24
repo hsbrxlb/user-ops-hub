@@ -158,14 +158,20 @@
       if (match) shown += 1;
     }
     for (const day of days) {
-      const n = day.querySelectorAll('.post:not([hidden])').length;
-      day.hidden = n === 0;
+      const visiblePosts = [...day.querySelectorAll('.post:not([hidden])')];
+      const scheduled = visiblePosts.filter((post) => {
+        const state = post.dataset.scheduleStatus;
+        if (state) return ['Ready to post', 'Scheduled', 'Posted', 'Published'].includes(state);
+        const badge = post.querySelector('.post-status')?.dataset.status;
+        return badge ? ['ready', 'scheduled', 'posted'].includes(badge) : day.dataset.date < '2026-11-24';
+      }).length;
+      day.hidden = visiblePosts.length === 0;
       const count = day.querySelector('.day-count');
-      if (count) count.textContent = n + ' 条';
+      if (count) count.textContent = scheduled + ' 条排期';
       const link = dateNav?.querySelector(`a[data-date="${day.dataset.date}"]`);
       if (link) {
-        link.hidden = n === 0;
-        link.querySelector('.date-count').textContent = ' · ' + n + ' 条';
+        link.hidden = day.hidden;
+        link.querySelector('.date-count').textContent = ' · ' + scheduled + ' 条';
       }
     }
     for (const button of filterBar?.querySelectorAll('button') || []) {

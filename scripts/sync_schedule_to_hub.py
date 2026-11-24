@@ -165,18 +165,30 @@ def media_urls(row):
     return files
 
 
-def check_ready_rows(brand, rows):
-    ready = [dict(row, image_files=media_urls(row)) for row in rows
-             if not removed(row) and row["status"] == "Ready to post"]
-    if not ready:
-        return
+def check_schedule_changes(brand, rows, original):
+    sections = list(DAYS.finditer(original))
+    matched = matching_card_ids(sections, rows)
+    frozen = "2026-11-24" if brand == "cozeware" else None
+    if frozen:
+        old_ids = {p[1] for day in sections if day[1] == frozen for p in POSTS.finditer(day[0])}
+        if any(row.get("date") == frozen for row in rows) or old_ids.intersection(matched):
+            raise ValueError("This daily feed is locked after visual approval")
+    requests = []
+    for row in rows:
+        candidate = dict(row)
+        if not removed(row) and row["status"] == "Ready to post":
+            candidate["image_files"] = media_urls(row)
+        for old_id, source in matched.items():
+            if source is row and old_id != row["id"]:
+                candidate["previous_id"] = old_id
+        requests.append(candidate)
     gate = Path.home() / "AI/scripts/agent_bus/bus.py"
     if not gate.is_file():
-        raise ValueError("Ready to post requires the Content Plan approval service")
+        raise ValueError("Schedule changes require the Content Plan approval service")
     result = subprocess.run(
         [sys.executable, "-B", str(gate), "--root", str(gate.parent),
          "content", "check-hub", {"cozeware": "Cozeware", "oedro": "OEDRO"}[brand]],
-        input=json.dumps(ready), text=True, capture_output=True, timeout=150,
+        input=json.dumps(requests), text=True, capture_output=True, timeout=150,
     )
     if result.returncode:
         try:
@@ -186,7 +198,7 @@ def check_ready_rows(brand, rows):
         raise ValueError(issues or "Could not verify Content Plan release approval")
 
 
-def render(row, scratch, assets):
+def render(row, scratch, assets, repo=None):
     ident = row["id"]
     title = public_text(row["title"])
     status = row["status"]
@@ -194,16 +206,21 @@ def render(row, scratch, assets):
     copy = captions(row["captions"])
     paths, sizes = [], []
     for number, url in enumerate(media_urls(row), 1):
-        source = scratch / "source.image"
-        result = scratch / "converted.webp"
-        source.write_bytes(image_bytes(url))
-        subprocess.run(["cwebp", "-quiet", "-q", "88", "-size", "580000", str(source), "-o", str(result)],
-                       check=True, timeout=60, capture_output=True)
+        path = f'assets/feed/{row["product"]}-{ident.lower()}/{number}.webp'
+        staged = repo / path if repo else None
+        if (status in {"In review", "In review – do not post yet"} and url == SITE + path
+                and staged and staged.is_file() and staged.resolve().is_relative_to(repo.resolve())):
+            result = staged
+        else:
+            source = scratch / "source.image"
+            result = scratch / "converted.webp"
+            source.write_bytes(image_bytes(url))
+            subprocess.run(["cwebp", "-quiet", "-q", "88", "-size", "580000", str(source), "-o", str(result)],
+                           check=True, timeout=60, capture_output=True)
         info = subprocess.check_output(["sips", "-g", "pixelWidth", "-g", "pixelHeight", str(result)],
                                        text=True, timeout=20)
         sizes.append(tuple(int(re.search(key + r": (\d+)", info)[1])
                            for key in ("pixelWidth", "pixelHeight")))
-        path = f'assets/feed/{row["product"]}-{ident.lower()}/{number}.webp'
         data = result.read_bytes()
         if not is_webp(data) or len(data) > 600_000:
             raise ValueError(f"{ident}: Hub image must be WebP under 600 KB")
@@ -302,13 +319,13 @@ def hold_card(card, row):
     return opening + f' data-schedule-status="{status}"' + end + body
 
 
-def render_feed(original, rows, scratch, assets):
+def render_feed(original, rows, scratch, assets, repo=None):
     sections = list(DAYS.finditer(original))
     if not sections:
         raise ValueError("Hub feed layout has changed")
     # A day section consists of its heading and cards. Keep unrelated sections intact.
     updates = matching_card_ids(sections, rows)
-    replacements = {row["id"]: render(row, scratch, assets) for row in rows
+    replacements = {row["id"]: render(row, scratch, assets, repo) for row in rows
                     if not removed(row) and not row.get("status_only")}
     pending = defaultdict(list)
     for row in rows:
@@ -438,12 +455,12 @@ def main():
             return
         if not options.repo or not options.scratch or not options.scratch.is_dir():
             parser.error("provide --repo and an existing --scratch directory")
-        check_ready_rows(options.brand, rows)
         path = options.repo / feed
         original = path.read_text(encoding="utf-8")
+        check_schedule_changes(options.brand, rows, original)
         assets = {}
         with TemporaryDirectory(prefix="hub-schedule-", dir=options.scratch) as scratch:
-            changed = render_feed(original, rows, Path(scratch), assets)
+            changed = render_feed(original, rows, Path(scratch), assets, options.repo)
         verify(changed, rows)
         if path.read_text(encoding="utf-8") != original:
             raise ValueError("Hub feed changed during rendering. Refresh the checkout and retry")
