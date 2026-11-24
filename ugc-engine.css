@@ -63,7 +63,7 @@ container-type:inline-size;container-name:ugc;display:block;position:relative;bo
 .ugc-engine .ugc-fig{margin:0}
 .ugc-engine .ugc-fig__stage{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;align-items:start}
 .ugc-engine .ugc-fig__stage--img{grid-template-columns:minmax(0,1fr);max-width:520px}
-.ugc-engine .ugc-fig__plate{width:100%;background:var(--ugc-paper);border:1px solid var(--ugc-rule);padding:7px}
+.ugc-engine .ugc-fig__plate{width:100%;background:none;border:0;padding:0}
 .ugc-engine .ugc-fig__img{width:100%;height:auto;background:var(--ugc-sand)}
 .ugc-engine .ugc-fig__cap{display:flex;flex-direction:column;gap:2px;margin-top:22px;padding-top:10px;border-top:1px solid var(--ugc-rule);font-size:max(14px,.9375rem);line-height:1.6;color:var(--ugc-ink2)}
 .ugc-engine .ugc-fig__title{color:var(--ugc-ink);font-weight:600}
@@ -96,7 +96,7 @@ container-type:inline-size;container-name:ugc;display:block;position:relative;bo
 
 /* 3 story tile */
 .ugc-engine .ugc-tile{position:relative}
-.ugc-engine .ugc-tile__photo{margin-left:22%;background:var(--ugc-paper);border:1px solid var(--ugc-rule);padding:7px}
+.ugc-engine .ugc-tile__photo{margin-left:22%;background:none;border:0;padding:0}
 .ugc-engine .ugc-tile__img{width:100%;height:auto}
 .ugc-engine .ugc-tile__pair{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr);align-items:start}
 .ugc-engine .ugc-tile--photo .ugc-tile__pair{margin-top:-30px;margin-right:8%}

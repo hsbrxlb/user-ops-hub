@@ -154,7 +154,7 @@ p, ul, ol, dl, figure { margin-top: 0; }
 .smart-survey-case { display: grid; grid-template-columns: minmax(0, .92fr) minmax(360px, 1.08fr); gap: 46px; align-items: start; }
 .smart-survey-copy .tab-intro { margin: 0; font-size: 14px; line-height: 1.8; }
 .smart-survey-visual { margin: 0; }
-.smart-survey-visual img { display: block; width: 100%; height: auto; background: var(--surface); border: 1px solid var(--border); }
+.smart-survey-visual img { display: block; width: 100%; height: auto; background: var(--surface);  }
 .flipbook-demo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6); border-top: 1px solid var(--border-strong); }
 .flipbook-demo-item { min-width: 0; }
 .flipbook-demo-item h2 { margin: 0 0 var(--space-3); font-family: var(--font-heading); font-size: 17px; line-height: 1.35; }
@@ -668,10 +668,6 @@ a, button { transition: color 200ms ease-out, background-color 200ms ease-out, b
 :where(h1, h2, h3) { text-wrap: balance; }
 :where(p, li, dd) { text-wrap: pretty; }
 :where(img, video, iframe) { max-width: 100%; }
-#content :is(.hub-image-trigger > img, .hub-image-trigger > picture img, [data-pages] > img, .email-frame, .newsletter-frame) {
-  outline: 1px solid var(--media-edge);
-  outline-offset: -1px;
-}
 :where(td, th, dd) { font-variant-numeric: tabular-nums; }
 
 .sidebar { border-right-width: .5px; scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent; }
@@ -1229,8 +1225,6 @@ button.hub-image-aux {
   max-inline-size: 100cqi;
   max-block-size: 100cqb;
   object-fit: contain;
-  outline: 1px solid var(--media-edge, #aa9682);
-  outline-offset: -1px;
 }
 
 .hub-image-stage.is-original {
@@ -1342,6 +1336,7 @@ button.hub-image-aux {
 <a href="email-templates.html" data-page="email-templates"><span>OEDRO 邮件模板</span></a>
 <a href="email-templates-cozeware.html" data-page="email-templates-cozeware"><span>Cozeware 邮件模板</span></a>
 <div class="nav-group">会员与复购</div>
+<a href="ugc-engine.html" data-page="ugc-engine"><span>用户晒单与积分</span></a>
 <a href="loyalty.html" data-page="loyalty"><span>OEDRO 积分商城</span></a>
 <a href="loyalty-cozeware.html" data-page="loyalty-cozeware"><span>Cozeware 积分商城</span></a>
 <a href="repurchase.html" data-page="repurchase"><span>复购办法</span></a>

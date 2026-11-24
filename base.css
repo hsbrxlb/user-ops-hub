@@ -143,7 +143,7 @@ p, ul, ol, dl, figure { margin-top: 0; }
 .smart-survey-case { display: grid; grid-template-columns: minmax(0, .92fr) minmax(360px, 1.08fr); gap: 46px; align-items: start; }
 .smart-survey-copy .tab-intro { margin: 0; font-size: 14px; line-height: 1.8; }
 .smart-survey-visual { margin: 0; }
-.smart-survey-visual img { display: block; width: 100%; height: auto; background: var(--surface); border: 1px solid var(--border); }
+.smart-survey-visual img { display: block; width: 100%; height: auto; background: var(--surface);  }
 .flipbook-demo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6); border-top: 1px solid var(--border-strong); }
 .flipbook-demo-item { min-width: 0; }
 .flipbook-demo-item h2 { margin: 0 0 var(--space-3); font-family: var(--font-heading); font-size: 17px; line-height: 1.35; }
