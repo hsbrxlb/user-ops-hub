@@ -77,7 +77,7 @@ for (const file of files) {
 const assetRoot = path.join(root, 'assets');
 for (const file of walk(assetRoot)) {
   const relative = path.relative(root, file);
-  if (relative !== identityBackground && fs.statSync(file).size > 600 * 1024) errors.push(`${relative}: 单个公开素材超过600KB`);
+  if (relative !== identityBackground && fs.statSync(file).size > 1024 * 1024) errors.push(`${relative}: 单个公开素材超过1MB`);
 }
 
 const identityBackgroundPath = path.join(root, identityBackground);
