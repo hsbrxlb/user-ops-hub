@@ -301,7 +301,7 @@ def render(row, scratch, assets, repo=None):
                              f'<a href="{url}" target="_blank" rel="noopener noreferrer">{url}'
                              '<span aria-hidden="true"> ↗</span></a></p>')
     return "\n".join([
-        f'<article class="post" data-post="{ident}" data-purpose="{row["tags"]}" data-schedule-status="{status}">',
+        f'<article class="post" data-post="{ident}" data-purpose="{row["tags"]}" data-schedule-status="{status}" id="post-{ident}">',
         '<div class="post-media">',
         f'<button class="feed-large" type="button" aria-label="查看大图" data-title="{title}" '
         f'data-pages="{"|".join(paths)}">{img(0, title)}</button>',
