@@ -435,6 +435,7 @@
   display: block;
   inline-size: 100%;
   max-inline-size: 360px;
+  block-size: auto;
   aspect-ratio: 9 / 16;
   border-radius: var(--radius-media);
   background: var(--surface-sunken);
