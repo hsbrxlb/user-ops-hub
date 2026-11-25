@@ -422,7 +422,7 @@ function renderDiscord(topic, data) {
 function visibleTopicSections(topic) {
   if (!topic.sections?.length) return [];
   const ids = {
-    'brand-voice-system': ['current', 'brand-name', 'everyday-example', 'discord-example', 'fitment-example', 'support-example', 'research-example', 'ugc-example', 'principles', 'channels', 'donts'],
+    'brand-voice-system': ['current', 'persona', 'tone-by-situation', 'signature-and-banned', 'voice-check', 'brand-name', 'everyday-example', 'discord-example', 'fitment-example', 'support-example', 'research-example', 'ugc-example', 'principles', 'channels', 'donts'],
   }[topic.slug];
   return ids ? topic.sections.filter((section) => ids.includes(section.id)) : topic.sections;
 }
