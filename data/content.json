@@ -299,12 +299,6 @@
       "group": "用户与市场研究"
     },
     {
-      "id": "voice",
-      "label": "全网讨论",
-      "file": "user-voice.html",
-      "group": "用户与市场研究"
-    },
-    {
       "id": "competitor-experience",
       "label": "竞品官网购物体验对比",
       "file": "competitor-experience.html",
@@ -356,12 +350,6 @@
       "id": "ai-dev-light",
       "label": "OEDRO 工作灯 AI 问卷",
       "file": "ai-dev-light.html",
-      "group": "AI 开发成果"
-    },
-    {
-      "id": "ai-dev-radar",
-      "label": "用户声音雷达",
-      "file": "ai-dev-radar.html",
       "group": "AI 开发成果"
     },
     {

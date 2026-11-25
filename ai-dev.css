@@ -6,7 +6,7 @@
 .aidev .page-heading p { max-width: 58ch; font-size: 18px; }
 
 /* Overview: a showcase wall. Each piece is a screen you can step into. */
-.aidev-hero { padding: 8px 0 44px; animation: hub-rise-in 600ms var(--ease-out) both; }
+.aidev-hero { padding: 8px 0 44px; }
 #content .aidev-hero h1 { margin: 0; font-size: clamp(40px, 4.6vw, 62px); line-height: 1.04; letter-spacing: -.035em; font-weight: 700; }
 #content .aidev-hero h1 .en { display: block; margin: 12px 0 0; color: var(--accent); font-family: var(--font-display); font-size: .62em; font-weight: 400; letter-spacing: -.005em; }
 .aidev-hero p { max-width: 46ch; margin: 22px 0 0; color: var(--text-secondary); font-size: 18px; line-height: 1.7; }
@@ -16,6 +16,7 @@
 .aidev-card.is-wide { grid-column: span 7; }
 .aidev-card.is-mid { grid-column: span 5; }
 .aidev-card.is-full { grid-column: 1 / -1; }
+.aidev-card.is-half { grid-column: span 6; }
 #content .aidev-card > a[href] {
   display: grid;
   grid-template-rows: auto 1fr;
@@ -245,7 +246,8 @@
 }
 @media (max-width: 720px) {
   .aidev-wall { gap: 14px; }
-  .aidev-card, .aidev-card.is-wide, .aidev-card.is-mid, .aidev-card.is-full { grid-column: 1 / -1; }
+  .aidev-card, .aidev-card.is-wide, .aidev-card.is-mid, .aidev-card.is-half, .aidev-card.is-full { grid-column: 1 / -1; }
+.aidev-card.is-half { grid-column: span 6; }
   .aidev-card.is-full .aidev-screen, .aidev-card:is(.is-wide, .is-mid) .aidev-screen { aspect-ratio: 16 / 10; height: auto; }
   #content .aidev-card h2, .aidev-card.is-wide h2, .aidev-card.is-full h2 { font-size: 20px; }
   .aidev-stage { margin-inline: -12px; padding: 8px; border-radius: 22px; }

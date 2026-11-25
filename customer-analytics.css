@@ -102,3 +102,9 @@ body[data-page="customer-analytics"] { --workspace-surface:transparent; }
  .matrix-cell .chart-value strong { font-size:18px; }
 }
 @media(prefers-reduced-motion:reduce) { .analytics * { transition:none!important; scroll-behavior:auto!important; } }
+
+.analytics-method { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.analytics-method > section { padding: 22px 24px; border-radius: 18px; background: var(--surface-raised); box-shadow: inset 0 0 0 1px var(--border); }
+#content .analytics-method h3 { margin: 0 0 8px; font-size: 18px; }
+.analytics-method p { margin: 0; color: var(--text-secondary); line-height: 1.75; }
+@media (max-width: 680px) { .analytics-method { grid-template-columns: minmax(0, 1fr); } }

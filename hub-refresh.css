@@ -27,7 +27,7 @@ a, button { transition: color var(--motion-standard) var(--ease-out), background
 ::view-transition-old(root) { animation: hub-fade-out 160ms var(--ease-out) both; }
 ::view-transition-new(root) { animation: hub-rise-in 380ms var(--ease-out) both; }
 @keyframes hub-fade-out { to { opacity: 0; } }
-@keyframes hub-rise-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes hub-rise-in { from { opacity: .6; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
 /* ---------- Sidebar ---------- */
 .sidebar {
@@ -124,7 +124,6 @@ a, button { transition: color var(--motion-standard) var(--ease-out), background
 
 .main-content .page-heading, .page-heading {
   min-height: 0; display: block; padding: 0 0 40px; margin: 0 0 8px;
-  animation: hub-rise-in var(--motion-slow) var(--ease-out) both;
 }
 .main-content .page-heading h1, .page-heading h1 { margin: 0; font-size: var(--type-h1); line-height: 1.18; letter-spacing: var(--tracking-tight); font-weight: 650; }
 .main-content .page-heading p, .page-heading p { max-width: 62ch; margin: 16px 0 0; color: var(--text-secondary); font-size: 17px; line-height: 1.7; }
@@ -328,7 +327,7 @@ body[data-page="home"] .main-content { width: min(var(--content-wide), 100%); pa
   border-bottom: var(--hairline) solid var(--border-strong);
   overflow: hidden;
 }
-.hub-hero-copy { position: relative; z-index: 1; padding: 64px 0; animation: hub-rise-in 700ms var(--ease-out) both; }
+.hub-hero-copy { position: relative; z-index: 1; padding: 64px 0; }
 #content .hub-hero h1 {
   margin: 0;
   font-size: var(--type-display);
