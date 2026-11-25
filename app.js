@@ -768,7 +768,7 @@ function markContentLinks() {
     if (link.dataset.linkChecked) return;
     link.dataset.linkChecked = 'true';
     const destination = new URL(link.href, location.href);
-    if (destination.origin !== location.origin && /^https?:$/.test(destination.protocol)) {
+    if (destination.origin !== location.origin && /^https?:$/.test(destination.protocol) && !link.querySelector('img, picture')) {
       link.classList.add('external-link');
       // Existing visible arrows remain part of their original link labels.
       if (!link.textContent.includes('↗')) {

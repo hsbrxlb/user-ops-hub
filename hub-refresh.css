@@ -206,26 +206,70 @@ a, button { transition: color var(--motion-standard) var(--ease-out), background
 #content :is(.page-jumps, .resource-links, .hub-hero-links, .mascot-jump, .jump) a[href]:hover { color: var(--accent-hover); box-shadow: inset 0 0 0 1px rgba(45, 71, 176, .4); background: var(--surface); }
 
 /* Primary action and file actions. */
-#content .research-open, .research-open {
+#content a.research-open[href], .research-open {
   display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 22px;
   border-radius: var(--radius-chip); background: var(--text); color: var(--on-accent); font-size: 15px; font-weight: 600; text-decoration: none;
   box-shadow: 0 10px 24px -14px rgba(28, 31, 39, .7);
 }
-#content .research-open:hover { color: var(--on-accent); background: var(--accent-hover); transform: translateY(-1px); }
-#content :is(a[download], #download-products) {
+#content a.research-open[href]:hover { color: var(--on-accent); background: var(--accent-hover); transform: translateY(-1px); }
+#content a[download]:not(.asset-preview-link, :has(img)), #content #download-products {
   display: inline-flex; align-items: center; gap: .45em;
   min-height: 44px; padding: 9px 18px;
   border: 0; border-radius: var(--radius-chip);
   background: var(--accent-soft); box-shadow: inset 0 0 0 1px rgba(45, 71, 176, .28);
   color: var(--accent-hover); font: inherit; font-size: 15px; font-weight: 550; line-height: 1.4; text-decoration: none; cursor: pointer;
 }
-#content :is(a[download], #download-products):hover { background: rgba(45, 71, 176, .14); color: var(--accent-hover); }
+#content a[download]:not(.asset-preview-link, :has(img)):hover, #content #download-products:hover { background: rgba(45, 71, 176, .14); color: var(--accent-hover); }
 #content #download-products:disabled { opacity: .6; cursor: default; }
-#content .asset-preview-link[download] { padding: 14px; border-radius: var(--radius-card); }
+#content :is(.asset-preview-link[download], a[download]:has(img)) { padding: 14px; border-radius: var(--radius-card); background: var(--surface-raised); box-shadow: inset 0 0 0 1px var(--border); color: var(--accent-hover); text-decoration: none; }
+#content :is(.asset-preview-link[download], a[download]:has(img)):hover { background: var(--surface); box-shadow: inset 0 0 0 1px var(--border-strong), var(--shadow-1); }
 .text-link { color: var(--accent); }
 
 /* Status chips keep their meaning; the shape follows the system. */
 .status { padding: 3px 10px; border: 0; border-radius: var(--radius-chip); font-size: 14px; font-weight: 600; }
+
+/* ---------- Shared controls: filter chips and view switches on every page ---------- */
+#content :is(.cg-filter, .email-widths, .newsletter-controls, .filter-group > div, .family-nav, .fw-presets, .list-filters) button,
+#content .scope-switch button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: var(--radius-chip);
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--border-strong);
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 550;
+  cursor: pointer;
+}
+#content :is(.cg-filter, .email-widths, .newsletter-controls, .filter-group > div, .family-nav, .fw-presets, .list-filters) button:hover,
+#content .scope-switch button:hover { color: var(--text); background: var(--surface); box-shadow: inset 0 0 0 1px var(--text-muted); }
+#content :is(.cg-filter, .email-widths, .newsletter-controls, .filter-group > div, .family-nav, .list-filters) button[aria-pressed="true"],
+#content .scope-switch button[aria-pressed="true"] { color: var(--on-accent); background: var(--text); box-shadow: none; }
+#content .category-matrix { gap: 8px; border: 0; }
+#content .category-cell { border: 0; border-radius: 14px; background: var(--surface-raised); box-shadow: inset 0 0 0 1px var(--border); }
+#content .category-cell:hover { background: var(--surface); box-shadow: inset 0 0 0 1px var(--border-strong), var(--shadow-1); }
+#content .category-cell.active { color: var(--on-accent); background: var(--text); box-shadow: none; }
+#content .catalog-downloads a { border: 0; border-radius: var(--radius-chip); box-shadow: inset 0 0 0 1px var(--border-strong); }
+#content .products-main .product-grid, #content .product-grid { gap: 20px; background: transparent; border: 0; }
+#content .product-card { border: 0; border-radius: 18px; overflow: hidden; background: var(--surface-raised); box-shadow: var(--shadow-1); }
+#content .product-card .product-copy { padding: 18px 20px 16px; }
+#content .ring-legend button[aria-pressed="true"] { background: var(--accent-soft); }
+#content .ring-legend button:hover { background: var(--nav-hover); }
+#content :is(.email-preview-shell) { border: 0; border-radius: 18px; box-shadow: var(--shadow-1); }
+
+/* ---------- Step sequences (ol.steps): numbered cards, because the order matters ---------- */
+#content ol.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 24px 0 8px; padding: 0; list-style: none; counter-reset: hub-step; }
+#content ol.steps > li { position: relative; min-width: 0; margin: 0; padding: 64px 22px 22px; border-radius: 18px; background: var(--surface-raised); box-shadow: inset 0 0 0 1px var(--border); counter-increment: hub-step; }
+#content ol.steps > li::before { content: counter(hub-step); position: absolute; top: 18px; left: 22px; color: var(--text); font-family: var(--font-numerals); font-size: 34px; font-weight: 600; line-height: 1; }
+#content ol.steps h3 { margin: 0 0 8px; font-size: 18px; }
+#content ol.steps p { margin: 0; color: var(--text-secondary); font-size: 15px; line-height: 1.7; max-width: none; }
+@media (max-width: 980px) { #content ol.steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { #content ol.steps { grid-template-columns: minmax(0, 1fr); } #content ol.steps > li { padding: 18px 18px 18px 64px; } #content ol.steps > li::before { top: 18px; left: 20px; font-size: 30px; } }
 
 /* ---------- Tables ---------- */
 .data-table th, #content table th { color: var(--text-muted); font-size: 14px; font-weight: 600; letter-spacing: .01em; }

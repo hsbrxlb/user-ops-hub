@@ -277,7 +277,7 @@
 }
 .post-purpose li { margin: 0; padding: 4px 11px; background: var(--surface-sunken); }
 .post-purpose li.is-product { background: var(--accent-soft); color: var(--accent-hover); }
-.post-purpose li.is-product [lang="en"] { color: rgba(31, 53, 144, .72); }
+.post-purpose li.is-product [lang="en"] { color: #34438c; }
 
 #content .post h3 {
   margin: 0;
@@ -354,12 +354,10 @@
 .post-copy:hover { background: var(--accent-hover); transform: translateY(-1px); }
 
 .post-caption {
-  margin-top: 14px;
-  padding: 18px 22px;
+  margin-top: 18px;
+  padding: 18px 0 0;
   border: 0;
-  border-radius: 14px;
-  background: var(--surface);
-  box-shadow: inset 0 0 0 1px var(--border);
+  border-top: var(--hairline) solid var(--border-strong);
 }
 #content .post-caption .feed-caption {
   max-width: 68ch;
@@ -421,7 +419,7 @@
   #content .post:not(:has(.post-media)) :is(.post-purpose, h3, .post-context) { grid-column: 1 / -1; grid-row: auto; }
   .post-platforms, .post-caption, .post-links, .feed-schedule-link { grid-column: 1 / -1; }
   .post-platforms { margin-top: 6px; }
-  .post-caption { margin-top: 0; padding: 14px 16px; }
+  .post-caption { margin-top: 4px; padding: 14px 0 0; }
   .post-platform-switch { width: 100%; }
   .post-platform-switch button { flex: 1 1 0; padding: 0 6px; }
   .post-copy { width: 100%; }

@@ -172,7 +172,7 @@
 .dc-side { display: flex; flex-direction: column; background: var(--dc-side); border-right: 1px solid var(--dc-line); min-width: 0; }
 .dc-server { padding: 16px; font-size: 16px; font-weight: 700; border-bottom: 1px solid var(--dc-line); color: #fff; }
 .dc-chans { padding: 12px 8px; display: grid; gap: 2px; align-content: start; }
-.dc-chans h4 { margin: 12px 8px 4px; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--dc-muted); font-weight: 700; }
+.dc-chans :is(h4, .dc-cat) { margin: 12px 8px 4px; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--dc-muted); font-weight: 700; }
 .dc-chans span { padding: 6px 8px; border-radius: 4px; font-size: 15px; color: var(--dc-muted); }
 .dc-chans span.is-on { background: #404249; color: #fff; }
 .dc-chans span::before { content: '# '; opacity: .7; }

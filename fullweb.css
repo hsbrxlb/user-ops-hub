@@ -69,3 +69,7 @@ body[data-page="voice"] .fw { --fw-gap: var(--space-5); }
   .fw-open { justify-self: start; }
 }
 @media (prefers-reduced-motion: no-preference) { .fw-chip, .fw-presets button { transition: background-color .12s; } }
+
+#content .fw-body h2 { margin: 0 0 var(--space-1); font-size: 17px; line-height: 1.5; font-weight: 600; letter-spacing: 0; }
+#content .fw-body h2 a { color: var(--text); text-decoration-color: rgba(28, 31, 39, .25); }
+#content .fw-body h2 a:hover { color: var(--accent-hover); text-decoration-color: currentColor; }
