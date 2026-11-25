@@ -9,6 +9,15 @@
     try { return node ? JSON.parse(node.textContent) : null; } catch (error) { return null; }
   };
 
+  // 全网讨论的收录数、日期范围随数据更新
+  const live = document.querySelectorAll('[data-fw]');
+  if (live.length) {
+    fetch('data/fullweb/index.json', { cache: 'no-store' }).then((r) => (r.ok ? r.json() : null)).then((meta) => {
+      if (!meta) return;
+      live.forEach((node) => { const value = meta[node.dataset.fw]; if (value !== undefined && value !== null) node.textContent = Number.isFinite(value) ? value.toLocaleString('en-US') : value; });
+    }).catch(() => {});
+  }
+
   // 嵌入页面：选页面、切电脑／手机宽度、点击后才加载外部演示
   document.querySelectorAll('[data-frame]').forEach((frame) => {
     const iframe = frame.querySelector('iframe');
