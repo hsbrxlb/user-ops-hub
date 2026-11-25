@@ -53,9 +53,9 @@ for (const file of codeFiles) {
     detailTags.push({ file, tag: match[0] });
     const intentionalHistory = /class="[^"]*evo-round/.test(match[0]);
     const demoFaq = path.relative(root, file) === 'fakesite/faq.html' && /class="(?:faq-question|faq-item)"/.test(match[0]);
-    const mobileArticleToc = /^(?:fakesite|experiences\/oedro-guides)\/[^/]+\.html$/.test(path.relative(root,file)) && /class="mobile-toc"/.test(match[0]);
+    const mobileArticleToc = /^(?:fakesite|experiences\/oedro-guides(?:-before)?)\/[^/]+\.html$/.test(path.relative(root,file)) && /class="(?:mobile-toc|toc-mobile|sources)"/.test(match[0]);
     // The OEDRO site Blog/Guides demo keeps its built FAQ accordion as shipped.
-    const guidesFaq = path.relative(root, file) === 'experiences/oedro-guides/faq.html' && /class="faq-item"/.test(match[0]);
+    const guidesFaq = /^experiences\/oedro-guides(?:-before)?\/faq\.html$/.test(path.relative(root, file)) && /class="faq-item"/.test(match[0]);
     const draftControls = path.relative(root, file) === 'fakesite/editor.html' && /class="draft-(settings|tools)"/.test(match[0]);
     const emailImportFiles = path.relative(root, file) === 'email-templates.js' && match[0] === '<details class="email-files">';
     const emailPreviewSpec = /^email-templates(?:-cozeware)?\.html$/.test(path.relative(root, file))
@@ -75,7 +75,7 @@ for (const file of codeFiles) {
     if (!guidesFaq && !merchandiseReference && !sidebarTree && !revisedReference && !loyaltyReference && !competitorEvidence && !unverifiedVoiceArchive && !intentionalHistory && !demoFaq && !mobileArticleToc && !draftControls && !emailImportFiles && !emailPreviewSpec && !analyticsDefinition && !intentionalProductDetail && !/\bopen\b/i.test(match[0])) errors.push(path.relative(root, file) + ' 有正文details未默认展开：' + match[0]);
   }
   for (const match of source.matchAll(/<[^>]+aria-expanded="false"[^>]*>/gi)) {
-    const sampleMenu = /^(?:fakesite|experiences\/oedro-guides)\/[^/]+\.html$/.test(path.relative(root,file)) && /class="menu-(?:toggle|button)"/.test(match[0]);
+    const sampleMenu = /^(?:fakesite|experiences\/oedro-guides(?:-before)?)\/[^/]+\.html$/.test(path.relative(root,file)) && /class="menu-(?:toggle|button)"/.test(match[0]);
     if (!sampleMenu && !/class="[^"]*menu-button/.test(match[0])) errors.push(path.relative(root, file) + ' 有正文aria-expanded=false：' + match[0]);
   }
 }
@@ -114,7 +114,7 @@ for (const file of publicFiles.filter((item) => path.extname(item) === '.html'))
   for (const match of source.matchAll(/(?:href|src)="([^"]+)"/g)) {
     const target = match[1];
     if (/\.zip(?:$|[?#])/i.test(target)) errors.push(path.relative(root, file) + ' 仍含 ZIP 下载');
-    if (/^(?:https:|data:|#|mailto:|javascript:)/.test(target)) continue;
+    if (/^(?:https:|data:|#|mailto:|tel:|javascript:)/.test(target)) continue;
     const clean = target.split('#')[0].split('?')[0];
     if (!clean) continue;
     const resolved = path.resolve(path.dirname(file), clean);
