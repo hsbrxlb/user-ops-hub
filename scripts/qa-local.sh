@@ -35,4 +35,7 @@ else
   exit 2
 fi
 bash scripts/check-site.sh "$scratch/public-dist"
+if [[ -d apps/light-research ]] && { [[ ${LIGHT_RESEARCH_QA:-auto} == all ]] || git diff --quiet refs/remotes/origin/main -- apps/light-research 2>/dev/null; [[ $? -ne 0 ]]; }; then
+  (cd apps/light-research && npm ci --silent && npm run build -- --webpack && npm run typecheck && npm test && npm run lint)
+fi
 echo "Local Hub QA passed in ${SECONDS}s."
