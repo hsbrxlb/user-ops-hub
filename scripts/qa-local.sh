@@ -22,6 +22,10 @@ cleanup() {
   fi
 }
 trap cleanup EXIT
+if [[ $# == 0 ]]; then
+  # Auto-shrink public images over the size limit (originals go to build-artifacts/originals, git-ignored).
+  python3 -B scripts/compress-public-images.py
+fi
 if [[ $# == 2 ]]; then
   "${copy[@]}" --range "$1" "$2"
   # Test exactly the outgoing commit, even with a different branch checked out.

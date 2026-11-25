@@ -77,7 +77,7 @@ for (const file of files) {
 const assetRoot = path.join(root, 'assets');
 for (const file of walk(assetRoot)) {
   const relative = path.relative(root, file);
-  if (relative !== identityBackground && fs.statSync(file).size > 1024 * 1024) errors.push(`${relative}: 单个公开素材超过1MB`);
+  if (relative !== identityBackground && fs.statSync(file).size > 1024 * 1024) errors.push(`${relative}: 单个公开素材超过1MB（运行 python3 scripts/compress-public-images.py 自动压缩后重新提交）`);
 }
 
 const identityBackgroundPath = path.join(root, identityBackground);
