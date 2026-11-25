@@ -1,0 +1,398 @@
+{
+ "types": [
+  {
+   "id": "trend",
+   "zh": "热点梗",
+   "en": "Trend meme"
+  },
+  {
+   "id": "product",
+   "zh": "产品介绍",
+   "en": "Product"
+  },
+  {
+   "id": "education",
+   "zh": "科普",
+   "en": "Education"
+  },
+  {
+   "id": "tips",
+   "zh": "小技巧",
+   "en": "Tips"
+  },
+  {
+   "id": "comic",
+   "zh": "漫画",
+   "en": "Comic"
+  },
+  {
+   "id": "realistic",
+   "zh": "写实",
+   "en": "Realistic"
+  },
+  {
+   "id": "quote",
+   "zh": "媒体评价",
+   "en": "Quote"
+  },
+  {
+   "id": "video",
+   "zh": "视频",
+   "en": "Video"
+  }
+ ],
+ "statuses": {
+  "review": {
+   "zh": "待审",
+   "en": "In review"
+  },
+  "ready": {
+   "zh": "可发",
+   "en": "Ready to post"
+  }
+ },
+ "items": [
+  {
+   "id": "OE-T01",
+   "brand": "OEDRO",
+   "type": "trend",
+   "status": "review",
+   "title": "Casting Update: Tonneau Cover",
+   "zh": "Bruno 的皮卡硬折盖在感恩节停车场派对里先后被“选角”当餐桌、长凳、舞台，最后一格还是老本行：给车斗挡雨雪灰尘。",
+   "image": "assets/pool/oe-t01.webp",
+   "w": 1080,
+   "h": 1350,
+   "meme": {
+    "name": "“Robert Pattinson 被选去演所有角色”：官宣后全网用“X is Y.”官宣句式造假选角公告，把一个人（物）塞进各种不相干的角色",
+    "how": "借用“X is Y.”公告句式和“被选去演所有角色”的玩法；画面里没有任何演员面孔、007 或蝙蝠侠等影视标识；主角换成我们的硬折盖和原创角色。",
+    "date": "11-16 官宣，11-19 仍在刷屏",
+    "sources": [
+     {
+      "label": "Know Your Meme · Pattinson 007 选角",
+      "url": "https://knowyourmeme.com/memes/robert-pattinson-james-bond-casting"
+     },
+     {
+      "label": "SocialBee 本周梗图 11-19",
+      "url": "https://socialbee.com/blog/trending-instagram-memes-this-week/"
+     }
+    ]
+   },
+   "product": {
+    "name": "OEDRO FRP Hard Tri-fold Tonneau Cover, Toyota Tacoma 2016-2023 (excl. Trail Edition), 5 ft bed",
+    "url": "https://www.oedro.com/products/oedro-2016-2023-5ft-toyota-tacoma-tonneau-cover-3011-p-5878.html"
+   },
+   "captions": {
+    "Instagram": "Casting update, filed from a Thanksgiving parking lot. This week the tonneau cover has been the dinner table, the bench and the stage. It still does the day job: rain, snow and dust stay out of the bed.\n\nFits the 2016-2023 Tacoma with the 5 ft bed (not the Trail Edition).\n\nWhat's the strangest thing your tailgate has been cast as? #OEDRO #Tacoma #TailgateSeason",
+    "Facebook": "Somebody always sets the pie down on the bed cover. Honestly, fair. Ours has been the dinner table, the bench and the stage this week, and it still keeps rain, snow and dust out of the bed.\n\nFits the 2016-2023 Tacoma, 5 ft bed, not the Trail Edition.\n\nWhat's the oddest thing you've seen on a tailgate?",
+    "X": "Casting update: the tonneau cover is the dinner table. Also the bench. Also the stage. Still keeps rain, snow and dust out of the bed. Fits the 2016-2023 Tacoma, 5 ft bed."
+   }
+  },
+  {
+   "id": "OE-T02",
+   "brand": "OEDRO",
+   "type": "trend",
+   "status": "review",
+   "title": "Same Line, Third Visit",
+   "zh": "感恩节来的奶奶每次靠近 Bruno 的高皮卡都说同一句“好高的台阶啊”，装上侧踏板后，她终于说出了新的一句。",
+   "image": "assets/pool/oe-t02.webp",
+   "w": 1080,
+   "h": 1350,
+   "meme": {
+    "name": "“GTA VI NPC 的戏剧性对话”：路人角色一遍遍重复同一句台词，玩家一靠近就触发",
+    "how": "借用“路人角色反复重复同一句话”的机制；画面里没有游戏名、画面、界面、角色或任何第三方标识；人物换成原创动物角色。",
+    "date": "11-18 至 11-19 起",
+    "sources": [
+     {
+      "label": "Virlo 本周热门梗 11-19 至 11-25",
+      "url": "https://virlo.ai/trending/memes"
+     },
+     {
+      "label": "Euronews · GTA VI 上市 11-19",
+      "url": "https://www.euronews.com/2026/11/19/grand-theft-auto-vi-released-after-13-year-wait-selling-over-17-million-copies"
+     }
+    ]
+   },
+   "product": {
+    "name": "OEDRO Running Boards for Ford F-150 SuperCrew Cab 2015-2026 and F-250/F-350 Super Duty Crew Cab 2017-2026, 6.8\" two-stair side steps",
+    "url": "https://www.oedro.com/products/oedro-running-boards-compatible-with-2015-2026-ford-f-150-supercrew-cab-and-2017-2026-ford-f-250-f-350-super-duty-crew-cab-68-inch-two-stairs-side-steps-black-powder-coated-nerf-bar-p-10154.html"
+   },
+   "captions": {
+    "Instagram": "Visit one: \"That's a big step up.\" Visit two, same line. Then the running boards went on, and grandma finally got a new line.\n\nFits the 2015-2026 F-150 SuperCrew and the 2017-2026 F-250/F-350 Crew Cab. Bolts on, no drilling.\n\nWho in your family needs the step most? #OEDRO #F150 #Thanksgiving",
+    "Facebook": "Every holiday, the same sentence about how tall the truck is. We finally gave it a step. The running boards have a wide perforated tread, bolt on without drilling and fit the 2015-2026 F-150 SuperCrew.\n\nWho in your family asks about the step first?",
+    "X": "Grandma, visit one: \"That's a big step up.\" Visit two: same line. Running boards on. New line unlocked. Fits the 2015-2026 F-150 SuperCrew, bolt-on, no drilling."
+   }
+  },
+  {
+   "id": "OE-T03",
+   "brand": "OEDRO",
+   "type": "trend",
+   "status": "review",
+   "title": "Slush Gives a Speech",
+   "zh": "一团泥雪小怪在车里得意地念独白，以为地毯完蛋了，结果一垫黑色 TPE 脚垫把它兜住，被 Bruno 提起来冲干净。",
+   "image": "assets/pool/oe-t03.webp",
+   "w": 1080,
+   "h": 1350,
+   "meme": {
+    "name": "“反派第一视角独白”：反派对着主角深情款款地念一大段得意台词，结果落空",
+    "how": "借用“反派得意独白”的语气；反派是我们原创的一团灰色泥雪小怪，不像任何影视反派；画面里没有任何第三方角色或台词原句。",
+    "date": "本周 117 位创作者在做",
+    "sources": [
+     {
+      "label": "Virlo 本周热门梗 11-19 至 11-25",
+      "url": "https://virlo.ai/trending/memes"
+     }
+    ]
+   },
+   "product": {
+    "name": "OEDRO Floor Mats, Tesla Model Y Juniper 2025-2026 5-seater, 9-piece all-weather TPE set",
+    "url": "https://www.oedro.com/products/oedro-floor-mats-fits-tesla-model-y-juniper-2025-2026-5-seater-custom-fit-all-weather-tpe-floor-liners-cargo-trunk-mat-set-with-backrest-protection-9pcs-model-y-interior-accessories-p-10296.html"
+   },
+   "captions": {
+    "Instagram": "Slush gave a long speech about how the carpet was done for. Then it met the liner.\n\nCustom fit for the 2025-2026 Tesla Model Y Juniper, 5 seater. TPE, waterproof, and it rinses off at the hose.\n\nWhat's the worst thing you've found in your footwell? #OEDRO #ModelY #WinterDriving",
+    "Facebook": "Winter slush has opinions about your carpet. The liner has a different plan. Custom fit TPE for the 2025-2026 Model Y Juniper, and it rinses clean at the hose.\n\nWhat's the worst thing you've pulled out of a footwell?",
+    "X": "Slush had a whole speech ready for the carpet. Then it met a custom-fit TPE liner. Rinses off at the hose. Fits the 2025-2026 Model Y Juniper, 5 seater."
+   }
+  },
+  {
+   "id": "OE-T04",
+   "brand": "OEDRO",
+   "type": "trend",
+   "status": "review",
+   "title": "Expectation, Reality, Pies",
+   "zh": "计划里整整齐齐的车斗、现实里塞满派和工具的车斗，把工具丢进轮拱工具箱后，派终于有地方坐。",
+   "image": "assets/pool/oe-t04.webp",
+   "w": 1080,
+   "h": 1350,
+   "meme": {
+    "name": "“Expectation vs Reality”并排对比梗（2026 年仍在流行的通用格式，感恩节出行高峰是本周真实背景）",
+    "how": "通用格式，无任何受保护形象；人物换成 Bruno 和原创动物角色。",
+    "date": "感恩节周（AAA 预测 8150 万人出行）",
+    "sources": [
+     {
+      "label": "ABC7 转 AAA 感恩节出行预测 11-16",
+      "url": "https://abc7news.com/story/aaa-forecasts-another-busy-not-thanksgiving-travel-week/20044328/"
+     },
+     {
+      "label": "Vaizle 2026 梗图格式指南",
+      "url": "https://insights.vaizle.com/trending-memes/"
+     }
+    ]
+   },
+   "product": {
+    "name": "OEDRO Truck Bed Storage Tool Box, Ford F-150 2015-2026 passenger side",
+    "url": "https://www.oedro.com/"
+   },
+   "captions": {
+    "Instagram": "Expectation: one neat bed. Reality: eleven pies and a socket set.\n\nThe wheel well toolbox takes the tools and the lid locks, so the pies get the room. No drilling to install.\n\nFits the 2015-2026 F-150, passenger side.\n\nWhat rides in your bed on the way to family dinner? #OEDRO #F150 #HolidayRoadTrip",
+    "Facebook": "The plan: one neat bed. The truth: pies, a socket set and a folding chair. The wheel well toolbox gives the tools their own spot with a lockable lid, so the pies get the room. Fits the 2015-2026 F-150, passenger side, no drilling.\n\nWhat's riding in your bed this week?",
+    "X": "Expectation: one neat bed. Reality: eleven pies and a socket set. Tools go in the wheel well box, lid locks, pies get the room. Fits the 2015-2026 F-150, passenger side."
+   }
+  },
+  {
+   "id": "OE-T05",
+   "brand": "OEDRO",
+   "type": "trend",
+   "status": "review",
+   "title": "Doorbuster Stroll",
+   "zh": "黑五店门一开所有人狂奔，Bruno 慢悠悠踩着挂钩踏板爬进车斗放好大纸箱，回头门口还在排队。",
+   "image": "assets/pool/oe-t05.webp",
+   "w": 1080,
+   "h": 1350,
+   "meme": {
+    "name": "黑五“抢购冲刺”梗：所有人一窝蜂冲向店门，一个人慢悠悠",
+    "how": "通用的“人群冲刺对比一个淡定者”情境，无任何受保护形象；人物是原创动物角色。",
+    "date": "黑五 11-27，网一 11-30",
+    "sources": [
+     {
+      "label": "Groupon 黑五网一指南",
+      "url": "https://www.groupon.com/coupons/seasonal/cyber-monday"
+     },
+     {
+      "label": "Daily Beast 提前黑五",
+      "url": "https://www.thedailybeast.com/best-early-black-friday-deals-to-shop-now"
+     }
+    ]
+   },
+   "product": {
+    "name": "OEDRO Black Aluminum Towing Hitch Steps, 2\" hitch receiver",
+    "url": "https://www.oedro.com/products/oedro-black-aluminum-towing-hitch-steps-p-5721.html"
+   },
+   "captions": {
+    "Instagram": "Doors open and everybody sprints. Bruno found a calmer way to load the big box: one foot on the hitch step, box in the bed, done.\n\nBlack aluminum, textured stainless tread, fits any 2 inch hitch receiver.\n\nPark far, walk happy. What's the biggest thing you've hauled home on Black Friday? #OEDRO #BlackFriday",
+    "Facebook": "Doors open and the whole lot sprints. Bruno strolls: one foot on the hitch step, big box in the bed. Fits any 2 inch hitch receiver.\n\nWhat's the biggest thing you've ever hauled home on Black Friday?",
+    "X": "Doors open, everybody sprints. Bruno takes the hitch step and loads the big box like it's Tuesday. Fits any 2 inch hitch receiver."
+   }
+  },
+  {
+   "id": "CZ-T01",
+   "brand": "Cozeware",
+   "type": "trend",
+   "status": "review",
+   "title": "The Stale Air Monologue",
+   "zh": "窗户关紧的卧室里，一团闷气小怪得意地念独白，Oolong 睡得安稳，窗上的 FreshFlow 在悄悄换进新鲜空气，小怪的台词落了空。",
+   "image": "assets/pool/cz-t01.webp",
+   "w": 1080,
+   "h": 1350,
+   "meme": {
+    "name": "“反派第一视角独白”：反派得意地念台词，结果落空",
+    "how": "借用“反派得意独白”的语气；反派是我们原创的一团灰色闷气小怪，不像任何影视反派；画面里没有任何第三方角色或原句。",
+    "date": "本周 117 位创作者在做",
+    "sources": [
+     {
+      "label": "Virlo 本周热门梗 11-19 至 11-25",
+      "url": "https://virlo.ai/trending/memes"
+     }
+    ]
+   },
+   "product": {
+    "name": "COZEWARE FreshFlow Pro window-mounted fresh air unit",
+    "url": "https://www.cozeware.com/promo/freshflow-early-access-a-165.html"
+   },
+   "captions": {
+    "Instagram": "The stale air had a whole speech ready. Window shut, room sleepy. Then FreshFlow sat down in the window.\n\nIt brings filtered outdoor air in while the window stays shut. Made for compatible vertical sliding windows. If it's smoky outside, pause it until the air clears.\n\nWho sleeps with the window shut at your place? #Cozeware #FreshFlow",
+    "Facebook": "Stale air thought it had the room to itself. Then FreshFlow moved into the window. It brings filtered outdoor air in while the window stays shut, and it fits compatible vertical sliding windows.\n\nWho keeps the window shut at your house?",
+    "X": "The stale air had a speech ready. Then FreshFlow sat down in the window. Filtered outdoor air in, window stays shut. For compatible vertical sliding windows."
+   }
+  },
+  {
+   "id": "CZ-T02",
+   "brand": "Cozeware",
+   "type": "trend",
+   "status": "review",
+   "title": "Window Cracker, Position Filled",
+   "zh": "家里负责每二十分钟去开窗透气的 Tuftle 终于下岗，窗上的 FreshFlow 接了这份活。",
+   "image": "assets/pool/cz-t02.webp",
+   "w": 1080,
+   "h": 1350,
+   "meme": {
+    "name": "“Robert Pattinson 被选去演所有角色”衍生句式：“如果你现在有份工作，那是因为他不想要它”，把一份活动当成被人接手的职位",
+    "how": "借用“XX 抢走你的工作”的句式，把演员换成产品；画面里没有演员面孔、007、蝙蝠侠等影视标识。",
+    "date": "11-16 官宣，11-19 仍在刷屏",
+    "sources": [
+     {
+      "label": "SocialBee 本周梗图 11-19",
+      "url": "https://socialbee.com/blog/trending-instagram-memes-this-week/"
+     },
+     {
+      "label": "Know Your Meme · Pattinson 007 选角",
+      "url": "https://knowyourmeme.com/memes/robert-pattinson-james-bond-casting"
+     }
+    ]
+   },
+   "product": {
+    "name": "COZEWARE FreshFlow Pro window-mounted fresh air unit",
+    "url": "https://www.cozeware.com/promo/freshflow-early-access-a-165.html"
+   },
+   "captions": {
+    "Instagram": "Job opening filled. The family window cracker, on duty every twenty minutes, has been replaced. FreshFlow brings filtered outdoor air in while the window stays shut, so Tuftle finally gets the couch.\n\nFits compatible vertical sliding windows.\n\nWho's the window cracker at your house? #Cozeware #FreshFlow",
+    "Facebook": "Every family has one person who cracks the window every twenty minutes. This winter, FreshFlow took the shift. Filtered outdoor air comes in, the window stays shut, and the blanket stays on.\n\nWho's your window cracker?",
+    "X": "Job opening: family window cracker, every twenty minutes. Position filled by FreshFlow. Filtered outdoor air in, window stays shut."
+   }
+  },
+  {
+   "id": "CZ-T03",
+   "brand": "Cozeware",
+   "type": "trend",
+   "status": "review",
+   "title": "Is It Hot In Here",
+   "zh": "挤满亲戚的客厅里，每个人都在重复“是不是有点热”，直到墙上的 Visio 把温度调好，台词终于换了。",
+   "image": "assets/pool/cz-t03.webp",
+   "w": 1080,
+   "h": 1350,
+   "meme": {
+    "name": "“GTA VI NPC 的戏剧性对话”：路人角色一遍遍重复同一句台词",
+    "how": "借用“路人角色循环说同一句话”的机制；画面里没有游戏名、画面、界面、角色；人物换成 Pebble、Oolong。",
+    "date": "11-18 至 11-19 起",
+    "sources": [
+     {
+      "label": "Virlo 本周热门梗 11-19 至 11-25",
+      "url": "https://virlo.ai/trending/memes"
+     },
+     {
+      "label": "Al Jazeera · GTA VI 上市 11-19",
+      "url": "https://www.aljazeera.com/news/2026/11/19/grand-theft-auto-vi-launches-to-rave-reviews-after-13-year-wait"
+     }
+    ]
+   },
+   "product": {
+    "name": "COZEWARE Visio Series 12,000 BTU 20 SEER2 Ductless Mini Split AC with Heat Pump",
+    "url": "https://www.cozeware.com/products/12000-btu-20-seer2-mini-split-air-conditioner-230v-ac-p-8862.html"
+   },
+   "captions": {
+    "Instagram": "Everyone at the party was saying the same line: is it just me, or is it warm in here? Then the Visio got set.\n\nIt heats and cools, with a remote, an app and voice control, and suits rooms up to about 750 square feet.\n\nWhat's the line everyone repeats at your place? #Cozeware #HolidayHosting",
+    "Facebook": "Eleven relatives, one living room, and the same question on repeat: is it just me, or is it warm in here? The Visio mini split heats and cools, and you can set it by remote, app or voice. Good for rooms up to about 750 square feet.\n\nWhat's the line at your holiday table?",
+    "X": "Everyone: \"Is it just me, or is it warm in here?\" Same line, third time. Then the Visio mini split got set. Remote, app or voice. Heats and cools."
+   }
+  },
+  {
+   "id": "CZ-T04",
+   "brand": "Cozeware",
+   "type": "trend",
+   "status": "review",
+   "title": "Just Browsing, 2 A.M.",
+   "zh": "Pebble 晚上九点说只是看看，凌晨两点购物车里多了一台迷你分体，最后真的装上，房间一直是舒服的温度。",
+   "image": "assets/pool/cz-t04.webp",
+   "w": 1080,
+   "h": 1350,
+   "meme": {
+    "name": "黑五网购“我只是看看，凌晨两点我：加入购物车”双时间点对比梗",
+    "how": "通用情境，无任何受保护形象；人物是 Pebble。",
+    "date": "黑五 11-27，网一 11-30",
+    "sources": [
+     {
+      "label": "Groupon 黑五网一指南",
+      "url": "https://www.groupon.com/coupons/seasonal/cyber-monday"
+     },
+     {
+      "label": "Daily Beast 提前黑五",
+      "url": "https://www.thedailybeast.com/best-early-black-friday-deals-to-shop-now"
+     }
+    ]
+   },
+   "product": {
+    "name": "COZEWARE Visio Series 12,000 BTU 20 SEER2 Ductless Mini Split AC with Heat Pump",
+    "url": "https://www.cozeware.com/products/12000-btu-20-seer2-mini-split-air-conditioner-230v-ac-p-8862.html"
+   },
+   "captions": {
+    "Instagram": "9 p.m.: just browsing. 2 a.m.: somehow in the cart. We've all been there.\n\nThe Visio is a 12,000 BTU mini split that heats and cools, with a heat pump and a 24 hour timer. Check your room size first, it suits about 750 square feet.\n\nWhat's in your cart tonight? #Cozeware #CyberWeek",
+    "Facebook": "Just browsing at nine. Cart full at two. Pebble knows the feeling. If it's a mini split you're eyeing, the Visio heats and cools, has a heat pump and a 24 hour timer, and suits rooms up to about 750 square feet.\n\nWhat's in your cart tonight?",
+    "X": "9 p.m.: just browsing. 2 a.m.: added to cart. The Visio mini split heats and cools, 12,000 BTU, with a 24 hour timer."
+   }
+  },
+  {
+   "id": "CZ-T05",
+   "brand": "Cozeware",
+   "type": "trend",
+   "status": "review",
+   "title": "Holiday Plans: Right Here",
+   "zh": "全美都在路上堵车，Oolong 和 Tuftle 窝在家里，墙上的 Visio 保持刚刚好的温度。",
+   "image": "assets/pool/cz-t05.webp",
+   "w": 1080,
+   "h": 1350,
+   "meme": {
+    "name": "“Everyone else vs Me”并排梗：别人在忙，我选择原地不动（感恩节出行高峰是本周真实背景）",
+    "how": "通用格式，无受保护形象；角色为 Oolong、Tuftle。",
+    "date": "感恩节周（AAA 预测 8150 万人出行）",
+    "sources": [
+     {
+      "label": "ABC7 转 AAA 感恩节出行预测 11-16",
+      "url": "https://abc7news.com/story/aaa-forecasts-another-busy-not-thanksgiving-travel-week/20044328/"
+     },
+     {
+      "label": "Vaizle 2026 梗图格式指南",
+      "url": "https://insights.vaizle.com/trending-memes/"
+     }
+    ]
+   },
+   "product": {
+    "name": "COZEWARE Visio Series 12,000 BTU 20 SEER2 Ductless Mini Split AC with Heat Pump",
+    "url": "https://www.cozeware.com/products/12000-btu-20-seer2-mini-split-air-conditioner-230v-ac-p-8862.html"
+   },
+   "captions": {
+    "Instagram": "Everyone else is on the road. Oolong and Tuftle are staying exactly here.\n\nSet the Visio once and the living room stays right where you put it. It heats and cools, with a 24 hour timer, for rooms up to about 750 square feet.\n\nWhere are your holiday plans? Ours are on the couch. #Cozeware #StayingIn",
+    "Facebook": "Millions of people are on the road this week. Oolong and Tuftle picked the couch. The Visio mini split heats and cools and has a 24 hour timer, so the living room is ready when you are.\n\nWhere are your holiday plans?",
+    "X": "Everyone else: almost there. Us: not going anywhere. The Visio mini split heats and cools, with a 24 hour timer. Holiday plans: right here."
+   }
+  }
+ ]
+}

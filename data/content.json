@@ -66,6 +66,12 @@
       "group": "社媒内容"
     },
     {
+      "id": "content-pool",
+      "label": "社媒内容池",
+      "file": "content-pool.html",
+      "group": "社媒内容"
+    },
+    {
       "id": "ad-tests",
       "label": "广告测试",
       "file": "ad-tests.html",

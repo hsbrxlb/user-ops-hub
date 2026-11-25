@@ -10,7 +10,7 @@ const vm = require('node:vm');
 const root = path.resolve(process.env.PUBLIC_SITE_ROOT || path.join(__dirname, '..'));
 const read = (name) => fs.readFileSync(path.join(root, name), 'utf8');
 // Bump these when a shared stylesheet or script changes so browsers fetch the new files.
-const ASSET_VERSIONS = { 'app.js': 'hub29', 'hub-refresh.css': 'hub30', 'theme.css': 'hub27', 'base.css': 'hub27', 'image-viewer.css': 'hub27', 'image-viewer.js': 'hub27', 'post-feed.css': 'hub31', 'post-feed.js': 'hub28', 'ai-dev.css': 'hub30', 'ai-dev.js': 'hub28', 'daily-ops.css': 'hub28', 'fullweb.css': 'hub28', 'fullweb.js': 'hub28', 'customer-analytics.css': 'hub29' };
+const ASSET_VERSIONS = { 'app.js': 'hub30', 'hub-refresh.css': 'hub30', 'theme.css': 'hub27', 'base.css': 'hub27', 'image-viewer.css': 'hub27', 'image-viewer.js': 'hub27', 'post-feed.css': 'hub31', 'post-feed.js': 'hub28', 'content-pool.css': 'pool1', 'content-pool.js': 'pool1', 'ai-dev.css': 'hub30', 'ai-dev.js': 'hub28', 'daily-ops.css': 'hub28', 'fullweb.css': 'hub28', 'fullweb.js': 'hub28', 'customer-analytics.css': 'hub29' };
 // mascot.html carries its own snapshot markers; scripts/build-mascot-page.js rebuilds it.
 const SKIP = new Set(['mascot.html']);
 
