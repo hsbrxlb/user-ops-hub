@@ -17,14 +17,14 @@ const homeMain = home.match(/<main[^>]*>([\s\S]*?)<\/main>/)[1];
 for (const item of nav.filter(item => item.id !== 'home' && !item.reserved && !item.parent)) {
   assert.ok(homeMain.includes('href="' + item.file + '"'), 'homepage links to ' + item.id);
 }
-assert.equal((homeMain.match(/class="section home-directory"/g) || []).length, 7);
+assert.equal((homeMain.match(/class="section home-directory"/g) || []).length, 8);
 assert.ok(read('context.html').includes("location.replace('index.html')"));
 assert.ok(home.includes('base.css') && home.includes('theme.css'), 'keep existing visual system');
 assert.ok(home.includes('class="menu-button"') && home.includes('class="skip-link"'));
 
 
 for (const [id, label] of Object.entries({"mascot": "OEDRO 吉祥物", "merch-plan": "OEDRO 周边", "ugc-activity": "OEDRO 车主故事征集", "campaigns-oedro": "OEDRO 年末抽奖", "campaigns-cozeware": "Cozeware 年末抽奖", "user-segments-oedro": "OEDRO 用户分层"})) assert.equal(nav.find(item => item.id === id)?.label, label);
-assert.deepEqual(nav.filter(item => !item.parent).map(item => item.id), ["home", "daily-ops", "content-guides", "content-review", "studio", "comics-gallery", "feed-oedro", "feed-cozeware", "ad-tests", "skills", "social-brand", "brand-voice-system", "brand-voice-cozeware", "mascot", "mascot-cozeware", "merch-plan", "merch-cozeware", "products", "products-cozeware", "discord-community", "discord-community-cozeware", "newsletter", "newsletter-cozeware", "email-templates", "email-templates-cozeware", "ugc-engine", "loyalty", "loyalty-cozeware", "repurchase", "ugc-activity", "campaigns-oedro", "campaigns-cozeware", "customer-analytics", "first-outreach", "voice", "competitor-experience", "research", "user-segments-oedro"]);
+assert.deepEqual(nav.filter(item => !item.parent).map(item => item.id), ["home", "daily-ops", "content-guides", "content-review", "studio", "comics-gallery", "feed-oedro", "feed-cozeware", "ad-tests", "skills", "social-brand", "brand-voice-system", "brand-voice-cozeware", "mascot", "mascot-cozeware", "merch-plan", "merch-cozeware", "products", "products-cozeware", "discord-community", "discord-community-cozeware", "newsletter", "newsletter-cozeware", "email-templates", "email-templates-cozeware", "ugc-engine", "loyalty", "loyalty-cozeware", "repurchase", "ugc-activity", "campaigns-oedro", "campaigns-cozeware", "customer-analytics", "first-outreach", "voice", "competitor-experience", "research", "user-segments-oedro", "ai-dev", "ai-dev-survey", "ai-dev-bruno", "ai-dev-site", "ai-dev-flipbooks", "ai-dev-light", "ai-dev-radar", "ai-dev-hub"]);
 // Sub-pages sit directly after their parent and only one level deep.
 const branches = { "content-guides": ["content-guides-oedro", "content-guides-cozeware"], mascot: ["mascot-friends"], "products-cozeware": ["freshflow"], "discord-community": ["discord-invite-plan"],
   "campaigns-oedro": [1, 2, 3, 4].map(n => `campaigns-oedro-r${n}`), "campaigns-cozeware": [1, 2, 3, 4].map(n => `campaigns-cozeware-r${n}`) };
@@ -38,7 +38,7 @@ assert.ok(nav.every(item => !item.parent || !nav.find(p => p.id === item.parent)
 assert.equal(require('child_process').spawnSync(process.execPath, [path.join(root, 'scripts/build-nav.js'), '--check']).status, 0, 'run node scripts/build-nav.js');
 assert.match(read('campaign-oedro-r2.html'), /<details class="nav-children" open>[^]*data-page="campaigns-oedro-r2" class="active nav-child" aria-current="page"/);
 assert.match(read('mascot-friends.html'), /data-page="mascot" class="nav-ancestor"[^]*data-page="mascot-friends" class="active nav-child" aria-current="page"/);
-assert.deepEqual([...new Set(nav.map(item => item.group).filter(Boolean))], ["社媒内容", "品牌与产品", "社区与邮件", "会员与复购", "活动", "用户与市场研究"]);
+assert.deepEqual([...new Set(nav.map(item => item.group).filter(Boolean))], ["社媒内容", "品牌与产品", "社区与邮件", "会员与复购", "活动", "用户与市场研究", "AI 开发成果"]);
 const staticPages = read('app.js').match(/const staticContentPage = \[([^\]]+)\]/)[1];
 for (const id of ['first-outreach', 'discord-invite-plan', 'ugc-activity', 'comics-gallery', 'skills']) {
   const html = read(`${id}.html`);

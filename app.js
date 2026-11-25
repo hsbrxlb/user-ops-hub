@@ -1,3 +1,10 @@
+// Pages shown inside the AI 开发成果 demos load without the sidebar and top bar.
+if (new URLSearchParams(location.search).get('embed') === '1') {
+  document.documentElement.classList.add('is-embed');
+  const embedStyle = document.createElement('style');
+  embedStyle.textContent = '.is-embed .sidebar,.is-embed .topbar,.is-embed .mobile-overlay{display:none!important}.is-embed .app-shell{display:block!important}.is-embed .workspace{margin:0!important;width:100%!important;max-width:none!important}.is-embed .main-content{margin:0 auto!important;width:100%!important;max-width:1180px!important;padding-top:24px!important}';
+  document.head.append(embedStyle);
+}
 const page = document.body.dataset.page;
 const sidebar = document.querySelector('.sidebar');
 const overlay = document.querySelector('.mobile-overlay');
@@ -681,7 +688,7 @@ const contextSupplement = document.querySelector('#context-supplement')?.outerHT
 function restoreContextSupplement() {
   if (contextSupplement && !document.querySelector('#context-supplement')) mainContent.insertAdjacentHTML('beforeend', contextSupplement);
 }
-const staticContentPage = ['home', 'email-templates', 'context', 'studio', 'content-guides', 'content-guides-oedro', 'content-guides-cozeware', 'daily-ops', 'content-review', 'comics-gallery', 'skills', 'ugc-engine', 'loyalty', 'repurchase', 'freshflow', 'competitor-experience', 'customer-analytics', 'mascot-workflow', 'social-brand', 'merch-plan', 'merch-cozeware', 'first-outreach', 'discord-invite-plan', 'ugc-activity', 'user-segments-oedro', 'feed-oedro', 'feed-cozeware', 'ad-tests', 'loyalty-cozeware', 'mascot-cozeware', 'mascot-friends', 'email-templates-cozeware', 'newsletter-cozeware'].includes(page) || page?.startsWith('campaigns-');
+const staticContentPage = ['home', 'email-templates', 'context', 'studio', 'content-guides', 'content-guides-oedro', 'content-guides-cozeware', 'daily-ops', 'content-review', 'comics-gallery', 'skills', 'ugc-engine', 'loyalty', 'repurchase', 'freshflow', 'competitor-experience', 'customer-analytics', 'mascot-workflow', 'social-brand', 'merch-plan', 'merch-cozeware', 'first-outreach', 'discord-invite-plan', 'ugc-activity', 'user-segments-oedro', 'feed-oedro', 'feed-cozeware', 'ad-tests', 'loyalty-cozeware', 'mascot-cozeware', 'mascot-friends', 'email-templates-cozeware', 'newsletter-cozeware', 'ai-dev', 'ai-dev-survey', 'ai-dev-bruno', 'ai-dev-site', 'ai-dev-flipbooks', 'ai-dev-light', 'ai-dev-radar', 'ai-dev-hub'].includes(page) || page?.startsWith('campaigns-');
 if (page === 'mascot') {
   if (!document.querySelector('#nav-list').querySelector('a')) initMascotNavigation();
 } else {

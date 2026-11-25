@@ -10,7 +10,7 @@ const vm = require('node:vm');
 const root = path.resolve(process.env.PUBLIC_SITE_ROOT || path.join(__dirname, '..'));
 const read = (name) => fs.readFileSync(path.join(root, name), 'utf8');
 // Bump these when app.js or hub-refresh.css change so browsers fetch the new files.
-const ASSET_VERSIONS = { 'app.js': 'hub25', 'hub-refresh.css': 'hub24' };
+const ASSET_VERSIONS = { 'app.js': 'hub26', 'hub-refresh.css': 'hub24' };
 // mascot.html carries its own snapshot markers; scripts/build-mascot-page.js rebuilds it.
 const SKIP = new Set(['mascot.html']);
 

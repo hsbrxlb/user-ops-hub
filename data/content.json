@@ -321,6 +321,54 @@
       "label": "OEDRO 用户分层",
       "file": "user-segments-oedro.html",
       "group": "用户与市场研究"
+    },
+    {
+      "id": "ai-dev",
+      "label": "成果一览",
+      "file": "ai-dev.html",
+      "group": "AI 开发成果"
+    },
+    {
+      "id": "ai-dev-survey",
+      "label": "Cozeware FreshFlow AI 访谈",
+      "file": "ai-dev-survey.html",
+      "group": "AI 开发成果"
+    },
+    {
+      "id": "ai-dev-bruno",
+      "label": "OEDRO Discord 机器人",
+      "file": "ai-dev-bruno.html",
+      "group": "AI 开发成果"
+    },
+    {
+      "id": "ai-dev-site",
+      "label": "OEDRO 内容站样站",
+      "file": "ai-dev-site.html",
+      "group": "AI 开发成果"
+    },
+    {
+      "id": "ai-dev-flipbooks",
+      "label": "互动翻页书",
+      "file": "ai-dev-flipbooks.html",
+      "group": "AI 开发成果"
+    },
+    {
+      "id": "ai-dev-light",
+      "label": "OEDRO 工作灯 AI 问卷",
+      "file": "ai-dev-light.html",
+      "group": "AI 开发成果"
+    },
+    {
+      "id": "ai-dev-radar",
+      "label": "用户声音雷达",
+      "file": "ai-dev-radar.html",
+      "group": "AI 开发成果"
+    },
+    {
+      "id": "ai-dev-hub",
+      "label": "本 Hub 的搭建",
+      "file": "ai-dev-hub.html",
+      "group": "AI 开发成果"
     }
   ],
   "flipbooks": {
