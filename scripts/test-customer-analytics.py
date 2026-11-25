@@ -21,14 +21,8 @@ class CustomerAnalyticsTests(unittest.TestCase):
     def setUpClass(cls):
         source = os.environ.get("HUB_PRIVATE_OUTREACH_SOURCE")
         cls.rows = json.loads(Path(source).read_text()) if source else None
-        cls.counts = json.loads((ROOT / "data/outreach-summary.json").read_text())
-        cls.public = json.loads((ROOT / "data/customer-analytics.json").read_text())
-
-    def test_counts_stay_out_of_the_public_site(self):
-        if PUBLIC == ROOT / ".":
-            self.skipTest("Checked against the built public site")
-        self.assertFalse((PUBLIC / "data/customer-analytics.json").exists())
-        self.assertFalse((PUBLIC / "data/outreach-summary.json").exists())
+        cls.counts = json.loads((PUBLIC / "data/outreach-summary.json").read_text())
+        cls.public = json.loads((PUBLIC / "data/customer-analytics.json").read_text())
 
     def test_published_sample_matches_source(self):
         if self.rows is None:

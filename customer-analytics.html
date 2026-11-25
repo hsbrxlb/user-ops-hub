@@ -11,7 +11,7 @@
 <link href="base.css?v=hub27" rel="stylesheet"/>
 <link href="theme.css?v=hub27" rel="stylesheet"/>
 <link href="customer-analytics.css?v=hub29" rel="stylesheet"/>
-<link href="hub-refresh.css?v=hub29" rel="stylesheet"/>
+<link href="hub-refresh.css?v=hub30" rel="stylesheet"/>
 <link rel="stylesheet" href="image-viewer.css?v=hub27"/>
 <link rel="stylesheet" href="reference-reading.css?v=hub18"/>
 </head>
@@ -72,6 +72,7 @@
 <a href="ai-dev-survey.html" data-page="ai-dev-survey"><span>Cozeware FreshFlow AI 访谈</span></a>
 <a href="ai-dev-bruno.html" data-page="ai-dev-bruno"><span>OEDRO Discord 机器人</span></a>
 <a href="ai-dev-site.html" data-page="ai-dev-site"><span>OEDRO 内容站样站</span></a>
+<a href="ai-dev-guides.html" data-page="ai-dev-guides"><span>OEDRO 官网 Blog / Guides</span></a>
 <a href="ai-dev-flipbooks.html" data-page="ai-dev-flipbooks"><span>互动翻页书</span></a>
 <a href="ai-dev-light.html" data-page="ai-dev-light"><span>OEDRO 工作灯 AI 问卷</span></a>
 <a href="ai-dev-voice.html" data-page="ai-dev-voice"><span>全网讨论</span></a>
@@ -86,17 +87,20 @@
 </header>
 <main class="main-content analytics ref-reading" id="content">
 <header class="page-heading"><h1>OEDRO 下单与复购分析</h1></header><section aria-labelledby="oedro-brand-title" class="brand-section"><h2 class="brand-section-title" id="oedro-brand-title">OEDRO</h2>
-<div class="analytics-method">
-<section><h3>两个范围</h3><p>全体客户和首批触达名单分开统计，各用自己的人数作分母。首批名单的结论只代表这批客户。</p></section>
-<section><h3>购买次数</h3><p>按未下单、1 单、2–3 单、4–9 单、10 单及以上分组，看有多少客户还没下过单、多少已经复购。</p></section>
-<section><h3>累计订单金额</h3><p>按历史累计金额从不足 100 美元到 5,000 美元及以上分档，人数差距大的档位用对数刻度并排比较。</p></section>
-<section><h3>邮件订阅</h3><p>分已订阅、未订阅和已退订三类。首批名单另看订阅和购买的交叉，以及官网访问名单和高消费名单的重叠。</p></section>
-<section><h3>口径</h3><p>统计单位是各组的客户人数。数据里没有日期，所以不画时间趋势。</p></section>
+<div class="analytics-toolbar">
+<div aria-label="分析范围" class="scope-switch" role="group">
+<button aria-pressed="true" data-scope="snapshot" type="button">全体客户</button>
+<button aria-pressed="false" data-scope="outreach" type="button">首批触达</button>
 </div>
+<span id="scope-denominator"></span>
+</div>
+<div aria-busy="true" id="analytics-view"><p class="load-message" role="status">正在加载数据…</p></div>
+<noscript><p>请启用 JavaScript，读取客户统计和切换分析范围。</p></noscript>
 </section></main>
 </div>
 </div>
-<script src="app.js?v=hub28"></script>
+<script src="app.js?v=hub29"></script>
+<script src="customer-analytics.js?v=hub18"></script>
 <script src="image-viewer.js?v=hub27"></script>
 </body>
 </html>

@@ -275,3 +275,22 @@
   .aidev-shotrow { grid-template-columns: minmax(0, 1fr); }
   .aidev-shotrow figure:last-child { max-width: 240px; }
 }
+
+/* Status line, page list and screenshot gallery on showcase pages */
+#content .page-heading .aidev-status { display: inline-flex; align-items: center; gap: 8px; margin: 18px 0 0; padding: 6px 14px 6px 12px; border-radius: 999px; background: var(--status-ready-bg); color: var(--status-ready); font-size: 15px; font-weight: 600; }
+#content .page-heading .aidev-status::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.aidev-pages { margin-top: 56px; }
+#content .aidev-pages h2 { margin: 0 0 18px; font-size: var(--type-h2); }
+.aidev-pages ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
+.aidev-pages li { display: grid; gap: 6px; padding: 20px 22px; border-radius: 18px; background: var(--surface-raised); box-shadow: inset 0 0 0 1px var(--border); }
+.aidev-pages strong { font-size: 17px; }
+.aidev-pages span { color: var(--text-secondary); font-size: 15px; line-height: 1.7; }
+.aidev-gallery { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, .42fr); gap: 16px; align-items: start; margin-top: 40px; }
+.aidev-gallery figure { margin: 0; min-width: 0; }
+#content .aidev-gallery img { display: block; width: 100%; height: auto; max-block-size: none; }
+#content .aidev-gallery figcaption { margin-top: 10px; font-size: 14px; color: var(--text-muted); }
+@media (max-width: 900px) {
+  .aidev-pages ul { grid-template-columns: minmax(0, 1fr); }
+  .aidev-gallery { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .aidev-gallery .is-phone { grid-column: 1 / -1; max-width: 240px; }
+}

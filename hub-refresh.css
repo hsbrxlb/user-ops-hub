@@ -345,10 +345,11 @@ body[data-page="home"] .main-content { width: min(var(--content-wide), 100%); pa
   letter-spacing: -.01em;
   line-height: .95;
 }
-.hub-hero-brands { display: flex; align-items: center; gap: 22px; margin: 36px 0 0; }
-#content .hub-hero-brands img { display: block; width: auto; height: 22px; max-block-size: none; border-radius: 0; box-shadow: none; }
-.hub-hero-brands span { color: var(--text); font-family: var(--font-body); font-size: 22px; font-weight: 600; letter-spacing: -.01em; line-height: 1; }
-.hub-hero-brands img + span { padding-left: 22px; box-shadow: inset 1px 0 0 var(--border-strong); }
+.hub-hero-brands { display: flex; align-items: flex-end; gap: 22px; margin: 36px 0 0; }
+#content .hub-hero-brands img { display: block; width: auto; max-block-size: none; border-radius: 0; box-shadow: none; }
+/* Optical match: the OEDRO mark carries its car line above the letters, so it sits taller for equal letter height. */
+#content .hub-hero-brands .hub-brand-oedro { height: 34px; }
+#content .hub-hero-brands .hub-brand-cozeware { height: 22px; padding-left: 22px; border-left: 1px solid var(--border-strong); box-sizing: content-box; position: relative; top: 4px; }
 .hub-hero-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
 #content .hub-hero-links a[href] { min-height: 48px; padding: 0 22px; font-size: 15px; }
 #content .hub-hero-links a[href]:first-child { background: var(--text); box-shadow: 0 12px 26px -14px rgba(28, 31, 39, .8); color: var(--on-accent); }

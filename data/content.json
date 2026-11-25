@@ -341,6 +341,12 @@
       "group": "AI 开发成果"
     },
     {
+      "id": "ai-dev-guides",
+      "label": "OEDRO 官网 Blog / Guides",
+      "file": "ai-dev-guides.html",
+      "group": "AI 开发成果"
+    },
+    {
       "id": "ai-dev-flipbooks",
       "label": "互动翻页书",
       "file": "ai-dev-flipbooks.html",

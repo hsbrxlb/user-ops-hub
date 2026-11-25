@@ -53,7 +53,9 @@ for (const file of codeFiles) {
     detailTags.push({ file, tag: match[0] });
     const intentionalHistory = /class="[^"]*evo-round/.test(match[0]);
     const demoFaq = path.relative(root, file) === 'fakesite/faq.html' && /class="(?:faq-question|faq-item)"/.test(match[0]);
-    const mobileArticleToc = /^fakesite\/[^/]+\.html$/.test(path.relative(root,file)) && /class="mobile-toc"/.test(match[0]);
+    const mobileArticleToc = /^(?:fakesite|experiences\/oedro-guides)\/[^/]+\.html$/.test(path.relative(root,file)) && /class="mobile-toc"/.test(match[0]);
+    // The OEDRO site Blog/Guides demo keeps its built FAQ accordion as shipped.
+    const guidesFaq = path.relative(root, file) === 'experiences/oedro-guides/faq.html' && /class="faq-item"/.test(match[0]);
     const draftControls = path.relative(root, file) === 'fakesite/editor.html' && /class="draft-(settings|tools)"/.test(match[0]);
     const emailImportFiles = path.relative(root, file) === 'email-templates.js' && match[0] === '<details class="email-files">';
     const emailPreviewSpec = /^email-templates(?:-cozeware)?\.html$/.test(path.relative(root, file))
@@ -70,10 +72,10 @@ for (const file of codeFiles) {
     const merchandiseReference = path.relative(root, file) === 'merch-plan.html'
       && /^<details class="goods-(?:directory|rfq|placement)">$/.test(match[0]);
     const sidebarTree = /^<details class="nav-children"/.test(match[0]);
-    if (!merchandiseReference && !sidebarTree && !revisedReference && !loyaltyReference && !competitorEvidence && !unverifiedVoiceArchive && !intentionalHistory && !demoFaq && !mobileArticleToc && !draftControls && !emailImportFiles && !emailPreviewSpec && !analyticsDefinition && !intentionalProductDetail && !/\bopen\b/i.test(match[0])) errors.push(path.relative(root, file) + ' 有正文details未默认展开：' + match[0]);
+    if (!guidesFaq && !merchandiseReference && !sidebarTree && !revisedReference && !loyaltyReference && !competitorEvidence && !unverifiedVoiceArchive && !intentionalHistory && !demoFaq && !mobileArticleToc && !draftControls && !emailImportFiles && !emailPreviewSpec && !analyticsDefinition && !intentionalProductDetail && !/\bopen\b/i.test(match[0])) errors.push(path.relative(root, file) + ' 有正文details未默认展开：' + match[0]);
   }
   for (const match of source.matchAll(/<[^>]+aria-expanded="false"[^>]*>/gi)) {
-    const sampleMenu = /^fakesite\/[^/]+\.html$/.test(path.relative(root,file)) && /class="menu-toggle"/.test(match[0]);
+    const sampleMenu = /^(?:fakesite|experiences\/oedro-guides)\/[^/]+\.html$/.test(path.relative(root,file)) && /class="menu-(?:toggle|button)"/.test(match[0]);
     if (!sampleMenu && !/class="[^"]*menu-button/.test(match[0])) errors.push(path.relative(root, file) + ' 有正文aria-expanded=false：' + match[0]);
   }
 }
