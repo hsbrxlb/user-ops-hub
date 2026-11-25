@@ -4,10 +4,11 @@
   const KIND = { post: '帖子', comment: '评论', video: '视频', article: '文章', official: '官方账号' };
   const REL = { direct: '直接提到品牌', context: '相关讨论', official: '官方账号' };
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const state = { q: '', brand: new Set(), source: new Set(), topic: new Set(), kind: new Set(), rel: new Set(), from: '', to: '', undated: true, sort: 'new', shown: PAGE };
+  const state = { q: '', type: new Set(['用户讨论']), brand: new Set(), source: new Set(), topic: new Set(), kind: new Set(), rel: new Set(), from: '', to: '', undated: true, sort: 'new', shown: PAGE };
   let all = [];
 
   const dims = {
+    type: { label: '内容性质', get: (i) => [i.y || '商家内容'] },
     brand: { label: '品牌', get: (i) => [i.b] },
     source: { label: '来源', get: (i) => [i.f || i.s] },
     topic: { label: '话题', get: (i) => i.g },
@@ -68,7 +69,7 @@
       const body = i.c || i.x || '';
       return `<article class="fw-item"><div class="fw-meta"><time${i.d ? ` datetime="${i.d}"` : ''}>${fmtDate(i.d)}</time><span>${esc(i.s)}</span><span class="fw-brand fw-brand-${i.b === 'Cozeware' ? 'cz' : 'oe'}">${esc(i.b)}</span></div>
       <div class="fw-body">${title ? `<h2><a href="${esc(i.u)}" target="_blank" rel="noopener noreferrer">${mark(title, state.q)}</a></h2>` : ''}${body && body !== title ? `<p>${mark(body, state.q)}</p>` : ''}${i.x && i.c ? `<p class="fw-orig">${mark(i.x, state.q)}</p>` : ''}
-      <div class="fw-tags"><span class="fw-kind">${esc(KIND[i.k] || i.k)}</span>${i.g.map((g) => `<span>${esc(g)}</span>`).join('')}</div></div>
+      <div class="fw-tags"><span class="fw-kind">${esc(i.y || '商家内容')}</span><span class="fw-kind">${esc(KIND[i.k] || i.k)}</span>${i.g.map((g) => `<span>${esc(g)}</span>`).join('')}</div></div>
       <a class="fw-open" href="${esc(i.u)}" target="_blank" rel="noopener noreferrer" aria-label="在${esc(i.s)}查看原帖：${esc((title || body).slice(0, 40))}">查看原帖 <span aria-hidden="true">↗</span></a></article>`;
     }).join('');
     const active = chips.length + (state.q ? 1 : 0);
@@ -91,7 +92,7 @@
     const parts = await Promise.all(Array.from({ length: meta.chunks }, (_, n) => fetch(`${base}items-${n + 1}.json`, { cache: 'no-store' }).then((r) => { if (!r.ok) throw new Error('数据加载失败'); return r.json(); })));
     all = parts.flat();
     for (const i of all) i._h = hay(i);
-    main.innerHTML = `<header class="page-heading"><h1>全网讨论库</h1><p>OEDRO 与 Cozeware 在公开网页上被提到的帖子、评论、视频和文章，共 ${meta.total} 条，发布日期 ${meta.min_date} 至 ${meta.max_date}。每条都能点回原网址。</p></header>
+    main.innerHTML = `<header class="page-heading"><h1>全网讨论库</h1><p>OEDRO 与 Cozeware 在公开网页上被提到的帖子、评论、视频和文章，共 ${meta.total} 条，发布日期 ${meta.min_date} 至 ${meta.max_date}。每条都能点回原网址。默认只显示用户讨论，在“内容性质”里可以切换到用户视频、媒体评测和商家内容。</p></header>
     <div class="fw" id="fw">
       <div class="fw-bar">
         <label class="fw-search"><span class="sr-only">搜索全文</span><input type="search" id="fw-q" placeholder="搜索关键词，如 leak、fit、脚垫" autocomplete="off" enterkeyhint="search"></label>
