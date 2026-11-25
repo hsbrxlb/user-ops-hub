@@ -300,7 +300,7 @@
     },
     {
       "id": "voice",
-      "label": "全网讨论库",
+      "label": "全网讨论",
       "file": "user-voice.html",
       "group": "用户与市场研究"
     },
@@ -362,6 +362,12 @@
       "id": "ai-dev-radar",
       "label": "用户声音雷达",
       "file": "ai-dev-radar.html",
+      "group": "AI 开发成果"
+    },
+    {
+      "id": "ai-dev-voice",
+      "label": "全网讨论",
+      "file": "ai-dev-voice.html",
       "group": "AI 开发成果"
     },
     {

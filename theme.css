@@ -1,50 +1,84 @@
+/* Hub design system v6 "Ink & Paper": tokens. Components live in hub-refresh.css. */
+@font-face { font-family: "Hub Sans"; src: url('assets/fonts/dm-sans-400.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Hub Sans"; src: url('assets/fonts/dm-sans-500.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Hub Sans"; src: url('assets/fonts/dm-sans-600.woff2') format('woff2'); font-weight: 600 700; font-display: swap; }
+@font-face { font-family: "Hub Numerals"; src: url('assets/fonts/barlow-condensed-500.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Hub Numerals"; src: url('assets/fonts/barlow-condensed-600.woff2') format('woff2'); font-weight: 600 700; font-display: swap; }
+@font-face { font-family: "Hub Display"; src: url('assets/fonts/libre-caslon-display-400.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+
 :root {
   color-scheme: light;
-  --page-bg: #f7f1e7;
+  /* Paper: the selected light background, lifted by a soft shade. */
+  --page-bg: #f3ece2;
   --identity-background: url('assets/hub-light.webp');
-  --surface: #fffaf1;
+  --canvas-shade: rgba(250, 247, 241, .58);
+  --paper: #f5efe7;
+  --surface: #fffcf7;
+  --surface-raised: rgba(255, 252, 247, .78);
+  --surface-sunken: rgba(28, 31, 39, .035);
   --workspace-surface: transparent;
   --content-surface: transparent;
-  --canvas-shade: rgba(255, 249, 238, .27);
-  --surface-raised: rgba(255, 250, 241, .78);
-  --sidebar-bg: rgba(251, 245, 233, .97);
-  --topbar-bg: #fbf5e9;
-  --input-bg: #fffaf1;
-  --text: #2c2119;
-  --text-secondary: #4c3b30;
-  --text-muted: #635144;
-  --text-faint: #6e5b4c;
-  --border: #cbb9a5;
-  --border-strong: #9e8570;
-  --accent: #804619;
-  --nav-hover: #f0e3d2;
-  --nav-active: #ebd9c3;
-  --nav-active-text: #693a18;
-  --on-accent: #fffaf1;
-  --media-edge: #aa9682;
-  --viewer-scrim: rgb(251 244 232 / 97%);
-  --status-pending: #62420c;
-  --status-pending-bg: #f4e5bb;
-  --status-active: #285638;
-  --status-active-bg: #dce9d9;
-  --status-ready: #663e62;
-  --status-ready-bg: #efe2ec;
-  --status-blocked: #852e24;
-  --status-blocked-bg: #f4e0d7;
-  --status-done: #415522;
+  --sidebar-bg: rgba(248, 244, 237, .94);
+  --topbar-bg: #f5f0e8;
+  --input-bg: #fffcf7;
+
+  /* Ink */
+  --text: #1c1f27;
+  --text-secondary: #3d4250;
+  --text-muted: #5e6372;
+  --text-faint: #5e6372;
+  --border: rgba(28, 31, 39, .12);
+  --border-strong: rgba(28, 31, 39, .24);
+  --hairline: .5px;
+
+  /* Ink blue for links, focus and the current item; seal red marks today only. */
+  --accent: #2d47b0;
+  --accent-hover: #1f3590;
+  --accent-soft: rgba(45, 71, 176, .08);
+  --accent-softer: rgba(45, 71, 176, .05);
+  --seal: #b5432f;
+  --on-accent: #fbf8f2;
+  --nav-hover: rgba(28, 31, 39, .05);
+  --nav-active: rgba(45, 71, 176, .09);
+  --nav-active-text: #1f3590;
+  --media-edge: rgba(28, 31, 39, .1);
+
+  /* Night surfaces: image viewer and live demo stages. The Hub itself stays light. */
+  --night: #121419;
+  --night-raised: #1c1f27;
+  --night-text: #f1ece4;
+  --night-muted: #a9adb8;
+  --viewer-scrim: rgba(14, 15, 19, .94);
+
+  --status-pending: #7a4b0c;
+  --status-pending-bg: #f6e7c8;
+  --status-active: #22603a;
+  --status-active-bg: #dcebdd;
+  --status-ready: #22603a;
+  --status-ready-bg: #dcebdd;
+  --status-blocked: #8f2f22;
+  --status-blocked-bg: #f5ddd5;
+  --status-done: #3d5420;
   --status-done-bg: #e4ebd6;
-  --font-heading: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+
+  /* Type: DM Sans for Latin UI, PingFang for Chinese, Caslon for English display names, Barlow Condensed for dates. */
+  --font-body: "Hub Sans", -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", sans-serif;
+  --font-heading: var(--font-body);
+  --font-display: "Hub Display", "Iowan Old Style", "Songti SC", Georgia, serif;
+  --font-numerals: "Hub Numerals", "Hub Sans", -apple-system, "PingFang SC", sans-serif;
   --type-body: 16px;
   --type-nav: 14px;
   --type-meta: 14px;
   --type-small: 14px;
-  --type-h1: 34px;
-  --type-h1-mobile: 26px;
-  --type-h2: 24px;
-  --type-h3: 18px;
+  --type-h1: 40px;
+  --type-h1-mobile: 30px;
+  --type-h2: 26px;
+  --type-h3: 19px;
   --type-h4: 16px;
-  --line-body: 1.8;
+  --type-display: clamp(40px, 4.4vw, 60px);
+  --line-body: 1.75;
+  --tracking-tight: -.022em;
+
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -53,18 +87,31 @@
   --space-6: 32px;
   --space-7: 48px;
   --space-8: 64px;
-  --radius-control: 3px;
+  --space-9: 96px;
+
+  /* Radii nest: chip inside control inside card. */
+  --radius-chip: 999px;
+  --radius-control: 10px;
+  --radius-card: 16px;
+  --radius-media: 12px;
+  --shadow-1: 0 1px 2px rgba(48, 38, 24, .05), 0 6px 16px -8px rgba(48, 38, 24, .14);
+  --shadow-2: 0 2px 6px rgba(48, 38, 24, .05), 0 22px 48px -20px rgba(48, 38, 24, .28);
+  --shadow-media: 0 1px 2px rgba(48, 38, 24, .06), 0 14px 34px -18px rgba(48, 38, 24, .38);
+
   --touch-size: 44px;
-  --sidebar-width: 236px;
+  --sidebar-width: 248px;
   --topbar-height: 60px;
-  --content-max: 1280px;
-  --content-wide: 1480px;
-  --content-gallery: 1480px;
-  --page-gutter: 48px;
-  --page-gutter-mobile: 22px;
-  --shadow-focus: 0 0 0 2px var(--page-bg), 0 0 0 4px var(--accent);
+  --content-max: 1200px;
+  --content-wide: 1440px;
+  --content-gallery: 1440px;
+  --page-gutter: 56px;
+  --page-gutter-mobile: 20px;
+  --shadow-focus: 0 0 0 2px var(--paper), 0 0 0 4px var(--accent);
+
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+  --ease-in-out: cubic-bezier(.65, 0, .35, 1);
   --motion-fast: 160ms;
-  --motion-standard: 250ms;
+  --motion-standard: 240ms;
   --motion-slow: 420ms;
 }
 

@@ -71,15 +71,29 @@
   const today = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Shanghai' }).format(Date.now());
   const focus = keys.find((key) => key >= today) || keys[keys.length - 1];
   if (dateNav) {
+    let month = 0;
     dateNav.innerHTML = days.map((day) => {
       const key = day.dataset.date;
-      const { month, day: date, week } = label(key);
-      return `<a href="#day-${key}" data-date="${key}" aria-label="${month}月${date}日 ${week}"><span class="date-num">${month}/${date}</span><span class="date-meta">${week}<span class="date-count"></span></span></a>`;
+      const { month: m, day: date, week } = label(key);
+      const marker = m !== month ? `<span class="schedule-month" aria-hidden="true">${m}月</span>` : '';
+      month = m;
+      return `${marker}<a href="#day-${key}" data-date="${key}"${key === today ? ' data-today' : ''} aria-label="${m}月${date}日 ${week}"><span class="date-week">${week}</span><span class="date-num">${date}</span><span class="date-count"></span></a>`;
     }).join('');
   }
   for (const day of days) {
     const heading = day.querySelector('h2');
-    if (heading && !heading.querySelector('.day-count')) heading.insertAdjacentHTML('beforeend', '<span class="day-count"></span>');
+    if (!heading) continue;
+    if (day.dataset.date === today) day.dataset.today = '';
+    if (!heading.querySelector('.day-numeral')) {
+      const { month: m, day: date } = label(day.dataset.date);
+      const week = heading.querySelector('.day-week');
+      heading.querySelector('.day-date')?.classList.add('is-visually-hidden');
+      week?.setAttribute('aria-hidden', 'true');
+      heading.insertAdjacentHTML('afterbegin', `<span class="day-numeral" aria-hidden="true">${date}</span><span class="day-stack" aria-hidden="true"><span class="day-month">${m}月</span><span class="day-week">${week ? week.textContent : ''}</span></span>`);
+      week?.remove();
+      if (week) heading.querySelector('.day-date').insertAdjacentHTML('beforeend', ' ' + week.textContent);
+    }
+    if (!heading.querySelector('.day-count')) heading.insertAdjacentHTML('beforeend', '<span class="day-count"></span>');
   }
 
   function markCurrent(key) {
@@ -171,7 +185,9 @@
       const link = dateNav?.querySelector(`a[data-date="${day.dataset.date}"]`);
       if (link) {
         link.hidden = day.hidden;
-        link.querySelector('.date-count').textContent = ' · ' + scheduled + ' 条';
+        const tally = link.querySelector('.date-count');
+        tally.textContent = scheduled + ' 条';
+        tally.classList.toggle('is-empty', scheduled === 0);
       }
     }
     for (const button of filterBar?.querySelectorAll('button') || []) {

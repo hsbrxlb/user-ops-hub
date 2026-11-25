@@ -9,7 +9,8 @@
   const seenFrames = new WeakMap();
   const triggers = '.hub-image-trigger, [data-pages]';
   const scriptURL = document.currentScript.src;
-  let viewer, stage, image, error, counter, thumbnailBar, controls, opener, items, index, scroll, scrollLock;
+  let viewer, stage, image, error, counter, caption, thumbnailBar, controls, opener, items, index, scroll, scrollLock;
+  let swiped = false;
 
   function button(className, label, icon) {
     const control = document.createElement('button');
@@ -27,14 +28,26 @@
     viewer.className = 'hub-image-viewer';
     viewer.setAttribute('aria-label', labels.dialog);
 
+    const top = document.createElement('div');
+    top.className = 'hub-image-top';
+    caption = document.createElement('p');
+    caption.className = 'hub-image-caption';
+    counter = document.createElement('output');
+    counter.className = 'hub-image-count';
+    counter.setAttribute('aria-live', 'polite');
+    const close = button('hub-image-close', labels.close, '<path d="M6 6l12 12M18 6 6 18"/>');
+    close.addEventListener('click', () => shut());
+    top.append(caption, counter, close);
+
     stage = document.createElement('div');
     stage.className = 'hub-image-stage';
     image = document.createElement('img');
     image.decoding = 'async';
+    image.draggable = false;
     const zoom = button('hub-image-zoom', labels.original);
     zoom.setAttribute('aria-pressed', 'false');
     zoom.append(image);
-    zoom.addEventListener('click', toggleZoom);
+    zoom.addEventListener('click', (event) => { if (!swiped) toggleZoom(event); });
     error = document.createElement('p');
     error.className = 'hub-image-error';
     error.setAttribute('role', 'status');
@@ -42,41 +55,33 @@
     error.hidden = true;
     stage.append(zoom, error);
 
-    const top = document.createElement('div');
-    top.className = 'hub-image-top';
-    const close = button('hub-image-close', labels.close, '<path d="m6 6 12 12M18 6 6 18"/>');
-    close.addEventListener('click', () => viewer.close());
-    top.append(close);
-
     const previous = button('hub-image-previous', labels.previous, '<path d="m15 5-7 7 7 7"/>');
     const next = button('hub-image-next', labels.next, '<path d="m9 5 7 7-7 7"/>');
-    previous.addEventListener('click', () => select((index + items.length - 1) % items.length));
-    next.addEventListener('click', () => select((index + 1) % items.length));
-    counter = document.createElement('output');
-    counter.className = 'hub-image-count';
-    counter.setAttribute('aria-live', 'polite');
-    const navigation = document.createElement('div');
-    navigation.className = 'hub-image-navigation';
-    navigation.append(previous, counter, next);
+    previous.addEventListener('click', () => step(-1));
+    next.addEventListener('click', () => step(1));
+
     thumbnailBar = document.createElement('div');
     thumbnailBar.className = 'hub-image-thumbnails';
     const footer = document.createElement('div');
     footer.className = 'hub-image-footer';
-    footer.append(navigation, thumbnailBar);
-    viewer.append(top, stage, footer);
-    controls = { close, zoom, footer };
+    footer.append(thumbnailBar);
+    viewer.append(top, stage, previous, next, footer);
+    controls = { close, zoom, footer, previous, next };
 
     viewer.addEventListener('click', (event) => {
-      if (event.target === viewer || event.target === stage || event.target === top || event.target === footer) viewer.close();
+      if (swiped) return;
+      if (event.target === viewer || event.target === stage || event.target === top || event.target === footer) shut();
     });
     viewer.addEventListener('keydown', (event) => {
       if (items.length < 2) return;
       const delta = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0;
       if (!delta) return;
       event.preventDefault();
-      select((index + delta + items.length) % items.length);
+      step(delta);
     });
+    viewer.addEventListener('cancel', (event) => { event.preventDefault(); shut(); });
     viewer.addEventListener('close', () => {
+      viewer.classList.remove('is-open', 'is-closing');
       document.documentElement.style.overflow = scrollLock;
       if (opener?.isConnected) opener.focus({ preventScroll: true });
       window.scrollTo({ left: scroll.x, top: scroll.y, behavior: 'instant' });
@@ -88,7 +93,54 @@
       error.hidden = false;
       zoom.hidden = true;
     });
+
+    // Touch: swipe sideways for the next picture, drag down to close.
+    let start = null;
+    stage.addEventListener('pointerdown', (event) => {
+      if (event.pointerType === 'mouse' || stage.classList.contains('is-original')) return;
+      start = { x: event.clientX, y: event.clientY, id: event.pointerId };
+      swiped = false;
+    });
+    stage.addEventListener('pointermove', (event) => {
+      if (!start || event.pointerId !== start.id) return;
+      const dx = event.clientX - start.x;
+      const dy = event.clientY - start.y;
+      if (!swiped && Math.hypot(dx, dy) > 10) swiped = true;
+      if (!swiped) return;
+      const down = Math.max(0, dy);
+      const sideways = Math.abs(dx) > Math.abs(dy) && items.length > 1;
+      viewer.style.setProperty('--drag-x', (sideways ? dx : 0) + 'px');
+      viewer.style.setProperty('--drag-y', (sideways ? 0 : down) + 'px');
+      viewer.style.setProperty('--drag-fade', sideways ? 1 : Math.max(.35, 1 - down / 420));
+      viewer.classList.add('is-dragging');
+    });
+    const release = (event) => {
+      if (!start || event.pointerId !== start.id) return;
+      const dx = event.clientX - start.x;
+      const dy = event.clientY - start.y;
+      start = null;
+      viewer.classList.remove('is-dragging');
+      viewer.style.setProperty('--drag-x', '0px');
+      viewer.style.setProperty('--drag-y', '0px');
+      viewer.style.setProperty('--drag-fade', 1);
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 60 && items.length > 1) step(dx < 0 ? 1 : -1);
+      else if (dy > 90 && dy > Math.abs(dx)) shut();
+      setTimeout(() => { swiped = false; }, 0);
+    };
+    stage.addEventListener('pointerup', release);
+    stage.addEventListener('pointercancel', release);
     document.body.append(viewer);
+  }
+
+  function shut() {
+    if (!viewer?.open || viewer.classList.contains('is-closing')) return;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { viewer.close(); return; }
+    viewer.classList.add('is-closing');
+    setTimeout(() => viewer.close(), 200);
+  }
+
+  function step(delta) {
+    select((index + delta + items.length) % items.length);
   }
 
   function resetZoom() {
@@ -121,7 +173,11 @@
     controls.zoom.hidden = false;
     image.alt = current.alt;
     image.src = current.src;
-    counter.textContent = (index + 1) + ' / ' + items.length;
+    caption.textContent = current.alt || '';
+    counter.textContent = items.length > 1 ? (index + 1) + ' / ' + items.length : '';
+    stage.classList.remove('is-entering');
+    void stage.offsetWidth;
+    stage.classList.add('is-entering');
     for (const [i, thumb] of Array.from(thumbnailBar.children).entries()) {
       if (i === index) {
         thumb.setAttribute('aria-current', 'true');
@@ -139,7 +195,7 @@
       const picture = trigger.querySelector('img');
       data = {
         items: trigger.dataset.pages.split('|').filter(Boolean).map((src, i) => ({
-          src, alt: i === 0 ? picture?.alt || '' : trigger.dataset.title || picture?.alt || ''
+          src, alt: i === 0 ? picture?.alt || trigger.dataset.title || '' : trigger.dataset.title || picture?.alt || ''
         })),
         position: Number(trigger.dataset.imageIndex) || 0
       };
@@ -152,8 +208,11 @@
     scroll = { x: window.scrollX, y: window.scrollY };
     scrollLock = document.documentElement.style.overflow;
     document.documentElement.style.overflow = 'hidden';
-    controls.footer.hidden = items.length === 1;
-    thumbnailBar.replaceChildren(...(items.length === 1 ? [] : items.map((item, i) => {
+    const single = items.length === 1;
+    controls.footer.hidden = single;
+    controls.previous.hidden = single;
+    controls.next.hidden = single;
+    thumbnailBar.replaceChildren(...(single ? [] : items.map((item, i) => {
       const thumb = button('hub-image-thumbnail', (i + 1) + ' / ' + items.length);
       const preview = document.createElement('img');
       preview.src = item.src;
@@ -163,6 +222,7 @@
       return thumb;
     })));
     viewer.showModal();
+    requestAnimationFrame(() => viewer.classList.add('is-open'));
     controls.close.focus({ preventScroll: true });
     select(data.position);
   }
@@ -233,7 +293,7 @@
         seenFrames.set(frame, doc);
         const style = doc.createElement('link');
         style.rel = 'stylesheet';
-        style.href = new URL('image-viewer.css?v=hub18', scriptURL);
+        style.href = new URL('image-viewer.css?v=hub27', scriptURL);
         doc.head.append(style);
         doc.querySelectorAll('img').forEach((img) => decorate(img, true));
         doc.addEventListener('click', activate);

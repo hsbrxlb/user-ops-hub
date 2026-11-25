@@ -167,6 +167,15 @@
     })));
     const clear = ctrl.querySelector('[data-clear]');
     if (clear) clear.addEventListener('click', () => { feed.innerHTML = ''; last = -1; });
+    // 第一次看到回放时，先演示一位新成员加入，频道不留空。
+    if (welcome && 'IntersectionObserver' in window) {
+      const seen = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        seen.disconnect();
+        if (!feed.children.length) welcome.click();
+      }, { threshold: 0.35 });
+      seen.observe(root);
+    }
   });
 
   // 检查清单回放

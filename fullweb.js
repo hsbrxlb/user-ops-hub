@@ -1,4 +1,4 @@
-// 全网讨论库：加载 data/fullweb 下的分块数据，在浏览器内筛选和全文搜索。
+// 全网讨论：加载 data/fullweb 下的分块数据，在浏览器内筛选和全文搜索。
 (function () {
   const PAGE = 40;
   const KIND = { post: '帖子', comment: '评论', video: '视频', article: '文章', official: '官方账号' };
@@ -92,7 +92,7 @@
     const parts = await Promise.all(Array.from({ length: meta.chunks }, (_, n) => fetch(`${base}items-${n + 1}.json`, { cache: 'no-store' }).then((r) => { if (!r.ok) throw new Error('数据加载失败'); return r.json(); })));
     all = parts.flat();
     for (const i of all) i._h = hay(i);
-    main.innerHTML = `<header class="page-heading"><h1>全网讨论库</h1><p>OEDRO 与 Cozeware 在公开网页上被提到的帖子、评论、视频和文章，共 ${meta.total} 条，发布日期 ${meta.min_date} 至 ${meta.max_date}。每条都能点回原网址。默认只显示用户讨论，在“内容性质”里可以切换到用户视频、媒体评测和商家内容。</p></header>
+    main.innerHTML = `<header class="page-heading"><h1>全网讨论</h1><p>OEDRO 与 Cozeware 在公开网页上被提到的帖子、评论、视频和文章，共 ${meta.total} 条，发布日期 ${meta.min_date} 至 ${meta.max_date}。每条都能点回原网址。默认只显示用户讨论，在“内容性质”里可以切换到用户视频、媒体评测和商家内容。</p></header>
     <div class="fw" id="fw">
       <div class="fw-bar">
         <label class="fw-search"><span class="sr-only">搜索全文</span><input type="search" id="fw-q" placeholder="搜索关键词，如 leak、fit、脚垫" autocomplete="off" enterkeyhint="search"></label>
