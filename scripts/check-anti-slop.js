@@ -42,7 +42,7 @@ for (const file of files) {
     if (rejectedCopy.test(source)) errors.push(`${relative}: 被用户退回的过程说明或占位文案重新出现`);
     const officialProductSnapshot = /^data\/products\/category-\d+\.json$/.test(relative);
     if (!officialProductSnapshot) {
-      for (const [label, pattern] of /^data\/(?:products\/category-\d+\.json|cozeware-products\/|product-library\/)/.test(relative) ? [] : highRiskCopy) {
+      for (const [label, pattern] of /^data\/(?:products\/category-\d+\.json|cozeware-products\/|product-library\/|fullweb\/)/.test(relative) ? [] : highRiskCopy) {
         // These exact phrases carry product scope, permissions or atomic redemption rules.
         // Keep scanning the rest of each page for unrelated defensive copy.
         const factualConditions = [

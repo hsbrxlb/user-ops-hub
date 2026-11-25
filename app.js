@@ -655,10 +655,10 @@ async function init() {
   }
   const [dataResponse, voiceResponse, radarResponse] = await Promise.all([
     fetch('data/content.json', { cache: 'no-store' }),
-    page === 'voice' ? fetch('data/user-voice.json', { cache: 'no-store' }) : Promise.resolve(null),
-    page === 'voice' ? fetch('data/demand-radar.json', { cache: 'no-store' }) : Promise.resolve(null)
+    Promise.resolve(null),
+    Promise.resolve(null)
   ]);
-  if (!dataResponse.ok || (page === 'voice' && (!voiceResponse?.ok || !radarResponse?.ok))) throw new Error('页面数据加载失败');
+  if (!dataResponse.ok) throw new Error('页面数据加载失败');
   const [data, voice, radar] = await Promise.all([
     dataResponse.json(),
     voiceResponse ? voiceResponse.json() : Promise.resolve(null),
@@ -668,8 +668,7 @@ async function init() {
   if (page === 'research') renderResearch(data);
   if (page === 'flipbooks') renderFlipbooks(data);
   if (page === 'voice') {
-    renderUserVoice(data, voice, radar);
-    if (location.hash === '#feedback-method') document.querySelector('.voice-discussions')?.scrollIntoView({ behavior: 'instant', block: 'start' });
+    await window.initFullweb();
   }
   if (page === 'topics' && location.pathname.endsWith('topic.html')) await renderTopic(data);
   if (page === 'email-templates') await window.initEmailTemplates?.();
@@ -731,7 +730,7 @@ if (typeof MutationObserver !== 'undefined') {
 function completeBrandSections() {
   const content = document.querySelector('#content');
   if (!content?.querySelector('.page-heading') || content.getAttribute('aria-busy') === 'true' || content.querySelector('.brand-section')) return;
-  if (!['voice', 'newsletter', 'flipbooks'].includes(page)) return;
+  if (!['newsletter', 'flipbooks'].includes(page)) return;
   const supplement = content.querySelector('#context-supplement');
   const oedro = document.createElement('section');
   oedro.className = 'brand-section';
