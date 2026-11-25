@@ -115,11 +115,11 @@
     return (topbar?.offsetHeight || 0) + (bar?.offsetHeight || 0) + 12;
   }
 
-  function goTo(key, smooth) {
+  function goTo(key, smooth, target) {
     const section = document.getElementById('day-' + key);
     if (!section || section.hidden) return;
     markCurrent(key);
-    const top = section.getBoundingClientRect().top + window.scrollY - barOffset();
+    const top = (target || section).getBoundingClientRect().top + window.scrollY - barOffset();
     window.scrollTo({ top, behavior: smooth && !matchMedia('(prefers-reduced-motion: reduce)').matches ? 'smooth' : 'instant' });
   }
 
@@ -221,7 +221,9 @@
   applyFilter();
 
   // Initial position: the linked date, or the first date from today onward.
-  const fromHash = location.hash.startsWith('#day-') ? location.hash.slice(5) : '';
+  const linkedPost = location.hash.startsWith('#post-') ? document.getElementById(location.hash.slice(1)) : null;
+  const postDay = linkedPost && !linkedPost.hidden ? linkedPost.closest('.feed-day')?.dataset.date : '';
+  const fromHash = postDay || (location.hash.startsWith('#day-') ? location.hash.slice(5) : '');
   const start = keys.includes(fromHash) && !document.getElementById('day-' + fromHash).hidden
     ? fromHash
     : (days.find((day) => !day.hidden && day.dataset.date >= today) || days.filter((day) => !day.hidden).pop())?.dataset.date;
@@ -230,9 +232,9 @@
     for (const type of ['pointerdown', 'wheel', 'touchstart', 'keydown']) {
       window.addEventListener(type, () => { moved = true; }, { once: true, passive: true });
     }
-    const align = () => { if (!moved) goTo(start, false); };
+    const align = () => { if (!moved) goTo(start, false, start === postDay ? linkedPost : null); };
     markCurrent(start);
-    if (start !== keys[0]) {
+    if (start !== keys[0] || linkedPost) {
       requestAnimationFrame(align);
       document.fonts?.ready.then(align);
       if (document.readyState !== 'complete') window.addEventListener('load', align, { once: true });
@@ -240,6 +242,11 @@
   }
   window.addEventListener('hashchange', () => {
     if (location.hash.startsWith('#day-')) goTo(location.hash.slice(5), false);
+    else if (location.hash.startsWith('#post-')) {
+      const post = document.getElementById(location.hash.slice(1));
+      const day = post?.closest('.feed-day')?.dataset.date;
+      if (day) goTo(day, false, post);
+    }
   });
 
   // Platform switch, caption copy and gallery thumbnails
