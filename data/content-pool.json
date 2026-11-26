@@ -883,6 +883,77 @@
     "Facebook": "You hose off the Jeep and there’s still half a trail in the wheel wells.\nWhich tires would you pair with these OEDRO flares on your 2007-2018 Jeep Wrangler JK or JK Unlimited?",
     "X": "You hose off the Jeep and there’s still half a trail in the wheel wells.\nWhich tires would you pair with these OEDRO flares on your 2007-2018 Jeep Wrangler JK or JK Unlimited?"
    }
+  },
+  {
+   "id": "OE-P01",
+   "brand": "OEDRO",
+   "type": "product",
+   "status": "review",
+   "title": "Muddy Boots, Clean Car",
+   "zh": "雨中徒步回来，泥靴直接踩进 Model Y，脚垫凸起的边把泥水留住，回家用水管一冲就好。含产品悬浮特写。",
+   "image": "assets/pool/oe-p01.webp",
+   "w": 1080,
+   "h": 1350,
+   "product": {
+    "name": "OEDRO Floor Mats, Tesla Model Y Juniper 2025-2026 5-seater, 9-piece all-weather TPE set",
+    "url": "https://www.oedro.com/products/oedro-floor-mats-fits-tesla-model-y-juniper-2025-2026-5-seater-custom-fit-all-weather-tpe-floor-liners-cargo-trunk-mat-set-with-backrest-protection-9pcs-model-y-interior-accessories-p-10296.html"
+   },
+   "captions": {
+    "Instagram": "Rainy trailhead, muddy boots, brand new Model Y. Fair test.\n\nThe raised edge and deep grooves on the mat hold the mess, so you hose it off in the driveway and slide it back in. Made for the 2025-2026 Model Y Juniper, five seat only, so check your trim first.\n\nWhat's the muddiest place your boots went this fall?",
+    "Facebook": "Rainy trailhead, muddy boots, brand new Model Y. We call that a fair test. The raised edge and deep grooves on the mat hold the mess until you hose it off at home. Fits the 2025-2026 Model Y Juniper, five seat only.\n\nWhat's the muddiest place your boots went this fall?",
+    "X": "Muddy trailhead boots, brand new Model Y. The raised edge keeps the mess on the mat and the hose does the rest. Fits the 2025-2026 Model Y Juniper, five seat."
+   }
+  },
+  {
+   "id": "OE-P02",
+   "brand": "OEDRO",
+   "type": "product",
+   "status": "review",
+   "title": "Mulch Day In The Rain",
+   "zh": "下雨天也要去买覆盖土：货装好、硬折盖合上上锁，到家车斗里还是干的。含产品悬浮特写。",
+   "image": "assets/pool/oe-p02.webp",
+   "w": 1080,
+   "h": 1350,
+   "product": {
+    "name": "OEDRO FRP Hard Tri-fold Tonneau Cover, Toyota Tacoma 2016-2023 (excl. Trail Edition), 5 ft bed",
+    "url": "https://www.oedro.com/products/oedro-2016-2023-5ft-toyota-tacoma-tonneau-cover-3011-p-5878.html"
+   },
+   "captions": {
+    "Instagram": "Mulch day in the rain is still mulch day. Bags in, cover folded shut, lock clicked, and the bed stays dry all the way home.\n\nThe hard tri-fold cover has a wear-resistant, waterproof surface. Fits the 2016-2023 Tacoma with the 5 ft bed (not the Trail Edition).\n\nWhat's the soggiest thing you've ever hauled home?",
+    "Facebook": "Mulch day in the rain is still mulch day. Bags in, hard tri-fold cover shut and locked, bed dry all the way home. Fits the 2016-2023 Tacoma with the 5 ft bed, not the Trail Edition.\n\nWhat's the soggiest thing you've hauled home?",
+    "X": "Rain forecast, mulch day anyway. Fold the cover shut, lock it, and the bed stays dry. Hard tri-fold cover for the 2016-2023 Tacoma, 5 ft bed (not the Trail Edition)."
+   }
+  },
+  {
+   "id": "OE-M01",
+   "brand": "OEDRO",
+   "type": "trend",
+   "status": "review",
+   "title": "I Got So Mad I Locked The Toolbox",
+   "zh": "借“I got so mad I…”句式：气到把工具箱锁上，然后扳手还在里面。平静收尾。",
+   "image": "assets/pool/oe-m01.webp",
+   "w": 1080,
+   "h": 1350,
+   "meme": {
+    "name": "“I got so mad I…”：用一句夸张又没道理的“气到做了某事”收尾的句式",
+    "how": "只借这个通用句式，不出现任何人物、名人、角色或具体视频；主角是原创的车主，产品是我们的工具箱。",
+    "date": "11-8 起，11-20 周榜仍在榜",
+    "sources": [
+     {
+      "label": "Know Your Meme · I Got So Mad I",
+      "url": "https://knowyourmeme.com/memes/i-got-so-mad-trend-meme"
+     }
+    ]
+   },
+   "product": {
+    "name": "OEDRO Truck Bed Storage Tool Box, Ford F-150 2015-2026 passenger side",
+    "url": "https://www.oedro.com/products/oedro-truck-bed-storage-tool-box-fits-2015-2025-ford-f150-passenger-side-180-degree-rotation-rear-tool-boxs-with-lockable-lid-and-password-padlock-black-waterproof-wheel-well-storage-p-8018.html"
+   },
+   "captions": {
+    "Instagram": "I got so mad I locked the toolbox. The wrench was inside. Anyway.\n\nThe lid on our F-150 bed toolbox locks with a password padlock, so pick a code you'll remember when you're calm. Fits the 2015-2026 F-150, passenger side wheel well.\n\nWhat's the silliest thing you've done while mad at a bolt?",
+    "Facebook": "I got so mad I locked the toolbox. The wrench was inside. Anyway. The lid on our F-150 bed toolbox locks with a password padlock, so pick a code you'll remember when you're calm. Fits the 2015-2026 F-150, passenger side.\n\nWhat's the silliest thing you've done while mad at a bolt?",
+    "X": "I got so mad I locked the toolbox. The wrench was inside. Anyway. Password padlock, lockable lid, fits the 2015-2026 F-150 passenger side."
+   }
   }
  ]
 }
