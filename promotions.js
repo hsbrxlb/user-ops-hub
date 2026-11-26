@@ -92,10 +92,11 @@
   function card(item) {
     const status = statusOf(item);
     const type = typeOf(item.type);
+    const prize = item.type === 'giveaway';
     const terms = [
-      term('怎么领', item.how_to_get),
-      term('适用', item.scope_include),
-      term('不适用', item.scope_exclude),
+      term(prize ? '怎么参加' : '怎么领', item.how_to_get),
+      term(prize ? '奖品' : '适用', item.scope_include),
+      term(prize ? '不能参加' : '不适用', item.scope_exclude),
       term('最低消费', item.min_spend, money),
       term('叠加', item.stacking)
     ].join('');

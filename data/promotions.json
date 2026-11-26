@@ -1,11 +1,122 @@
 {
   "types": [
-    { "id": "discord", "zh": "Discord 入群礼", "en": "Discord welcome" },
-    { "id": "giveaway", "zh": "抽奖", "en": "Giveaway" },
-    { "id": "loyalty", "zh": "会员积分", "en": "Rewards" },
-    { "id": "email", "zh": "邮件优惠", "en": "Email offer" },
-    { "id": "creator", "zh": "红人专属码", "en": "Creator code" },
-    { "id": "sale", "zh": "全站促销", "en": "Sale" }
+    {
+      "id": "discord",
+      "zh": "Discord 入群礼",
+      "en": "Discord welcome"
+    },
+    {
+      "id": "giveaway",
+      "zh": "每周抽奖",
+      "en": "Giveaway"
+    },
+    {
+      "id": "story-reward",
+      "zh": "投稿奖励",
+      "en": "Story reward"
+    },
+    {
+      "id": "loyalty",
+      "zh": "会员积分",
+      "en": "Rewards"
+    },
+    {
+      "id": "email",
+      "zh": "邮件优惠",
+      "en": "Email offer"
+    },
+    {
+      "id": "creator",
+      "zh": "红人专属码",
+      "en": "Creator code"
+    }
   ],
-  "items": []
+  "items": [
+    {
+      "id": "oedro-discord-join",
+      "brand": "OEDRO",
+      "type": "discord",
+      "name": "Discord join coupon",
+      "offer": "Up to $80 off",
+      "how_to_get": "加入 OEDRO Discord，在 #service-ticket 点 `Get my code`，机器人私下发码；再点一次取回同一个码。每个 Discord 账号一个码。",
+      "scope_include": "全部商品",
+      "scope_exclude": "Tonneau Cover 类目",
+      "min_spend": "满 $200 减 $30，满 $300 减 $40，满 $400 减 $50，满 $500 减 $80；同一单按最高一档",
+      "stacking": "不能和其他优惠码同用，一单一个码",
+      "start": "2026-09-18",
+      "end": "2027-09-18",
+      "channel_links": [
+        {
+          "label": "OEDRO Discord",
+          "url": "https://discord.gg/CXM9tuFqG7"
+        }
+      ],
+      "status": "running",
+      "source": "Coupon admin record and Discord bot message, checked 2026-11-26",
+      "verified": true
+    },
+    {
+      "id": "oedro-giveaway-r1",
+      "brand": "OEDRO",
+      "type": "giveaway",
+      "name": "Weekly giveaway, round 1 of 4",
+      "offer": "3 winners each get a LEGO Technic Ferrari 488 Pista",
+      "how_to_get": "关注 OEDRO 的 Instagram、Facebook、X 或 Threads，给抽奖帖点赞，评论并 @ 一位朋友；在 Instagram 快拍转发并 @ OEDRO 再多一次机会。每人最多 2 次机会，不用下单。",
+      "scope_include": "",
+      "scope_exclude": "美国本土 48 州和华盛顿特区以外的地区；未满 18 岁；公司员工及其家人",
+      "min_spend": "",
+      "stacking": "",
+      "start": "2026-11-25",
+      "end": "2026-12-01",
+      "channel_links": [
+        {
+          "label": "活动规则",
+          "url": "https://docs.google.com/document/d/e/2PACX-1vTVTzLQbo1QuHDgQ35lVmwLayXdMdV7gTEt_JbZuzMsi030L79SKqfQ4Pwmyk17sBf4nWmCCtIYP62_/pub"
+        }
+      ],
+      "status": "running",
+      "source": "Published rules document, read 2026-11-26",
+      "verified": true
+    },
+    {
+      "id": "cozeware-giveaway-r1",
+      "brand": "Cozeware",
+      "type": "giveaway",
+      "name": "Weekly giveaway, round 1 of 4",
+      "offer": "3 winners each get a Stanley Quencher 40 oz tumbler",
+      "how_to_get": "关注 @cozeware，给抽奖帖点赞，评论并 @ 一位朋友；在 Instagram 快拍转发并 @cozeware 再多一次机会。每人最多 2 次机会，不用下单。",
+      "scope_include": "",
+      "scope_exclude": "美国本土 48 州和华盛顿特区以外的地区；未满 18 岁；公司员工及其家人",
+      "min_spend": "",
+      "stacking": "",
+      "start": "2026-11-25",
+      "end": "2026-12-01",
+      "channel_links": [
+        {
+          "label": "活动规则",
+          "url": "https://docs.google.com/document/d/e/2PACX-1vSwZRbZrCTI3KDqqRJoG4kTua6yApjQf0kZZ59c3eEgL8usKZe7TcieI41_sW6fOPFJgLnOfmfHs7OM/pub"
+        }
+      ],
+      "status": "running",
+      "source": "Published rules document, read 2026-11-26",
+      "verified": true
+    },
+    {
+      "id": "oedro-garage-stories-reward",
+      "brand": "OEDRO",
+      "type": "story-reward",
+      "name": "Garage Stories contributor reward",
+      "offer": "$20 off orders of $21+",
+      "how_to_get": "Garage Stories 投稿审核通过后，私下发给投稿人。",
+      "scope_include": "全部商品",
+      "scope_exclude": "",
+      "min_spend": "$21",
+      "stacking": "不能和其他优惠码同用",
+      "start": "2026-10-08",
+      "end": "2027-01-31",
+      "channel_links": [],
+      "status": "running",
+      "source": "Coupon delivery record, 2026-10-09"
+    }
+  ]
 }
