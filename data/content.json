@@ -219,6 +219,12 @@
       "group": "会员与复购"
     },
     {
+      "id": "promotions",
+      "label": "活动与折扣",
+      "file": "promotions.html",
+      "group": "活动"
+    },
+    {
       "id": "ugc-activity",
       "label": "OEDRO 车主故事征集",
       "file": "ugc-activity.html",

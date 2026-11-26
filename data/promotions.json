@@ -1,0 +1,11 @@
+{
+  "types": [
+    { "id": "discord", "zh": "Discord 入群礼", "en": "Discord welcome" },
+    { "id": "giveaway", "zh": "抽奖", "en": "Giveaway" },
+    { "id": "loyalty", "zh": "会员积分", "en": "Rewards" },
+    { "id": "email", "zh": "邮件优惠", "en": "Email offer" },
+    { "id": "creator", "zh": "红人专属码", "en": "Creator code" },
+    { "id": "sale", "zh": "全站促销", "en": "Sale" }
+  ],
+  "items": []
+}
