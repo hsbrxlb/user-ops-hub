@@ -39,6 +39,11 @@
    "id": "video",
    "zh": "视频",
    "en": "Video"
+  },
+  {
+   "id": "giveaway",
+   "zh": "抽奖",
+   "en": "Giveaway"
   }
  ],
  "statuses": {
@@ -392,6 +397,491 @@
     "Instagram": "Everyone else is on the road. Oolong and Tuftle are staying exactly here.\n\nSet the Visio once and the living room stays right where you put it. It heats and cools, with a 24 hour timer, for rooms up to about 750 square feet.\n\nWhere are your holiday plans? Ours are on the couch. #Cozeware #StayingIn",
     "Facebook": "Millions of people are on the road this week. Oolong and Tuftle picked the couch. The Visio mini split heats and cools and has a 24 hour timer, so the living room is ready when you are.\n\nWhere are your holiday plans?",
     "X": "Everyone else: almost there. Us: not going anywhere. The Visio mini split heats and cools, with a 24 hour timer. Holiday plans: right here."
+   }
+  },
+  {
+   "id": "OE-K01",
+   "brand": "OEDRO",
+   "type": "tips",
+   "status": "review",
+   "title": "Reach The Back Of The Bed",
+   "zh": "小技巧：车斗最里面的东西够不着，把靴子放到挂钩踏板上、手扶车斗边，就够到了，保险杠也不挨蹭。",
+   "image": "assets/pool/oe-k01.webp",
+   "w": 1080,
+   "h": 1350,
+   "product": {
+    "name": "OEDRO Black Aluminum Towing Hitch Steps, 2\" hitch receiver",
+    "url": "https://www.oedro.com/products/oedro-black-aluminum-towing-hitch-steps-p-5721.html"
+   },
+   "captions": {
+    "Instagram": "The good stuff is always at the very back of the bed. Boot on the hitch, hand on the rail, and you can reach it without standing on the bumper.\n\nThese black aluminum hitch steps fit any 2 inch receiver and have a non-slip tread, which helps cut down on bumper scuffs.\n\nWhat always ends up at the back of your bed?",
+    "Facebook": "The good stuff is always at the very back of the bed. Put a boot on the hitch step, a hand on the rail, and reach. Our black aluminum hitch steps fit any 2 inch receiver and have a non-slip tread that helps cut down on bumper scuffs.\n\nWhat always ends up at the back of your bed?",
+    "X": "The good stuff lives at the back of the bed. Boot on the hitch, hand on the rail. Fits any 2 inch hitch receiver, non-slip tread."
+   }
+  },
+  {
+   "id": "OE-C01",
+   "brand": "OEDRO",
+   "type": "comic",
+   "status": "review",
+   "title": "Family Ride",
+   "zh": "Bruno 的皮卡前聚了一群动物朋友，有人问还有位置吗，Bruno 一本正经地说我没有乘客，我有家人，大家顺着宽踏板爬上车。",
+   "image": "assets/pool/oe-c01.webp",
+   "w": 1080,
+   "h": 1350,
+   "meme": {
+    "name": "Dom 的“family”：“I don’t have friends, I got family”那句名台词和“有家人就不需要逻辑”的玩法",
+    "how": "借“把乘客说成家人”的句式；画面里没有电影人物或影视标识，台词是改写的；主角是 Bruno 和原创动物。",
+    "date": "经典常青梗（2021 年起），不是本周新梗",
+    "sources": [
+     {
+      "label": "Know Your Meme · Nothing Stronger Than Family",
+      "url": "https://knowyourmeme.com/memes/nothing-stronger-than-family"
+     }
+    ]
+   },
+   "product": {
+    "name": "OEDRO Running Boards for Ford F-150 SuperCrew Cab 2015-2026, 6.8\" two-stair side steps",
+    "url": "https://www.oedro.com/products/oedro-running-boards-compatible-with-2015-2026-ford-f-150-supercrew-cab-and-2017-2026-ford-f-250-f-350-super-duty-crew-cab-68-inch-two-stairs-side-steps-black-powder-coated-nerf-bar-p-10154.html"
+   },
+   "captions": {
+    "Instagram": "Saturday morning, and nobody gets left in the driveway. Bruno doesn't have passengers. He has family, and everybody fits.\n\nThe F-150 running boards are 6.8 inches wide with a perforated tread so water and snow don't pile up. Fits the 2015-2026 F-150 SuperCrew.\n\nWho's first in your truck on a Saturday?",
+    "Facebook": "Saturday morning, and nobody gets left in the driveway. Bruno doesn't have passengers. He has family. The wide, perforated running boards make the climb in easy. Fits the 2015-2026 F-150 SuperCrew.\n\nWho's first in your truck on a Saturday?",
+    "X": "Bruno doesn't have passengers. He has family. Wide perforated running boards for the 2015-2026 F-150 SuperCrew."
+   }
+  },
+  {
+   "id": "CZ-P01",
+   "brand": "Cozeware",
+   "type": "product",
+   "status": "review",
+   "title": "The Window Stays Shut",
+   "zh": "冬天傍晚阅读角有点闷，不想开窗，窗上的 FreshFlow 让过滤后的室外空气进来，窗不用开。含产品悬浮特写。",
+   "image": "assets/pool/cz-p01.webp",
+   "w": 1080,
+   "h": 1350,
+   "product": {
+    "name": "COZEWARE FreshFlow Pro window-mounted fresh air unit",
+    "url": "https://www.cozeware.com/promo/freshflow-early-access-a-165.html"
+   },
+   "captions": {
+    "Instagram": "Cold evening, favorite chair, and the corner of the room feels a little stuffy. Opening the window isn't the plan tonight.\n\nFreshFlow Pro sits in a compatible vertical sliding window and brings filtered outdoor air in while the window stays closed. Pause it on smoky days.\n\nWhere's the coziest corner in your place?",
+    "Facebook": "Cold evening, favorite chair, and a corner that feels a little stuffy. Opening the window isn't the plan. FreshFlow Pro sits in a compatible vertical sliding window and brings filtered outdoor air in while it stays closed.\n\nWhere's the coziest corner in your place?",
+    "X": "Cold evening, stuffy corner, window staying shut. FreshFlow Pro brings filtered outdoor air in through a compatible vertical sliding window."
+   }
+  },
+  {
+   "id": "CZ-P02",
+   "brand": "Cozeware",
+   "type": "product",
+   "status": "review",
+   "title": "The Gym Corner That Behaves",
+   "zh": "家里的健身角冬冷夏热，墙上的 Visio 迷你分体空调用 App 设好，练多久都舒服。含产品悬浮特写。",
+   "image": "assets/pool/cz-p02.webp",
+   "w": 1080,
+   "h": 1350,
+   "product": {
+    "name": "COZEWARE Visio Series 12,000 BTU 20 SEER2 Ductless Mini Split AC with Heat Pump",
+    "url": "https://www.cozeware.com/products/12000-btu-20-seer2-mini-split-air-conditioner-230v-ac-p-8862.html"
+   },
+   "captions": {
+    "Instagram": "Home gym corner, mid-set, and the room can't decide what season it is.\n\nThe Visio mini split heats and cools a room up to about 750 sq ft, and you can set it from the remote, the app or your voice, so you never lose your spot on the mat.\n\nWhat's the first thing you do when a room is too warm?",
+    "Facebook": "Home gym corner, mid-set, and the room can't decide what season it is. The Visio mini split with heat pump heats and cools up to about 750 sq ft, and you can set it from the remote, the app or your voice.\n\nWhat's the first thing you do when a room is too warm?",
+    "X": "Home gym, mid-set, wrong temperature. The Visio mini split heats and cools up to about 750 sq ft. Remote, app or voice, no getting up."
+   }
+  },
+  {
+   "id": "CZ-K01",
+   "brand": "Cozeware",
+   "type": "tips",
+   "status": "review",
+   "title": "Too Cozy To Get Up",
+   "zh": "小技巧：窝在毯子里嫌房间凉，不用起身，遥控器、App 或语音都能调。",
+   "image": "assets/pool/cz-k01.webp",
+   "w": 1080,
+   "h": 1350,
+   "product": {
+    "name": "COZEWARE Visio Series 12,000 BTU 20 SEER2 Ductless Mini Split AC with Heat Pump",
+    "url": "https://www.cozeware.com/products/12000-btu-20-seer2-mini-split-air-conditioner-230v-ac-p-8862.html"
+   },
+   "captions": {
+    "Instagram": "Chilly, blanket on, cat asleep on your feet. Getting up to fix the temperature feels like a lot.\n\nGood news, you don't have to. The Visio mini split takes the remote, the app or your voice.\n\nWho gets the warm seat first at your place?",
+    "Facebook": "Chilly, blanket on, cat asleep on your feet. Getting up to fix the temperature feels like a lot, and you don't have to. The Visio mini split takes the remote, the app or your voice.\n\nWho gets the warm seat first at your place?",
+    "X": "Chilly, blanket on, cat on your feet. The Visio mini split takes the remote, the app or your voice. No getting up."
+   }
+  },
+  {
+   "id": "CZ-E01",
+   "brand": "Cozeware",
+   "type": "education",
+   "status": "review",
+   "title": "Which Window Fits FreshFlow",
+   "zh": "科普：推一下下半扇窗，能上下滑动的单悬或双悬窗就能装 FreshFlow，向外摇开的不行。",
+   "image": "assets/pool/cz-e01.webp",
+   "w": 1080,
+   "h": 1350,
+   "product": {
+    "name": "COZEWARE FreshFlow Pro window-mounted fresh air unit",
+    "url": "https://www.cozeware.com/promo/freshflow-early-access-a-165.html"
+   },
+   "captions": {
+    "Instagram": "Quick window check before you order. Push the bottom half of your window up. If it slides up and down, single hung or double hung, that's the kind FreshFlow Pro is made for. If it swings out like a door, it's a different window.\n\nFreshFlow brings filtered outdoor air in while the window stays closed.\n\nWhich kind of window do you have?",
+    "Facebook": "Quick window check before you order. Push the bottom half up. If it slides up and down, single hung or double hung, FreshFlow Pro is made for it. If it swings out like a door, it's a different window.\n\nWhich kind of window do you have?",
+    "X": "Window check: does it slide up and down, single or double hung? That's the kind FreshFlow Pro fits. Swings out like a door? Different window."
+   }
+  },
+  {
+   "id": "CZ-M01",
+   "brand": "Cozeware",
+   "type": "trend",
+   "status": "review",
+   "title": "What Was He Doing On The Thermostat",
+   "zh": "借“恒温器上摆小人像加红圈”的画面：家里开会，最后用遥控器、App、语音调温度，没人再碰墙。",
+   "image": "assets/pool/cz-m01.webp",
+   "w": 1080,
+   "h": 1350,
+   "meme": {
+    "name": "“What Was General Grant Doing On The Thermostat?”：电影《小屁孩日记：罗德里克定律》里爸爸发现恒温器上放着小人像的一幕",
+    "how": "借“恒温器上放小人像并圈红圈”的画面。图里没有电影角色、截图或台词，也没有人名，小人像是原创的塑料玩具。",
+    "date": "11-14 起；11-18 被 KYM 列为热门",
+    "sources": [
+     {
+      "label": "Know Your Meme · What Was General Grant Doing On The Thermostat?",
+      "url": "https://knowyourmeme.com/memes/what-was-general-grant-doing-on-the-thermostat"
+     }
+    ]
+   },
+   "product": {
+    "name": "COZEWARE Visio Series 12,000 BTU 20 SEER2 Ductless Mini Split AC with Heat Pump",
+    "url": "https://www.cozeware.com/products/12000-btu-20-seer2-mini-split-air-conditioner-230v-ac-p-8862.html"
+   },
+   "captions": {
+    "Instagram": "What was he doing on the thermostat? Every house has a thermostat standoff. Ours ended with a figurine on the bookshelf and a Visio mini split on the wall.\n\nRemote, app or voice, so nobody has to touch the wall.\n\nWho controls the temperature at your place?",
+    "Facebook": "What was he doing on the thermostat? Every house has a thermostat standoff. Ours ended with the figurine on the bookshelf and a Visio mini split on the wall, run from the remote, the app or your voice.\n\nWho controls the temperature at your place?",
+    "X": "What was he doing on the thermostat? Every house has a standoff. Ours ended with the Visio mini split: remote, app or voice, nobody touches the wall."
+   }
+  },
+  {
+   "id": "OE-B-G1",
+   "brand": "OEDRO",
+   "type": "giveaway",
+   "status": "review",
+   "title": "LEGO Ferrari On The Cover",
+   "zh": "抽奖第一轮提醒帖备选：LEGO Technic Ferrari 488 Pista 停在 Tacoma 硬折盖上，两个人蹲着量尺寸。图里有奖品和钩子，规则在配文里。",
+   "image": "assets/pool/oe-b-g1.webp",
+   "w": 1080,
+   "h": 1350,
+   "product": {
+    "name": "OEDRO FRP Hard Tri-fold Tonneau Cover, Toyota Tacoma 2016-2023 (excl. Trail Edition), 5 ft bed",
+    "url": "https://www.oedro.com/products/oedro-2016-2023-5ft-toyota-tacoma-tonneau-cover-3011-p-5878.html"
+   },
+   "captions": {
+    "Instagram": "If you’re usually the one finding the piece somebody dropped under the workbench, we figured you deserved a build of your own.\n\nThree of you will each get a LEGO Technic Ferrari 488 Pista. Ours is parked on the hard cover that fits a 2016 to 2023 Tacoma with a 5 ft bed.\n\nWhat would you move off your workbench to make a parking spot for yours?\n\nTo enter, follow us on Instagram, Facebook, X or Threads. On that same platform, like the original giveaway post and tag one friend in a comment on it.\nFor one extra entry, share that post to your Instagram Story and tag @oedroautoparts. Up to two entries total per person across all platforms.\nOpen to legal residents of the 48 contiguous states and DC who are at least 18 and have reached the age of majority where they live. No purchase necessary.\nEnter by December 1, 2026, at 11:59 p.m. ET. Full rules here. https://docs.google.com/document/d/e/2PACX-1vTVTzLQbo1QuHDgQ35lVmwLayXdMdV7gTEt_JbZuzMsi030L79SKqfQ4Pwmyk17sBf4nWmCCtIYP62_/pub",
+    "Facebook": "If you’re usually the one finding the piece somebody dropped under the workbench, we figured you deserved a build of your own.\n\nThree of you will each get a LEGO Technic Ferrari 488 Pista. Ours is parked on the hard cover that fits a 2016 to 2023 Tacoma with a 5 ft bed.\n\nWhat would you move off your workbench to make a parking spot for yours?\n\nTo enter, follow us on Instagram, Facebook, X or Threads. On that same platform, like the original giveaway post and tag one friend in a comment on it.\nFor one extra entry, share that post to your Instagram Story and tag @oedroautoparts. Up to two entries total per person across all platforms.\nOpen to legal residents of the 48 contiguous states and DC who are at least 18 and have reached the age of majority where they live. No purchase necessary.\nEnter by December 1, 2026, at 11:59 p.m. ET. Full rules here. https://docs.google.com/document/d/e/2PACX-1vTVTzLQbo1QuHDgQ35lVmwLayXdMdV7gTEt_JbZuzMsi030L79SKqfQ4Pwmyk17sBf4nWmCCtIYP62_/pub"
+   }
+  },
+  {
+   "id": "CZ-B-G1",
+   "brand": "Cozeware",
+   "type": "giveaway",
+   "status": "review",
+   "title": "Win This Stanley",
+   "zh": "抽奖第一轮提醒帖备选：Stanley 保温杯、猫睡在沙发上，墙上的 Cozeware 挂机在背景里。图里有奖品和钩子，规则在配文里。",
+   "image": "assets/pool/cz-b-g1.webp",
+   "w": 1080,
+   "h": 1350,
+   "product": {
+    "name": "COZEWARE Visio Series 12,000 BTU 20 SEER2 Ductless Mini Split AC with Heat Pump",
+    "url": "https://www.cozeware.com/products/12000-btu-20-seer2-mini-split-air-conditioner-230v-ac-p-8862.html"
+   },
+   "captions": {
+    "Instagram": "You shouldn’t have to wake a sleeping cat just to reach your water. We thought a few of you could use a cup of your own.\n\nWe’re giving three people a Stanley Quencher H2.0 FlowState Tumbler, 40 oz each. What would you offer your cat to get your cup back?\n\nTo enter, follow Cozeware here, like the giveaway post and tag one friend in a comment on it.\nFor one extra entry, share the giveaway post to your Instagram Story and tag @cozeware. You can enter twice in total across all platforms.\nEntry is free from November 25, 2026, at noon ET through December 1, 2026, at 11:59 p.m. ET. It’s open to legal residents of the 48 contiguous states and DC who are at least 18 and have reached the age of majority where they live.\nEmployees of Cozeware, its affiliates and its promotion agencies, and members of their households, aren’t eligible. Full rules: https://docs.google.com/document/d/e/2PACX-1vSwZRbZrCTI3KDqqRJoG4kTua6yApjQf0kZZ59c3eEgL8usKZe7TcieI41_sW6fOPFJgLnOfmfHs7OM/pub",
+    "Facebook": "You shouldn’t have to wake a sleeping cat just to reach your water. We thought a few of you could use a cup of your own.\n\nWe’re giving three people a Stanley Quencher H2.0 FlowState Tumbler, 40 oz each. What would you offer your cat to get your cup back?\n\nTo enter, follow Cozeware here, like the giveaway post and tag one friend in a comment on it.\nFor one extra entry, share the giveaway post to your Instagram Story and tag @cozeware. You can enter twice in total across all platforms.\nEntry is free from November 25, 2026, at noon ET through December 1, 2026, at 11:59 p.m. ET. It’s open to legal residents of the 48 contiguous states and DC who are at least 18 and have reached the age of majority where they live.\nEmployees of Cozeware, its affiliates and its promotion agencies, and members of their households, aren’t eligible. Full rules: https://docs.google.com/document/d/e/2PACX-1vSwZRbZrCTI3KDqqRJoG4kTua6yApjQf0kZZ59c3eEgL8usKZe7TcieI41_sW6fOPFJgLnOfmfHs7OM/pub"
+   }
+  },
+  {
+   "id": "OE-B-M1",
+   "brand": "OEDRO",
+   "type": "trend",
+   "status": "review",
+   "title": "Casting Announcement: The Floor Mat",
+   "zh": "借“某某被选角成一切”的假选角公告格式：Bruno 在发布会上宣布全天候脚垫被选角成泥靴、洒了的咖啡和一湿狗，回家一冲就干净。",
+   "image": "assets/pool/oe-b-m1.webp",
+   "w": 1080,
+   "h": 1350,
+   "meme": {
+    "name": "“Robert Pattinson 被选去演所有角色”：官宣后全网用“X is cast as Y”造假选角公告",
+    "how": "借公告句式；图里没有演员、邦德或任何影视标识，主角是 Bruno 和原创动物。",
+    "date": "11-16 官宣，11-19 仍在刷屏",
+    "sources": [
+     {
+      "label": "Know Your Meme · Robert Pattinson James Bond Casting",
+      "url": "https://knowyourmeme.com/memes/robert-pattinson-james-bond-casting"
+     }
+    ]
+   },
+   "product": {
+    "name": "OEDRO Floor Mats, Tesla Model Y Juniper 2025-2026 5-seater, 9-piece all-weather TPE set",
+    "url": "https://www.oedro.com/products/oedro-floor-mats-fits-tesla-model-y-juniper-2025-2026-5-seater-custom-fit-all-weather-tpe-floor-liners-cargo-trunk-mat-set-with-backrest-protection-9pcs-model-y-interior-accessories-p-10296.html"
+   },
+   "captions": {
+    "Instagram": "Somehow the dog picked the cleanest spot.\nThese OEDRO mats fit the five-seat 2025 and 2026 Tesla Model Y Juniper.\nDo you keep a towel in the car for wet paws?",
+    "Facebook": "Somehow the dog picked the cleanest spot.\nThese OEDRO mats fit the five-seat 2025 and 2026 Tesla Model Y Juniper.\nDo you keep a towel in the car for wet paws?",
+    "X": "Somehow the dog picked the cleanest spot.\nThese OEDRO mats fit the five-seat 2025 and 2026 Tesla Model Y Juniper.\nDo you keep a towel in the car for wet paws?"
+   }
+  },
+  {
+   "id": "OE-B-M2",
+   "brand": "OEDRO",
+   "type": "trend",
+   "status": "review",
+   "title": "Big Game Week, Empty Street",
+   "zh": "借本周《GTA VI》发售周“全街人都进屋了”的场景：整条街的人消失在屋里，Bruno 一个人在空荡的车道上把侧踏板装好，邻居出来才发现车变了。",
+   "image": "assets/pool/oe-b-m2.webp",
+   "w": 1080,
+   "h": 1350,
+   "meme": {
+    "name": "《GTA VI》11-19 发售周：玩家集体消失在屋里",
+    "how": "借“发售周街上没人”的场景；图里不写游戏名、没有 Logo 或游戏画面。",
+    "date": "11-19 发售",
+    "sources": [
+     {
+      "label": "Know Your Meme · GTA VI 发售周合集",
+      "url": "https://trending.knowyourmeme.com/editorials/collections/gta-vi-finally-arrives-this-week-and-the-internet-is-losing-it"
+     }
+    ]
+   },
+   "product": {
+    "name": "OEDRO Running Boards for Ford F-150 SuperCrew Cab 2015-2026 and F-250/F-350 Super Duty Crew Cab 2017-2026, 6.8\" two-stair side steps",
+    "url": "https://www.oedro.com/products/oedro-running-boards-compatible-with-2015-2026-ford-f-150-supercrew-cab-and-2017-2026-ford-f-250-f-350-super-duty-crew-cab-68-inch-two-stairs-side-steps-black-powder-coated-nerf-bar-p-10154.html"
+   },
+   "captions": {
+    "Instagram": "Bruno finally got that box off the garage floor.\nThese OEDRO steps fit 2015 to 2026 Ford F-150 SuperCrew cabs and 2017 to 2026 F-250 and F-350 Super Duty crew cabs.\nWhat truck part is still sitting in your garage?",
+    "Facebook": "Bruno finally got that box off the garage floor.\nThese OEDRO steps fit 2015 to 2026 Ford F-150 SuperCrew cabs and 2017 to 2026 F-250 and F-350 Super Duty crew cabs.\nWhat truck part is still sitting in your garage?",
+    "X": "Bruno finally got that box off the garage floor.\nThese OEDRO steps fit 2015 to 2026 Ford F-150 SuperCrew cabs and 2017 to 2026 F-250 and F-350 Super Duty crew cabs.\nWhat truck part is still sitting in your garage?"
+   }
+  },
+  {
+   "id": "OE-B-M3",
+   "brand": "OEDRO",
+   "type": "trend",
+   "status": "review",
+   "title": "Nothing Stronger Than Family",
+   "zh": "借 Dom 的“I don’t have friends. I got family.”：Bruno 举杯说出这句，全桌人说 Amen，最后每个动物踩着挂钩踏板爬进车斗。",
+   "image": "assets/pool/oe-b-m3.webp",
+   "w": 1080,
+   "h": 1350,
+   "meme": {
+    "name": "Dom 的“family”：《速度与激情》里的名台词和“Nothing stronger than family”格式",
+    "how": "图里直接用了这句电影台词，人物是 Bruno 和原创动物，没有任何电影人物或影视标识。",
+    "date": "经典常青梗（2021 年起）",
+    "sources": [
+     {
+      "label": "Know Your Meme · Nothing Stronger Than Family",
+      "url": "https://knowyourmeme.com/memes/nothing-stronger-than-family"
+     }
+    ]
+   },
+   "note": "图里直接写了电影名台词，请 Oliver 看是否保留。",
+   "product": {
+    "name": "OEDRO Black Aluminum Towing Hitch Steps, 2\" hitch receiver",
+    "url": "https://www.oedro.com/products/oedro-black-aluminum-towing-hitch-steps-p-5721.html"
+   },
+   "captions": {
+    "Instagram": "Grandma called dibs on the sunset seat.\nThe OEDRO hitch step fits a two-inch receiver.\nWho gets the best spot in your truck bed?",
+    "Facebook": "Grandma called dibs on the sunset seat.\nThe OEDRO hitch step fits a two-inch receiver.\nWho gets the best spot in your truck bed?",
+    "X": "Grandma called dibs on the sunset seat.\nThe OEDRO hitch step fits a two-inch receiver.\nWho gets the best spot in your truck bed?"
+   }
+  },
+  {
+   "id": "CZ-B-M1",
+   "brand": "Cozeware",
+   "type": "trend",
+   "status": "review",
+   "title": "What Was He Doing On The Thermostat",
+   "zh": "借“恒温器上摆小人像加红圈”的梗：Oolong 严肃地问恒温器上的小人像怎么回事，Pebble 说“他冷”，最后用挂机和 App 解决。",
+   "image": "assets/pool/cz-b-m1.webp",
+   "w": 1080,
+   "h": 1350,
+   "meme": {
+    "name": "“What Was General Grant Doing On The Thermostat?”：电影《小屁孩日记：罗德里克定律》里爸爸发现恒温器上放着小人像的一幕",
+    "how": "图里写了电影的原句“General Grant”和“Those are not toys.”，没有电影人物或截图；人像是原创小玩偶。",
+    "date": "11-14 起；11-18 被 KYM 列为热门",
+    "sources": [
+     {
+      "label": "Know Your Meme · What Was General Grant Doing On The Thermostat?",
+      "url": "https://knowyourmeme.com/memes/what-was-general-grant-doing-on-the-thermostat"
+     }
+    ]
+   },
+   "note": "图里直接写了电影台词和人名，请 Oliver 看是否保留。",
+   "product": {
+    "name": "COZEWARE E-Save Series 12,000 BTU 20 SEER2 and 10 HSPF2 Mini Split with AI Chip, 230V",
+    "url": "https://www.cozeware.com/products/cozeware-e-save-series-12000-btu-20-seer2-mini-split-air-conditioner-with-ai-chip-230v-p-9545.html"
+   },
+   "captions": {
+    "Instagram": "Pebble saved you a spot under the blanket.\nThe Cozeware mini split keeps a small apartment cozy. Who gets the warm spot on your couch?",
+    "Facebook": "Pebble saved you a spot under the blanket.\nThe Cozeware mini split keeps a small apartment cozy. Who gets the warm spot on your couch?",
+    "X": "Pebble saved you a spot under the blanket.\nThe Cozeware mini split keeps a small apartment cozy. Who gets the warm spot on your couch?"
+   }
+  },
+  {
+   "id": "CZ-B-M2",
+   "brand": "Cozeware",
+   "type": "trend",
+   "status": "review",
+   "title": "Good Morning, Living Room",
+   "zh": "借“Bing Chilling”：冰淇淋在午后融化，Oolong 和 Pebble 在 Visio 挂机的凉风里舒服地吃冰淇淋，说“Now we have Bing Chilling.”",
+   "image": "assets/pool/cz-b-m2.webp",
+   "w": 1080,
+   "h": 1350,
+   "meme": {
+    "name": "约翰·塞纳的普通话“早上好中国，现在我有冰淇淋”，被听成 “Bing Chilling”",
+    "how": "用 “Bing Chilling” 这个网络口头禅；图里没有塞纳的脸或肖像，角色是 Oolong 和 Pebble。",
+    "date": "经典常青梗（2021、2022 年各火过一次）",
+    "sources": [
+     {
+      "label": "Know Your Meme · John Cena Speaking Chinese And Eating Ice Cream",
+      "url": "https://knowyourmeme.com/memes/john-cena-speaking-chinese-and-eating-ice-cream-bing-chilling"
+     }
+    ]
+   },
+   "note": "图里用了名人的口头禅 Bing Chilling，请 Oliver 看是否保留。",
+   "product": {
+    "name": "COZEWARE Visio Series 12,000 BTU 20 SEER2 Ductless Mini Split AC with Heat Pump",
+    "url": "https://www.cozeware.com/products/12000-btu-20-seer2-mini-split-air-conditioner-230v-ac-p-8862.html"
+   },
+   "captions": {
+    "Instagram": "Pebble saved you the shady end of the couch.\nThe Cozeware Visio mini split cools a room up to about 750 square feet.\nWhat flavor should we scoop for you?",
+    "Facebook": "Pebble saved you the shady end of the couch.\nThe Cozeware Visio mini split cools a room up to about 750 square feet.\nWhat flavor should we scoop for you?",
+    "X": "Pebble saved you the shady end of the couch.\nThe Cozeware Visio mini split cools a room up to about 750 square feet.\nWhat flavor should we scoop for you?"
+   }
+  },
+  {
+   "id": "CZ-B-M3",
+   "brand": "Cozeware",
+   "type": "trend",
+   "status": "review",
+   "title": "This Is Fine, Window Shut",
+   "zh": "借“This Is Fine”：Oolong 端着茶说“This is fine”，窗从周一关到现在，Tuftle 在旁边扇扇子，窗上装了 FreshFlow 之后才真的 fine。",
+   "image": "assets/pool/cz-b-m3.webp",
+   "w": 1080,
+   "h": 1350,
+   "meme": {
+    "name": "“This Is Fine”：着火的房间里，主角淡定喝咖啡说“这没事”",
+    "how": "借“明明很糟却说没事”的构思，角色是我们自己的 Oolong 和 Tuftle，没有原作角色或画面。",
+    "date": "经典常青梗（2013 年起）",
+    "sources": [
+     {
+      "label": "Know Your Meme · This Is Fine",
+      "url": "https://knowyourmeme.com/memes/this-is-fine"
+     }
+    ]
+   },
+   "product": {
+    "name": "COZEWARE FreshFlow Pro window-mounted fresh air unit",
+    "url": "https://www.cozeware.com/promo/freshflow-early-access-a-165.html"
+   },
+   "captions": {
+    "Instagram": "Window shut since Monday, and the room has opinions. Oolong says this is fine. Tuftle, fanning herself, disagrees.\n\nFreshFlow Pro sits in a compatible vertical sliding window and brings filtered outdoor air in while the window stays closed.\n\nHow many days has your window stayed shut?",
+    "Facebook": "Window shut since Monday, and the room has opinions. Oolong says this is fine. Tuftle, fanning herself, disagrees. FreshFlow Pro sits in a compatible vertical sliding window and brings filtered outdoor air in while the window stays closed.\n\nHow many days has your window stayed shut?",
+    "X": "Window shut since Monday. Oolong says it's fine. Tuftle is fanning herself. FreshFlow Pro brings filtered outdoor air in through a compatible vertical sliding window."
+   }
+  },
+  {
+   "id": "CZ-B-S1",
+   "brand": "Cozeware",
+   "type": "product",
+   "status": "review",
+   "title": "Fresh Air, Window Shut",
+   "zh": "三张组图：冬天傍晚窗边起身开窗，冷风灌进来，猫霸占了暖位；换上窗上的 FreshFlow，窗关着空气还是进来了。",
+   "image": [
+    "assets/pool/cz-b-s1-1.webp",
+    "assets/pool/cz-b-s1-2.webp",
+    "assets/pool/cz-b-s1-3.webp"
+   ],
+   "w": 1080,
+   "h": 1350,
+   "product": {
+    "name": "COZEWARE FreshFlow Pro window-mounted fresh air unit",
+    "url": "https://www.cozeware.com/promo/freshflow-early-access-a-165.html"
+   },
+   "captions": {
+    "Instagram": "You get up to crack the living room window, and the cat takes your warm spot.\nCozeware FreshFlow Pro fits in the window, so the wall can stay as it is.\nWho gets the warm spot back at your place?",
+    "Facebook": "You get up to crack the living room window, and the cat takes your warm spot.\nCozeware FreshFlow Pro fits in the window, so the wall can stay as it is.\nWho gets the warm spot back at your place?",
+    "X": "You get up to crack the living room window, and the cat takes your warm spot.\nCozeware FreshFlow Pro fits in the window, so the wall can stay as it is.\nWho gets the warm spot back at your place?"
+   }
+  },
+  {
+   "id": "CZ-B-S2",
+   "brand": "Cozeware",
+   "type": "product",
+   "status": "review",
+   "title": "The Spare Room Office",
+   "zh": "三张组图：备用房办公室下午闷热、早上偏凉，装上 Visio 挂机后用 App 设好温度和定时。",
+   "image": [
+    "assets/pool/cz-b-s2-1.webp",
+    "assets/pool/cz-b-s2-2.webp",
+    "assets/pool/cz-b-s2-3.webp"
+   ],
+   "w": 1080,
+   "h": 1350,
+   "product": {
+    "name": "COZEWARE Visio Series 12,000 BTU 20 SEER2 Ductless Mini Split AC with Heat Pump",
+    "url": "https://www.cozeware.com/products/12000-btu-20-seer2-mini-split-air-conditioner-230v-ac-p-8862.html"
+   },
+   "captions": {
+    "Instagram": "By lunch, that sunny spot on your desk has found your chair.\nThe Cozeware Visio mini split heats and cools spaces up to about 750 square feet.\nWhich room in your house gets the best morning light and the hottest afternoons?",
+    "Facebook": "By lunch, that sunny spot on your desk has found your chair.\nThe Cozeware Visio mini split heats and cools spaces up to about 750 square feet.\nWhich room in your house gets the best morning light and the hottest afternoons?",
+    "X": "By lunch, that sunny spot on your desk has found your chair.\nThe Cozeware Visio mini split heats and cools spaces up to about 750 square feet.\nWhich room in your house gets the best morning light and the hottest afternoons?"
+   }
+  },
+  {
+   "id": "OE-B-S1",
+   "brand": "OEDRO",
+   "type": "product",
+   "status": "review",
+   "title": "Saturday Project",
+   "zh": "三张组图：周五晚拆开 Jeep 前保险杠的箱子，周六上午靠原厂孔位螺栓装好，不用钻孔。",
+   "image": [
+    "assets/pool/oe-b-s1-1.webp",
+    "assets/pool/oe-b-s1-2.webp",
+    "assets/pool/oe-b-s1-3.webp"
+   ],
+   "w": 1080,
+   "h": 1350,
+   "product": {
+    "name": "OEDRO Front Bumper for 2007-2018 Jeep Wrangler JK and Unlimited, rock crawler bumper with winch plate mounting, 4 LED lights and 2 D-rings",
+    "url": "https://www.oedro.com/products/oedro-front-bumper-for-2007-2018-jeep-wrangler-jk-unlimited-rock-crawler-bumper-with-winch-plate-p-5395.html"
+   },
+   "captions": {
+    "Instagram": "Friday night, you crack the box just to have a look. Five minutes later you’re hunting for your ratchet.\nThis OEDRO bumper fits 2007 to 2018 Jeep Wrangler JKs, including the Unlimited. Where’s yours headed for lunch?",
+    "Facebook": "Friday night, you crack the box just to have a look. Five minutes later you’re hunting for your ratchet.\nThis OEDRO bumper fits 2007 to 2018 Jeep Wrangler JKs, including the Unlimited. Where’s yours headed for lunch?",
+    "X": "Friday night, you crack the box just to have a look. Five minutes later you’re hunting for your ratchet.\nThis OEDRO bumper fits 2007 to 2018 Jeep Wrangler JKs, including the Unlimited. Where’s yours headed for lunch?"
+   }
+  },
+  {
+   "id": "OE-B-S2",
+   "brand": "OEDRO",
+   "type": "product",
+   "status": "review",
+   "title": "Room For Bigger Tires",
+   "zh": "三张组图：越野回来轮拱上全是泥沙划痕，装上平板式轮拱，给下一次换更大的轮胎留出空间。",
+   "image": [
+    "assets/pool/oe-b-s2-1.webp",
+    "assets/pool/oe-b-s2-2.webp",
+    "assets/pool/oe-b-s2-3.webp"
+   ],
+   "w": 1080,
+   "h": 1350,
+   "product": {
+    "name": "OEDRO Solid Steel Fender Flares for 2007-2018 Jeep Wrangler JK and Unlimited, off-road flat style, front and rear 4-piece set",
+    "url": "https://www.oedro.com/products/oedro-solid-steel-fender-flares-competible-with-2007-2018-jeep-wrangler-jk-unlimited-off-road-front-rear-flat-4-pcs-set-p-5393.html"
+   },
+   "captions": {
+    "Instagram": "You hose off the Jeep and there’s still half a trail in the wheel wells.\nWhich tires would you pair with these OEDRO flares on your 2007-2018 Jeep Wrangler JK or JK Unlimited?",
+    "Facebook": "You hose off the Jeep and there’s still half a trail in the wheel wells.\nWhich tires would you pair with these OEDRO flares on your 2007-2018 Jeep Wrangler JK or JK Unlimited?",
+    "X": "You hose off the Jeep and there’s still half a trail in the wheel wells.\nWhich tires would you pair with these OEDRO flares on your 2007-2018 Jeep Wrangler JK or JK Unlimited?"
    }
   }
  ]

@@ -20,15 +20,17 @@
 
   function card(item) {
     const type = typeOf(item.type);
+    const pages = Array.isArray(item.image) ? item.image : [item.image];
     const status = data.statuses[item.status] || data.statuses.review;
     const platforms = PLATFORMS.filter((name) => item.captions && item.captions[name]);
     const sources = (item.meme?.sources || []).map((s) => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)} ↗</a>`).join('');
     const product = item.product ? `<a href="${esc(item.product.url)}" target="_blank" rel="noopener">${esc(item.product.name)} ↗</a>` : '';
     return `<article class="pool-card" id="pool-${esc(item.id)}" data-brand="${esc(item.brand)}" data-type="${esc(item.type)}">
-<button class="feed-large" type="button" aria-label="查看大图" data-title="${esc(item.title)}" data-pages="${esc(item.image)}" style="--feed-ratio:${item.w / item.h}"><img src="${esc(item.image)}" alt="${esc(item.title)}" width="${item.w}" height="${item.h}" loading="lazy"></button>
+<button class="feed-large" type="button" aria-label="查看大图" data-title="${esc(item.title)}" data-pages="${esc(pages.join('|'))}" style="--feed-ratio:${item.w / item.h}"><img src="${esc(pages[0])}" alt="${esc(item.title)}" width="${item.w}" height="${item.h}" loading="lazy"></button>
 <ul class="pool-meta"><li class="pool-brand-pill">${esc(item.brand)}</li><li class="pool-type-pill">${esc(type.zh)}<span lang="en">${esc(type.en)}</span></li><li class="post-status" data-status="${esc(item.status)}">${esc(status.zh)} <span lang="en">${esc(status.en)}</span></li><li class="pool-id">${esc(item.id)}</li></ul>
 <h4 lang="en">${esc(item.title)}</h4>
 <p class="pool-story">${esc(item.zh)}</p>
+${item.note ? `<p class="pool-note">${esc(item.note)}</p>` : ''}
 ${item.meme ? `<dl class="pool-meme"><dt>借的梗</dt><dd>${esc(item.meme.name)}${item.meme.date ? `（${esc(item.meme.date)}）` : ''}</dd><dt>怎么避开抄袭</dt><dd>${esc(item.meme.how)}</dd><dt>来源</dt><dd>${sources}</dd>${product ? `<dt>产品</dt><dd>${product}</dd>` : ''}</dl>` : ''}
 <div class="post-platforms"><div class="post-platform-switch" role="group" aria-label="平台">${platforms.map((name, i) => `<button type="button" data-platform="${name}" aria-pressed="${i === 0}">${name}</button>`).join('')}</div><button type="button" class="post-copy">复制配文</button></div>
 ${platforms.map((name, i) => `<div class="post-caption" data-feed-platform="${name}"${i ? ' hidden' : ''}><p class="feed-caption" lang="en">${esc(item.captions[name])}</p></div>`).join('')}
