@@ -10,6 +10,12 @@
       "file": "index.html"
     },
     {
+      "id": "mina-three",
+      "label": "给 Mina 的三件事",
+      "file": "mina-three.html",
+      "group": "工作汇报"
+    },
+    {
       "id": "daily-ops",
       "label": "用户运营每日工作",
       "file": "daily-ops.html",
