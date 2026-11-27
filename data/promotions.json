@@ -72,6 +72,26 @@
         {
           "label": "活动规则",
           "url": "https://docs.google.com/document/d/e/2PACX-1vTVTzLQbo1QuHDgQ35lVmwLayXdMdV7gTEt_JbZuzMsi030L79SKqfQ4Pwmyk17sBf4nWmCCtIYP62_/pub"
+        },
+        {
+          "label": "OEDRO Discord",
+          "url": "https://discord.gg/CXM9tuFqG7"
+        },
+        {
+          "label": "首发帖",
+          "url": "https://hsbrxlb.github.io/user-ops-hub/feed-oedro.html#post-OE-1125-GIVEAWAY-LAUNCH"
+        },
+        {
+          "label": "快拍",
+          "url": "https://hsbrxlb.github.io/user-ops-hub/feed-oedro.html#post-OE-1125-GIVEAWAY-STORY"
+        },
+        {
+          "label": "12月4日提醒帖",
+          "url": "https://hsbrxlb.github.io/user-ops-hub/feed-oedro.html#post-OE-1201-GIVEAWAY-REMINDER"
+        },
+        {
+          "label": "邮件模板",
+          "url": "https://hsbrxlb.github.io/user-ops-hub/email-templates.html#weekly-giveaway"
         }
       ],
       "status": "running",
@@ -95,6 +115,26 @@
         {
           "label": "活动规则",
           "url": "https://docs.google.com/document/d/e/2PACX-1vSwZRbZrCTI3KDqqRJoG4kTua6yApjQf0kZZ59c3eEgL8usKZe7TcieI41_sW6fOPFJgLnOfmfHs7OM/pub"
+        },
+        {
+          "label": "Cozeware Discord",
+          "url": "https://discord.gg/jSNeFnDmpy"
+        },
+        {
+          "label": "首发帖",
+          "url": "https://hsbrxlb.github.io/user-ops-hub/feed-cozeware.html#post-CZ-1125-GIVEAWAY-LAUNCH"
+        },
+        {
+          "label": "快拍",
+          "url": "https://hsbrxlb.github.io/user-ops-hub/feed-cozeware.html#post-CZ-1125-GIVEAWAY-STORY"
+        },
+        {
+          "label": "12月4日提醒帖",
+          "url": "https://hsbrxlb.github.io/user-ops-hub/feed-cozeware.html#post-CZ-1201-GIVEAWAY-REMINDER"
+        },
+        {
+          "label": "邮件模板",
+          "url": "https://hsbrxlb.github.io/user-ops-hub/email-templates-cozeware.html#weekly-giveaway"
         }
       ],
       "status": "running",
