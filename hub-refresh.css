@@ -371,16 +371,17 @@ body[data-page="home"] .main-content { width: min(var(--content-wide), 100%); pa
   mask-image: linear-gradient(180deg, transparent 0, #000 16%, #000 84%, transparent 100%), linear-gradient(90deg, transparent 0, #000 12%);
   mask-composite: intersect;
 }
-.hub-wall-col { display: grid; gap: 14px; align-content: start; animation: hub-wall-up 80s linear infinite; }
-.hub-wall-col:nth-child(2) { animation-name: hub-wall-down; animation-duration: 96s; }
-.hub-wall-col:nth-child(3) { animation-duration: 72s; }
-.hub-wall-col:nth-child(4) { animation-name: hub-wall-down; animation-duration: 88s; }
+.hub-wall-col { display: grid; gap: 14px; align-content: start; animation: hub-wall-up 197s linear infinite; }
+.hub-wall-col:nth-child(2) { animation-name: hub-wall-down; animation-duration: 197s; }
+.hub-wall-col:nth-child(3) { animation-duration: 166s; }
+.hub-wall-col:nth-child(4) { animation-name: hub-wall-down; animation-duration: 203s; }
 #content .hub-wall img {
   display: block;
   width: 100%;
   height: auto;
   max-block-size: none;
   border-radius: 12px;
+  background: var(--surface-sunken);
   box-shadow: 0 1px 2px rgba(48, 38, 24, .08), 0 16px 32px -18px rgba(48, 38, 24, .45);
 }
 @keyframes hub-wall-up { from { transform: translateY(0); } to { transform: translateY(calc(-50% - 7px)); } }
@@ -655,7 +656,7 @@ body[data-page="home"] .home-index > .section {
   .hub-hero-copy { padding: 40px 20px 32px; }
   .hub-hero-brands { margin-top: 24px; }
   .hub-wall { display: flex; gap: 10px; min-height: 0; height: auto; padding: 0 0 32px; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%); }
-  .hub-wall-col { display: flex; gap: 10px; animation: hub-wall-left 70s linear infinite; }
+  .hub-wall-col { display: flex; gap: 10px; animation: hub-wall-left 172s linear infinite; }
   .hub-wall-col:nth-child(n+2) { display: none; }
   #content .hub-wall img { width: 132px; flex: none; }
   body[data-page="home"] .main-content > .section, body[data-page="home"] .home-index > .section { grid-template-columns: minmax(0, 1fr); gap: 18px; padding: 44px 0; }

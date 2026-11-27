@@ -40,9 +40,19 @@ a{color:inherit}
 .wrap{max-width:940px;margin:0 auto;padding:0 24px}
 
 /* top */
-header.top{padding:56px 0 28px}
-.top h1{font-size:34px;line-height:1.25;margin:0 0 8px;font-weight:700;letter-spacing:.01em}
-.top p{margin:0;color:var(--ink-2)}
+header.top{padding:32px 0 24px}
+.top .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);align-items:center;gap:32px}
+.top h1{font-size:40px;line-height:1.2;margin:0;font-weight:700;letter-spacing:.01em}
+.wall{height:300px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;overflow:hidden;pointer-events:none;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 18%,#000 82%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 18%,#000 82%,transparent 100%)}
+.wall-col{display:flex;flex-direction:column;gap:10px;animation:wall-up 110s linear infinite}
+.wall-col:nth-child(2){animation-name:wall-down;animation-duration:130s}
+.wall-col:nth-child(3){animation-duration:96s}
+.wall img{display:block;width:100%;height:auto;border-radius:8px;background:var(--track)}
+@keyframes wall-up{from{transform:translateY(0)}to{transform:translateY(calc(-50% - 5px))}}
+@keyframes wall-down{from{transform:translateY(calc(-50% - 5px))}to{transform:translateY(0)}}
+@keyframes wall-left{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 4px))}}
+@media (prefers-reduced-motion: reduce){.wall-col{animation:none}}
 
 /* sticky nav */
 nav.jump{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--paper) 92%,transparent);
@@ -116,18 +126,26 @@ h3{font-size:18px;margin:40px 0 14px;font-weight:650}
 .f-done{background:var(--done)} .f-doing{background:var(--doing)} .f-push{background:var(--push)}
 .pair + .pair{margin-top:12px}
 
-/* ③ AI */
-.ai{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
-.card{display:grid;grid-template-columns:minmax(0,1fr) 190px 200px;grid-template-areas:"h res go" "p res go";gap:4px 24px;align-items:center;padding:20px 24px;border-top:1px solid var(--line)}
-.card:first-child{border-top:0}
-.card h3{grid-area:h;margin:0;font-size:17px;line-height:1.4;align-self:end}
-.card p{grid-area:p;margin:0;font-size:15px;color:var(--ink-2);align-self:start}
-.card .res{grid-area:res;font-size:15px;margin:0;color:var(--ink-2)}
-.card .res b{display:block;font-size:24px;line-height:1.2;font-weight:650;color:var(--petrol);letter-spacing:-.01em}
-.card .go{grid-area:go;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+/* ③ AI tickets */
+.tickets{display:grid;gap:16px}
+.tk{display:grid;grid-template-columns:minmax(0,1fr) 220px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden}
+.tk-main{padding:22px 26px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.tk h3{margin:0;font-size:18px;line-height:1.4}
+.tk p{margin:0;font-size:15px;color:var(--ink-2)}
+.tk dl{margin:4px 0 0;display:flex;gap:12px;font-size:14px;line-height:1.5}
+.tk dt{color:var(--ink-3);flex:none}
+.tk dd{margin:0;color:var(--ink);font-weight:500}
+.tk .go{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.tk-stub{position:relative;border-left:2px dashed var(--line);padding:22px 22px;display:flex;flex-direction:column;justify-content:center;
+  background:color-mix(in srgb,var(--petrol-soft) 55%,var(--surface))}
+.tk-stub::before,.tk-stub::after{content:"";position:absolute;left:-12px;width:22px;height:22px;border-radius:50%;background:var(--paper);border:1px solid var(--line)}
+.tk-stub::before{top:-12px}
+.tk-stub::after{bottom:-12px}
+.tk-stub b{font-size:34px;line-height:1.15;font-weight:650;color:var(--petrol);letter-spacing:-.01em}
+.tk-stub span{font-size:14px;color:var(--ink-2);margin-top:6px}
 .btn{font-size:15px;text-decoration:none;padding:0 16px;border-radius:999px;background:var(--petrol-soft);color:var(--petrol);font-weight:600;min-height:44px;display:inline-flex;align-items:center}
 .btn:hover{background:var(--petrol);color:var(--surface)}
-.int{font-size:14px;color:var(--ink-3);padding:0 4px;min-height:44px;display:inline-flex;align-items:center}
+.int{font-size:14px;color:var(--ink-3);min-height:44px;display:inline-flex;align-items:center}
 .more{margin:22px 0 0}
 
 footer{padding:40px 0 56px}
@@ -138,14 +156,26 @@ footer{padding:40px 0 56px}
   .kr dl{grid-template-columns:1fr;gap:0}
   .kr dd{margin-bottom:6px}
   .kpi{grid-template-columns:1fr 1fr}
-  .card{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"h h" "p p" "res go";gap:6px 16px}
-  .card .res{margin-top:8px}
   .kpi .nowcol{grid-column:1 / -1}
 }
 @media (max-width:600px){
   .wrap{padding:0 16px}
-  header.top{padding:36px 0 20px}
-  .top h1{font-size:27px}
+  header.top{padding:28px 0 16px}
+  .top .wrap{grid-template-columns:minmax(0,1fr);gap:20px}
+  .top h1{font-size:30px}
+  .wall{display:flex;height:auto;margin:0 -16px;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%)}
+  .wall-col{flex-direction:row;gap:8px;animation:wall-left 90s linear infinite}
+  .wall-col:nth-child(n+2){display:none}
+  .wall img{width:96px;flex:none}
+  .tk{grid-template-columns:minmax(0,1fr)}
+  .tk-main{padding:18px 18px 20px}
+  .tk dl{gap:10px}
+  .tk-stub{border-left:0;border-top:2px dashed var(--line);flex-direction:row;align-items:baseline;flex-wrap:wrap;gap:4px 10px;padding:16px 18px}
+  .tk-stub::before,.tk-stub::after{top:-12px;bottom:auto}
+  .tk-stub::before{left:-12px}
+  .tk-stub::after{left:auto;right:-12px}
+  .tk-stub b{font-size:26px}
+  .tk-stub span{margin-top:0}
   section{padding:40px 0 4px}
   section > .wrap > h2{font-size:23px}
   .goal{padding:24px 20px}
@@ -161,9 +191,6 @@ footer{padding:40px 0 56px}
   .kpi .name{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
   .kpi .w{margin:0;white-space:nowrap}
   .kpi .nowcol{margin-top:8px}
-  .card{padding:18px;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"h h" "p p" "res go";gap:6px 12px}
-  .card .res{margin-top:8px}
-  .card .go{align-self:end}
   .goal .due{flex-direction:column}
   .steps{grid-template-columns:1fr}
   .steps li{padding:0 0 22px 28px}
@@ -175,12 +202,12 @@ footer{padding:40px 0 56px}
   body{background:#fff;font-size:12pt}
   nav.jump{display:none}
   section{padding-top:24px}
-  .goal,.kr,.kpis,.ai,.card{border-color:#ccc}
-  .kpi,.card,.kr,.goal,.steps li{break-inside:avoid}
+  .goal,.kr,.kpis,.tk{border-color:#ccc}
+  .kpi,.tk,.kr,.goal,.steps li{break-inside:avoid}
+  .wall{display:none}
   .kpi.win{background:none}
   .bar .t{print-color-adjust:exact;-webkit-print-color-adjust:exact}
   .go,.more{display:none}
-  .card{grid-template-columns:minmax(0,1fr) 190px;grid-template-areas:"h res" "p res"}
   #ai{break-before:page}
 }
 </style>
@@ -189,6 +216,7 @@ footer{padding:40px 0 56px}
 
 <header class="top"><div class="wrap">
   <h1>汇报</h1>
+  <div class="wall" aria-hidden="true"><div class="wall-col"><img src="../../assets/home-wall/20.webp" alt="" width="360" height="450" loading="eager" decoding="async"><img src="../../assets/home-wall/43.webp" alt="" width="360" height="450" loading="eager" decoding="async"><img src="../../assets/home-wall/24.webp" alt="" width="360" height="450" loading="eager" decoding="async"><img src="../../assets/home-wall/56.webp" alt="" width="360" height="450" loading="lazy" decoding="async"><img src="../../assets/home-wall/35.webp" alt="" width="360" height="450" loading="lazy" decoding="async"><img src="../../assets/home-wall/45.webp" alt="" width="360" height="450" loading="lazy" decoding="async"><img src="../../assets/home-wall/20.webp" alt="" width="360" height="450" loading="lazy" decoding="async"><img src="../../assets/home-wall/43.webp" alt="" width="360" height="450" loading="lazy" decoding="async"><img src="../../assets/home-wall/24.webp" alt="" width="360" height="450" loading="lazy" decoding="async"><img src="../../assets/home-wall/56.webp" alt="" width="360" height="450" loading="lazy" decoding="async"><img src="../../assets/home-wall/35.webp" alt="" width="360" height="450" loading="lazy" decoding="async"><img src="../../assets/home-wall/45.webp" alt="" width="360" height="450" loading="lazy" decoding="async"></div><div class="wall-col"><img src="../../assets/home-wall/23.webp" alt="" width="360" height="450" loading="eager" decoding="async"><img src="../../assets/home-wall/44.webp" alt="" width="360" height="450" loading="eager" decoding="async"><img src="../../assets/home-wall/26.webp" alt="" width="360" height="450" loading="eager" decoding="async"><img src="../../assets/home-wall/48.webp" alt="" width="360" height="450" loading="lazy" decoding="async"><img src="../../assets/home-wall/36.webp" alt="" width="360" height="450" loading="lazy" decoding="async"><img src="../../assets/home-wall/58.webp" alt="" width="360" height="450" loading="lazy" decoding="async"><img src="../../assets/home-wall/23.webp" alt="" width="360" height="450" loading="lazy" decoding="async"><img src="../../assets/home-wall/44.webp" alt="" width="360" height="450" loading="lazy" decoding="async"><img src="../../assets/home-wall/26.webp" alt="" width="360" height="450" loading="lazy" decoding="async"><img src="../../assets/home-wall/48.webp" alt="" width="360" height="450" loading="lazy" decoding="async"><img src="../../assets/home-wall/36.webp" alt="" width="360" height="450" loading="lazy" decoding="async"><img src="../../assets/home-wall/58.webp" alt="" width="360" height="450" loading="lazy" decoding="async"></div><div class="wall-col"><img src="../../assets/home-wall/22.webp" alt="" width="360" height="450" loading="eager" decoding="async"><img src="../../assets/home-wall/53.webp" alt="" width="360" height="450" loading="eager" decoding="async"><img src="../../assets/home-wall/40.webp" alt="" width="360" height="450" loading="eager" decoding="async"><img src="../../assets/home-wall/50.webp" alt="" width="360" height="450" loading="lazy" decoding="async"><img src="../../assets/home-wall/37.webp" alt="" width="360" height="450" loading="lazy" decoding="async"><img src="../../assets/home-wall/46.webp" alt="" width="360" height="450" loading="lazy" decoding="async"><img src="../../assets/home-wall/22.webp" alt="" width="360" height="450" loading="lazy" decoding="async"><img src="../../assets/home-wall/53.webp" alt="" width="360" height="450" loading="lazy" decoding="async"><img src="../../assets/home-wall/40.webp" alt="" width="360" height="450" loading="lazy" decoding="async"><img src="../../assets/home-wall/50.webp" alt="" width="360" height="450" loading="lazy" decoding="async"><img src="../../assets/home-wall/37.webp" alt="" width="360" height="450" loading="lazy" decoding="async"><img src="../../assets/home-wall/46.webp" alt="" width="360" height="450" loading="lazy" decoding="async"></div></div>
 </div></header>
 
 <nav class="jump" aria-label="章节"><div class="wrap">
@@ -267,7 +295,7 @@ footer{padding:40px 0 56px}
       <div class="nowcol">
         <div class="pair">
           <div class="now"><strong>+678</strong>OEDRO
-            <span class="sub">两品牌合计 +684，全季目标完成 88%</span></div>
+            <span class="sub">两品牌合计 +684，全季目标完成 88%；11 月 OEDRO 排期 65 条帖子</span></div>
           <div class="bar"><div class="t"><i class="f-done" style="width:100%"></i></div><span class="tag s-done">达成 154%</span></div>
         </div>
         <div class="pair">
@@ -302,7 +330,7 @@ footer{padding:40px 0 56px}
       <div class="name">AI 运营工具与流程<span class="w">权重 15%</span></div>
       <div class="tgt">12-31 前在日常运营中用起来</div>
       <div class="nowcol">
-        <div class="now"><strong>9</strong>项在用</div>
+        <div class="now"><strong>8</strong>项在用</div>
         <div class="bar"><div class="t"><i class="f-done" style="width:100%"></i></div><span class="tag s-done">达成</span></div>
       </div>
     </div>
@@ -332,7 +360,8 @@ footer{padding:40px 0 56px}
       <div class="tgt">经官网、社媒、邮件邀约并跟进</div>
       <div class="nowcol">
         <div class="now"><strong>21,746</strong>封邀约邮件
-          <span class="sub">官网、社媒、邮件 3 个渠道在用；Discord 欢迎新成员 179 位</span></div>
+          <span class="sub">官网、社媒、邮件 3 个渠道在用；Discord 欢迎新成员 179 位</span>
+          <span class="sub">Cozeware 广告投放 11 轮（含 KOL 安装视频、Discord 引流），内容浏览 5,600+（12 条帖子，四平台）</span></div>
         <div class="bar"><span class="tag s-doing">进行中</span></div>
       </div>
     </div>
@@ -341,61 +370,79 @@ footer{padding:40px 0 56px}
 
 <section id="ai"><div class="wrap">
   <h2>③ AI coding 成果</h2>
-  <div class="ai">
-    <div class="card">
-      <h3>运营资料站</h3>
-      <p>内容规则、排期、素材原来散在各处，现在一个网址全找到。</p>
-      <div class="res"><b>77</b>个网页</div>
-      <div class="go"><a class="btn" href="https://hsbrxlb.github.io/user-ops-hub/index.html" target="_blank" rel="noopener">打开</a></div>
-    </div>
-    <div class="card">
-      <h3>官网 Blog 与问答编辑器</h3>
-      <p>官网改稿不用再等开发排期，浏览器里直接改。</p>
-      <div class="res"><b>46</b>篇指南和问答</div>
-      <div class="go"><a class="btn" href="https://hsbrxlb.github.io/user-ops-hub/oedro-editor/editor.html" target="_blank" rel="noopener">编辑器</a><a class="btn" href="https://hsbrxlb.github.io/user-ops-hub/ai-dev-guides.html" target="_blank" rel="noopener">成果页</a></div>
-    </div>
-    <div class="card">
-      <h3>Discord 机器人 Bruno</h3>
-      <p>自动欢迎新成员、答常见问题、发入群券，还记录入退群。</p>
-      <div class="res"><b>179</b>位新成员获欢迎</div>
-      <div class="go"><a class="btn" href="https://hsbrxlb.github.io/user-ops-hub/ai-dev-bruno.html" target="_blank" rel="noopener">打开</a></div>
-    </div>
-    <div class="card">
-      <h3>周报自动起草</h3>
-      <p>每周日晚自动读本周记录起草钉钉周报，人工审后提交。</p>
-      <div class="res"><b>每周</b>自动运行</div>
-      <div class="go"><span class="int">内部工具</span></div>
-    </div>
-    <div class="card">
-      <h3>内容预审与每日内容池</h3>
-      <p>审稿标准写成固定检查，排期页每天自动更新。</p>
-      <div class="res"><b>每天</b>更新</div>
-      <div class="go"><a class="btn" href="https://hsbrxlb.github.io/user-ops-hub/feed-oedro.html" target="_blank" rel="noopener">排期</a><a class="btn" href="https://hsbrxlb.github.io/user-ops-hub/content-pool.html" target="_blank" rel="noopener">内容池</a></div>
-    </div>
-    <div class="card">
-      <h3>客户数据看板</h3>
-      <p>后台看不出谁买了几次，现在按次数、金额一眼看清。</p>
-      <div class="res"><b>511,392</b>位客户</div>
-      <div class="go"><a class="btn" href="https://hsbrxlb.github.io/user-ops-hub/customer-analytics.html" target="_blank" rel="noopener">打开</a></div>
-    </div>
-    <div class="card">
-      <h3>优惠券工具</h3>
-      <p>建券、查券、发子码不用再进后台逐项核对。</p>
-      <div class="res"><b>满 $200 减 $30</b>入群券由它配置</div>
-      <div class="go"><span class="int">内部工具</span></div>
-    </div>
-    <div class="card">
-      <h3>任务调度与资料同步</h3>
-      <p>多个 AI 任务自动排队运行，电脑和云端资料每天同步。</p>
-      <div class="res"><b>1,478</b>份文件保持一致</div>
-      <div class="go"><span class="int">内部工具</span></div>
-    </div>
-    <div class="card">
-      <h3>两品牌产品知识库</h3>
-      <p>官网、说明书、FAQ 里的产品资料，逐个商品整理成库。</p>
-      <div class="res"><b>每周日</b>自动更新</div>
-      <div class="go"><span class="int">内部工具</span></div>
-    </div>
+  <div class="tickets">
+    <article class="tk">
+      <div class="tk-main">
+        <h3>运营资料站</h3>
+        <p>内容规则、排期、素材原来散在各处，现在一个网址全找到。</p>
+        <dl><dt>技术</dt><dd>静态站点生成 · GitHub Pages 自动部署</dd></dl>
+        <div class="go"><a class="btn" href="https://hsbrxlb.github.io/user-ops-hub/index.html" target="_blank" rel="noopener">打开</a></div>
+      </div>
+      <div class="tk-stub"><b>77</b><span>个网页</span></div>
+    </article>
+    <article class="tk">
+      <div class="tk-main">
+        <h3>官网 Blog 与问答编辑器</h3>
+        <p>官网改稿不用再等开发排期，浏览器里直接改。</p>
+        <dl><dt>技术</dt><dd>Tiptap 富文本内核 · 静态页生成</dd></dl>
+        <div class="go"><a class="btn" href="https://hsbrxlb.github.io/user-ops-hub/oedro-editor/editor.html" target="_blank" rel="noopener">编辑器</a><a class="btn" href="https://hsbrxlb.github.io/user-ops-hub/ai-dev-guides.html" target="_blank" rel="noopener">成果页</a></div>
+      </div>
+      <div class="tk-stub"><b>46</b><span>篇指南和问答</span></div>
+    </article>
+    <article class="tk">
+      <div class="tk-main">
+        <h3>Discord 机器人 Bruno</h3>
+        <p>自动欢迎新成员、答常见问题、发入群券，还记录入退群。</p>
+        <dl><dt>技术</dt><dd>Discord Bot · 事件驱动</dd></dl>
+        <div class="go"><a class="btn" href="https://hsbrxlb.github.io/user-ops-hub/ai-dev-bruno.html" target="_blank" rel="noopener">打开</a></div>
+      </div>
+      <div class="tk-stub"><b>179</b><span>位新成员获欢迎</span></div>
+    </article>
+    <article class="tk">
+      <div class="tk-main">
+        <h3>内容预审与每日内容池</h3>
+        <p>审稿标准写成固定检查，排期页每天自动更新。</p>
+        <dl><dt>技术</dt><dd>LLM 内容质检流水线 · 定时同步</dd></dl>
+        <div class="go"><a class="btn" href="https://hsbrxlb.github.io/user-ops-hub/feed-oedro.html" target="_blank" rel="noopener">排期</a><a class="btn" href="https://hsbrxlb.github.io/user-ops-hub/content-pool.html" target="_blank" rel="noopener">内容池</a></div>
+      </div>
+      <div class="tk-stub"><b>每天</b><span>更新</span></div>
+    </article>
+    <article class="tk">
+      <div class="tk-main">
+        <h3>客户数据看板</h3>
+        <p>后台看不出谁买了几次，现在按次数、金额一眼看清。</p>
+        <dl><dt>技术</dt><dd>数据管道 · 分群看板</dd></dl>
+        <div class="go"><a class="btn" href="https://hsbrxlb.github.io/user-ops-hub/customer-analytics.html" target="_blank" rel="noopener">打开</a></div>
+      </div>
+      <div class="tk-stub"><b>511,392</b><span>位客户</span></div>
+    </article>
+    <article class="tk">
+      <div class="tk-main">
+        <h3>优惠券工具</h3>
+        <p>建券、查券、发子码不用再进后台逐项核对。</p>
+        <dl><dt>技术</dt><dd>电商后台浏览器自动化 · 规则校验</dd></dl>
+        <div class="go"><span class="int">内部工具</span></div>
+      </div>
+      <div class="tk-stub"><b>满 $200 减 $30</b><span>入群券由它配置</span></div>
+    </article>
+    <article class="tk">
+      <div class="tk-main">
+        <h3>任务调度与资料同步</h3>
+        <p>多个 AI 任务自动排队运行，电脑和云端资料每天同步。</p>
+        <dl><dt>技术</dt><dd>多智能体任务编排 · 增量云同步</dd></dl>
+        <div class="go"><span class="int">内部工具</span></div>
+      </div>
+      <div class="tk-stub"><b>1,478</b><span>份文件保持一致</span></div>
+    </article>
+    <article class="tk">
+      <div class="tk-main">
+        <h3>两品牌产品知识库</h3>
+        <p>官网、说明书、FAQ 里的产品资料，逐个商品整理成库。</p>
+        <dl><dt>技术</dt><dd>LLM 结构化抽取 · 多源资料归并</dd></dl>
+        <div class="go"><span class="int">内部工具</span></div>
+      </div>
+      <div class="tk-stub"><b>1,137</b><span>款商品已入库</span></div>
+    </article>
   </div>
   <p class="more"><a class="btn" href="https://hsbrxlb.github.io/user-ops-hub/ai-dev.html" target="_blank" rel="noopener">看全部 AI 成果演示</a></p>
 </div></section>
