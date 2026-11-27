@@ -33,7 +33,7 @@ function collectRuntimeFiles(directory, prefix = '') {
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
     if (entry.isDirectory() && excludedDirectories.has(entry.name)) continue;
     // Independent server applications are excluded by the Pages artifact allowlist.
-    if (!prefix && entry.isDirectory() && entry.name === 'apps') continue;
+    if (!prefix && entry.isDirectory() && (entry.name === 'apps' || entry.name === 'oedro-editor')) continue;
     const relativePath = path.join(prefix, entry.name);
     const absolutePath = path.join(directory, entry.name);
     if (entry.isDirectory()) files.push(...collectRuntimeFiles(absolutePath, relativePath));
