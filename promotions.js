@@ -98,7 +98,8 @@
       term(prize ? '奖品' : '适用', item.scope_include),
       term(prize ? '不能参加' : '不适用', item.scope_exclude),
       term('最低消费', item.min_spend, money),
-      term('叠加', item.stacking)
+      term('叠加', item.stacking),
+      prize ? term('Discord 公告', item.discord_post) : ''
     ].join('');
     const heading = filled(item.offer) ? item.offer : item.name;
     const subtitle = filled(item.offer) && filled(item.name) ? `<h3 class="ticket-name">${esc(item.name)}</h3>` : '';
