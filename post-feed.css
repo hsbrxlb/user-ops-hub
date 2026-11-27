@@ -22,18 +22,13 @@
 }
 .schedule-zh { color: var(--text-muted); font-size: 20px; font-weight: 550; letter-spacing: .02em; }
 
-/* Sticky bar: dates on one row, purposes on the next. */
+/* Bar: dates on one row, purposes wrapped below. Not sticky: the wrapped chips are too tall to pin. */
 .schedule-bar {
-  position: sticky;
-  top: var(--topbar-height);
-  z-index: 4;
   display: grid;
   gap: 14px;
   margin: 8px 0 0;
   padding: 14px 0 16px;
-  background: var(--topbar-bg);
-  box-shadow: 0 0 0 100vmax var(--topbar-bg), 0 1px 0 100vmax rgba(28, 31, 39, .1);
-  clip-path: inset(0 -100vmax -1px);
+  border-bottom: 1px solid rgba(28, 31, 39, .1);
 }
 
 .schedule-dates,
@@ -170,7 +165,7 @@
 #content .schedule-status { margin: 18px 0 0; color: var(--text-muted); font-size: 14px; }
 
 /* Day groups */
-.feed-day { scroll-margin-top: 230px; }
+.feed-day { scroll-margin-top: calc(var(--topbar-height) + 24px); }
 #content .feed-day > h2 {
   display: flex;
   align-items: center;
@@ -218,7 +213,7 @@
 .post + .post { margin-top: 20px; border-top: 0; }
 .post:not(:has(.post-media)) { grid-template-columns: minmax(0, 1fr); }
 
-.post-media { position: sticky; top: calc(var(--topbar-height) + 190px); display: grid; gap: 10px; }
+.post-media { position: sticky; top: calc(var(--topbar-height) + 24px); display: grid; gap: 10px; }
 
 #content .post .feed-large {
   position: relative;
@@ -404,11 +399,9 @@
   .schedule-bar { gap: 10px; padding: 10px 0 12px; }
   .schedule-dates { padding-inline: 16px; margin-inline: -20px; }
   .schedule-filter { gap: 6px; padding-inline: 0; margin-inline: 0; }
-  .schedule-bar { position: static; }
   #content .schedule-dates a { width: 56px; min-height: 70px; border-radius: 12px; }
   .schedule-dates .date-num { font-size: 26px; }
   .schedule-filter button { min-height: 36px; padding-left: 12px; }
-  .feed-day { scroll-margin-top: 200px; }
   #content .feed-day > h2 { margin: 44px 0 16px; }
   .day-numeral { font-size: 48px; }
 
