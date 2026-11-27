@@ -59,15 +59,15 @@
       "id": "oedro-giveaway-r1",
       "brand": "OEDRO",
       "type": "giveaway",
-      "name": "Weekly giveaway, round 1 of 4",
+      "name": "Giveaway, round 1",
       "offer": "3 winners each get a LEGO Technic Ferrari 488 Pista",
-      "how_to_get": "关注 OEDRO 的 Instagram、Facebook、X 或 Threads，给抽奖帖点赞，评论并 @ 一位朋友；在 Instagram 快拍转发并 @ OEDRO 再多一次机会。每人最多 2 次机会，不用下单。",
+      "how_to_get": "每人 1 次机会，无需下单。Instagram：关注 @oedroautoparts，点赞，评论并 @ 一位朋友；Facebook：关注主页，点赞，评论；X：关注，点赞，转发；Threads：关注，点赞，回复。开奖和公布得奖者在 OEDRO Discord 和 Instagram，不用进 Discord 也能参加。",
       "scope_include": "",
       "scope_exclude": "美国本土 48 州和华盛顿特区以外的地区；未满 18 岁；公司员工及其家人",
       "min_spend": "",
       "stacking": "",
-      "start": "2026-11-25",
-      "end": "2026-12-01",
+      "start": "2026-11-27",
+      "end": "2026-12-04",
       "channel_links": [
         {
           "label": "活动规则",
@@ -75,22 +75,22 @@
         }
       ],
       "status": "running",
-      "source": "Published rules document, read 2026-11-26",
+      "source": "Published rules document, updated 2026-11-27",
       "verified": true
     },
     {
       "id": "cozeware-giveaway-r1",
       "brand": "Cozeware",
       "type": "giveaway",
-      "name": "Weekly giveaway, round 1 of 4",
+      "name": "Giveaway, round 1",
       "offer": "3 winners each get a Stanley Quencher 40 oz tumbler",
-      "how_to_get": "关注 @cozeware，给抽奖帖点赞，评论并 @ 一位朋友；在 Instagram 快拍转发并 @cozeware 再多一次机会。每人最多 2 次机会，不用下单。",
+      "how_to_get": "每人 1 次机会，无需下单。Instagram：关注 @cozeware，点赞，评论并 @ 一位朋友；Facebook：关注主页，点赞，评论；X：关注，点赞，转发；Threads：关注，点赞，回复。开奖和公布得奖者在 Cozeware Discord 和 Instagram，不用进 Discord 也能参加。",
       "scope_include": "",
       "scope_exclude": "美国本土 48 州和华盛顿特区以外的地区；未满 18 岁；公司员工及其家人",
       "min_spend": "",
       "stacking": "",
-      "start": "2026-11-25",
-      "end": "2026-12-01",
+      "start": "2026-11-27",
+      "end": "2026-12-04",
       "channel_links": [
         {
           "label": "活动规则",
@@ -98,7 +98,7 @@
         }
       ],
       "status": "running",
-      "source": "Published rules document, read 2026-11-26",
+      "source": "Published rules document, updated 2026-11-27",
       "verified": true
     },
     {
