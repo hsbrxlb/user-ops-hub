@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>给 Mina 的三件事</title>
+<style>
+:root{
+  --paper:#F5F6F4;
+  --surface:#FFFFFF;
+  --ink:#1D2730;
+  --ink-2:#4A5661;
+  --ink-3:#6B7680;
+  --line:#DDE2E0;
+  --petrol:#1F5A5A;
+  --petrol-soft:#E3EEEC;
+  --done:#2E7A4E; --done-soft:#E2F1E7;
+  --doing:#9A6512; --doing-soft:#F7EDD9;
+  --push:#A6463F; --push-soft:#F6E3E0;
+  --track:#E6EAE8;
+  --r-lg:18px; --r-md:12px; --r-sm:8px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#151B1F; --surface:#1D252A; --ink:#E7ECEE; --ink-2:#B9C3C8; --ink-3:#97A3A9;
+    --line:#2E3A40; --petrol:#7CC2BC; --petrol-soft:#21363A;
+    --done:#7CCB9A; --done-soft:#1F3428; --doing:#E2B566; --doing-soft:#3A2F1C;
+    --push:#E9978F; --push-soft:#3C2624; --track:#2C373C;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;
+  font-size:16px;line-height:1.65;font-variant-numeric:tabular-nums;
+}
+a{color:inherit}
+.wrap{max-width:940px;margin:0 auto;padding:0 24px}
+
+/* top */
+header.top{padding:56px 0 28px}
+.top h1{font-size:34px;line-height:1.25;margin:0 0 8px;font-weight:700;letter-spacing:.01em}
+.top p{margin:0;color:var(--ink-2)}
+
+/* sticky nav */
+nav.jump{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--paper) 92%,transparent);
+  backdrop-filter:saturate(1.2) blur(8px);-webkit-backdrop-filter:saturate(1.2) blur(8px);border-bottom:1px solid var(--line)}
+nav.jump .wrap{display:flex;gap:6px;padding-top:10px;padding-bottom:10px;overflow-x:auto;scrollbar-width:none}
+nav.jump .wrap::-webkit-scrollbar{display:none}
+nav.jump a{flex:0 0 auto;text-decoration:none;font-size:15px;color:var(--ink-2);padding:8px 14px;border-radius:999px;min-height:40px;display:inline-flex;align-items:center}
+nav.jump a:hover{background:var(--track)}
+nav.jump a.on{background:var(--ink);color:var(--paper)}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--petrol);outline-offset:2px;border-radius:8px}
+
+section{padding:56px 0 8px}
+section > .wrap > h2{font-size:26px;line-height:1.3;margin:0 0 6px;font-weight:700}
+.lead{margin:0 0 28px;color:var(--ink-2);max-width:40em}
+h3{font-size:18px;margin:40px 0 14px;font-weight:650}
+
+/* ① hero number */
+.goal{background:var(--surface);border-radius:var(--r-lg);padding:36px 36px 32px;border:1px solid var(--line)}
+.goal .what{font-size:17px;color:var(--ink-2);margin:0 0 18px}
+.nums{display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.num{line-height:1}
+.num b{display:block;font-size:76px;font-weight:300;letter-spacing:-.02em}
+.num span{display:block;font-size:14px;color:var(--ink-3);margin-top:10px}
+.num.to b{color:var(--petrol);font-weight:600}
+.bridge{flex:1 1 120px;min-width:90px;height:76px;position:relative;margin-bottom:24px}
+.bridge::before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:var(--line)}
+.bridge i{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-style:normal;font-size:14px;
+  background:var(--petrol-soft);color:var(--petrol);padding:4px 10px;border-radius:999px;white-space:nowrap}
+.goal .due{margin:22px 0 0;padding-top:18px;border-top:1px solid var(--line);display:flex;gap:24px;flex-wrap:wrap;color:var(--ink-2);font-size:15px}
+.gap-m{display:none}
+.goal .due strong{color:var(--ink);font-weight:600}
+
+.krs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.kr{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:20px}
+.kr .k{font-size:14px;color:var(--petrol);font-weight:600}
+.kr h4{margin:4px 0 14px;font-size:17px;line-height:1.4}
+.kr dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:15px}
+.kr dt{color:var(--ink-3)}
+.kr dd{margin:0}
+
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:s}
+.steps li{position:relative;padding:28px 16px 0 0}
+.steps li::before{content:"";position:absolute;left:0;right:0;top:8px;height:2px;background:var(--line)}
+.steps li::after{content:"";position:absolute;left:0;top:3px;width:12px;height:12px;border-radius:50%;background:var(--petrol)}
+.steps li:last-child::before{right:auto;width:12px}
+.steps .when{font-weight:650;font-size:16px;display:block;margin-bottom:4px}
+.steps p{margin:0;font-size:15px;color:var(--ink-2)}
+
+.risks{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.risks li{font-size:15px;color:var(--ink-2);padding-left:18px;position:relative}
+.risks li::before{content:"";position:absolute;left:2px;top:.7em;width:6px;height:6px;border-radius:50%;background:var(--doing)}
+.risks b{color:var(--ink);font-weight:600}
+
+/* ② KPI */
+.tally{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 22px}
+.tally span{font-size:15px;padding:6px 12px;border-radius:999px}
+.s-done{background:var(--done-soft);color:var(--done)}
+.s-doing{background:var(--doing-soft);color:var(--doing)}
+.s-push{background:var(--push-soft);color:var(--push)}
+.kpis{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+.kpi{display:grid;grid-template-columns:minmax(150px,1.1fr) minmax(170px,1.3fr) minmax(220px,1.6fr);gap:6px 24px;padding:20px 24px;border-top:1px solid var(--line);align-items:start}
+.kpi:first-child{border-top:0}
+.kpi.win{background:linear-gradient(90deg,var(--done-soft),transparent 70%)}
+.kpi .name{font-weight:650;font-size:16px}
+.kpi .w{display:block;font-size:14px;color:var(--ink-3);font-weight:400}
+.kpi .tgt{font-size:15px;color:var(--ink-2)}
+.kpi .tgt em{font-style:normal;display:block;font-size:14px;color:var(--ink-3)}
+.now{font-size:15px}
+.now strong{font-size:20px;font-weight:650;margin-right:4px}
+.now .d{color:var(--ink-3);font-size:14px}
+.now .sub{display:block;color:var(--ink-2);font-size:14px;margin-top:2px}
+.bar{display:flex;align-items:center;gap:10px;margin-top:8px}
+.bar .t{flex:1;height:8px;background:var(--track);border-radius:99px;overflow:hidden}
+.bar .t i{display:block;height:100%;border-radius:99px}
+.bar .tag{font-size:14px;padding:2px 10px;border-radius:99px;white-space:nowrap}
+.f-done{background:var(--done)} .f-doing{background:var(--doing)} .f-push{background:var(--push)}
+.pair + .pair{margin-top:12px}
+.ask{margin:6px 0 0;font-size:14px;color:var(--petrol)}
+
+/* ③ AI */
+.ai{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:20px;display:flex;flex-direction:column}
+.card h3{margin:0 0 6px;font-size:16px;line-height:1.4}
+.card p{margin:0 0 16px;font-size:15px;color:var(--ink-2);flex:1}
+.card .res{font-size:15px;margin:0 0 14px}
+.card .res b{font-size:22px;font-weight:650;color:var(--petrol);margin-right:4px}
+.card .go{display:flex;gap:8px;flex-wrap:wrap}
+.btn{font-size:14px;text-decoration:none;padding:7px 14px;border-radius:999px;background:var(--petrol-soft);color:var(--petrol);font-weight:600;min-height:36px;display:inline-flex;align-items:center}
+.btn:hover{background:var(--petrol);color:var(--surface)}
+.int{font-size:14px;color:var(--ink-3);padding:7px 14px;border-radius:999px;border:1px dashed var(--line);display:inline-flex;align-items:center}
+.more{margin:22px 0 0}
+
+footer{padding:48px 0 64px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:4px 20px}
+summary{cursor:pointer;font-size:15px;color:var(--ink-2);padding:12px 0;min-height:44px}
+details p{font-size:14px;color:var(--ink-2);margin:0 0 12px}
+.sign{margin:20px 0 0;font-size:14px;color:var(--ink-3)}
+
+@media (max-width:820px){
+  .krs,.ai{grid-template-columns:1fr 1fr}
+  .kpi{grid-template-columns:1fr 1fr}
+  .kpi .nowcol{grid-column:1 / -1}
+}
+@media (max-width:600px){
+  .wrap{padding:0 16px}
+  header.top{padding:36px 0 20px}
+  .top h1{font-size:27px}
+  section{padding:40px 0 4px}
+  section > .wrap > h2{font-size:23px}
+  .goal{padding:24px 20px}
+  .nums{flex-wrap:nowrap;gap:12px}
+  .num b{font-size:46px}
+  .bridge{height:46px;margin-bottom:24px;min-width:32px}
+  .bridge i{display:none}
+  .gap-m{display:inline}
+  .goal .due{gap:6px 20px}
+  .krs,.ai{grid-template-columns:1fr}
+  .kpi{grid-template-columns:1fr;padding:18px}
+  .steps{grid-template-columns:1fr}
+  .steps li{padding:0 0 22px 28px}
+  .steps li::before{left:5px;right:auto;top:14px;bottom:-6px;width:2px;height:auto}
+  .steps li::after{top:5px}
+  .steps li:last-child::before{display:none}
+}
+@media print{
+  body{background:#fff;font-size:12pt}
+  nav.jump{display:none}
+  section{padding-top:24px}
+  .goal,.kr,.kpis,.card,details{border-color:#ccc}
+  .kpi,.card,.kr,.goal,.steps li{break-inside:avoid}
+  .kpi.win{background:none}
+  details{display:block}
+  details > *{display:block}
+  #ai{break-before:page}
+}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <h1>给 Mina 的三件事</h1>
+  <p>OKR 拆解、Q4 KPI 进度、AI coding 成果。截至 2026-11-27，Oliver</p>
+</div></header>
+
+<nav class="jump" aria-label="章节"><div class="wrap">
+  <a href="#okr">① OKR 拆解</a>
+  <a href="#kpi">② Q4 KPI 进度</a>
+  <a href="#ai">③ AI coding 成果</a>
+</div></nav>
+
+<main>
+<section id="okr"><div class="wrap">
+  <h2>① OKR 拆解</h2>
+  <p class="lead">一个目标：让买过一次的 OEDRO 车主愿意回来再买。Cozeware 产品使用周期长，这一期只做小范围试点，不设复购率目标。</p>
+
+  <div class="goal">
+    <p class="what">OEDRO 复购率</p>
+    <div class="nums">
+      <div class="num"><b>27.6%</b><span>现在</span></div>
+      <div class="bridge" aria-hidden="true"><i>+2.4 个百分点</i></div>
+      <div class="num to"><b>30%</b><span>目标</span></div>
+    </div>
+    <div class="due">
+      <span>截止 <strong>2027-03-31</strong></span>
+      <span class="gap-m">还差 <strong>2.4 个百分点</strong></span>
+      <span>2026-12 起每月看一次</span>
+    </div>
+  </div>
+
+  <h3>三个关键结果</h3>
+  <div class="krs">
+    <div class="kr">
+      <div class="k">KR1</div>
+      <h4>复购率</h4>
+      <dl><dt>现在</dt><dd>27.6%</dd><dt>目标</dt><dd>30%</dd><dt>时间</dt><dd>2027-03-31</dd></dl>
+    </div>
+    <div class="kr">
+      <div class="k">KR2</div>
+      <h4>复购邮件流上线</h4>
+      <dl><dt>现在</dt><dd>0 条</dd><dt>目标</dt><dd>12 月底 2 条，1 月底 3 条</dd><dt>时间</dt><dd>2027-01-31</dd></dl>
+    </div>
+    <div class="kr">
+      <div class="k">KR3</div>
+      <h4>Discord 社群与车主故事</h4>
+      <dl><dt>现在</dt><dd>466 人；故事 0 个</dd><dt>目标</dt><dd>200 人；故事 1 个</dd><dt>时间</dt><dd>2026-12-31</dd></dl>
+    </div>
+  </div>
+
+  <h3>怎么推进</h3>
+  <ol class="steps">
+    <li><span class="when">11 月底</span><p>两品牌第 1 轮抽奖（11-27 至 12-04）；和曾篪定好复购率取数方法</p></li>
+    <li><span class="when">12 月</span><p>上线购后关怀、晒单邀请两条邮件流；改 Discord 入群领券入口；发布第 1 个车主故事</p></li>
+    <li><span class="when">1 月</span><p>上线 90 天未下单唤醒邮件；保养品小批量测试；积分商城进开发评审</p></li>
+    <li><span class="when">2–3 月</span><p>2 月中期复算并调整活动；3-31 同一算法复算复购率</p></li>
+  </ol>
+
+  <h3>要留意的三件事</h3>
+  <ul class="risks">
+    <li><b>算法不混用：</b>27.6% 按注册月份分组算，和 Klaviyo 里的 1.07% 不是一回事，全程只用一套。</li>
+    <li><b>单次活动看不出效果：</b>每个动作留一组不发的对照，按 90 天看回头单。</li>
+    <li><b>年底人手紧：</b>邮件流和社群动作排在日常内容之后，每周更新进度。</li>
+  </ul>
+</div></section>
+
+<section id="kpi"><div class="wrap">
+  <h2>② Q4 KPI 进度</h2>
+  <p class="lead">八项 KPI 11-18 已提交。离年底还有 34 天。</p>
+  <div class="tally">
+    <span class="s-done">2 项达成</span>
+    <span class="s-doing">5 项进行中</span>
+    <span class="s-push">1 项待发力</span>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi win">
+      <div class="name">社群人数<span class="w">权重 10%</span></div>
+      <div class="tgt">两个 Discord 合计 200 名外部成员</div>
+      <div class="nowcol">
+        <div class="now"><strong>466</strong>人 <span class="d">11-27</span>
+          <span class="sub">11-26 起两天新增 304 人</span></div>
+        <div class="bar"><div class="t"><i class="f-done" style="width:100%"></i></div><span class="tag s-done">达成 233%</span></div>
+      </div>
+    </div>
+
+    <div class="kpi">
+      <div class="name">Instagram 涨粉<span class="w">权重 5%</span></div>
+      <div class="tgt">OEDRO 净增 440<em>Cozeware 净增 340</em></div>
+      <div class="nowcol">
+        <div class="pair">
+          <div class="now"><strong>约 +650</strong>OEDRO <span class="d">11-27</span></div>
+          <div class="bar"><div class="t"><i class="f-done" style="width:100%"></i></div><span class="tag s-done">达成</span></div>
+        </div>
+        <div class="pair">
+          <div class="now"><strong>+6</strong>Cozeware <span class="d">11-27</span>
+            <span class="sub">靠 11-27 起的抽奖拉关注</span></div>
+          <div class="bar"><div class="t"><i class="f-push" style="width:2%"></i></div><span class="tag s-push">待发力</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kpi">
+      <div class="name">真实用户故事<span class="w">权重 10%</span></div>
+      <div class="tgt">1 个授权并发布的故事</div>
+      <div class="nowcol">
+        <div class="now"><strong>1</strong>个实车投稿 <span class="d">11-27</span>
+          <span class="sub">等作者授权后发布，目前计入 0 / 1</span></div>
+        <div class="bar"><span class="tag s-doing">进行中</span></div>
+      </div>
+    </div>
+
+    <div class="kpi">
+      <div class="name">用户调研<span class="w">权重 25%</span></div>
+      <div class="tgt">3 份合格研究报告</div>
+      <div class="nowcol">
+        <div class="now"><strong>0 / 3</strong><span class="d">11-27</span>
+          <span class="sub">问卷已试填；Hub 上另有 4 份研究成稿</span></div>
+        <div class="bar"><div class="t"><i class="f-push" style="width:4%"></i></div><span class="tag s-push">待发力</span></div>
+        <p class="ask">这 4 份能否计入，请你定</p>
+      </div>
+    </div>
+
+    <div class="kpi win">
+      <div class="name">AI 运营工具与流程<span class="w">权重 15%</span></div>
+      <div class="tgt">12-31 前在日常运营中用起来</div>
+      <div class="nowcol">
+        <div class="now"><strong>8</strong>项在用 <span class="d">11-27</span>
+          <span class="sub">见第三部分</span></div>
+        <div class="bar"><div class="t"><i class="f-done" style="width:100%"></i></div><span class="tag s-done">达成</span></div>
+      </div>
+    </div>
+
+    <div class="kpi">
+      <div class="name">X 试运营<span class="w">权重 10%</span></div>
+      <div class="tgt">持续发帖，交 1 份运营报告</div>
+      <div class="nowcol">
+        <div class="now"><strong>869</strong>帖 <span class="d">OEDRO，11-27</span>
+          <span class="sub">8,480 粉；运营报告 0 / 1</span></div>
+        <div class="bar"><span class="tag s-doing">进行中</span></div>
+      </div>
+    </div>
+
+    <div class="kpi">
+      <div class="name">长期 UGC 方案<span class="w">权重 15%</span></div>
+      <div class="tgt">交 1 套长期晒单激励方案</div>
+      <div class="nowcol">
+        <div class="now"><strong>已成文</strong><span class="d">11-27</span>
+          <span class="sub">晒单积分和积分商城方案；提交 0 / 1</span></div>
+        <div class="bar"><span class="tag s-doing">进行中</span></div>
+      </div>
+    </div>
+
+    <div class="kpi">
+      <div class="name">用户沟通<span class="w">权重 10%</span></div>
+      <div class="tgt">经官网、社媒、邮件邀约并跟进</div>
+      <div class="nowcol">
+        <div class="now"><strong>3 个</strong>渠道都在跑 <span class="d">11-27</span>
+          <span class="sub">Bruno 当天欢迎新成员 179 位；10-09 期刊发出 3,295 封</span></div>
+        <div class="bar"><span class="tag s-doing">进行中</span></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section id="ai"><div class="wrap">
+  <h2>③ AI coding 成果</h2>
+  <p class="lead">九个用 AI 编程助手做出来、已在日常运营里用的东西。</p>
+
+  <div class="ai">
+    <div class="card">
+      <h3>运营资料站</h3>
+      <p>内容规则、排期、素材原来散在各处，现在一个网址全找到。</p>
+      <div class="res"><b>77</b>个网页</div>
+      <div class="go"><a class="btn" href="https://hsbrxlb.github.io/user-ops-hub/index.html" target="_blank" rel="noopener">打开</a></div>
+    </div>
+    <div class="card">
+      <h3>官网 Blog 与问答编辑器</h3>
+      <p>官网改稿不用再等开发排期，浏览器里直接改。</p>
+      <div class="res"><b>46</b>篇指南和问答</div>
+      <div class="go"><a class="btn" href="https://hsbrxlb.github.io/user-ops-hub/oedro-editor/editor.html" target="_blank" rel="noopener">编辑器</a><a class="btn" href="https://hsbrxlb.github.io/user-ops-hub/ai-dev-guides.html" target="_blank" rel="noopener">成果页</a></div>
+    </div>
+    <div class="card">
+      <h3>Discord 机器人 Bruno</h3>
+      <p>自动欢迎新成员、答常见问题、发入群券，还记录入退群。</p>
+      <div class="res"><b>179</b>位新成员获欢迎（11-27）</div>
+      <div class="go"><a class="btn" href="https://hsbrxlb.github.io/user-ops-hub/ai-dev-bruno.html" target="_blank" rel="noopener">打开</a></div>
+    </div>
+    <div class="card">
+      <h3>周报自动起草</h3>
+      <p>每周日晚自动读本周记录起草钉钉周报，人工审后提交。</p>
+      <div class="res"><b>每周</b>自动运行，10-25 起</div>
+      <div class="go"><span class="int">内部工具</span></div>
+    </div>
+    <div class="card">
+      <h3>内容预审与每日内容池</h3>
+      <p>审稿标准写成固定检查，排期页每天自动更新。</p>
+      <div class="res"><b>每天</b>更新，11-13 起</div>
+      <div class="go"><a class="btn" href="https://hsbrxlb.github.io/user-ops-hub/feed-oedro.html" target="_blank" rel="noopener">排期</a><a class="btn" href="https://hsbrxlb.github.io/user-ops-hub/content-pool.html" target="_blank" rel="noopener">内容池</a></div>
+    </div>
+    <div class="card">
+      <h3>客户数据看板</h3>
+      <p>后台看不出谁买了几次，现在按次数、金额一眼看清。</p>
+      <div class="res"><b>511,392</b>位客户</div>
+      <div class="go"><a class="btn" href="https://hsbrxlb.github.io/user-ops-hub/customer-analytics.html" target="_blank" rel="noopener">打开</a></div>
+    </div>
+    <div class="card">
+      <h3>优惠券工具</h3>
+      <p>建券、查券、发子码不用再进后台逐项核对。</p>
+      <div class="res"><b>满 $200 减 $30</b>入群券由它配置</div>
+      <div class="go"><span class="int">内部工具</span></div>
+    </div>
+    <div class="card">
+      <h3>任务调度与资料同步</h3>
+      <p>多个 AI 任务自动排队运行，电脑和云端资料每天同步。</p>
+      <div class="res"><b>1,478</b>份文件保持一致</div>
+      <div class="go"><span class="int">内部工具</span></div>
+    </div>
+    <div class="card">
+      <h3>两品牌产品知识库</h3>
+      <p>官网、说明书、FAQ 里的产品资料，逐个商品整理成库。</p>
+      <div class="res"><b>每周日</b>自动更新</div>
+      <div class="go"><span class="int">内部工具</span></div>
+    </div>
+  </div>
+  <p class="more"><a class="btn" href="https://hsbrxlb.github.io/user-ops-hub/ai-dev.html" target="_blank" rel="noopener">看全部 AI 成果演示</a></p>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <details>
+    <summary>数字怎么算的</summary>
+    <p>复购率 27.6%：2026-03-01 至 05-31 注册的 3,688 位客户里，2,446 位下过单，其中 674 位下了 2 单及以上（订单算到 2026-11-25）。前一季注册客户同样算法为 28.5%，2025 年 3 月起各月在 26%–32% 之间。</p>
+    <p>社群人数：本季入群且仍在群的外部账号，OEDRO 415 + Cozeware 52，去掉跨服重复 1 人，内部账号已剔除。</p>
+    <p>Instagram：起点为 11-17 的 OEDRO 45,650、Cozeware 5,324；OEDRO 主页 11-27 显示 46.3K（取整）。</p>
+  </details>
+  <p class="sign">Oliver，2026-11-27</p>
+</div></footer>
+
+<script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('nav.jump a'));
+  if(!('IntersectionObserver' in window))return;
+  var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.remove('on')});map[e.target.id].classList.add('on');}});
+  },{rootMargin:'-40% 0px -55% 0px'});
+  ['okr','kpi','ai'].forEach(function(id){io.observe(document.getElementById(id))});
+})();
+</script>
+</body>
+</html>
