@@ -171,3 +171,7 @@ node scripts/check-email-templates.js
 “下载 Markdown”在浏览器本地生成当前分类、品牌及资料状态筛选下的全部记录，包含所有分页。文件保留清单、分类元信息与每条产品的完整 JSON 字段，供 AI 读取；价格库存是原抓取时快照。无上传或模型调用。验证：`node scripts/check-product-library.js` 和 `node scripts/check-products.js`。
 
 Cozeware Post Schedule（`feed-cozeware.html`）里的 FreshFlow 帖子每次更新后都从 Cozeware Content Plan 的 Schedule 表读取 Date（B）、Post ID（E）及 Link（T）。保留每条标有 `freshflow` 用途的帖子的对应行，空链接写空值，链接单元格优先取实际超链接。把这些行转换成含 `day`、`id`、`url` 的 JSON 数组（`day` 用 `YYYY-MM-DD`），通过标准输入交给 `node scripts/update-freshflow-schedule-links.js`，再检查提交差异。脚本按 ID 和日期匹配，只在有网址的卡片下显示链接，旧链接清空后也会移除。
+
+## 发帖团队专页 · Posting-team pages
+
+`scripts/build-team-pages.py`（由 `scripts/build-public.sh` 调用）在构建时把 `feed-oedro.html`、`feed-cozeware.html` 复制成不带侧栏和 Hub 链接的隐藏页，路径写在 `team-pages.json`（随机、固定不变）。这两页由排期页自动生成，禁止手改；给团队的链接就是这两个 URL，不要给 Hub 首页。路径不进 robots、不进任何 Hub 页面。

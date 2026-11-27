@@ -1,0 +1,7 @@
+{
+  "_note": "Generated at build time from the feed pages by scripts/build-team-pages.py. Paths are unguessable and stay stable; never edit the generated pages by hand.",
+  "pages": [
+    {"source": "feed-oedro.html", "path": "t/757cdaff170c1327/oedro", "title": "OEDRO Post Schedule"},
+    {"source": "feed-cozeware.html", "path": "t/060f88dad4f2ccac/cozeware", "title": "Cozeware Post Schedule"}
+  ]
+}
