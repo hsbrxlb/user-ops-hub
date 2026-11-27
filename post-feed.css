@@ -112,8 +112,17 @@
 #content .schedule-dates a[aria-current] :is(.date-week, .date-count) { color: rgba(251, 248, 242, .72); }
 #content .schedule-dates a[aria-current][data-today]::after { background: #ff8a72; }
 
-/* Purpose chips: one quiet row that scrolls sideways. */
-.schedule-filter { gap: 8px; }
+/* Purpose chips: wrap onto as many lines as needed so every one is visible, no sideways scroll. */
+.schedule-filter {
+  flex-wrap: wrap;
+  gap: 8px;
+  overflow: visible;
+  -webkit-mask-image: none;
+  mask-image: none;
+  scroll-snap-type: none;
+  padding: 2px 0;
+  margin-inline: 0;
+}
 .schedule-filter button,
 .post-purpose li {
   display: inline-flex;
@@ -393,10 +402,12 @@
   .main-content.feed-schedule-main { padding-top: 24px; }
   .schedule-zh { font-size: 17px; }
   .schedule-bar { gap: 10px; padding: 10px 0 12px; }
-  .schedule-dates, .schedule-filter { padding-inline: 16px; margin-inline: -20px; }
+  .schedule-dates { padding-inline: 16px; margin-inline: -20px; }
+  .schedule-filter { gap: 6px; padding-inline: 0; margin-inline: 0; }
+  .schedule-bar { position: static; }
   #content .schedule-dates a { width: 56px; min-height: 70px; border-radius: 12px; }
   .schedule-dates .date-num { font-size: 26px; }
-  .schedule-filter button { min-height: 36px; }
+  .schedule-filter button { min-height: 36px; padding-left: 12px; }
   .feed-day { scroll-margin-top: 200px; }
   #content .feed-day > h2 { margin: 44px 0 16px; }
   .day-numeral { font-size: 48px; }
