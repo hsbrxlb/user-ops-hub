@@ -4,8 +4,11 @@ const categories = new Set(['bed-covers','running-boards','floor-mats','bumpers'
 const articleKeys = new Set(['slug','title','category','description','intro','bodyHtml','related','factNotes','id','seoTitle','categoryLabel','author','publishedAt','modifiedAt','readingMinutes','cover','sections','sources','productLinks','status','sortOrder','publication','approval','featureImage','featuredLinkLabel','navigationLabel']);
 const faqKeys = new Set(['id','category','question','answerHtml','related','sources','status','sortOrder','approval']);
 const faqCategories = new Set(['Buying & fitment','Care & troubleshooting','Installation & safety','Measuring','Orders','Returns & warranty','Shipping']);
-const tags = new Set(['p','h2','h3','a','ul','ol','li','strong','em','br','blockquote','figure','figcaption','img']);
-const attributes = new Set(['id','href','target','rel','src','alt','width','height','loading']);
+const tags = new Set(['p','h2','h3','h4','h5','h6','a','ul','ol','li','strong','em','br','blockquote','figure','figcaption','img']);
+const attributes = new Set(['id','href','target','rel','src','alt','width','height','loading','class','style']);
+// Text blocks may carry the editor's text style: class="ts" with PC/M sizes, a hex colour and a weight, nothing else.
+const styledTags = new Set(['p','h2','h3','h4','h5','h6']);
+const textStyle = /^(?:--ts-pc:(?:[89]|[1-9][0-9]|1[01][0-9]|120);--ts-m:(?:[89]|[1-9][0-9]|1[01][0-9]|120))?(?:(?:^|;)color:#[0-9a-f]{6})?(?:(?:^|;)font-weight:(?:400|500|700))?$/;
 // Body images are local site assets inside a figure; size attributes keep the layout stable.
 const imageAttributes = new Set(['src','alt','width','height','loading']);
 function requireText(value, label) {
@@ -57,9 +60,13 @@ function validateHTML(html, label) {
       if (key === 'src' && !/^assets\/[a-zA-Z0-9_-]+\.(?:jpg|jpeg|png|svg|webp)$/.test(value)) throw new Error(`Invalid body image path: ${label}`);
       if ((key === 'width' || key === 'height') && !/^[1-9][0-9]{0,4}$/.test(value)) throw new Error(`Invalid body image size: ${label}`);
       if (key === 'loading' && value !== 'lazy') throw new Error(`Unsupported image loading: ${label}`);
+      if ((key === 'class' || key === 'style') && !styledTags.has(name)) throw new Error(`Unsupported HTML attribute: ${label}`);
+      if (key === 'class' && value !== 'ts') throw new Error(`Unsupported text class: ${label}`);
+      if (key === 'style' && (!value || !textStyle.test(value))) throw new Error(`Unsupported text style: ${label}`);
       rest = rest.slice(attr[0].length);
     }
     if (name === 'img' && !['src','alt','width','height'].every(key=>seen.has(key))) throw new Error(`Body image needs src, alt, width and height: ${label}`);
+    if (seen.has('class') !== /\bstyle=(["'])--ts-pc:/.test(token)) throw new Error(`Text size needs class="ts" and both sizes: ${label}`);
   }
   if (html.replace(/<[^<>]+>/g,'').includes('<')) throw new Error(`Malformed HTML: ${label}`);
 }

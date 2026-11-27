@@ -70,6 +70,7 @@
       <button type="button" data-cmd="paragraph" title="正文" aria-label="正文"><span class="t-txt">正文</span></button>
       <button type="button" data-cmd="h2" title="小标题 (⌘⌥2)" aria-label="小标题"><span class="t-txt">H2</span></button>
       <button type="button" data-cmd="h3" title="子标题 (⌘⌥3)" aria-label="子标题"><span class="t-txt">H3</span></button>
+      <button type="button" data-cmd="style" id="style-btn" title="文字样式：SEO 标签、字号、颜色、字重" aria-label="文字样式" aria-haspopup="dialog" aria-expanded="false" aria-controls="stylepop"><span class="t-txt t-aa">Aa</span></button>
       <span class="t-sep" aria-hidden="true"></span>
       <button type="button" data-cmd="bold" title="加粗 (⌘B)" aria-label="加粗"><b>B</b></button>
       <button type="button" data-cmd="italic" title="斜体 (⌘I)" aria-label="斜体"><i>I</i></button>
@@ -124,6 +125,7 @@
       <div class="pane-bar">
         <div class="seg" role="group" aria-label="预览设备">
           <button type="button" data-device="desktop" aria-pressed="true">电脑</button>
+          <button type="button" data-device="wide" aria-pressed="false" title="屏宽 1920px，字号按 PC 设置显示">大屏</button>
           <button type="button" data-device="mobile" aria-pressed="false">手机</button>
         </div>
         <p class="pane-note">和正式文章页用同一套模板与样式</p>
@@ -231,6 +233,71 @@
     <button type="button" class="btn-primary small" id="link-apply">应用</button>
   </div>
 </div>
+
+<section class="pop stylepop" id="stylepop" role="dialog" aria-labelledby="style-title" hidden>
+  <div class="sp-head">
+    <h2 id="style-title">文字样式 <span class="sp-what" id="sp-what"></span></h2>
+    <button type="button" class="sp-reset" id="sp-reset">恢复默认</button>
+    <button type="button" class="icon-btn" id="sp-close" aria-label="关闭文字样式"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg></button>
+  </div>
+  <p class="sp-note" id="sp-note" hidden></p>
+  <div class="sp-body" id="sp-body">
+    <div class="sp-sec">
+      <h3 class="sp-label" id="sp-tag-label">SEO 标签</h3>
+      <div class="sp-seg sp-tags" role="radiogroup" aria-labelledby="sp-tag-label" id="sp-tags">
+        <button type="button" role="radio" data-tag="h1" aria-checked="false" aria-disabled="true" title="文章标题已经是 H1，一页只用一个 H1">H1</button>
+        <button type="button" role="radio" data-tag="h2" aria-checked="false">H2</button>
+        <button type="button" role="radio" data-tag="h3" aria-checked="false">H3</button>
+        <button type="button" role="radio" data-tag="h4" aria-checked="false">H4</button>
+        <button type="button" role="radio" data-tag="h5" aria-checked="false">H5</button>
+        <button type="button" role="radio" data-tag="h6" aria-checked="false">H6</button>
+        <button type="button" role="radio" data-tag="p" aria-checked="false">p</button>
+      </div>
+      <p class="sp-hint">标签给搜索引擎看结构；外观在下面单独设置</p>
+    </div>
+    <div class="sp-sec">
+      <h3 class="sp-label">字号</h3>
+      <div class="sp-size" data-size="sizePc">
+        <div class="sp-size-row">
+          <label for="sp-pc"><b>PC</b><small>屏宽 ≥ 1920px 时的字号</small></label>
+          <div class="sp-step"><button type="button" data-step="-1" aria-label="PC 字号减小">−</button><input id="sp-pc" inputmode="numeric" autocomplete="off" aria-describedby="sp-pc-unit"><span id="sp-pc-unit">px</span><button type="button" data-step="1" aria-label="PC 字号增大">+</button></div>
+        </div>
+        <div class="sp-chips" role="group" aria-label="PC 常用字号"><button type="button" data-preset="">默认</button><button type="button" data-preset="16">16</button><button type="button" data-preset="18">18</button><button type="button" data-preset="20">20</button><button type="button" data-preset="24">24</button><button type="button" data-preset="28">28</button><button type="button" data-preset="32">32</button><button type="button" data-preset="40">40</button></div>
+      </div>
+      <div class="sp-size" data-size="sizeM">
+        <div class="sp-size-row">
+          <label for="sp-m"><b>M</b><small>手机，屏宽 ≤ 760px 时的字号</small></label>
+          <div class="sp-step"><button type="button" data-step="-1" aria-label="手机字号减小">−</button><input id="sp-m" inputmode="numeric" autocomplete="off" aria-describedby="sp-m-unit"><span id="sp-m-unit">px</span><button type="button" data-step="1" aria-label="手机字号增大">+</button></div>
+        </div>
+        <div class="sp-chips" role="group" aria-label="手机常用字号"><button type="button" data-preset="">默认</button><button type="button" data-preset="11">11</button><button type="button" data-preset="12">12</button><button type="button" data-preset="13">13</button><button type="button" data-preset="15">15</button><button type="button" data-preset="16">16</button><button type="button" data-preset="18">18</button><button type="button" data-preset="20">20</button></div>
+      </div>
+      <p class="sp-hint">两者之间的屏宽按比例过渡</p>
+    </div>
+    <div class="sp-sec">
+      <h3 class="sp-label" id="sp-color-label">颜色</h3>
+      <div class="sp-colors" role="group" aria-labelledby="sp-color-label">
+        <button type="button" class="sp-swatch" data-color="" aria-label="默认颜色" title="默认"></button>
+        <button type="button" class="sp-swatch" data-color="#212121" aria-label="深灰 #212121" style="--c:#212121"></button>
+        <button type="button" class="sp-swatch" data-color="#087bb9" aria-label="品牌蓝 #087BB9" style="--c:#087bb9"></button>
+        <button type="button" class="sp-swatch" data-color="#5d6670" aria-label="灰 #5D6670" style="--c:#5d6670"></button>
+        <button type="button" class="sp-swatch" data-color="#d92d20" aria-label="红 #D92D20" style="--c:#d92d20"></button>
+        <button type="button" class="sp-swatch" data-color="#f57c00" aria-label="橙 #F57C00" style="--c:#f57c00"></button>
+        <button type="button" class="sp-swatch" data-color="#ffffff" aria-label="白 #FFFFFF" style="--c:#ffffff"></button>
+        <label class="sp-swatch sp-custom" title="自定义颜色"><input type="color" id="sp-picker" aria-label="自定义颜色"></label>
+        <label class="sp-hex"><span class="sr-only">颜色代码</span><input id="sp-hex" maxlength="7" spellcheck="false" autocomplete="off" placeholder="#161B20"></label>
+      </div>
+    </div>
+    <div class="sp-sec">
+      <h3 class="sp-label" id="sp-weight-label">字重</h3>
+      <div class="sp-seg" role="radiogroup" aria-labelledby="sp-weight-label" id="sp-weights">
+        <button type="button" role="radio" data-weight="400" aria-checked="false">Regular</button>
+        <button type="button" role="radio" data-weight="500" aria-checked="false">Medium</button>
+        <button type="button" role="radio" data-weight="700" aria-checked="false">Bold</button>
+      </div>
+    </div>
+    <button type="button" class="btn-secondary sp-sync" id="sp-sync">同步到本页其他同类元素</button>
+  </div>
+</section>
 
 <dialog class="sheet" id="library" aria-labelledby="library-title">
   <div class="sheet-head"><h2 id="library-title">站点图库</h2><button type="button" class="icon-btn" data-close aria-label="关闭"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg></button></div>

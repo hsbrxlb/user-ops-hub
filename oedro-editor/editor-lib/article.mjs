@@ -37,6 +37,61 @@ export function linkProblem(href) {
   } catch { return '链接地址格式不对'; }
 }
 
+/* ---------- text style (SEO tag and look are stored separately) ---------- */
+
+/**
+ * A text block keeps its semantic tag in the node (paragraph, or heading level 2-6) and its look in
+ * attrs.sizePc / sizeM / color / weight. null means "follow site.css", so older drafts render exactly as before.
+ * These defaults mirror site.css for .article-body at 1920px (pc) and at 760px and below (m).
+ */
+export const TEXT_DEFAULTS = {
+  p: { pc: 18, m: 18, weight: 400 },
+  h2: { pc: 24, m: 24, weight: 500 },
+  h3: { pc: 21, m: 21, weight: 500 },
+  h4: { pc: 18, m: 18, weight: 500 },
+  h5: { pc: 16, m: 16, weight: 500 },
+  h6: { pc: 15, m: 15, weight: 500 }
+};
+export const TEXT_TAGS = ['p', 'h2', 'h3', 'h4', 'h5', 'h6'];
+export const TEXT_WEIGHTS = [400, 500, 700];
+export const TEXT_COLOR_DEFAULT = '#161b20';
+export const SIZE_MIN = 8, SIZE_MAX = 120;
+export const STYLE_KEYS = ['sizePc', 'sizeM', 'color', 'weight'];
+
+export const textTag = node => node?.type === 'heading' ? `h${[2, 3, 4, 5, 6].includes(node.attrs?.level) ? node.attrs.level : 2}` : 'p';
+export const cleanSize = v => { const n = Math.round(Number(v)); return v !== null && v !== '' && Number.isFinite(n) && n >= SIZE_MIN && n <= SIZE_MAX ? n : null; };
+export const cleanColor = v => { const m = String(v ?? '').trim().toLowerCase().match(/^#?([0-9a-f]{6}|[0-9a-f]{3})$/); if (!m) return null; const h = m[1].length === 3 ? [...m[1]].map(c => c + c).join('') : m[1]; return `#${h}`; };
+export const cleanWeight = v => TEXT_WEIGHTS.includes(Number(v)) ? Number(v) : null;
+/** The explicit look of a block with invalid values dropped; empty object = site default. */
+export function textStyle(attrs = {}) {
+  const out = {};
+  const pc = cleanSize(attrs.sizePc), m = cleanSize(attrs.sizeM), color = cleanColor(attrs.color), weight = cleanWeight(attrs.weight);
+  if (pc !== null) out.sizePc = pc;
+  if (m !== null) out.sizeM = m;
+  if (color) out.color = color;
+  if (weight !== null) out.weight = weight;
+  return out;
+}
+/**
+ * HTML attributes for a styled block: class="ts" turns on the responsive size rule in site.css
+ * (M at 760px and below, PC at 1920px and above, linear in between); color and weight are plain declarations.
+ */
+export function styleAttrs(attrs, tag) {
+  const s = textStyle(attrs), d = TEXT_DEFAULTS[tag] || TEXT_DEFAULTS.p;
+  const decl = [];
+  const sized = s.sizePc !== undefined || s.sizeM !== undefined;
+  if (sized) decl.push(`--ts-pc:${s.sizePc ?? d.pc}`, `--ts-m:${s.sizeM ?? d.m}`);
+  if (s.color) decl.push(`color:${s.color}`);
+  if (s.weight !== undefined) decl.push(`font-weight:${s.weight}`);
+  return decl.length ? `${sized ? ' class="ts"' : ''} style="${decl.join(';')}"` : '';
+}
+/** Reads the look back from published HTML (style="--ts-pc:40;--ts-m:18;color:#…;font-weight:700"). */
+export function parseStyleAttr(style) {
+  const v = String(style || '');
+  const get = re => v.match(re)?.[1] ?? null;
+  return textStyle({ sizePc: get(/--ts-pc:\s*(\d+)/), sizeM: get(/--ts-m:\s*(\d+)/), color: get(/(?:^|;)\s*color:\s*(#[0-9a-f]{3,6})\b/i), weight: get(/font-weight:\s*(\d{3})/) });
+}
+
 /* ---------- document → site HTML ---------- */
 
 function inlineHtml(nodes = [], ctx) {
@@ -75,10 +130,10 @@ function blockHtml(node, ctx) {
   switch (node.type) {
     case 'paragraph': {
       const inner = inlineHtml(node.content, ctx);
-      return inner.replace(/<br>/g, '').trim() ? `<p>${inner}</p>` : '';
+      return inner.replace(/<br>/g, '').trim() ? `<p${styleAttrs(node.attrs, 'p')}>${inner}</p>` : '';
     }
     case 'heading': {
-      const level = node.attrs?.level === 3 ? 3 : 2;
+      const level = Number(textTag(node).slice(1));
       const title = textOf(node).trim();
       if (!title) return '';
       const wanted = isSlug(node.attrs?.id) ? node.attrs.id : (slugify(title) || 'section');
@@ -87,7 +142,7 @@ function blockHtml(node, ctx) {
       ctx.ids.add(id);
       ctx.headings.push(level);
       if (level === 2) ctx.sections.push({ id, title });
-      return `<h${level} id="${id}">${inlineHtml(node.content, ctx)}</h${level}>`;
+      return `<h${level} id="${id}"${styleAttrs(node.attrs, `h${level}`)}>${inlineHtml(node.content, ctx)}</h${level}>`;
     }
     case 'bulletList':
     case 'orderedList': {

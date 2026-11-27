@@ -88,3 +88,9 @@ html:not(.js) .oedro-editorial .filter-bar{display:none}
 @media(min-width:1051px){.oedro-editorial [data-filter-kind=guides] .topic-tabs{flex-shrink:0}.oedro-editorial [data-filter-kind=guides] .search-field:focus-within,.oedro-editorial [data-filter-kind=guides] .search-field:has(input:not(:placeholder-shown)){flex:0 1 400px;min-width:176px}}
 /* Article header at 1051-1700px: the cover column gives way so the byline stays on one line, as in the design file. */
 @media(min-width:1051px){.oedro-editorial .article-header{grid-template-columns:minmax(0,1fr) minmax(0,min(800px,50%))}}
+/* Body headings h4-h6 for the editor's SEO tag choice; h2/h3 keep their existing look. */
+.oedro-editorial .article-body h4,.oedro-editorial .article-body h5,.oedro-editorial .article-body h6{font-family:OedroRoboto,sans-serif;font-weight:500;line-height:1.4;scroll-margin-top:36px}.oedro-editorial .article-body h5{font-size:16px;margin:22px 0 10px}.oedro-editorial .article-body h6{font-size:15px;margin:20px 0 10px}
+/* Editor text style: class="ts" with --ts-pc / --ts-m (px, unitless). M at 760px and below, PC at 1920px and above, linear in between. */
+.oedro-editorial .article-body .ts{font-size:calc(var(--ts-m)*1px + (var(--ts-pc) - var(--ts-m))*(100vw - 760px)/1160);line-height:1.4}.oedro-editorial .article-body :is(h2,h3,h4,h5,h6).ts{line-height:1.25}
+@media(max-width:760px){.oedro-editorial .article-body .ts{font-size:calc(var(--ts-m)*1px)}}
+@media(min-width:1920px){.oedro-editorial .article-body .ts{font-size:calc(var(--ts-pc)*1px)}}

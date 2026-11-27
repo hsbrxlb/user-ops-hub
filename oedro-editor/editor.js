@@ -71,6 +71,28 @@ const HeadingId = Extension.create({
   }
 });
 
+// Text style: the block's look (PC/M size, colour, weight) lives in its own attributes, separate from the SEO tag.
+// Published HTML carries it as class="ts" style="--ts-pc:…;--ts-m:…;color:…;font-weight:…" (see article.mjs).
+const BlockStyle = Extension.create({
+  name: 'blockStyle',
+  addGlobalAttributes() {
+    const fromEl = (el, key) => {
+      const data = el.getAttribute(`data-${key.replace(/[A-Z]/g, c => `-${c.toLowerCase()}`)}`);
+      if (data !== null) return A.textStyle({ [key]: data })[key] ?? null;
+      return A.parseStyleAttr(el.getAttribute('style'))[key] ?? null;
+    };
+    return [{
+      types: ['paragraph', 'heading'],
+      attributes: {
+        sizePc: { default: null, parseHTML: el => fromEl(el, 'sizePc'), renderHTML: a => a.sizePc ? { 'data-size-pc': a.sizePc, style: `font-size:${a.sizePc}px` } : {} },
+        sizeM: { default: null, parseHTML: el => fromEl(el, 'sizeM'), renderHTML: a => a.sizeM ? { 'data-size-m': a.sizeM } : {} },
+        color: { default: null, parseHTML: el => fromEl(el, 'color'), renderHTML: a => a.color ? { 'data-color': a.color, style: `color:${a.color}` } : {} },
+        weight: { default: null, parseHTML: el => fromEl(el, 'weight'), renderHTML: a => a.weight ? { 'data-weight': a.weight, style: `font-weight:${a.weight}` } : {} }
+      }
+    }];
+  }
+});
+
 function imageAttrs(img, caption) {
   const src = img.getAttribute('src') || '';
   if (!/^assets\/[a-zA-Z0-9_-]+\.(?:jpg|jpeg|png|svg|webp)$/.test(src)) return false;
@@ -215,6 +237,8 @@ function cleanPastedHTML(html) {
     for (const a of [...el.attributes]) {
       if (['href', 'src', 'alt', 'width', 'height'].includes(a.name) && ['A', 'IMG'].includes(el.tagName)) continue;
       if ((el.tagName === 'H2' || el.tagName === 'H3') && a.name === 'id') continue;
+      // text style copied inside the editor
+      if (/^(P|H[1-6])$/.test(el.tagName) && ['data-size-pc', 'data-size-m', 'data-color', 'data-weight'].includes(a.name)) continue;
       el.removeAttribute(a.name); cleaned++;
     }
   });
@@ -256,11 +280,11 @@ function pickImage() { imageTarget = editor.state.selection.from; $('#image-file
 /* ================= editor ================= */
 const EXTENSIONS = [
       StarterKit.configure({
-        heading: { levels: [2, 3] }, code: false, codeBlock: false, horizontalRule: false, strike: false, underline: false, link: false
+        heading: { levels: [2, 3, 4, 5, 6] }, code: false, codeBlock: false, horizontalRule: false, strike: false, underline: false, link: false
       }),
       // typing right after a link must not extend it
       Link.extend({ inclusive: () => false }).configure({ openOnClick: false, autolink: true, linkOnPaste: true, defaultProtocol: 'https', protocols: ['https'], HTMLAttributes: { rel: null, target: null } }),
-      HeadingId, Figure, Slash,
+      HeadingId, BlockStyle, Figure, Slash,
       Placeholder.configure({ placeholder: ({ node }) => node.type.name === 'heading' ? '小标题' : '输入正文，或输入 / 插入标题、列表、图片', includeChildren: false })
 ];
 function makeEditor() {
@@ -310,6 +334,7 @@ $('#toolbar').addEventListener('click', e => {
   const cmd = b.dataset.cmd;
   if (cmd === 'link') return openLink();
   if (cmd === 'image') return pickImage();
+  if (cmd === 'style') return toggleStyle();
   CMDS[cmd](editor.chain().focus()).run();
 });
 function paintToolbar() {
@@ -325,7 +350,154 @@ function paintToolbar() {
     if (c === 'undo') b.disabled = !editor.can().undo();
     if (c === 'redo') b.disabled = !editor.can().redo();
   }
+  paintStyle();
 }
+
+/* ---------- text style panel ---------- */
+const stylePop = $('#stylepop'), styleBtn = $('#style-btn');
+const isText = n => n.type.name === 'paragraph' || n.type.name === 'heading';
+/** Blocks the panel edits: every paragraph or heading touched by the selection, except text inside lists. */
+function styleTargets() {
+  const { state } = editor, { from, to, $from } = state.selection;
+  const list = [];
+  let inList = false;
+  state.doc.nodesBetween(from, to, (node, pos, parent) => {
+    if (isText(node)) { if (parent?.type.name === 'listItem') inList = true; else list.push({ node, pos }); return false; }
+    return node.type.name !== 'figure';
+  });
+  if (!list.length && !inList && isText($from.parent) && $from.depth === 1) list.push({ node: $from.parent, pos: $from.before() });
+  return { list, inList };
+}
+/** Other blocks with the same tag (outside lists), for “同步到本页其他同类元素”. */
+function sameKind(tag, skip) {
+  const out = [];
+  editor.state.doc.descendants((node, pos, parent) => {
+    if (isText(node)) { if (parent?.type.name !== 'listItem' && A.textTag(node.toJSON()) === tag && !skip.has(pos) && node.textContent.trim()) out.push({ node, pos }); return false; }
+    return node.type.name !== 'figure';
+  });
+  return out;
+}
+function setStyle(patch, list = styleTargets().list) {
+  if (!list.length) return;
+  const tr = editor.state.tr;
+  for (const { node, pos } of list) tr.setNodeMarkup(pos, undefined, { ...node.attrs, ...patch });
+  editor.view.dispatch(tr);
+}
+function setTag(tag) {
+  const { list } = styleTargets(); if (!list.length) return;
+  const { heading, paragraph } = editor.schema.nodes;
+  const tr = editor.state.tr;
+  for (const { node, pos } of list) {
+    const keep = Object.fromEntries(A.STYLE_KEYS.map(k => [k, node.attrs[k] ?? null]));
+    if (tag === 'p') tr.setNodeMarkup(pos, paragraph, keep);
+    else tr.setNodeMarkup(pos, heading, { ...keep, level: Number(tag.slice(1)), id: node.type === heading ? node.attrs.id : null });
+  }
+  editor.view.dispatch(tr);
+}
+const TAG_NAMES = { p: '正文段落', h2: '小标题', h3: '子标题', h4: '四级标题', h5: '五级标题', h6: '六级标题' };
+function paintStyle() {
+  if (!editor || stylePop.hidden) return;
+  const { list, inList } = styleTargets();
+  const first = list[0]?.node;
+  const disabled = !first;
+  $('#sp-body').classList.toggle('is-off', disabled);
+  for (const el of $$('button,input', $('#sp-body'))) el.disabled = disabled;
+  $('#sp-reset').disabled = disabled;
+  const note = $('#sp-note');
+  note.hidden = !disabled;
+  note.textContent = inList ? '列表里的文字跟随列表样式。把光标放到段落或标题上再调整。' : '把光标放到正文的段落或标题上，就可以调整它的样式。';
+  if (disabled) { $('#sp-what').textContent = ''; return; }
+  const json = first.toJSON();
+  const tag = A.textTag(json), d = A.TEXT_DEFAULTS[tag], st = A.textStyle(first.attrs);
+  $('#sp-what').textContent = list.length > 1 ? `· 已选 ${list.length} 段` : `· ${TAG_NAMES[tag]}`;
+  for (const b of $$('[data-tag]', stylePop)) b.setAttribute('aria-checked', String(b.dataset.tag === tag));
+  for (const box of $$('[data-size]', stylePop)) {
+    const key = box.dataset.size, value = st[key], input = $('input', box), def = key === 'sizePc' ? d.pc : d.m;
+    if (document.activeElement !== input) input.value = String(value ?? def);
+    input.classList.toggle('is-default', value === undefined);
+    for (const c of $$('[data-preset]', box)) c.setAttribute('aria-pressed', String(c.dataset.preset === '' ? value === undefined : Number(c.dataset.preset) === value));
+    $('[data-preset=""]', box).textContent = '默认';
+    $('[data-preset=""]', box).title = `默认 ${def}px`;
+  }
+  const color = st.color || '';
+  for (const b of $$('[data-color]', stylePop)) b.setAttribute('aria-pressed', String(b.dataset.color === color));
+  const custom = color && !$$('[data-color]', stylePop).some(b => b.dataset.color === color);
+  $('.sp-custom', stylePop).classList.toggle('is-on', Boolean(custom));
+  $('.sp-custom', stylePop).style.setProperty('--c', custom ? color : '');
+  $('#sp-picker').value = color || A.TEXT_COLOR_DEFAULT;
+  if (document.activeElement !== $('#sp-hex')) $('#sp-hex').value = color.toUpperCase();
+  const weight = st.weight ?? d.weight;
+  for (const b of $$('[data-weight]', stylePop)) b.setAttribute('aria-checked', String(Number(b.dataset.weight) === weight));
+  const others = sameKind(tag, new Set(list.map(t => t.pos))).length;
+  const sync = $('#sp-sync');
+  sync.textContent = `同步到本页其他同类元素（${others} 处）`;
+  sync.disabled = !others;
+  $('#sp-reset').disabled = !Object.keys(st).length && list.every(t => !Object.keys(A.textStyle(t.node.attrs)).length);
+}
+function placeStyle() {
+  if (stylePop.hidden) return;
+  const paper = $('.paper');
+  paper.style.paddingRight = '';
+  if (innerWidth <= 640) { stylePop.style.left = stylePop.style.top = ''; return; }
+  const write = $('#write').getBoundingClientRect(), bar = $('#toolbar').getBoundingClientRect();
+  const w = stylePop.offsetWidth, left = Math.max(8, Math.min(write.right - w - 12, innerWidth - w - 8));
+  stylePop.style.left = `${left}px`;
+  stylePop.style.top = `${bar.bottom + 8}px`;
+  // keep the text being styled visible beside the panel
+  const pr = paper.getBoundingClientRect(), pad = parseFloat(getComputedStyle(paper).paddingRight) || 0;
+  const overlap = pr.right - pad - (left - 16);
+  if (overlap > 0) paper.style.paddingRight = `${pad + overlap}px`;
+}
+function toggleStyle(open = stylePop.hidden) {
+  stylePop.hidden = !open;
+  styleBtn.setAttribute('aria-expanded', String(open));
+  styleBtn.setAttribute('aria-pressed', String(open));
+  if (open) { paintStyle(); placeStyle(); $('#sp-tags [aria-checked=true]')?.focus({ preventScroll: true }); }
+  else $('.paper').style.paddingRight = '';
+}
+addEventListener('resize', placeStyle);
+new ResizeObserver(() => placeStyle()).observe($('#write'));
+new ResizeObserver(() => placeStyle()).observe($('#write'));
+$('#sp-close').addEventListener('click', () => { toggleStyle(false); editor.commands.focus(); });
+stylePop.addEventListener('keydown', e => { if (e.key === 'Escape') { e.stopPropagation(); toggleStyle(false); styleBtn.focus(); } });
+// clicking a control must not move the text selection the panel is editing (Safari moves it on mousedown)
+stylePop.addEventListener('mousedown', e => { if (e.target.closest('button')) e.preventDefault(); });
+stylePop.addEventListener('click', e => {
+  const t = e.target.closest('button'); if (!t || t.disabled) return;
+  if (t.dataset.tag) { if (t.dataset.tag === 'h1') toast('文章标题已经是 H1，一页只用一个 H1；正文请从 H2 开始'); else setTag(t.dataset.tag); return; }
+  if (t.dataset.preset !== undefined) { setStyle({ [t.closest('[data-size]').dataset.size]: t.dataset.preset ? Number(t.dataset.preset) : null }); return; }
+  if (t.dataset.step) {
+    const box = t.closest('[data-size]'), key = box.dataset.size;
+    const now = Number($('input', box).value) || 0;
+    setStyle({ [key]: Math.min(A.SIZE_MAX, Math.max(A.SIZE_MIN, now + Number(t.dataset.step))) }); return;
+  }
+  if (t.dataset.color !== undefined) { setStyle({ color: t.dataset.color || null }); return; }
+  if (t.dataset.weight) {
+    const { list } = styleTargets(), tag = list[0] && A.textTag(list[0].node.toJSON());
+    const w = Number(t.dataset.weight);
+    setStyle({ weight: tag && A.TEXT_DEFAULTS[tag].weight === w ? null : w }); return;
+  }
+  if (t.id === 'sp-reset') { setStyle(Object.fromEntries(A.STYLE_KEYS.map(k => [k, null]))); toast('已恢复默认样式'); return; }
+  if (t.id === 'sp-sync') {
+    const { list } = styleTargets(); if (!list.length) return;
+    const src = list[0].node, tag = A.textTag(src.toJSON());
+    const others = sameKind(tag, new Set(list.map(x => x.pos)));
+    setStyle(Object.fromEntries(A.STYLE_KEYS.map(k => [k, src.attrs[k] ?? null])), others);
+    toast(`已同步到其他 ${others.length} 处${TAG_NAMES[tag]}`);
+  }
+});
+for (const box of $$('[data-size]', stylePop)) {
+  const input = $('input', box), key = box.dataset.size;
+  const commit = () => { const v = A.cleanSize(input.value); if (v !== null) setStyle({ [key]: v }); else paintStyle(); };
+  input.addEventListener('change', commit);
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { e.preventDefault(); commit(); }
+    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') { e.preventDefault(); const v = (Number(input.value) || 0) + (e.key === 'ArrowUp' ? 1 : -1); input.value = String(Math.min(A.SIZE_MAX, Math.max(A.SIZE_MIN, v))); commit(); }
+  });
+}
+$('#sp-picker').addEventListener('input', e => setStyle({ color: A.cleanColor(e.target.value) }));
+$('#sp-hex').addEventListener('input', e => { const c = A.cleanColor(e.target.value); if (c && /^#?[0-9a-f]{6}$/i.test(e.target.value.trim())) setStyle({ color: c }); });
+$('#sp-hex').addEventListener('change', e => { const v = e.target.value.trim(); if (!v) setStyle({ color: null }); else { const c = A.cleanColor(v); if (c) setStyle({ color: c }); } paintStyle(); });
 
 /* ---------- link popover ---------- */
 const linkPop = $('#linkpop'), linkInput = $('#link-input');
@@ -555,8 +727,8 @@ const viewport = $('#viewport'), device = $('#device');
 function layout() {
   const vw = viewport.clientWidth, vh = viewport.clientHeight;
   if (!vw || !vh) return;
-  if (viewport.dataset.device === 'desktop') {
-    const w = 1280, s = Math.min(1, vw / w);
+  if (viewport.dataset.device !== 'mobile') {
+    const w = viewport.dataset.device === 'wide' ? 1920 : 1280, s = Math.min(1, vw / w);
     frame.style.width = `${w}px`; frame.style.height = `${Math.max(400, vh / s)}px`;
     device.style.transform = `scale(${s})`; device.style.left = `${Math.max(0, (vw - w * s) / 2)}px`;
   } else {
@@ -566,8 +738,8 @@ function layout() {
   }
 }
 new ResizeObserver(layout).observe(viewport);
-$$('[data-device]').forEach(b => b.addEventListener('click', () => {
-  $$('[data-device]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+$$('button[data-device]').forEach(b => b.addEventListener('click', () => {
+  $$('button[data-device]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
   viewport.dataset.device = b.dataset.device; layout();
 }));
 
@@ -669,6 +841,7 @@ document.addEventListener('keydown', e => {
   if (e.key !== 'Escape') return;
   if (!docsMenu.hidden) { toggleDocs(false); docsBtn.focus(); }
   if (!linkPop.hidden) { closeLink(); editor.commands.focus(); }
+  else if (!stylePop.hidden && e.target.closest?.('.prose')) toggleStyle(false);
 });
 async function switchTo(d) {
   if (current) await saveNow();
@@ -860,11 +1033,11 @@ function toMarkdown(r) {
     .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
   const body = r.bodyHtml
     .replace(/<figure><img src="([^"]+)" alt="([^"]*)"[^>]*>(?:<figcaption>(.*?)<\/figcaption>)?<\/figure>/g, (m, s, a, c) => `![${a}](${s})${c ? `\n*${c}*` : ''}\n\n`)
-    .replace(/<h2[^>]*>(.*?)<\/h2>/g, '## $1\n\n').replace(/<h3[^>]*>(.*?)<\/h3>/g, '### $1\n\n')
-    .replace(/<blockquote>(.*?)<\/blockquote>/gs, (m, x) => x.replace(/<p>(.*?)<\/p>/g, '> $1\n') + '\n')
+    .replace(/<h([2-6])[^>]*>(.*?)<\/h\1>/g, (m, n, x) => `${'#'.repeat(Number(n))} ${x}\n\n`)
+    .replace(/<blockquote>(.*?)<\/blockquote>/gs, (m, x) => x.replace(/<p[^>]*>(.*?)<\/p>/g, '> $1\n') + '\n')
     .replace(/<ul>(.*?)<\/ul>/gs, (m, x) => x.replace(/<li>(.*?)<\/li>/g, '- $1\n') + '\n')
     .replace(/<ol>(.*?)<\/ol>/gs, (m, x) => { let n = 0; return x.replace(/<li>(.*?)<\/li>/g, (mm, y) => `${++n}. ${y}\n`) + '\n'; })
-    .replace(/<p>(.*?)<\/p>/g, '$1\n\n');
+    .replace(/<p[^>]*>(.*?)<\/p>/g, '$1\n\n');
   const front = ['---', `status: ${r.status}`, `proposed_slug: ${r.slug}`, `seo_title: ${q(r.seoTitle)}`, `meta_description: ${q(r.description)}`, `category: ${r.category}`, `published_at: ${r.publishedAt || 'null'}`, '---', ''];
   const sources = r.sources.length ? `\n## Sources\n\n${r.sources.map(s => `- [${s.title}](${s.url})`).join('\n')}\n` : '';
   return `${front.join('\n')}\n# ${r.title}\n\n${r.intro}\n\n${inline(body).replace(/\n{3,}/g, '\n\n').trim()}\n${sources}`;
