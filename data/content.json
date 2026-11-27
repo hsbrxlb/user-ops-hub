@@ -127,6 +127,13 @@
       "group": "品牌与产品"
     },
     {
+      "id": "merch-revised",
+      "label": "周边改版（按现成款）",
+      "file": "merch-revised-1127.html",
+      "group": "品牌与产品",
+      "parent": "merch-plan"
+    },
+    {
       "id": "merch-cozeware",
       "label": "Cozeware 周边",
       "file": "merch-cozeware.html",
