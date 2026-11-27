@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 340" role="img" aria-labelledby="title desc">
+  <title id="title">Four accessory fitment checks</title>
+  <desc id="desc">Check the vehicle, accessory-specific configuration, exact part and instructions, and all exclusions. Resolve a mismatch before ordering.</desc>
+  <rect width="360" height="340" rx="4" fill="#f3f5f7"/>
+  <path d="M43 48v240" stroke="#0d4d95" stroke-width="2"/>
+  <g fill="#fff" stroke="#d7e0e8"><rect x="76" y="20" width="268" height="60" rx="4"/><rect x="76" y="100" width="268" height="60" rx="4"/><rect x="76" y="180" width="268" height="60" rx="4"/><rect x="76" y="260" width="268" height="60" rx="4"/></g>
+  <g fill="#0d4d95"><circle cx="43" cy="50" r="20"/><circle cx="43" cy="130" r="20"/><circle cx="43" cy="210" r="20"/><circle cx="43" cy="290" r="20"/></g>
+  <g font-family="Arial,Helvetica,sans-serif" font-size="22">
+    <g fill="#fff" text-anchor="middle" font-weight="700"><text x="43" y="58">1</text><text x="43" y="138">2</text><text x="43" y="218">3</text><text x="43" y="298">4</text></g>
+    <g fill="#111"><text x="96" y="58">Vehicle</text><text x="96" y="138">Configuration</text><text x="96" y="218">Exact part + guide</text><text x="96" y="298">Exclusions</text></g>
+  </g>
+</svg>

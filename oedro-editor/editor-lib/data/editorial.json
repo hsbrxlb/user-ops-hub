@@ -1,0 +1,36 @@
+{
+  "featuredArticleId": "how-to-measure-truck-bed-for-tonneau-cover",
+  "secondaryArticleId": "soft-vs-hard-tonneau-covers",
+  "relatedLimit": 3,
+  "footerArticleIds": [
+    "how-to-measure-truck-bed-for-tonneau-cover",
+    "how-to-choose-running-boards-fitment"
+  ],
+  "vehicleLinks": [
+    {
+      "articleId": "ford-f150-accessory-fitment-guide",
+      "label": "Ford F-150",
+      "image": "assets/figma-truck-ford.webp"
+    },
+    {
+      "articleId": "toyota-tacoma-bed-cover-guide",
+      "label": "Toyota Tacoma",
+      "image": "assets/figma-truck-tacoma.webp"
+    },
+    {
+      "articleId": "toyota-tundra-floor-mat-guide",
+      "label": "Toyota Tundra",
+      "image": "assets/figma-truck-tundra.webp"
+    },
+    {
+      "articleId": "silverado-sierra-floor-mat-fitment",
+      "label": "Silverado & Sierra",
+      "image": "assets/figma-truck-silverado.webp"
+    },
+    {
+      "articleId": "ram-1500-bed-cover-fitment",
+      "label": "Ram 1500",
+      "image": "assets/figma-truck-ram.webp"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" role="img" aria-labelledby="title desc">
+  <title id="title">Inside truck-bed measurement endpoints</title>
+  <desc id="desc">Top view, not to scale. A marks the inside front bulkhead; B marks the inside of the closed tailgate. The arrow measures straight between those faces, not across the wheel wells.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#0d4d95"/></marker></defs>
+  <rect width="360" height="360" rx="4" fill="#f3f5f7"/>
+  <rect x="112" y="20" width="136" height="32" rx="8" fill="#d7e0e8" stroke="#32475a" stroke-width="2"/>
+  <rect x="82" y="68" width="196" height="240" fill="#d7e0e8" stroke="#32475a" stroke-width="2"/>
+  <rect x="94" y="80" width="172" height="216" fill="#fff" stroke="#32475a" stroke-width="2"/>
+  <path d="M94 164h28v54H94m172-54h-28v54h28" fill="#e5ebef" stroke="#32475a" stroke-width="2"/>
+  <path d="M163 80h34M163 296h34" stroke="#0d4d95" stroke-width="3"/>
+  <path d="M180 90v196" stroke="#0d4d95" stroke-width="3" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <path d="M53 80h30M53 296h30" stroke="#0d4d95" stroke-width="2"/>
+  <g font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="700" text-anchor="middle" fill="#0d4d95"><text x="35" y="88">A</text><text x="35" y="304">B</text></g>
+</svg>

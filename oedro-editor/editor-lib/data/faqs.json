@@ -1,0 +1,634 @@
+[
+  {
+    "id": "find-fitment",
+    "category": "Buying & fitment",
+    "question": "What information should I have before ordering an accessory?",
+    "answerHtml": "<p>Record the vehicle's year, make, model, and exact configuration. For steps, include cab and existing side hardware. For a cover, include bed length, tailgate, rails, and installed cargo accessories. For liners, include cab, seating, flooring, and rear storage. Save the selected product option as well as the page link.</p>",
+    "sources": [
+      {
+        "title": "Ford: preliminary 2024 F-150 technical specifications",
+        "url": "https://content.fordpro.com/content/dam/fordpro/us/en-us/pdf/showroom/trucks/f-150/2024/2024_Ford_F-150_Tech_Specs.pdf"
+      },
+      {
+        "title": "OEDRO: F-150 SuperCrew floor mats, product 6861",
+        "url": "https://www.oedro.com/products/all-weather-tpe-floor-mats-liners-for-2015-2025-ford-f150-supercrew-cab-2022-2025-f-150-lightning-1st-2nd-row-mats-liner-p-6861.html"
+      }
+    ],
+    "related": [
+      "ford-f150-accessory-fitment-guide"
+    ],
+    "status": "legacy-demo",
+    "sortOrder": 34
+  },
+  {
+    "id": "selector-disagrees",
+    "category": "Buying & fitment",
+    "question": "What if the vehicle selector and product description disagree?",
+    "answerHtml": "<p>Keep the item unconfirmed. Send support the vehicle details, selected option, and the two conflicting statements. Request the correct application for that part number before ordering. Do not choose whichever statement gives the broader fitment range.</p>",
+    "sources": [
+      {
+        "title": "OEDRO Help Center",
+        "url": "https://www.oedro.com/help"
+      },
+      {
+        "title": "OEDRO: terms and conditions",
+        "url": "https://www.oedro.com/article/conditions.html?aid=86"
+      }
+    ],
+    "related": [
+      "how-to-measure-truck-bed-for-tonneau-cover"
+    ],
+    "status": "legacy-demo",
+    "sortOrder": 33
+  },
+  {
+    "id": "url-years",
+    "category": "Buying & fitment",
+    "question": "Does the year range in a product URL determine fitment?",
+    "answerHtml": "<p>No. A URL can retain an older product name after the page changes. Read the selected option and written application. If those disagree, request clarification for the exact part. Preserve body-version and equipment exclusions even when the headline is broad.</p>",
+    "sources": [
+      {
+        "title": "OEDRO: Ram 1500 hard tri-fold cover, product 5884",
+        "url": "https://www.oedro.com/products/oedro-5_6ft-2009-2024-dodge-ram-1500-tonneau-cover-3008-p-5884.html"
+      }
+    ],
+    "related": [
+      "ram-1500-bed-cover-fitment"
+    ],
+    "status": "legacy-demo",
+    "sortOrder": 32
+  },
+  {
+    "id": "f150-cabs",
+    "category": "Buying & fitment",
+    "question": "Are SuperCab and SuperCrew interchangeable when buying accessories?",
+    "answerHtml": "<p>Treat them as separate cab designations. Ford identifies them separately, and accessory applications may specify one. Use the exact cab in the listing; door count and a similar-looking vehicle photo do not prove that brackets or interior liners are interchangeable.</p>",
+    "sources": [
+      {
+        "title": "Ford: preliminary 2024 F-150 technical specifications",
+        "url": "https://content.fordpro.com/content/dam/fordpro/us/en-us/pdf/showroom/trucks/f-150/2024/2024_Ford_F-150_Tech_Specs.pdf"
+      },
+      {
+        "title": "Ford Racing: F-Series running boards, M-16450-FSORB",
+        "url": "https://performanceparts.ford.com/part/M-16450-FSORB"
+      }
+    ],
+    "related": [
+      "ford-f150-accessory-fitment-guide",
+      "how-to-choose-running-boards-fitment"
+    ],
+    "status": "legacy-demo",
+    "sortOrder": 31
+  },
+  {
+    "id": "gm-seats",
+    "category": "Buying & fitment",
+    "question": "Why does a Silverado or Sierra floor-mat listing ask about bench seats?",
+    "answerHtml": "<p>The seat and center-area layout is part of the application. OEDRO's Crew Cab bench-seat example identifies that condition and excludes a rear under-seat storage box. Describe the first-row seats, console area, and rear equipment so the exact liner can be selected.</p>",
+    "sources": [
+      {
+        "title": "OEDRO: Silverado/Sierra Crew Cab bench-seat mats, product 7012",
+        "url": "https://www.oedro.com/products/oedror-floor-mats-for-2019-2025-chevrolet-silverado-1500-gmc-sierra-1500-crew-cab-without-rear-storage-box-p-7012.html"
+      }
+    ],
+    "related": [
+      "silverado-sierra-floor-mat-fitment"
+    ],
+    "status": "legacy-demo",
+    "sortOrder": 30
+  },
+  {
+    "id": "tundra-hybrid",
+    "category": "Buying & fitment",
+    "question": "Can I assume Tundra CrewMax mats fit both i-FORCE and i-FORCE MAX?",
+    "answerHtml": "<p>Do not infer that from a broad CrewMax title. Give the supplier the year, powertrain, and rear-floor configuration, especially for coverage extending under the seat. Product 7931 specifies carpet flooring only. Its CrewMax listing does not explicitly settle every hybrid or storage question.</p>",
+    "sources": [
+      {
+        "title": "Toyota: 2024 Tundra cab and powertrain configurations",
+        "url": "https://pressroom.toyota.com/toyota-tundra-adds-enhancements-for-2024-model-year/"
+      },
+      {
+        "title": "OEDRO store: YITAMOTOR Tundra CrewMax mats, product 7931",
+        "url": "https://www.oedro.com/products/yitamotor-floor-mats-fit-for-toyota-tundra-crewmax-cab-2022-2025-custom-fit-tundra-car-mats-all-weather-tpe-front-and-rear-row-floor-liners-black-p-7931.html"
+      }
+    ],
+    "related": [
+      "toyota-tundra-floor-mat-guide"
+    ],
+    "status": "legacy-demo",
+    "sortOrder": 29
+  },
+  {
+    "id": "tacoma-rail",
+    "category": "Buying & fitment",
+    "question": "Do Tacoma deck rails affect which tonneau cover I need?",
+    "answerHtml": "<p>Yes. The selected cover may require a particular rail setup and hardware. OEDRO's product 5878 lists Tacoma bed rails as an application condition. Photograph the rails, tie-downs, and existing brackets, then confirm which cargo functions remain usable after installation.</p>",
+    "sources": [
+      {
+        "title": "OEDRO: Tacoma hard tri-fold cover, product 5878",
+        "url": "https://www.oedro.com/products/oedro-2016-2023-5ft-toyota-tacoma-tonneau-cover-3011-p-5878.html"
+      },
+      {
+        "title": "WeatherTech: 2024-on Tacoma deck-rail installation supplement",
+        "url": "https://images.weathertech.com/0bdb6d16-2b8e-4563-9d18-b337013cf03f/4008524-toyota-tacoma-w-deckrails-24_-alloy-cover_ada-original-file.pdf"
+      }
+    ],
+    "related": [
+      "toyota-tacoma-bed-cover-guide"
+    ],
+    "status": "legacy-demo",
+    "sortOrder": 28
+  },
+  {
+    "id": "ram-split",
+    "category": "Buying & fitment",
+    "question": "Does a Ram 1500 bed-size match guarantee RamBox or split-tailgate compatibility?",
+    "answerHtml": "<p>No. Check those conditions separately. OEDRO product 5884 excludes RamBox and a split tailgate. Having the listed bed size does not remove either exclusion, even if you intend to use only the conventional drop-down tailgate movement.</p>",
+    "sources": [
+      {
+        "title": "OEDRO: Ram 1500 hard tri-fold cover, product 5884",
+        "url": "https://www.oedro.com/products/oedro-5_6ft-2009-2024-dodge-ram-1500-tonneau-cover-3008-p-5884.html"
+      }
+    ],
+    "related": [
+      "ram-1500-bed-cover-fitment"
+    ],
+    "status": "legacy-demo",
+    "sortOrder": 27
+  },
+  {
+    "id": "measure-endpoints",
+    "category": "Measuring",
+    "question": "Where should I measure a truck bed for a cover?",
+    "answerHtml": "<p>For a basic inside-bed length, close the tailgate and measure between the inside bulkhead face and inside tailgate face. Record inches and photograph both endpoints, noting any liner the tape touches. Follow the selected cover's instructions for any additional measurements. This reading alone does not establish fitment.</p>",
+    "sources": [
+      {
+        "title": "WEATHER GUARD: measuring a truck bed",
+        "url": "https://www.weatherguard.com/support/faq/truck-faq/how-to-measure-your-truck-bed"
+      }
+    ],
+    "related": [
+      "how-to-measure-truck-bed-for-tonneau-cover"
+    ],
+    "status": "legacy-demo",
+    "sortOrder": 26
+  },
+  {
+    "id": "nominal-bed",
+    "category": "Measuring",
+    "question": "Why does my tape reading differ from the advertised bed-size name?",
+    "answerHtml": "<p>A nominal bed name may differ from the inside dimension. Keep both values instead of rounding the tape reading to match a listing. Also distinguish decimal feet from feet and inches. Ask the seller to resolve a material mismatch before choosing the cover.</p>",
+    "sources": [
+      {
+        "title": "Ford: preliminary 2024 F-150 technical specifications",
+        "url": "https://content.fordpro.com/content/dam/fordpro/us/en-us/pdf/showroom/trucks/f-150/2024/2024_Ford_F-150_Tech_Specs.pdf"
+      }
+    ],
+    "related": [
+      "how-to-measure-truck-bed-for-tonneau-cover"
+    ],
+    "status": "legacy-demo",
+    "sortOrder": 25
+  },
+  {
+    "id": "board-dimensions",
+    "category": "Measuring",
+    "question": "Which running-board measurements matter for easier entry?",
+    "answerHtml": "<p>Compare installed tread height, usable tread depth and width, and its position beneath the door. Ask where the height measurement starts and which tire and suspension setup it describes. Overall length or shipping-box dimensions do not tell you how comfortably you can step into the cab.</p>",
+    "sources": [
+      {
+        "title": "OEDRO: Gladiator running boards, product 6752",
+        "url": "https://www.oedro.com/products/2020-2024-jeep-gladiator-jt-4-door-running-boards-0172-p-6752.html"
+      },
+      {
+        "title": "Westin: wheel-to-wheel running board application chart",
+        "url": "https://www.westinautomotive.com/application-chart/r5-modular-wheel-to-wheel-nerf-step-bars"
+      }
+    ],
+    "related": [
+      "how-to-choose-running-boards-fitment"
+    ],
+    "status": "legacy-demo",
+    "sortOrder": 24
+  },
+  {
+    "id": "stack-mats",
+    "category": "Installation & safety",
+    "question": "Can I put all-weather mats on top of my existing mats?",
+    "answerHtml": "<p>No. Remove the existing removable mats. Stacking can reduce pedal clearance and leave a mat unsecured. Fit the new driver's mat with the vehicle's intended retention system and check the pedal area before driving.</p>",
+    "sources": [
+      {
+        "title": "Ford: floor mat safety instructions",
+        "url": "https://www.fordservicecontent.com/Ford_Content/vdirsnet/OwnerManual/Home/Content?ProcUid=G1477794&Uid=G1525276&buildtype=web&countryCode=USA&div=f&languageCode=en&userMarket=THA&vFilteringEnabled=False&variantid=4226"
+      }
+    ],
+    "related": [
+      "floor-mat-installation-and-care"
+    ],
+    "status": "legacy-demo",
+    "sortOrder": 23
+  },
+  {
+    "id": "loose-driver-mat",
+    "category": "Installation & safety",
+    "question": "What should I do if the driver's mat will not stay clipped in?",
+    "answerHtml": "<p>Remove the loose mat and resolve the attachment or application problem before using it. Do not drive with a mat that can shift toward the pedals. Photograph its label, retention points, and installed position for support; avoid cutting or adding improvised fasteners.</p>",
+    "sources": [
+      {
+        "title": "Ford: floor mat safety instructions",
+        "url": "https://www.fordservicecontent.com/Ford_Content/vdirsnet/OwnerManual/Home/Content?ProcUid=G1477794&Uid=G1525276&buildtype=web&countryCode=USA&div=f&languageCode=en&userMarket=THA&vFilteringEnabled=False&variantid=4226"
+      }
+    ],
+    "related": [
+      "floor-mat-installation-and-care"
+    ],
+    "status": "legacy-demo",
+    "sortOrder": 22
+  },
+  {
+    "id": "heating-mats",
+    "category": "Installation & safety",
+    "question": "Should I use a heat gun to flatten a new floor liner?",
+    "answerHtml": "<p>Do not improvise a heating method. Check the supplied directions or ask the seller about the specific deformation. Send a photo and the part label. If the driver's liner cannot sit securely with clear pedal space, keep it out of use while the issue is resolved.</p>",
+    "sources": [
+      {
+        "title": "Ford: floor mat safety instructions",
+        "url": "https://www.fordservicecontent.com/Ford_Content/vdirsnet/OwnerManual/Home/Content?ProcUid=G1477794&Uid=G1525276&buildtype=web&countryCode=USA&div=f&languageCode=en&userMarket=THA&vFilteringEnabled=False&variantid=4226"
+      },
+      {
+        "title": "OEDRO Help Center",
+        "url": "https://www.oedro.com/help"
+      }
+    ],
+    "related": [
+      "floor-mat-installation-and-care"
+    ],
+    "status": "legacy-demo",
+    "sortOrder": 21
+  },
+  {
+    "id": "drilling-claim",
+    "category": "Installation & safety",
+    "question": "Does an advertised no-drill installation mean no other changes are needed?",
+    "answerHtml": "<p>No. Read the preparation and compatibility conditions. An installation may require accessory removal or other work even when its mounts do not require drilling. The inspected OEDRO Tacoma cover page, for example, requires cargo-rack removal for the described setup.</p>",
+    "sources": [
+      {
+        "title": "OEDRO: Tacoma hard tri-fold cover, product 5878",
+        "url": "https://www.oedro.com/products/oedro-2016-2023-5ft-toyota-tacoma-tonneau-cover-3011-p-5878.html"
+      }
+    ],
+    "related": [
+      "toyota-tacoma-bed-cover-guide",
+      "bumper-installation-planning"
+    ],
+    "status": "legacy-demo",
+    "sortOrder": 20
+  },
+  {
+    "id": "partial-cover",
+    "category": "Installation & safety",
+    "question": "Can I drive with a tonneau cover partly folded?",
+    "answerHtml": "<p>Only use positions expressly allowed and secured by the matching product instructions. Do not assume another cover's straps or props authorize the same position on yours. OEDRO's inspected Tacoma cover page prohibits driving partially open.</p>",
+    "sources": [
+      {
+        "title": "OEDRO: Tacoma hard tri-fold cover, product 5878",
+        "url": "https://www.oedro.com/products/oedro-2016-2023-5ft-toyota-tacoma-tonneau-cover-3011-p-5878.html"
+      }
+    ],
+    "related": [
+      "soft-vs-hard-tonneau-covers"
+    ],
+    "status": "legacy-demo",
+    "sortOrder": 19
+  },
+  {
+    "id": "bumper-shackles",
+    "category": "Installation & safety",
+    "question": "Can I use the shackles supplied with every aftermarket bumper for recovery?",
+    "answerHtml": "<p>No. A supplied ring is not proof of a rated recovery point. OEDRO's product 9456 warning states that its shackle is not for towing or recovery. Use only equipment and attachment points explicitly approved for the intended operation.</p>",
+    "sources": [
+      {
+        "title": "OEDRO: Wrangler JL rear bumper, product 9456",
+        "url": "https://www.oedro.com/products/oedro-rear-bumper-compatible-for-2018-2026-jeep-wrangler-jl-rock-crawler-bumper-with-hitch-receiver-2-x-led-lights-and-2-x-d-rings-only-fit-jl-p-9456.html"
+      }
+    ],
+    "related": [
+      "choosing-aftermarket-bumper"
+    ],
+    "status": "legacy-demo",
+    "sortOrder": 18
+  },
+  {
+    "id": "bumper-torque",
+    "category": "Installation & safety",
+    "question": "What torque should I use for bumper bolts?",
+    "answerHtml": "<p>Use the specification for the exact joint in the correct bumper, vehicle, or attached-equipment instructions. There is no universal bumper-bolt value. If a required value is missing or the hardware differs, have the supplier or qualified installer resolve it before completion.</p>",
+    "sources": [
+      {
+        "title": "WARN: Elite bumper installation instructions 87926A7",
+        "url": "https://literature.warn.com/view/509481765/1/"
+      },
+      {
+        "title": "WARN: product installation literature",
+        "url": "https://www.warn.com/pages/product-literature"
+      }
+    ],
+    "related": [
+      "bumper-installation-planning"
+    ],
+    "status": "legacy-demo",
+    "sortOrder": 17
+  },
+  {
+    "id": "order-status",
+    "category": "Orders",
+    "question": "How can I check an OEDRO order's status?",
+    "answerHtml": "<p>The OEDRO Help Center directs customers to their account for order status. If the information is unclear, contact support with the order reference and the specific question. Keep order details private; do not post them in a public comment.</p>",
+    "sources": [
+      {
+        "title": "OEDRO Help Center",
+        "url": "https://www.oedro.com/help"
+      }
+    ],
+    "related": [],
+    "status": "legacy-demo",
+    "sortOrder": 16
+  },
+  {
+    "id": "missing-parts",
+    "category": "Orders",
+    "question": "What should I send support if parts are missing or damaged?",
+    "answerHtml": "<p>Provide the order reference, product label, selected item, and photographs of the contents and damage. Compare the pieces with the package list or manual and identify what is missing. Keep the packaging and do not substitute unverified hardware to finish installation.</p>",
+    "sources": [
+      {
+        "title": "OEDRO Help Center",
+        "url": "https://www.oedro.com/help"
+      },
+      {
+        "title": "WARN: product installation literature",
+        "url": "https://www.warn.com/pages/product-literature"
+      }
+    ],
+    "related": [
+      "bumper-installation-planning"
+    ],
+    "status": "legacy-demo",
+    "sortOrder": 15
+  },
+  {
+    "id": "cancel-order",
+    "category": "Orders",
+    "question": "Can I change or cancel an order after placing it?",
+    "answerHtml": "<p>The inspected product-page policy allows modification or cancellation before shipment and says shipped orders cannot be canceled. Contact support promptly with the order reference. A request is not confirmation that a change was made.</p>",
+    "sources": [
+      {
+        "title": "OEDRO: F-150 SuperCrew floor mats, product 6861",
+        "url": "https://www.oedro.com/products/all-weather-tpe-floor-mats-liners-for-2015-2025-ford-f150-supercrew-cab-2022-2025-f-150-lightning-1st-2nd-row-mats-liner-p-6861.html"
+      },
+      {
+        "title": "OEDRO: shipping and return policy",
+        "url": "https://www.oedro.com/article/shipping-return.html?aid=84"
+      }
+    ],
+    "related": [],
+    "status": "legacy-demo",
+    "sortOrder": 14
+  },
+  {
+    "id": "marketplace-order",
+    "category": "Orders",
+    "question": "What if I bought through a marketplace instead of OEDRO.com?",
+    "answerHtml": "<p>Keep the marketplace order record and seller identity. Ask that seller which support and return process applies to the purchase. You can also contact OEDRO with the product details, but do not assume the website's checkout terms automatically govern another sales channel.</p>",
+    "sources": [
+      {
+        "title": "OEDRO Help Center",
+        "url": "https://www.oedro.com/help"
+      },
+      {
+        "title": "OEDRO: 30-day return policy",
+        "url": "https://www.oedro.com/article/30-days-worry-free-returns.html?aid=79"
+      }
+    ],
+    "related": [],
+    "status": "legacy-demo",
+    "sortOrder": 13
+  },
+  {
+    "id": "ship-alaska-hawaii",
+    "category": "Shipping",
+    "question": "Is free shipping available to every U.S. destination?",
+    "answerHtml": "<p>Free shipping does not cover every destination. The published shipping policy lists excluded destinations, including Alaska, Hawaii, and Puerto Rico, plus specified territories and military addresses. Check the current policy and checkout for your address before ordering.</p>",
+    "sources": [
+      {
+        "title": "OEDRO: shipping and delivery policy",
+        "url": "https://www.oedro.com/article/Shipping---Delivery-Policy.html?aid=91"
+      }
+    ],
+    "related": [],
+    "status": "legacy-demo",
+    "sortOrder": 12
+  },
+  {
+    "id": "po-box",
+    "category": "Shipping",
+    "question": "Can I ship an order to a PO Box?",
+    "answerHtml": "<p>The inspected OEDRO product-page shipping terms say PO Boxes are not accepted. Use an eligible complete street address and confirm it at checkout. Contact support before purchase if your location needs special handling.</p>",
+    "sources": [
+      {
+        "title": "OEDRO: Ford under-seat storage, product 5389",
+        "url": "https://www.oedro.com/products/oedro-upgraded-under-seat-storage-box-for-2015-2019-ford-f150-supercrew-cab-trunk-organizers-p-5389.html"
+      },
+      {
+        "title": "OEDRO: shipping and return policy",
+        "url": "https://www.oedro.com/article/shipping-return.html?aid=84"
+      }
+    ],
+    "related": [],
+    "status": "legacy-demo",
+    "sortOrder": 11
+  },
+  {
+    "id": "delivery-guarantee",
+    "category": "Shipping",
+    "question": "Are the displayed delivery times guaranteed?",
+    "answerHtml": "<p>No. OEDRO's shipping policy describes estimates and notes that disruptions can delay an order. Use the order's current tracking information for its shipment status. If timing is critical, confirm availability and address eligibility before scheduling installation.</p>",
+    "sources": [
+      {
+        "title": "OEDRO: shipping and delivery policy",
+        "url": "https://www.oedro.com/article/Shipping---Delivery-Policy.html?aid=91"
+      }
+    ],
+    "related": [],
+    "status": "legacy-demo",
+    "sortOrder": 10
+  },
+  {
+    "id": "presale-shipping",
+    "category": "Shipping",
+    "question": "When does a pre-sale item ship?",
+    "answerHtml": "<p>The published policy ties processing to the item being in stock. A pre-sale purchase is not evidence that the item has shipped. Check the stated availability and ask support for the current status of your order.</p>",
+    "sources": [
+      {
+        "title": "OEDRO: shipping and delivery policy",
+        "url": "https://www.oedro.com/article/Shipping---Delivery-Policy.html?aid=91"
+      }
+    ],
+    "related": [],
+    "status": "legacy-demo",
+    "sortOrder": 9
+  },
+  {
+    "id": "return-eligibility",
+    "category": "Returns & warranty",
+    "question": "What is the published return window?",
+    "answerHtml": "<p>The inspected policy allows eligible returns within 30 days of receipt and requires new, unused, resealable condition. Clearance, final-sale, and used products are excluded. Check the current terms for your order before fitting or modifying an item you may need to return.</p>",
+    "sources": [
+      {
+        "title": "OEDRO: 30-day return policy",
+        "url": "https://www.oedro.com/article/30-days-worry-free-returns.html?aid=79"
+      }
+    ],
+    "related": [],
+    "status": "legacy-demo",
+    "sortOrder": 8
+  },
+  {
+    "id": "return-label",
+    "category": "Returns & warranty",
+    "question": "Can I send an item back without contacting support?",
+    "answerHtml": "<p>Request approval and the correct return instructions first. The published policy gives 14 days to send the item after receiving the return label. Do not use a warehouse address found elsewhere on the website as an assumed return destination.</p>",
+    "sources": [
+      {
+        "title": "OEDRO: 30-day return policy",
+        "url": "https://www.oedro.com/article/30-days-worry-free-returns.html?aid=79"
+      },
+      {
+        "title": "OEDRO: F-150 SuperCrew floor mats, product 6861",
+        "url": "https://www.oedro.com/products/all-weather-tpe-floor-mats-liners-for-2015-2025-ford-f150-supercrew-cab-2022-2025-f-150-lightning-1st-2nd-row-mats-liner-p-6861.html"
+      },
+      {
+        "title": "OEDRO: shipping and return policy",
+        "url": "https://www.oedro.com/article/shipping-return.html?aid=84"
+      }
+    ],
+    "related": [],
+    "status": "legacy-demo",
+    "sortOrder": 7
+  },
+  {
+    "id": "return-cost",
+    "category": "Returns & warranty",
+    "question": "Does a prepaid return label mean the return is free?",
+    "answerHtml": "<p>No. The published return policy says return shipping is deducted from the refund. Product-page terms also describe deductions for some non-quality returns. Ask for the applicable amount and reason before sending the item.</p>",
+    "sources": [
+      {
+        "title": "OEDRO: 30-day return policy",
+        "url": "https://www.oedro.com/article/30-days-worry-free-returns.html?aid=79"
+      },
+      {
+        "title": "OEDRO: F-150 SuperCrew floor mats, product 6861",
+        "url": "https://www.oedro.com/products/all-weather-tpe-floor-mats-liners-for-2015-2025-ford-f150-supercrew-cab-2022-2025-f-150-lightning-1st-2nd-row-mats-liner-p-6861.html"
+      },
+      {
+        "title": "OEDRO: shipping and return policy",
+        "url": "https://www.oedro.com/article/shipping-return.html?aid=84"
+      }
+    ],
+    "related": [],
+    "status": "legacy-demo",
+    "sortOrder": 6
+  },
+  {
+    "id": "warranty-duration",
+    "category": "Returns & warranty",
+    "question": "How long is the warranty on the item I am considering?",
+    "answerHtml": "<p>OEDRO floor mats have a two-year warranty. The shared one-year site banner applies to other product categories. Do not assume the same duration for other brands or categories; check the terms for the exact product and sales channel. Keep the applicable terms with your purchase record.</p>",
+    "sources": [
+      {
+        "title": "OEDRO: Silverado/Sierra Crew Cab bench-seat mats, product 7012",
+        "url": "https://www.oedro.com/products/oedror-floor-mats-for-2019-2025-chevrolet-silverado-1500-gmc-sierra-1500-crew-cab-without-rear-storage-box-p-7012.html"
+      },
+      {
+        "title": "OEDRO: F-150 SuperCrew floor mats, product 6861",
+        "url": "https://www.oedro.com/products/all-weather-tpe-floor-mats-liners-for-2015-2025-ford-f150-supercrew-cab-2022-2025-f-150-lightning-1st-2nd-row-mats-liner-p-6861.html"
+      }
+    ],
+    "related": [],
+    "status": "legacy-demo",
+    "sortOrder": 5
+  },
+  {
+    "id": "warranty-evidence",
+    "category": "Returns & warranty",
+    "question": "What should I prepare for a warranty question?",
+    "answerHtml": "<p>Keep proof of purchase, the item label, the date the issue appeared, photographs, and the installation or care instructions used. Describe the problem without guessing its cause. Support must determine the applicable coverage and remedy; a complaint alone does not confirm a replacement or refund.</p>",
+    "sources": [
+      {
+        "title": "OEDRO Help Center",
+        "url": "https://www.oedro.com/help"
+      }
+    ],
+    "related": [],
+    "status": "legacy-demo",
+    "sortOrder": 4
+  },
+  {
+    "id": "clean-liners",
+    "category": "Care & troubleshooting",
+    "question": "How should I clean OEDRO TPE floor liners?",
+    "answerHtml": "<p>Follow the supplied care directions. Inspected OEDRO listings describe wiping or rinsing with water. Remove the liners for cleaning, dry them before refitting, and securely reattach the driver's mat. Ask before using a chemical cleaner or dressing the instructions do not address.</p>",
+    "sources": [
+      {
+        "title": "OEDRO: F-150 SuperCrew floor mats, product 6861",
+        "url": "https://www.oedro.com/products/all-weather-tpe-floor-mats-liners-for-2015-2025-ford-f150-supercrew-cab-2022-2025-f-150-lightning-1st-2nd-row-mats-liner-p-6861.html"
+      },
+      {
+        "title": "Ford: floor mat safety instructions",
+        "url": "https://www.fordservicecontent.com/Ford_Content/vdirsnet/OwnerManual/Home/Content?ProcUid=G1477794&Uid=G1525276&buildtype=web&countryCode=USA&div=f&languageCode=en&userMarket=THA&vFilteringEnabled=False&variantid=4226"
+      }
+    ],
+    "related": [
+      "floor-mat-installation-and-care"
+    ],
+    "status": "legacy-demo",
+    "sortOrder": 3
+  },
+  {
+    "id": "cover-leak",
+    "category": "Care & troubleshooting",
+    "question": "What should I do first if my tonneau cover leaks?",
+    "answerHtml": "<p>Protect moisture-sensitive cargo and record where you first see water. Photograph the seals and installed alignment, then compare them with the correct manual. Ask support for the next diagnostic step before adding foam, sealant, or extra holes.</p>",
+    "sources": [
+      {
+        "title": "TruXedo: TruXport care and operating instructions",
+        "url": "https://static.thiecommerce.com/assets/production/truxedo-truxport-tonneau-cover-2024-ranger-isheet/a97e852f18e00001fcb1e68643e67896.pdf"
+      },
+      {
+        "title": "OEDRO Help Center",
+        "url": "https://www.oedro.com/help"
+      }
+    ],
+    "related": [
+      "tonneau-cover-troubleshooting"
+    ],
+    "status": "legacy-demo",
+    "sortOrder": 2
+  },
+  {
+    "id": "cover-wont-latch",
+    "category": "Care & troubleshooting",
+    "question": "Can I drive if one cover latch will not engage?",
+    "answerHtml": "<p>Keep the cover out of use if it cannot be secured in an approved driving position. With the vehicle parked, inspect for visible debris or damage and document which side fails. Use the matching instructions or support guidance to resolve it; do not force the panel shut.</p>",
+    "sources": [
+      {
+        "title": "OEDRO: Tacoma hard tri-fold cover, product 5878",
+        "url": "https://www.oedro.com/products/oedro-2016-2023-5ft-toyota-tacoma-tonneau-cover-3011-p-5878.html"
+      }
+    ],
+    "related": [
+      "tonneau-cover-troubleshooting"
+    ],
+    "status": "legacy-demo",
+    "sortOrder": 1
+  }
+]

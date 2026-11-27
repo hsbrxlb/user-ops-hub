@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>OEDRO Guides 文章编辑器</title>
+<meta name="description" content="写 OEDRO Guides 文章，实时看到正式文章页效果，一键生成站点发布文件。">
+<meta name="theme-color" content="#0d4d95">
+<link rel="icon" href="assets/logo.png">
+<link rel="preload" href="assets/figma-roboto.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="editor.css">
+<link rel="modulepreload" href="editor-lib/vendor.js">
+<link rel="modulepreload" href="editor-lib/article.mjs">
+<link rel="modulepreload" href="editor-lib/templates.mjs">
+<link rel="modulepreload" href="editor-lib/site-render.mjs">
+<link rel="modulepreload" href="editor-lib/validate.mjs">
+<link rel="modulepreload" href="editor-lib/editorial.mjs">
+<link rel="preload" href="editor-lib/data/articles.json" as="fetch" crossorigin>
+<script type="module" src="editor.js"></script>
+</head>
+<body>
+<a class="skip" href="#write">跳到正文编辑</a>
+
+<header class="top">
+  <a class="brand" href="index.html" title="打开 Guides 首页">
+    <img src="assets/figma-store-logo.svg" alt="OEDRO" width="104" height="20">
+    <span>文章编辑器</span>
+  </a>
+
+  <div class="docs">
+    <button type="button" class="docs-btn" id="docs-btn" aria-haspopup="true" aria-expanded="false" aria-controls="docs-menu">
+      <span class="docs-name" id="docs-name">未命名文章</span>
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+    <div class="pop docs-menu" id="docs-menu" hidden>
+      <button type="button" class="pop-new" id="new-doc"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3 8h10"/></svg>新建文章</button>
+      <p class="pop-label" id="docs-label">我的草稿</p>
+      <ul class="doc-list" id="doc-list"></ul>
+      <details class="pop-more">
+        <summary>修改站点上已有的文章</summary>
+        <ul class="doc-list" id="site-list"></ul>
+      </details>
+      <details class="pop-more">
+        <summary>从示例或 Markdown 开始</summary>
+        <div class="pop-row">
+          <button type="button" data-sample="tonneau-cover-car-wash.md">示例：货箱盖能不能进洗车机</button>
+          <button type="button" data-sample="running-boards-nerf-bars-rock-sliders.md">示例：踏板、侧踏管和岩石护杠</button>
+          <label class="file-link">导入 Markdown 文件…<input type="file" id="import-md" accept=".md,.markdown,text/markdown,text/plain"></label>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <p class="saved" id="saved" aria-live="polite"></p>
+
+  <nav class="views" aria-label="编辑器视图">
+    <button type="button" data-view="write" class="only-narrow" aria-pressed="true">写作</button>
+    <button type="button" data-view="preview" aria-pressed="false">预览</button>
+    <button type="button" data-view="settings" aria-pressed="false">设置</button>
+    <button type="button" data-view="checks" aria-pressed="false">检查<span class="score-chip" data-score>–</span></button>
+  </nav>
+
+  <button type="button" class="btn-primary publish-btn" id="publish-btn">发布</button>
+</header>
+
+<main class="desk" data-view="write">
+  <section class="write" id="write" aria-label="写作区">
+    <div class="toolbar" role="toolbar" aria-label="正文格式" id="toolbar">
+      <button type="button" data-cmd="paragraph" title="正文" aria-label="正文"><span class="t-txt">正文</span></button>
+      <button type="button" data-cmd="h2" title="小标题 (⌘⌥2)" aria-label="小标题"><span class="t-txt">H2</span></button>
+      <button type="button" data-cmd="h3" title="子标题 (⌘⌥3)" aria-label="子标题"><span class="t-txt">H3</span></button>
+      <span class="t-sep" aria-hidden="true"></span>
+      <button type="button" data-cmd="bold" title="加粗 (⌘B)" aria-label="加粗"><b>B</b></button>
+      <button type="button" data-cmd="italic" title="斜体 (⌘I)" aria-label="斜体"><i>I</i></button>
+      <button type="button" data-cmd="link" title="链接 (⌘K)" aria-label="链接"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M8.5 11.5a3 3 0 0 0 4.2 0l2.8-2.8a3 3 0 0 0-4.2-4.2l-1 1M11.5 8.5a3 3 0 0 0-4.2 0l-2.8 2.8a3 3 0 0 0 4.2 4.2l1-1"/></svg></button>
+      <span class="t-sep" aria-hidden="true"></span>
+      <button type="button" data-cmd="bullet" title="项目列表 (⌘⇧8)" aria-label="项目列表"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M8 5h9M8 10h9M8 15h9"/><circle cx="4" cy="5" r="1.2"/><circle cx="4" cy="10" r="1.2"/><circle cx="4" cy="15" r="1.2"/></svg></button>
+      <button type="button" data-cmd="ordered" title="编号列表 (⌘⇧7)" aria-label="编号列表"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M8 5h9M8 10h9M8 15h9M3 3.5h1.5V7M3 12.5c.4-.6 2.4-.8 2 .6L3 16h2.5"/></svg></button>
+      <button type="button" data-cmd="quote" title="引用 (⌘⇧B)" aria-label="引用"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 4v12M8 6h8M8 10h8M8 14h5"/></svg></button>
+      <button type="button" data-cmd="image" title="插入图片" aria-label="插入图片"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="4" width="15" height="12" rx="2"/><path d="M2.5 13l4-4 4 4 2-2 5 5"/><circle cx="13" cy="7.5" r="1.3"/></svg></button>
+      <span class="t-sep" aria-hidden="true"></span>
+      <button type="button" data-cmd="undo" title="撤销 (⌘Z)" aria-label="撤销"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5L3 9l4 4M3 9h9a5 5 0 0 1 0 10h-2"/></svg></button>
+      <button type="button" data-cmd="redo" title="重做 (⌘⇧Z)" aria-label="重做"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M13 5l4 4-4 4M17 9H8a5 5 0 0 0 0 10h2"/></svg></button>
+      <span class="t-grow"></span>
+      <button type="button" class="t-help" id="keys-btn" aria-haspopup="dialog" title="快捷键">?</button>
+      <span class="t-count" id="word-count"></span>
+    </div>
+
+    <div class="paper">
+      <div class="cover-drop" id="cover-drop" tabindex="0" role="button" aria-label="添加封面图：点击选择、拖入或粘贴图片">
+        <div class="cover-empty" id="cover-empty">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 16l5-5 5 5 3-3 5 5"/></svg>
+          <span><b>添加封面图</b>拖入、粘贴，或点这里选择</span>
+          <button type="button" class="link-btn" id="cover-library-btn">从站点图库选</button>
+        </div>
+        <img class="cover-img" id="cover-img" alt="" hidden>
+        <div class="cover-tools" id="cover-tools" hidden>
+          <button type="button" id="cover-change">更换</button>
+          <button type="button" id="cover-remove">移除</button>
+        </div>
+      </div>
+      <input type="file" id="cover-file" accept="image/jpeg,image/png,image/webp" aria-label="选择封面图片" hidden>
+      <input type="file" id="image-file" accept="image/jpeg,image/png,image/webp" aria-label="选择正文图片" hidden>
+
+      <p class="kicker" id="kicker">Bed Covers</p>
+      <label class="sr-only" for="title">标题</label>
+      <textarea class="title" id="title" rows="1" maxlength="140" placeholder="文章标题"></textarea>
+      <label class="sr-only" for="intro">导语</label>
+      <textarea class="intro" id="intro" rows="2" maxlength="600" placeholder="导语：用一两句话直接回答读者的问题"></textarea>
+
+      <div class="body-editor" id="body" aria-label="正文"></div>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="预览、设置和检查">
+    <nav class="panel-tabs" aria-label="侧栏">
+      <button type="button" data-view="preview" aria-pressed="true">预览</button>
+      <button type="button" data-view="settings" aria-pressed="false">设置</button>
+      <button type="button" data-view="checks" aria-pressed="false">检查<span class="score-chip" data-score>–</span></button>
+    </nav>
+
+    <div class="pane pane-preview" id="pane-preview">
+      <div class="pane-bar">
+        <div class="seg" role="group" aria-label="预览设备">
+          <button type="button" data-device="desktop" aria-pressed="true">电脑</button>
+          <button type="button" data-device="mobile" aria-pressed="false">手机</button>
+        </div>
+        <p class="pane-note">和正式文章页用同一套模板与样式</p>
+      </div>
+      <div class="viewport" id="viewport" data-device="desktop">
+        <div class="device" id="device"><iframe id="preview" title="文章页实时预览"></iframe></div>
+      </div>
+    </div>
+
+    <div class="pane pane-settings" id="pane-settings" hidden>
+      <form id="settings" autocomplete="off" novalidate>
+        <section class="group">
+          <h2>网址与分类</h2>
+          <label class="field"><span>分类</span><select name="category" id="f-category"></select></label>
+          <div class="field">
+            <label for="f-slug">文章网址</label>
+            <div class="slug"><span>/guides/</span><input id="f-slug" name="slug" maxlength="80" spellcheck="false" inputmode="url"><span>.html</span></div>
+            <label class="check"><input type="checkbox" name="slugAuto" id="f-slugAuto"> 跟随标题自动生成</label>
+          </div>
+        </section>
+
+        <section class="group">
+          <h2>搜索结果</h2>
+          <div class="serp" aria-label="搜索结果预览">
+            <p class="serp-url" id="serp-url"></p>
+            <p class="serp-title" id="serp-title"></p>
+            <p class="serp-desc" id="serp-desc"></p>
+          </div>
+          <label class="field"><span>SEO 标题 <small data-count="seoTitle"></small></span><input name="seoTitle" id="f-seoTitle" maxlength="120" placeholder="留空则用“标题 | OEDRO”"></label>
+          <label class="field"><span>SEO 描述 <small data-count="description"></small></span><textarea name="description" id="f-description" rows="3" maxlength="300" placeholder="留空则用导语"></textarea></label>
+        </section>
+
+        <section class="group">
+          <h2>封面</h2>
+          <label class="field"><span>图片说明</span><input name="coverAlt" id="f-coverAlt" maxlength="200" placeholder="描述图片内容，给看不到图片的读者和搜索引擎"></label>
+          <label class="field"><span>图注 <small>可选，显示在封面下方</small></span><input name="coverCaption" id="f-coverCaption" maxlength="240"></label>
+          <label class="field"><span>上传图片的来源</span>
+            <select name="rights" id="f-rights">
+              <option value="official">OEDRO 官方产品图</option>
+              <option value="own">公司自己拍摄或制作</option>
+              <option value="licensed">已获授权的其他图片</option>
+            </select>
+          </label>
+          <label class="field" id="rights-note-field" hidden><span>授权说明</span><input name="rightsNote" id="f-rightsNote" maxlength="200" placeholder="例如：供应商书面授权，用于官网文章"></label>
+        </section>
+
+        <section class="group">
+          <h2>参考来源</h2>
+          <p class="hint">显示在文章末尾。上线的文章至少需要一条。</p>
+          <ul class="rows" id="sources" data-list="sources"></ul>
+          <button type="button" class="add-row" data-add="sources">添加来源</button>
+        </section>
+
+        <section class="group">
+          <h2>产品链接 <small>可选</small></h2>
+          <p class="hint">显示为“Check your vehicle fit”，提醒读者到产品页核对车型。</p>
+          <ul class="rows" id="productLinks" data-list="productLinks"></ul>
+          <button type="button" class="add-row" data-add="productLinks">添加产品链接</button>
+        </section>
+
+        <section class="group">
+          <h2>相关文章 <small>最多 3 篇，不选则按分类推荐</small></h2>
+          <div class="related" id="related"></div>
+        </section>
+
+        <section class="group">
+          <h2>发布</h2>
+          <div class="pair">
+            <label class="field"><span>发布日期 <small>留空则显示上线日</small></span><input type="date" name="publishedAt" id="f-publishedAt"></label>
+            <div class="field readout"><span>阅读时长</span><output id="reading">–</output></div>
+          </div>
+          <fieldset class="field status">
+            <legend>状态</legend>
+            <label class="radio"><input type="radio" name="status" value="approved"> <span><b>审核通过，可以上线</b><small>生成发布文件后，站点会显示这篇文章</small></span></label>
+            <label class="radio" id="status-legacy" hidden><input type="radio" name="status" value="legacy-demo"> <span><b>保持演示状态</b><small>测试站照常显示，正式站不显示</small></span></label>
+            <label class="radio"><input type="radio" name="status" value="draft"> <span><b>草稿</b><small>文件里保留这篇文章，站点暂不显示</small></span></label>
+          </fieldset>
+          <label class="field" id="approval-field"><span>审核记录</span><input name="approvalRef" id="f-approvalRef" maxlength="200" placeholder="例如：2026-11-27 产品与运营审核通过"></label>
+          <label class="check" id="pin-field"><input type="checkbox" name="pinTop" id="f-pinTop"> 放在博客列表最前面</label>
+        </section>
+      </form>
+    </div>
+
+    <div class="pane pane-checks" id="pane-checks" hidden>
+      <div class="score-head">
+        <div class="score" id="score" role="img" aria-label="SEO 得分"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19" class="track"/><circle cx="22" cy="22" r="19" class="meter" id="score-meter"/></svg><b data-score>–</b></div>
+        <div><h2>SEO 检查</h2><p id="score-note">逐项检查标题、描述、网址、图片和结构</p></div>
+      </div>
+      <ul class="checks" id="checks"></ul>
+      <h2 class="sub">发布前还差</h2>
+      <ul class="problems" id="problems"></ul>
+    </div>
+  </section>
+</main>
+
+<div class="pop slash" id="slash" role="listbox" aria-label="插入内容" hidden></div>
+
+<div class="pop linkpop" id="linkpop" hidden>
+  <label for="link-input">链接地址</label>
+  <input id="link-input" placeholder="https://… 或搜索站内指南" autocomplete="off" spellcheck="false">
+  <ul class="link-suggest" id="link-suggest"></ul>
+  <p class="link-error" id="link-error" hidden></p>
+  <div class="linkpop-actions">
+    <button type="button" class="ghost" id="link-remove">移除链接</button>
+    <button type="button" class="btn-primary small" id="link-apply">应用</button>
+  </div>
+</div>
+
+<dialog class="sheet" id="library" aria-labelledby="library-title">
+  <div class="sheet-head"><h2 id="library-title">站点图库</h2><button type="button" class="icon-btn" data-close aria-label="关闭"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg></button></div>
+  <div class="library-grid" id="library-grid"></div>
+</dialog>
+
+<dialog class="sheet" id="keys" aria-labelledby="keys-title">
+  <div class="sheet-head"><h2 id="keys-title">快捷操作</h2><button type="button" class="icon-btn" data-close aria-label="关闭"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg></button></div>
+  <dl class="keys">
+    <div><dt><kbd>/</kbd></dt><dd>在空行输入，选择要插入的内容</dd></div>
+    <div><dt><kbd>##</kbd> 空格</dt><dd>小标题（<kbd>###</kbd> 为子标题）</dd></div>
+    <div><dt><kbd>-</kbd> 空格</dt><dd>项目列表（<kbd>1.</kbd> 为编号列表）</dd></div>
+    <div><dt><kbd>&gt;</kbd> 空格</dt><dd>引用</dd></div>
+    <div><dt><kbd>⌘</kbd><kbd>B</kbd> / <kbd>⌘</kbd><kbd>I</kbd></dt><dd>加粗 / 斜体</dd></div>
+    <div><dt><kbd>⌘</kbd><kbd>K</kbd></dt><dd>添加链接</dd></div>
+    <div><dt><kbd>⌘</kbd><kbd>⌥</kbd><kbd>2</kbd> / <kbd>3</kbd></dt><dd>小标题 / 子标题</dd></div>
+    <div><dt><kbd>⌘</kbd><kbd>Z</kbd></dt><dd>撤销（Windows 用 Ctrl）</dd></div>
+  </dl>
+  <p class="keys-note">图片可以直接拖进正文或粘贴。从网页、Word、Google Docs 粘贴时，多余的字体、颜色和格式会自动去掉，只保留标题、列表、加粗、斜体和链接。</p>
+</dialog>
+
+<dialog class="sheet publish" id="publish" aria-labelledby="publish-title">
+  <div class="sheet-head"><h2 id="publish-title">发布</h2><button type="button" class="icon-btn" data-close aria-label="关闭"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg></button></div>
+  <div class="publish-body" id="publish-body"></div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

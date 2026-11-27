@@ -1,0 +1,26 @@
+{
+  "files": [
+    "assets/figma-store-logo.svg",
+    "assets/figma-store-search.svg",
+    "assets/figma-store-user.svg",
+    "assets/figma-store-cart.svg",
+    "assets/figma-store-vehicle.svg",
+    "assets/figma-store-menu.svg",
+    "assets/figma-measure-hero.webp",
+    "assets/figma-search.svg",
+    "assets/figma-search-faq.svg",
+    "assets/figma-arrow-white.svg",
+    "assets/figma-arrow-dark.svg",
+    "assets/figma-arrow-blue.svg",
+    "assets/figma-faq-minus.svg",
+    "assets/figma-faq-plus.svg",
+    "assets/figma-truck-ford.webp",
+    "assets/figma-truck-tacoma.webp",
+    "assets/figma-truck-tundra.webp",
+    "assets/figma-truck-silverado.webp",
+    "assets/figma-truck-ram.webp",
+    "assets/figma-roboto.ttf",
+    "assets/figma-roboto-license.txt",
+    "assets/figma-roboto.woff2"
+  ]
+}
