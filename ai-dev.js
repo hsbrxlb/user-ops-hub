@@ -31,7 +31,7 @@
       frame.querySelectorAll('[data-src]').forEach((other) => other.setAttribute('aria-pressed', String(other === button)));
       setSrc(button.dataset.src);
     }));
-    // 版本切换：同一页面在新版与改版前两套副本之间切换
+    // 版本切换：同一页面在新版与旧版两套副本之间切换
     frame.querySelectorAll('[data-version]').forEach((button) => button.addEventListener('click', () => {
       const versions = [...frame.querySelectorAll('[data-version]')].map((other) => other.dataset.version);
       const swap = (value) => versions.reduce((result, prefix) => result.replace(prefix, button.dataset.version), value);

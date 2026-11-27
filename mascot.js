@@ -45,7 +45,7 @@
 
   function friendsMarkup() {
     return '<a class="friends-entry" href="mascot-friends.html"><img src="assets/bruno-friends/lineup.webp" alt="Bruno 和漫画固定配角的阵容" width="1536" height="1024" loading="lazy" decoding="async">'
-      + '<span><strong>Bruno 和朋友们</strong><span lang="en">Bruno &amp; Friends</span><span>漫画角色与出场规则 →</span></span></a>';
+      + '<span><strong>Bruno 和朋友们</strong><span>漫画角色与出场规则 →</span></span></a>';
   }
 
   function tocMarkup(characters) {
